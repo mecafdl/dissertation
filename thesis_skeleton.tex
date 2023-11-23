@@ -35,6 +35,8 @@
 %\newcommand{\TODO}{\hl{\textcolor{blue}{\Large \textbf{TODO}}}}
 \newcommand{\TODO}{\hl{\textbf{TODO}}}
 
+\newcommand{\redtext}[1]{\textcolor{red}{#1}}
+
 \newenvironment{namelist}[1]{%1
 \begin{list}{}
     {
@@ -55,7 +57,7 @@
 
 \begin{namelist}{xxxxxxxxxxxx}
 \item[{\bf Title:}]
-	Learning The-Self: Leveraging Proprioception to Guide the Autonomous Discovery of the Robotic Body Schema
+	Learning The-Self: Leveraging Proprioception to Guide the Autonomous Discovery of the Robot Body Schema
 
 \item[{\bf Titel:}]
 \TODO
@@ -68,43 +70,174 @@
 % ===================================================================================================
 \section*{Table of Contents}
 
-\begin{enumerate}
-	\item State of the Art
-	\begin{enumerate}
-		\item Calibration of serial kinematic chains  
-		\item Classical system identification in robotics
-		\newline\TODO CITE THE ARTICLE IN THE IEEE RAM
-		
-		\begin{enumerate}
-			\item Excitation trajectories
-			\item Reduction to base parameters
-			\item Least squares optimization
-		\end{enumerate}
-		
-		\item Machine learning for robotic models
-		\begin{enumerate}
-			\item Local models
-			\item End-to-end learning
-			\item Limitations
-		\end{enumerate}	
-	\end{enumerate}
-	
-	\item Learning the self
-	\begin{enumerate}
-			\item What is meant by the self?
-			\begin{enumerate}
-				\item The engineering view of the body schema
-				\item The phases to learn the robotic body schema
-			\end{enumerate}
+% \begin{enumerate}
+%     \item INTRODUCTION
+    
+%     \item LITERATURE REVIEW
+%     \begin{enumerate}
+%         \item Model learning in robotics
+%         \item Classical and recent works in system identification
+%         \item Local and global models linear models
+%         \item End-to-end learning (black box models)
+%         \item Data-driven learning with structure information
+%         \item Model learning and the body schema
+%         \item Sensorimotor learning
+%     \end{enumerate}
+    
+%     \item THEORETICAL FRAMEWORK
+%     \begin{enumerate}
+%         \item Robot equations of motion
+%         \begin{enumerate}
+%             \item Forward and inverse dynamics
+%             \item The Newton-Euler formulation of the inverse dynamics
+%             \begin{enumerate}
+%                 \item The kinematics forward recursion
+%                 \item The dynamics backward recursion
+%             \end{enumerate}
+%             \item Composition of the kinematics and dynamics
+%         \end{enumerate}
+%         \item Basics of robot system identification
+%         \begin{enumerate}
+%             \item Kinematic calibration
+%             \item Inertial parameter identification
+%             \begin{enumerate}
+%                 \item For fixed-based robots
+%                 \item For floating base robots
+%             \end{enumerate}
+%         \end{enumerate}
+%         \item  Robot proprioception
+%         \begin{enumerate}
+%             \item What is proprioception for?
+%             \item Comparison between human and robot proprioception
+%             \item  A sensor suite for robot proprioception
+%         \end{enumerate}
+%         \item State-of-the-art Gradient Descent
+%         \begin{enumerate}
+%             \item Fundamentals
+%             \item Momentum gradient descent
+%             \item  ADAM gradient descent
+%             \item  AMS gradient descent
+%         \end{enumerate}
+%         \item Fundamentals of graph theory
+%         \begin{enumerate}
+%             \item What is a graph?
+%             \item Graph representation, the adjacency matrix
+%             \item Metrics for graph comparison
+%         \end{enumerate}
+%         \item Network topology inference
+%         \begin{enumerate}
+%             \item Based on covariance
+%             \item Based on GSP
+%             \item Base on statistics
+%         \end{enumerate}
+%         \item Information theory
+%         \begin{enumerate}
+%             \item What is information?
+%             \item The entropy of a random variable
+%             \item Mutual Information: The correlation of the 21st century 
+%         \end{enumerate}
+%         \item Differential geometry
+%         \begin{enumerate}
+%             \item Fundamentals of differential geometry
+%             \item Manifolds and the tangent space
+%             \item Riemannian geometry and the metric
+%             \item Use in robotics
+%     \end{enumerate}
+% \end{enumerate}
+%     \item METHODOLOGY
+%     \begin{enumerate}
+%         \item Signal requirements
+%         \begin{enumerate}
+%             \item The importance of body measurements 
+%         \end{enumerate}
+%         \item Leveraging data history 
+%         \begin{enumerate}
+%             \item Replay buffer
+%             \item Reservoir sampling 
+%         \end{enumerate}
+%         \item Embodiment and mutual information
+%         \begin{enumerate}
+%             \item Online computation of the pairwise mutual information
+%             \item Handling scalar and vector relationships
+%             \item Assessing convergence
+%         \end{enumerate}
+%         \item Exploratory motions
+%         \begin{enumerate}
+%             \item Motor babbling
+%             \item Excitation trajectories
+%         \end{enumerate}
+%         \item Network topology inference using mutual information
+%         \begin{enumerate}
+%             \item Finding the adjacency matrix
+%             \item The proprioceptive information graph
+%             \item Inferring the mechanical topology 
+%         \end{enumerate}
+%         \item Kinematic description guided by topology and proprioceptive measurements
+%         \begin{enumerate}
+%             \item Validating body-body and body-joint connections
+%             \item Finding the sensor-to-sensor orientations
+%             \item Finding the joint center point 
+%             \item Learning the kinematics
+%         \end{enumerate}
+%         \item Online learning inertial parameters
+%         \begin{enumerate}
+%             \item Gradient descent for inverse dynamics
+%             \item Constraints for physical feasibility
+%             \begin{enumerate}
+%                 \item Barrier functions
+%                 \item Projections
+%             \end{enumerate}
+%             \item Riemannian AMS gradient descent
+%             \item The effect of six-dimensional force/torque measurements 
+%             \item  Alternatives to joint acceleration
+%         \end{enumerate}
+%     \end{enumerate}
+% \end{enumerate}
+% \item RESULTS
+% \begin{enumerate}
+% \begin{enumerate}
+% \item DISCUSSION
+% \item CONCLUSION
+      
 
-	\item Theoretical framework
-	\begin{enumerate}
-		\item The engineering view of the body schema
-		\item The phases to learn the robotic body schema
-	\end{enumerate}
+
+% \begin{enumerate}
+% 	\item State of the Art
+% 	\begin{enumerate}
+% 		\item Calibration of serial kinematic chains  
+% 		\item Classical system identification in robotics
+% 		\newline\TODO CITE THE ARTICLE IN THE IEEE RAM
 		
-	\end{enumerate}
-\end{enumerate}
+% 		\begin{enumerate}
+% 			\item Excitation trajectories
+% 			\item Reduction to base parameters
+% 			\item Least squares optimization
+% 		\end{enumerate}
+		
+% 		\item Machine learning for robotic models
+% 		\begin{enumerate}
+% 			\item Local models
+% 			\item End-to-end learning
+% 			\item Limitations
+% 		\end{enumerate}	
+% 	\end{enumerate}
+	
+% 	\item Learning the self
+% 	\begin{enumerate}
+% 			\item What is meant by the self?
+% 			\begin{enumerate}
+% 				\item The engineering view of the body schema
+% 				\item The phases to learn the robotic body schema
+% 			\end{enumerate}
+
+% 	\item Theoretical framework
+% 	\begin{enumerate}
+% 		\item The engineering view of the body schema
+% 		\item The phases to learn the robotic body schema
+% 	\end{enumerate}
+		
+% 	\end{enumerate}
+% dis\end{enumerate}
 
 % ===================================================================================================
 %                                                 |                                                 |
@@ -116,15 +249,18 @@
 \subsection*{Vision}
 
 \begin{itemize}
-	\item For future robots, the seamless integration of the body schema stands as a foundational pillar that fosters motor control, coordination, and an advanced spatial awareness that improves their versatility and seamless interaction with its surroundings.
+	\item For future robots, the seamless integration of the body schema stands as a foundational pillar that fosters learning, motor control, coordination, and advanced spatial awareness that improves their versatility and seamless interaction with their surroundings.
 
-	\item Emulating humans, future robots should be able to skillfully employ the body schema for intricate object manipulation, precise grasping, adaptive responses to dynamic changes, and instantaneous error detection and correction.
-	
-	\item As robots develop and steadily permeate many aspects of human life, they should actively engage in the exploration and development of models for their own bodies, i.e. autonomous self-discovery a their body schema.
-	
-	\item Real-time self-monitoring becomes a norm, significantly impacting human-robot interaction, tool use, and object manipulation.
-	
-	\item Understanding their own body structure enables robots to interact more effectively with humans by adjusting movements for safety. Additionally, robots can optimize energy consumption by adapting their motions based on physical properties, contributing to sustainability in robotic applications.
+    \item As robots develop and steadily permeate many aspects of human life, they should actively engage in the exploration and development of models for their own bodies, i.e. autonomous self-discovery of their body schema.
+
+	\item \textcolor{red}{Inspired by humans, future robots should be able to skillfully employ their body schema for advanced locomotion and motion planning, precise grasping, intricate object manipulation, and to anticipate and adapt the interaction with other agents.}
+		
+	\item \textcolor{red}{Constant self-monitoring of the sensorimotor state and the internal body models becomes the norm for instantaneous error detection and correction. These models can adapt steadily to different situations developing a spatial awareness of the physical self that enables the rapid planning and deployment of contingent motion strategies providing advanced interaction capabilities with the environment.} 
+
+    \item \redtext{Robots will be self-sufficient to perform monitoring, calibration, and adaptation of their body representation relying only on onboard sensing capabilities. Fundamental modalities will include somatosensation (proprioception and touch) and vision.}
+ 
+	\item Understanding their own body structure enables robots to interact more effectively with other robots and with humans by adjusting movements for safety. Additionally, robots can optimize their energy consumption by adapting their motions based on physical properties, contributing to sustainability in robotic applications.
+
 \end{itemize}
 
 \subsection*{Challenges}
@@ -139,10 +275,15 @@
 \end{itemize}
 
 \subsection*{Contribution}
+Towards enabling the learning of the robot body schema this thesis:
 \begin{itemize}
-	\item Identification of the proprioceptive signals and requisite sensor specifications necessary for enabling robots to autonomously acquire knowledge about their own body structure.	
-	\item Exploration of the influence of embodiment and first-order principles (FOP) in shaping the network topologies of parameterized operators, which serve as models for input-output mappings within robotic systems. 	
-	\item Restructuring of the traditional kinematic calibration and parametric system identification processes for stationary-base robots into an online learning scenario, utilizing only the robot's proprioception and fundamental principles from kinematics and dynamics.
+	\item \redtext{Consolidates the necessary and sufficient proprioceptive signals that enable robots to autonomously acquire, monitor, and adapt knowledge about their own body structure and decouple them from the need for external metrology.}
+
+    \item \redtext{Reformulates robot kinematic calibration and parametric system identification as online learning problems, relying on the minimal set of proprioceptive signals. Leveraging embodiment in conjunction with first-order principles, the thesis explores how network topologies for modeling input-output mappings in robotic systems emerge.}
+
+    \item The study uses online learning techniques to determine different robot kinematic representations—modified Denavit-Hartenberg parameters, Euler angles, and angle-axis representation. It demonstrates extracting a tree-structure robot's mechanical topology by analyzing mutual information among signals from a specified number of sensors. The method infers robot morphology, including mechanical topology and joint axis details, using only proprioceptive signals.
+
+	% \item Restructuring of the traditional kinematic calibration and parametric system identification processes for stationary-base robots into an online learning scenario, utilizing only the robot's proprioception and fundamental principles from kinematics and dynamics.
 \end{itemize}
 
 \subsection*{Overview of the Content}
@@ -296,7 +437,7 @@ This thesis
 \begin{enumerate}
 	\item Determines the type of proprioceptive signals and corresponding sensor requirements to enable robots to learn their body schema	
 	\item Reformulates the classical kinematic calibration and parametric system identification of fixed base robots as an online learning problem that relies solely on the robot's proprioception and first-order principles from kinematic and dynamics 
-	\item Discusses how embodiment and first-order principles (FOP) define network topologies of parameterized operator that model input-output mappings in robotic systems
+	\item Discusses how embodiment and first-order principles (FOP) define network topologies of parameterized operators that model input-output mappings in robotic systems
 \end{enumerate}
 
 \subsubsection*{Contribution 2: Inferring the robot morphology}
