@@ -251,39 +251,59 @@
 \begin{itemize}
 	\item For future robots, the seamless integration of the body schema stands as a foundational pillar that fosters learning, motor control, coordination, and advanced spatial awareness that improves their versatility and seamless interaction with their surroundings.
 
-    \item As robots develop and steadily permeate many aspects of human life, they should actively engage in the exploration and development of models for their own bodies, i.e. autonomous self-discovery of their body schema.
+    \item As robots develop and steadily permeate many aspects of human life, they need actively engage in the exploration and development of models for their own bodies, i.e. autonomous self-discovery of their body schema.
 
-	\item \textcolor{red}{Inspired by humans, future robots should be able to skillfully employ their body schema for advanced locomotion and motion planning, precise grasping, intricate object manipulation, and to anticipate and adapt the interaction with other agents.}
+	\item Inspired by humans, future robots should be able to skillfully employ their body schema for advanced locomotion and motion planning, precise grasping, intricate object manipulation, and to anticipate and adapt the interaction with other agents.
 		
-	\item \textcolor{red}{Constant self-monitoring of the sensorimotor state and the internal body models becomes the norm for instantaneous error detection and correction. These models can adapt steadily to different situations developing a spatial awareness of the physical self that enables the rapid planning and deployment of contingent motion strategies providing advanced interaction capabilities with the environment.} 
+	\item Constant self-monitoring of the sensorimotor state and the internal body models becomes the norm for instantaneous error detection and correction. These models can adapt steadily to different situations developing a spatial awareness of the physical self that enables the rapid planning and deployment of contingent motion strategies providing advanced interaction capabilities with the environment.
 
-    \item \redtext{Robots will be self-sufficient to perform monitoring, calibration, and adaptation of their body representation relying only on onboard sensing capabilities. Fundamental modalities will include somatosensation (proprioception and touch) and vision.}
+    \item Robots will be self-sufficient to perform monitoring, calibration, and adaptation of their body representation relying only on onboard sensing capabilities. Fundamental modalities will include somatosensation (proprioception and touch) and vision.
  
-	\item Understanding their own body structure enables robots to interact more effectively with other robots and with humans by adjusting movements for safety. Additionally, robots can optimize their energy consumption by adapting their motions based on physical properties, contributing to sustainability in robotic applications.
+	\item Understanding their own body structure enables robots to interact more effectively with other robots and with humans by adjusting movements for safety. Additionally, robots can optimize their energy consumption by adapting their motions based on physical properties, contributing to energy-aware robotics.
 
 \end{itemize}
 
 \subsection*{Challenges}
 \begin{itemize}
-    \item \textbf{Limited Learning Approaches:} Learning a robot's physical attributes is often confined to calibration routines and offline identification methods, primarily for known kinematic structures and inertial parameters. However, this is not standardized for floating base robots like quadrupeds and humanoids.
+	% Standard learning approaches are not suffient or addecuate
+	% Current learning paradigms are good for for lacking in
+    \item \redtext{\textbf{Limitations of Current Robot Learning Approaches:} Most state-of-the-art local and global learning frameworks exclude structural knowledge and suffer from limited generalization capabilities and low sample efficiency. Additionally, learning a robot's physical attributes parts from the assumption of a known mechanical topology and is often exclusive to calibration and offline parametric identification routines performed in controlled spaces (laboratories).}
 
-	\item \textbf{Reliance on External Measurements:} Calibration and identification heavily depend on off-robot measurement devices, such as vision and motion-capturing systems, to discern kinematic structure properties. Despite various sensor signals from modern robots, determining the minimum set for constructing a body model remains unresolved.
+	\item \textbf{Reliance on External Measurements:} Calibration and identification heavily depend on off-robot measurement devices, such as vision and motion-capturing systems, to discern kinematic structure properties. Despite various sensor signals from modern robots, determining the minimum set for constructing a body model based on robot sensing only remains unresolved.
 
 	\item \textbf{Challenges in Learning Methods:} Many alternative learning methods, like neural networks, lack information about the body structure and require substantial data. Designing neural networks presents challenges in determining topology, and most data-based methods suffer from generalization limitations, confining learning to specific input-output regions.
 
+	% Contextualize this to introudce this challenge
 	\item \textbf{Research Gaps and Unifying Scheme:} There are significant gaps in research, including unclear understanding of how object handling extends the robotic body schema and limited exploration of the mechanical arrangement of joints and links (mechanical topology). Additionally, there is a lack of a unifying scheme to integrate all learning stages for a fully characterized robotic body schema solely from knowledge about sensorimotor signals. 
 \end{itemize}
 
 \subsection*{Contribution}
-Towards enabling the learning of the robot body schema this thesis:
+For enabling the learning of the robot body schema this thesis:
 \begin{itemize}
-	\item \redtext{Consolidates the necessary and sufficient proprioceptive signals that enable robots to autonomously acquire, monitor, and adapt knowledge about their own body structure and decouple them from the need for external metrology.}
+	\item \redtext{Consolidates the necessary and sufficient proprioceptive signal quantities (afferent and efferent sensory inputs and commands) that enable robots to autonomously acquire, monitor, and adapt knowledge about their body structure and decouple them from the need for exteroceptive off-body sensors.}
 
-    \item \redtext{Reformulates robot kinematic calibration and parametric system identification as online learning problems, relying on the minimal set of proprioceptive signals. Leveraging embodiment in conjunction with first-order principles, the thesis explores how network topologies for modeling input-output mappings in robotic systems emerge.}
+	% * NOTE: Computational graph that describes the learning of the kinematics and dynamics
+	% * NOTE: Connect this idea with the building architectures
+    \item \redtext{Reformulates robot kinematic calibration and parametric robot system identification as a computational graph whose topology reflects a modular structure amenable to data-driven learning. The architecture of this graph is abstracted into a pipeline consisting of a sequence of online learning phases where streams of proprioceptive signals are merged with first-order principles stemming from the system's embodiment to enable the extraction of fundamental features of the robot body schema.}   
 
-    \item The study uses online learning techniques to determine different robot kinematic representations—modified Denavit-Hartenberg parameters, Euler angles, and angle-axis representation. It demonstrates extracting a tree-structure robot's mechanical topology by analyzing mutual information among signals from a specified number of sensors. The method infers robot morphology, including mechanical topology and joint axis details, using only proprioceptive signals.
+    \item \redtext{Demonstrates that essential properties of the body morphology of tree-like floating base serial kinematic chains can be characterized by studying the relationships among a fundamental set of proprioceptive signals. First, the mechanical topology, i.e., the arrangement of links and joints, is inferred from proprioception using model-free information-theoretic measures. Consequently, this topology is concurrently validated and leveraged to instantiate the kinematic description of the robot's body independent of exteroceptive off-robot calibration devices.}
+    
+	\item \redtext{To complete the description of the robot body schema, the inferred morphology is enhanced by instantiating the inertial properties of the links composing the kinematic chain. In particular, state-of-the-art gradient descent methods are extended to operate on the Riemannian manifold of symmetric positive definite matrices supported with a replay buffer that ensures a quasi-uniform distribution of stored experience to enable the online learning of always-physically-feasible robot inertial parameters.} 
 
-	% \item Restructuring of the traditional kinematic calibration and parametric system identification processes for stationary-base robots into an online learning scenario, utilizing only the robot's proprioception and fundamental principles from kinematics and dynamics.
+\end{itemize}
+
+\subsection*{Impact}
+
+\begin{itemize}
+	
+%	\item \redtext{While acknowledging the undeniable versatility of end-to-end learning's representational power, this work scrutinizes its applicability in physical systems when lacking principled knowledge. In contrast, the arguments and findings presented here reveal avenues for machine learning in embodied systems. This research exposes the untapped potential arising from the synergistic integration of existing structural knowledge with data-driven methods}.
+	\item \redtext{While acknowledging the undeniable versatility and representational power of end-to-end learning approaches, this work incites to reconsider their naive application to physical systems and promote the assessment of their limitations when they deliberately exclude principled knowledge. In contrast, the arguments and findings presented here reveal avenues for machine learning frameworks for embodied systems. This research exposes the untapped potential arising from the synergistic integration of existing structural knowledge with data-driven methods}.
+		
+	\item \redtext{The outlined concepts and methods demonstrate that crucial aspects of a robot's body schema can be deduced through the appropriate set of proprioceptive signals. As future mobile robots are anticipated to feature a diverse, enhanced, and reliable array of on-board sensing modalities, extending beyond proprioception, the findings discussed in this thesis serve as a catalyst for research into the integration of these modalities. This integration, coupled with the online learning of body morphological and dynamic properties, holds the promise of refining and adapting body models, ultimately empowering robots with heightened levels of autonomy}.
+		
+%	\item \TODO The integration of several methods, from state of the art, gradient descent, to optimization on Riemannian manifolds, including the network topology inference using information-theoretic measures enabled the definition of a pipeline that transforms robot system identification into a learning problem that provides these fundamental properties of the body schema and need not be constrained to a laboratory and that the technology and methods exist to infer the robot morphology and characterize its inertial properties producing physically feasible sets of the inertial parameters by learning on the appropriate space.
+	
+%	\item The work in this thesis proves that indeed the pairwise relationships among the proprioceptive signals can be represented and analyzed with information-theoretic measures that enable their study under the scope of the information structure emerging from the robot embodiment.
 \end{itemize}
 
 \subsection*{Overview of the Content}
@@ -291,22 +311,17 @@ The thesis discusses four main topics:
 \begin{enumerate}
 	\item \textbf{Model learning and body schema.} Introduction of the fundamentals of robotic calibration and system identification and their relation to the concept of body schema. The chapter elaborates on the different meanings of the body schema and the definition applying within the context of this thesis is provided. Finally the learning stages to characterize the robotic body schema from an engineering perspective are introduced and discussed.
 	
-	\item \textbf{Inferring the mechanical topology.} In this chapter, the concept of embodiment is presented and its significance to finding the robot structure is discussed. The fundamental idea that analyzing the relationships among the proprioceptive signals of a robot can convey information about the body structure as a result of embodiment is presented. Mutual information is pushed forward as a tool to unveil the mechanical topology of a robot given the right proprioceptive signals
+	\item \textbf{Inferring the mechanical topology.} In this section, the concept of embodiment is presented and its significance to finding the robot structure is discussed. The fundamental idea that analyzing the relationships among the proprioceptive signals of a robot can convey information about the body structure as a result of embodiment is presented. Mutual information is pushed forward as a tool to unveil the mechanical topology of a robot given the right proprioceptive signals
+	% Robots in the fiture can now learn things in the wild indepedent of calibration routines, self cointained identification
+	
+	% Deep understanding oh how to embed dynamics into the structzre of betwokrs
+	
+	% Accuracy and speed is shown on robots on a level that is equivalent of engineering approaches without the "chains" of conventional approaches. It shows true autonomy
 	
 	\item \textbf{Characterizing the kinematic structure.} This chapter extends the classical exteroception-based kinematic calibration methods with proprioception-based online learning. Departing from the conventional assumption that the mechanical topology is known, it is discussed how the combination of mutual information basic differential kinematic laws can be used to characterize the location and orientation of the robot joint axes.
 	
-	\item \textbf{Learning the inertial properties.} This chapter delves into the well established methods for robot inertial parameter identification and presents gradient-based online learning methods to produce valid sets of parameters. In particular the fundamental property that the inertial parameters lie on the manifold of symmetric positive definite matrices is exploited to present a Riemannian gradient descent method that operates on this manifold. 
+	\item \textbf{Learning the inertial properties.} This section delves into the well established methods for robot inertial parameter identification and presents gradient-based online learning methods to produce valid sets of parameters. In particular the fundamental property that the inertial parameters lie on the manifold of symmetric positive definite matrices is exploited to present a Riemannian gradient descent method that operates on this manifold. 
 \end{enumerate}
-
-\subsection*{Impact}
-
-\begin{itemize}
-	\item This thesis demonstrated that given the proper set of proprioceptive measurements, all signals that can be obtained from state-of-the-art sensors, properties of the body schema can be learned
-	
-	\item This thesis has shown that robotic system identification need not be constrained to a laboratory and that the technology and methods exist to infer the robot morphology and characterize its inertial properties producing physically feasible sets of the inertial parameters by learning on the appropriate space
-	
-	\item The work in this thesis proved that indeed mutual information is a measure to evaluate the nonlinear relationships among sensorimotor signals and study how this relationships correspond the embodiment of the robot	
-\end{itemize}
 
 % ===================================================================================================
 %                                                 |                                                 |
@@ -314,7 +329,7 @@ The thesis discusses four main topics:
 %                                                 |                                                 |
 % ===================================================================================================
 \section*{Summary for BIB (English)}
-\TODO
+\redtext{This thesis explores the potential for enhanced robot autonomy through a self-discovery-oriented body schema, proposing a unified online learning framework exclusively reliant on proprioception and leveraging structural knowledge. It infers the robot morphology and associated inertial description. The work urges reconsidering end-to-end learning for physical systems, emphasizing the need for a synergistic integration of principled knowledge and sensorimotor data. (467 characters)}
 
 % ===================================================================================================
 %                                                 |                                                 |
