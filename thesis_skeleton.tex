@@ -314,6 +314,7 @@ For enabling the learning of the robot body schema this thesis:
 %	\item The work in this thesis proves that indeed the pairwise relationships among the proprioceptive signals can be represented and analyzed with information-theoretic measures that enable their study under the scope of the information structure emerging from the robot embodiment.
 \end{itemize}
 
+
 \subsection*{Text}
 \redtext{As robots become increasingly integral to human life, the imperative emerges for them to autonomously explore and construct models of their bodies. Robots should take cues from human capabilities, aspiring to build and utilize their body schema for advanced locomotion, finer manipulation, and adaptive interactions. Thus, a crucial foundation lies in seamlessly integrating the body schema to elevate learning, motor control, coordination, and spatial awareness. Furthermore, future robots should become self-sufficient entities that conduct monitoring, calibration, and adaptation exclusively through onboard sensing modalities. Standardizing constant self-monitoring nurtures spatial awareness and facilitates rapid error detection and correction. A profound understanding of their body structure will undoubtedly lead to enhanced, safe, and energy-aware interactions. However, current robot learning approaches encounter limitations,  such as suboptimal generalization and sample efficiency, exhibiting a need for more structural knowledge. Versatile methods, like neural networks, confront challenges related to data and topology, confining learning to specific regions. On the other hand, learning robot physical attributes still rely on a presumed knowledge of the mechanical topology, often involving calibration and offline identification in controlled environments with a persistent reliance on external measurements, such as vision and motion-capturing systems. The research landscape generally reveals the lack of a unified framework that enables robots to build representations of their body schema to achieve improved body awareness and interaction capabilities. This study addresses these challenges by consolidating necessary and sufficient proprioceptive signal quantities, enabling robots to autonomously acquire knowledge about their body structure without relying on exteroceptive off-body sensors. It introduces an approach that reformulates robot kinematic calibration and system identification as a modular computational graph amenable to machine learning. This abstracted architecture, applied in online learning phases, seamlessly merges proprioceptive signals with first-order principles, extracting fundamental features of the robot body schema. Characterizing morphological properties of tree-like structures, the study infers mechanical topology through information-theoretic measures, validating and applying it independently of off-robot calibration. The research extends its scope by complementing the robot body schema by instantiating inertial properties, ensuring online learning and physical feasibility. Ultimately, this work challenges the uncritical application of end-to-end learning in physical systems, urging a reevaluation of its limitations when excluding principled knowledge. It underscores opportunities for machine learning frameworks in embodied systems, emphasizing the untapped potential of synergizing structural knowledge with data-driven methods. This study catalyzes future research in an incipient field that underscores building and maintaining a body schema by demonstrating that fundamental properties of a robot's morphology can be deduced from proprioceptive signals. Its implications are far-reaching, addressing the needs of conventional and dynamic robotic structures with diverse sensory modalities that require a more profound sense of self.}
 
@@ -343,26 +344,116 @@ This thesis explores the potential for enhanced robot autonomy through a self-di
 % ===================================================================================================
 \newpage
 \section*{Introduction}
-\TODO Clarify the terms body schema, body morphology, ecological self, and physical self
+%\TODO Clarify the terms body schema, body morphology, ecological self, and physical self
+%
+%\subsection*{Points to address}
+%In the ever-evolving landscape of robotics, a transformative paradigm is emerging — one where robots autonomously learn models of their own bodies. This monumental shift is not merely a technological advancement; it is a gateway to a future where robots seamlessly integrate into various facets of human life, revolutionizing the way they perceive, interact, and adapt to their surroundings.
+%\begin{enumerate}
+%	%\item As robots become increasingly integral to human life, the imperative emerges for them to autonomously explore and construct models of their bodies. 
+%	\item As robots develop and steadily permeate many aspects of human life, they need actively engage in the exploration and development of models for their own bodies, i.e. autonomous self-discovery of their physical self. Awareness of the physical self empowers robots to integrate sensory information and motor control, establishing a foundational body schema. This, in turn, contributes to enhanced motor control, spatial awareness, and efficient learning, fostering adaptability and effective interaction in diverse environments.
+%	
+%	%\item Robots should take cues from human capabilities aspiring to build and utilize their body schema for advanced locomotion, finer manipulation, and adaptive interactions
+%	\item Inspired by humans, future robots should be able to skillfully employ their body schema for better spatial awareness fostering efficient learning, adaptability interaction in diverse environments. As a result of using a body schema advanced locomotion and motion planning, precise grasping, intricate object manipulation will be possible. Furthermore, bodily awareness will allow robots to anticipate and adapt the interaction with other robotic and human agents.
+%	
+%	\item A crucial foundation for future robots, lies in seamlessly integrating the body schema to foster learning, motor control, coordination, and advanced spatial awareness that improves their versatility and seamless interaction with their surroundings.
+%	
+%	% Standardizing constant self-monitoring nurtures spatial awareness and facilitates rapid error detection and correction
+%	\item Future robots should become self-sufficient entities that conduct monitoring, calibration, and adaptation of their body representation exclusively through onboard sensing modalities. Fundamental modalities include somatosensation (proprioception and touch) and vision.
+%	
+%	\item Constant self-monitoring of the sensorimotor state and the internal body models becomes the norm for rapid error detection and correction. These models can adapt steadily to different situations developing a spatial awareness of the physical self that enables the rapid planning and deployment of contingent motion strategies providing advanced interaction capabilities with the environment.
+%	
+%	%\item A profound understanding of their body structure will undoubtedly lead to enhanced, safe, and energy-aware interactions
+%	\item Understanding their own body structure enables robots to interact more effectively with other robots and with humans by adjusting movements for safety. Additionally, robots can optimize their energy consumption by adapting their motions based on physical properties, contributing to energy-aware robotics.
+%	
+%\end{enumerate}
 \subsection*{Motivation}
-\begin{itemize}
-	\item Robots learning models of their bodies have diverse applications, including effective tool usage, object manipulation, increased autonomy, and safety in human-robot interactions.
 
-	\item The ability for robots to learn models of their bodies is inspired by the concepts of the physical self and body schema in humans, aiming to emulate aspects of human cognition and adaptability.
+\begin{enumerate}
+	\item Empowering Robots
+	\begin{itemize}
+		\item Autonomous self-discovery is imperative for robots integrating into human life.
+		\item Awareness of the physical self through the body schema is foundational.
+		\item It enables the integration of sensory information and motor control.
+		\item The evolving body schema serves as a dynamic map for interactions.
+		\item Enhances robot motor control, precision, and coordination.
+		\item Facilitates efficient learning, adapting to diverse environments.
+	\end{itemize} 
+	\item Learning and the Body Schema
+	\begin{itemize}
+		\item The body schema is indispensable for multifaceted robot capabilities.
+		\item Learning contributes to body schema development, forming a dual relationship.
+		\item Detects structure in sensorimotor signals, aiding body schema construction.
+		\item Incorporating body schema into learning refines skills and assimilates knowledge.
+		\item Enhances motor control through adaptive internal body representations.
+		\item Empowers robots to learn diverse tasks, providing versatility in dynamic settings.
+	\end{itemize}
+	\item Enhancing Locomotion, Manipulation, and Adaptability
+	\begin{itemize}
+		\item A well-integrated body schema improves adaptability and interaction.
+		\item Enables precise and coordinated movements, advanced locomotion, and motion planning.
+		\item Enhances manipulation capabilities with human-like dexterity and precision.
+		\item Coordination with other agents, both robots and humans, becomes more refined.
+		\item Anticipatory and adaptive capabilities are fundamental for safe and effective interactions.
+	\end{itemize}
+	\item Constant Self-Monitoring for Autonomy
+	\begin{itemize}
+		\item Continuous self-monitoring is fundamental for future robotic systems.
+		\item Achieved through internal models and uninterrupted sensorimotor signals.
+		\item Enables dynamic, real-time understanding of the robot's state.
+		\item Successive error detection and correction phases enhance reliability.
+		\item Rapid formulation and execution of contingency motion strategies in dynamic environments.
+	\end{itemize}
+	\item Onboard Sensing for Self-Sufficiency 
+	\begin{itemize}
+		\item True autonomy requires robots to rely exclusively on onboard sensing.
+		\item Somatosensation (proprioception and touch) and vision are fundamental modalities.
+		\item Liberates robots from external dependencies, enhancing self-sufficiency.
+		\item Enables dynamic responses to changes in surroundings in real-time.
+		\item Enhances autonomy and adaptability, previously unseen with off-board sensing.
+	\end{itemize}
+	\item Safety- and Energy-Awareness
+	\begin{itemize}
+		\item The body schema serves as a predictive tool, fostering safety in interactions.
+		\item Facilitates dynamic adjustments in movements to prioritize safety.
+		\item Enables seamless coordination with other robots and humans, averting collisions.
+		\item Comprehension of body structure optimizes energy consumption.
+		\item Dual capability enhances safety and contributes to energy-aware robotics, fostering efficiency and collaboration.
+	\end{itemize}
+\end{enumerate}
 
-	\item Robots with awareness of their physical self gain a holistic understanding of their own bodies, integrating sensory information and motor control.
 
-	\item The body schema in robotics serves as a foundational element, contributing to motor control, spatial awareness, and efficient learning, enabling robots to adapt and interact effectively.
 
-	\item Robots with self-modeling capabilities can autonomously adapt to changes in their physical structure, facilitating modifications, repairs, and adjustments.
 
-	\item They exhibit better motor control and coordination, allowing for more precise and efficient movements in diverse environments.
 
-	\item Robots with a constantly adapting representation of their bodies can detect discrepancies between intended and actual movements, enabling autonomous identification and correction of errors or malfunctions.
 
-	\item Self-aware robots reduce dependence on human intervention by autonomously adapting to changes, detecting errors, and making corrections, leading to increased reliability.
+%\redtext{Rephrase: ``The advantage of self-learned models is that they can be used without specific prior knowledge about the robot, for example its morphology or pre-defined forward and inverse models.''}
+%
+%\redtext{Rephrase: ``Improving the ability of robots to make predictions is a promising direction to enhance their skills, not only on motor control and prediction of their own body''}
+%
+%\redtext{Rephrase: ``In developmental robotics, such models are acquired by designing learning mechanisms to let a robot build its own perceptive and behavioral repertoire. The focus is to investigate the acquisition of motor skills from sensorimotor interaction with the environment. As a result, the developmental approach aims to endow robots with all the learning capabilities that may be necessary to build rich and flexible sensorimotor representations''}
+%
+%
+%\redtext{Rephrase: “Without internal models, robotic systems can autonomously synthesize increasingly complex behaviors (6, 14–16) or recover from damage (17) through physical trial and error, but this requires hundreds or thousands of tests on the physical machine and is generally too slow, energetically costly, or risky”}
 
-\end{itemize}
+
+%\begin{itemize}
+%	\item Robots learning models of their bodies have diverse implications. Among them, increased bodily awareness that yields higher autonomy. Better locomotion strategies and motion planning. Enhanced dexterous object manipulation leading to effective tool usage. Heightened bodily awareness and motor control leads to improved interaction with energy and safety guarantees. Safer human-robot interaction.
+%
+%	\item The ability for robots to learn models of their bodies is inspired by the concepts of the physical self, the ecological self, and body schema in humans, aiming to emulate aspects of human cognition and adaptability.
+%
+%	\item Robots with awareness of their physical self gain a holistic understanding of their own bodies, integrating sensory information and motor control.
+%
+%	\item The body schema in robotics serves as a foundational element, contributing to motor control, spatial awareness, and efficient learning, enabling robots to adapt and interact effectively.
+%
+%	\item Robots with self-modeling capabilities can autonomously adapt to changes in their physical structure, facilitating modifications, repairs, and adjustments.
+%
+%	\item They exhibit better motor control and coordination, allowing for more precise and efficient movements in diverse environments.
+%
+%	\item Robots with a constantly adapting representation of their bodies can detect discrepancies between intended and actual movements, enabling autonomous identification and correction of errors or malfunctions.
+%
+%	\item Self-aware robots reduce dependence on human intervention by autonomously adapting to changes, detecting errors, and making corrections, leading to increased reliability.
+%
+%\end{itemize}
 
 %1. **Diverse Applications:**
 %- Robots learning models of their bodies have diverse applications, including effective tool usage, object manipulation, increased autonomy, and safety in human-robot interactions.
@@ -389,7 +480,7 @@ This thesis explores the potential for enhanced robot autonomy through a self-di
 %- Self-aware robots reduce dependence on human intervention by autonomously adapting to changes, detecting errors, and making corrections, leading to increased reliability.
 
 \subsection*{Problem Statement}
-
+\redtext{Connect to the idea of leveraging engineering approaches for system identification and learning techniques to provide a first realized body schema}
 \begin{itemize}
 \item The learning of a robot's physical attributes is typically confined to calibration routines for known kinematic structures and conventional offline system identification methods, such as those for instantiating inertial parameters.
 
