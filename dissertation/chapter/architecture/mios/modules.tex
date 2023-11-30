@@ -1,0 +1,60 @@
+\paragraph{Core}
+The core as the central module coordinates all other modules and connects the various components of the command pipeline, i.e. it runs the base control cycle which coordinates the update of the percept struct, queries skill commands and relays them through the controller pipeline to the robot hardware.
+
+\paragraph{Task Engine}
+The task engine is the most outer loop in the program logic.
+It takes care of loading the context of a given task, running and (potentially) recovering it, and event handling such as various error cases.
+After execution it stores the various data from the result in the short-term memory.
+A task is a container for any number of skills and can execute additional commands in any manner allowed by the \verb!C++! language.
+When no explicit task is selected to run, an idle task is executed as default.
+
+\paragraph{Memory}
+The memory module is responsible for storing any form of data such as task results and environment data.
+It consists of a short-term memory and a long-term memory.
+The short-term memory uses only internal RAM to quickly store information and access it.
+The long-term memory connects to an external mongodb database to permanently store information.
+The latter is only updated in between task executions.
+
+\paragraph{Command Interface}
+The interface module offers a variety of high-level methods for interaction with MIOS via network.
+It utilizes RPC, websocket and UDP protocols as a framework for json-based communication channels.
+Additionally, it runs a ROS core, allowing for communication with the ROS ecosystem.
+The latter can also internally be utilized by skills for publishing or subscribing to ROS topics or make service requests.
+The methods offered by the various servers are always the same and range from basic hardware commands such as locking/unlocking brakes over information requests to starting/stopping tasks.
+
+\paragraph{Telemetry}
+The telemetry module allows a client to subscribe to \softwareabbr{} and receive telemetry data via UDP with a specified frequency.
+An already tested use case is a digital twin of the robot using e.g. the UNREAL engine \cite{EPICGames.2022}.
+
+\paragraph{Portal}
+The portal module offers communication services to other modules (e.g. the command interface and the telemetry).
+These are message-based communication methods as well as continuous streams via UDP.
+
+\paragraph{Skill Engine}
+The skill engine takes care of properly loading a skill including its context (any required execution information).
+It also serves as an interface for the core to execute the skill cycle.
+At the end of execution the skill engine collects the results from the last skill and adds them to the current task results.
+
+\paragraph{Controller Pipeline}
+The controller pipeline is a modular component that offers various control methodologies.
+In its current implementation it can connect to hardware interfaces based on joint torque, joint velocity, Cartesian twist, joint angles and Cartesian pose.
+Depending on the interface it makes use of e.g. custom Cartesian impedance and force controllers, nullspace controllers and joint torque controllers.
+It is easy to extend since a specific pipeline inherits from a base \verb!C++! class.
+
+\paragraph{Safety Stages}
+MIOS has two safety stages, the first modifies commands on velocity / pose / feedforward force level, the second on joint torque level.
+The used safety mechanisms are virtual walls, velocity walls, velocity scaling, and limitation of rates and maximum values.
+Furthermore, built-in checks for invalid values and buffering are implemented.
+
+\paragraph{Robot Body}
+The robot body module implements the bridge from \softwareabbr{} to the used robot hardware.
+The current implementation is focused on the \platformname{} arm and uses \emph{libfranka}.
+This module translates the platform-specific robot state into a \softwareabbr{}-readable percept struct which is then used throughout the other modules.
+In the other direction it translates the \softwareabbr{}-specific commands struct into platform-readable commands depending on the used hardware interface.
+
+\paragraph{Machine Learning Service}
+The machine learning service is implemented in Python and communicates with the \verb!C++! part of \softwareabbr{} using a websocket client.
+It runs an engine that calls the interface module in order to execute tasks and receive evaluation information.
+The engine is used by machine learning services which are based on third-party Python packages.
+Exemplary implementations are PSP, CMA-ES, Bayesian optimization and various algorithms from the sklearn Python package \cite{Pedregosa.2010}.
+The services are instructed by a problem definition class which determines the parameter domain, used cost function, and setup, reset and termination routines for the experiment.

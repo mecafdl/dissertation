@@ -1,0 +1,110 @@
+In the following, industrial assembly processes are considered that are typically well understood and planned in advance.
+Therefore, the construction plans are known beforehand.
+Also, it is assumed that during task execution all necessary tools and parts are fed to the team by suitable mechanisms such as conveyor belts.
+In turn, the requirements for autonomy are restricted to specific problems such as being able to execute a set of assembly and manipulation skills, or to communicate with humans and other robots within the context of assembly processes.
+
+A framework for human-robot collaboration is proposed that comprises three different architectural levels: the team-level assembly task planner, the agent-level skill planning, and the skill execution level that is the final decision component above the robot real-time control stack.
+
+The planner at team level performs the task allocation for the agents based on an abstract world model and with the help of suitable cost metrics.
+To suitably model the types of assembly processes AND/OR graphs \cite{HomemdeMello.1990} are employed as they implicitly model parallelism.
+The team-level planner produces task sequences for every agent via A$^\star$ graph-search, from which it derives task descriptions that are then passed down to the agent's skill execution level.
+The agents in turn implement tactile skills as introduced in Sec.~\ref{fig:foundations:representation:tactile_skill}.
+
+The proposed separation in terms of entities (agents, team-level planner) and abstraction leads to an efficient planning framework that can produce optimal nominal task plans to build a desired assembly, while handling failures due to dynamic and uncertain environments in a safe and reliable way on the lower levels of control.
+
+\subsubsection{Preliminaries}
+
+To be able to create (large) assembly plans and design control processes that implement those plans, it is necessary to select a proper representation.
+In this chapter such a representation is briefly introduced and reasonable assumptions are made about the structure of the assembly, simplifying the subsequent theoretical analysis.
+Note that in this work the generation process of assembly plans is not treated.
+Instead, it is assumed that such plans are already at disposal.
+A popular algorithm to generate assembly plans is e.g. described in \cite{HomemdeMello.1989}.
+
+In the following, a mechanical assembly is denoted by $\assembly$.
+An intuitive representation for a single assembly is the graph of connections $\graph$.
+This is obtained by simplifying the graph of contact, which was already used in several works \cite{Fazio.1987,HomemdeMello.1989,Huang.1989}.
+The resulting graph of connection contains a node for every part $\assemblypart \in \assemblypartset$, where $\assemblypartset \in \assembly$, and an edge if and only if there is at least one contact between the two respective parts.
+
+The parts $\assemblypart$ are assumed to be solid rigid objects, i.e. their shape remains the same throughout the complete assembly process.
+A subassembly $\assemblypartset_s \subset \assemblypartset$ has similar properties as the complete assembly.
+If a subassembly consists of more than one part, all the parts are connected, meaning the graph of connections induced by that subassembly is connected.
+For the sake of simplicity it is assumed that every part $\assemblypart$ is unique, i.e. they are not interchangeable when they have equal properties (e.g. two screws of the same type).
+Furthermore, it is assumed that the geometry and characteristics of the connection of every pair of parts are unique.
+Thus, every subassembly implicitly defines the complete geometry of the involved parts as well as their connections.
+A subassembly with only one part is considered atomic.
+
+In order to build an assembly an assembly plan is needed, which describes the possibilities of how to assemble a work piece.
+In particular, it assumes that all parts are in their designated places and the necessary connections were made already, so that one begins with the correct subassemblies.
+The process of executing the assembly plan is called assembly process.
+The process of assigning the available workers $\worker \in \workerset$ (for which also the more general term agent is used) to the assembly actions is called task allocation.
+A sequence of assembly actions that lead from the initial configuration to the finished product is called an assembly sequence $\assemblysequence$ which, in general, is a partially ordered set of assembly actions $\assemblyaction$.
+An assembly action $\assemblyaction$ denotes one step in the assembly process and can be understood as a skill instantiation.
+
+\subsubsection{Assumptions}\label{ch:foundations:planning:assumptions}
+
+Three predicates are introduced to further concretize the scenario which is being investigated.
+First, it is assumed that a subassembly $\assemblypartset_s$ is stable, $\text{st}(\assemblypartset_s)$, i.e. its parts remain in contact without applying any external forces and the relative geometry of all parts does not change.
+Then, the actions $\assemblyaction$ that are used in the assembly process are classified as geometrically feasible and mechanically feasible:
+\begin{itemize}
+\item $\text{gf}(\assemblyaction)$ denotes that there exists a collision free path to join the two involved subassemblies.
+\item $\text{mf}(\assemblyaction)$ holds if it is possible to permanently establish all necessary connections.
+\end{itemize}
+\paragraph{Sequentiality}
+A plan is sequential if there exists a sequence of assembly actions, involving only one subassembly that can represent the plan.
+This means that it is never necessary, though possible, to move two subassemblies at a time.
+A plan that holds this property could thus be executed by a robot with a single manipulator.
+Whether an assembly can be described by a sequential plan depends on its geometry.
+Also, it requires that every subassembly is stable.
+\paragraph{Monotonicity}
+A plan is called monotone if it contains no action that would break an already established connection or modifies the relative geometry in an already existing subassembly.
+Monotonicity is often built into real world assemblies.
+\paragraph{Coherency}
+A plan is coherent for a graph $\graph$ if every subassembly occurring in the plan corresponds to a connected sub graph of $\graph$.
+More formally, there exists a connected graph $\graph$ such that
+\begin{itemize}
+\item there exists an isomorphism from the set of parts to the set of nodes in $\graph$ and
+\item for every subassembly occurring in the plan, the sub graph of G that is induced by that subassembly is connected.
+\end{itemize}
+
+
+\subsubsection{Collaborative Assembly Planning Framework}
+
+\begin{figure}[ht!]
+\input{figures/svg/applications_planner_concept.pdf_tex}
+\caption{Collaborative assembly planning framework. The top layer depicts the input to the team-level planner, which is an AND/OR graph $Y_\assembly$ resulting from an assembly $\assembly$ (Step I).
+The planner then solves the problem of optimal task allocation (Step II) for multiple agents considering a given cost function and constructs a set of assembly sequences (Step III).
+The actions from the sequences are then passed to the respective agents (Step IV), which possess corresponding skills $\skill$.
+Skills in turn consist of more basic structures, i.e. atomic actions, which eventually map to the real-time-level.}
+\label{fig:foundations:planning:concept}
+\end{figure}
+
+Figure~\ref{fig:foundations:planning:concept} provides an overview of the collaborative assembly planning framework.
+The used notation $\worker \rightarrow \assemblyaction$ denotes a specific allocation of agent $\worker$ to action $\assemblyaction$.
+The framework comprises three main levels, which are strictly separated.
+However, they communicate bilaterally with each other and share common information.
+Although the approach is considered as rather general in principle, the focus here lies on its application to industrial assembly processes. 
+
+
+
+The first level, called team level, plans the assembly process from the view of a foreman, i.e. it has information about the possible construction plans, assembly parts, the available agents and other resources.
+It knows only actions that can manipulate this world model in an abstract way, i.e. it is domain-specific.
+The planning process on team-level solves the problem of task allocation in the assembly process for a team of human and robotic workers.
+It should be noted that at this level of abstraction no explicit distinction between human and robotic workers is made, since the team-level planner relays only abstract task descriptions without the need to take into account specific implementations of the necessary skills.
+It is possible to distinguish between agents by encoding their respective capabilities into cost functions that are used for planning.
+At this point it is important to state how the planner interacts with the agents.
+During the search process the planner sends the request to perform a specific action to an agent.
+The agent answers with the cost and possibly a further request for an interaction, which in turn is integrated into the planning process.
+If an agent is not able to perform a specific action it returns infinite costs.
+The planner then uses the received costs from all available agents to determine the optimal task allocation.
+Please note further, that the planning process at team-level is offline, see Fig.~\ref{fig:foundations:planning:concept}, hence, fast replanning and refinement methods are out of the planner's scope, despite it might be possible for a manageable assembly complexity.
+
+The second level, called agent level, maps the team-level planning process to the capabilities (skills) of the robot.
+In general, the agent level may of course contain also other sophisticated planning systems that plan out sequences of skills to accomplish a given objective.
+However, for executing industrially relevant skills that need a high level of expert knowledge, practical experience shows that their automatic planning instead of semi-handcrafting in collaboration with process experts is the significantly less capable approach as of today.
+Note that since the agent level is implemented on the robot itself, it is possible to use different robot types.
+For this, the systems have to provide the necessary formal semantics to the team level, which obviously requires the systems to be able to execute the same actions in principle.
+Another important task of the agent level is the consistent handling of events such as collisions or human induced interruptions of the assembly process.
+Although the reaction to the actual event itself is assumed to be handled by the skill level, the agent level either has to deal with the consequences in a way that is consistent with the overall plan on team level, or report a failure in plan execution and request replanning from the team-level planner.
+
+The third level, the skill level, is directly responsible for executing trajectory planning, controllers, etc.
+For the experimental analysis of the planning system it is realized by the \skillmodelabbr{} framework (see Sec.~\ref{ch:architecture:mios:ggtwrep}).

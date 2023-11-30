@@ -1,0 +1,11 @@
+This chapter describes the overall learning architecture that realizes the theoretical foundations provided in Ch.~\ref{ch:foundations}.
+It is used for the experimental work described in Ch.~\ref{ch:experiments}.
+First, in Sec.~\ref{ch:architecture:skill} the \skillmodel{} (\skillmodelabbr{}) framework is introduced.
+It is a multi-layered architecture that models the tactile skill concept.
+It consists of a system layer connected to the tactile platform, a control layer that provides a tactile controller,  a policy layer that implements a tactile policy, and a semantic layer that handles process steps and connects to a learning algorithm.
+Section~\ref{ch:architecture:mios} outlines the \software{} (\softwareabbr{}), a highly integrated software stack that efficiently implements the \skillmodelabbr{} framework in a scalable and distributed fashion.
+Section~\ref{ch:architecture:system} describes a number of validation experiments and applications where the architecture developed in this thesis has been successfully used.
+These cover the field of dentronics, a telepresence application, a collaborative assembly station, and a highly sophisticated robotic art project in the Pinakothek der Moderne in Munich, Germany.
+Section~\ref{ch:architecture:learning} presents two more cases in which the learning component was the main matter of interest.
+These are a manipulation learning setup for industrial-grade peg-in-hole and a complex, distributed robots system denoted the collective.
+This chapter was written based on \cite{Grischke.2019,Grischke.2020,chen2022communication,Johannsmeier.2023b}.

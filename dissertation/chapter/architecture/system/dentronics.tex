@@ -1,0 +1,19 @@
+\begin{figure}[ht!]
+\includegraphics[width=\textwidth]{figures/architecture/arch_dentronics.png}
+\caption{(Top left) The field of dentronics \cite{Grischke.2020}. (Bottom left) The modalities of the devised interaction framework dependent on the communication range \cite{Grischke.2019}. (Right) Experimental prototype setup for the conducted user-study consisting of a \platformname{} arm \cite{Haddadin.2022} (a) equipped with an SR300 camera \cite{keselman2017intel} (b), a mobile device (c), colored gloves (d), a pedal (e) and a microphone (f) \cite{Grischke.2019}.}
+\label{fig:architecture:system:dentronics:setup}
+\end{figure}
+
+In \cite{Grischke.2019} the concept of dentronics was introduced and further developed in \cite{Grischke.2020,monnink2023dentronics}.
+This new field is already starting to be recognized by scientists beyond the circle of initial authors \cite{jayaweera2021reshaping}, and has been featured in IEEE Spectrum \cite{spectrum2019dentronics}.
+It envisions robotic assistance in typical dental procedures such as assistance during treatment or device disinfection.
+A set of design principles, namely \emph{human safety}, \emph{human-centered interaction}, \emph{human-robot communication}, \emph{reliable manipulation skills}, and \emph{intuitive to use}, was introduced on which basis a prototypically implemented dentist-robot interaction framework was developed.
+With the help of a consecutive user-study it could be shown that the concept has the potential to become a realistic application domain for collaborative robots, providing benefit to the dentist.
+The results also indicate individual user-preferences regarding interaction modalities. 
+In summary, it is hypothesized that a powerful and intuitive multi-modal interaction framework significantly increases the acceptance of robotic assistance in dentistry and is worth to be taken further beyond the first steps.
+
+For the experimental realization a number of software components from \softwareabbr{} have been used and extended with an interaction framework.
+The developed framework builds upon the dentronics design principles and combines several communication modalities in order to cover a wide range of dentist-robot distances.
+These are speech recognition, hand gesture recognition, haptic gestures, a web interface, and a foot pedal.
+Figure~\ref{fig:architecture:system:dentronics:setup} shows the setup for the user study.
+

@@ -1,0 +1,90 @@
+%% Creator: Inkscape 1.0 (4035a4fb49, 2020-05-01), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ggtwrep.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{455bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.7032967)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/ggtwrep.pdf}}%
+    \put(0.33791208,0.6043956){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Semantic Layer\end{tabular}}}}%
+    \put(0.33791208,0.57142856){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\semantica:\objectset,\params_\pi,\worldstate_0 \rightarrow \req,\effects,\domain$\end{tabular}}}}%
+    \put(0.33791208,0.53846153){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\semanticb:\objectset,\params_\pi \rightarrow \quality,\worldstate_1$\end{tabular}}}}%
+    \put(0.33791208,0.489011){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$f_s: \objectset,\params_\pi,\worldstate \rightarrow \state,\primitive$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/ggtwrep.pdf}}%
+    \put(0.3379121,0.37362639){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Policy Layer\end{tabular}}}}%
+    \put(0.3379121,0.34065935){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$f_\pi: \state,\primitive,\params_\pi,\worldstate \rightarrow \commands$\end{tabular}}}}%
+    \put(0.33791213,0.22527474){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Control Layer\end{tabular}}}}%
+    \put(0.33791213,0.19230772){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$f_c: \commands,\params_c,\worldstate \rightarrow \torqued$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{figures/ggtwrep.pdf}}%
+    \put(0.02472527,0.22527479){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Input Processor\end{tabular}}}}%
+    \put(0.02472527,0.19230772){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$f_i: \percept \rightarrow \worldstate$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{figures/ggtwrep.pdf}}%
+    \put(0.83241746,0.58791208){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}User / AI\end{tabular}}}}%
+    \put(0.13186813,0.06868126){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\percept$\end{tabular}}}}%
+    \put(0.5357143,0.43131868){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\state,\primitive$\end{tabular}}}}%
+    \put(0.5357143,0.28296703){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\commands$\end{tabular}}}}%
+    \put(0.5357143,0.13461538){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\torqued$\end{tabular}}}}%
+    \put(0.23076924,0.1675824){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\worldstate$\end{tabular}}}}%
+    \put(0.65934072,0.10989011){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\constraints_h$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{figures/ggtwrep.pdf}}%
+    \put(0.33791213,0.07692305){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}System Layer\end{tabular}}}}%
+    \put(0.33791213,0.04395598){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$f_h:\torqued \rightarrow \percept$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{figures/ggtwrep.pdf}}%
+    \put(0.81593407,0.06043956){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Environment\end{tabular}}}}%
+    \put(0.65934072,0.36538462){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\constraints_\pi$\end{tabular}}}}%
+    \put(0.65934072,0.46428572){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\constraints_s$\end{tabular}}}}%
+    \put(0.71703297,0.66208791){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Cognitive Bridge\end{tabular}}}}%
+    \put(0.77472521,0.14285713){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Physical Bridge\end{tabular}}}}%
+    \put(0.65934072,0.21703295){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\constraints_c$\end{tabular}}}}%
+    \put(0.01648352,0.489011){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Real Time\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{figures/ggtwrep.pdf}}%
+  \end{picture}%
+\endgroup%

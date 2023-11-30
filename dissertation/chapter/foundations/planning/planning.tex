@@ -1,0 +1,166 @@
+\subsubsection{Team-Level Task Allocation}
+
+The team-level planner takes an assembly plan in the form of an AND/OR graph as input.
+Furthermore, a reference to a database is needed, which contains the necessary information about part locations, agents and other resources.
+To optimally solve the allocation problem with respect to a particular cost metric, the well-known A$^\star$ graph search algorithm \cite{Russel.2002} is applied.
+In the following, the formal problem statement, relevant cost metrics and heuristics, as well as further considerations concerning multi-agent allocation are provided.
+
+\paragraph{1) Problem Statement}
+
+The overall goal is to find an allocation of agents to assembly actions that is optimal with respect to a specified cost function.
+In the following, $\assemblystateset=\{\assemblystate_1,\dots,\assemblystate_n\}$ denotes the set of assembly states, each of which corresponds to a set of OR nodes $v_o(\assemblystate)\subset V_o$, where $V_o$ denotes the set of all OR nodes in the AND/OR graph $Y_\assembly$.
+Similarly, the assembly actions $\assemblyaction(\assemblystate)$ that are applicable in a state $\assemblystate$ correspond to a set of AND nodes $v_a(\assemblystate)\subset V_a$, where $V_a$ denotes the set of all AND nodes in $Y_\assembly$.
+Since $Y_\assembly$ and the number of available agents, and therefore, the number of possible allocations, are finite, the search space is finite as well.
+
+The general idea is now to propagate through $Y_\assembly$ from the root node via disassembly actions until some state contains only atomic subassemblies.
+The following formal definition of the problem complies to the simplifications for the assembly process introduced in Sec. \ref{ch:foundations:planning:assumptions}.
+\begin{itemize}
+\item The initial assembly state $\assemblystate_0$ corresponds to the root node $v_{o,0}$ of $Y_\assembly$, which corresponds to the complete assembly $\assembly$.
+\item In a state $\assemblystate$ the number of applicable assembly actions is at most as large as the number of OR nodes $n_{\assemblystate,o}$ in that state due to strict sequentiality.
+Also, a single OR node can provide at most one AND node to a valid set of actions, since a given assembly can not be disassembled into two different configurations at the same time.
+Therefore, in $\assemblystate$ there are $n_{\assemblystate,a}=\prod_i n_{a,i}$ different valid sets of actions, where $n_{a,i}$ denotes the number of children of the $i$-th OR node.
+Also note that an agent $\worker$ does not have to be assigned to an action.
+In addition, every action from $\assemblyaction(\assemblystate)$ can be assigned to every agent $\worker \in \workerset$.
+In a state $\assemblystate$, there is a maximum number of assignments
+\begin{equation*}
+N_A=\sum_{i=1}^{l} n_{\assemblystate,\assemblyaction}\binom{n_\worker}{i} n_{\assemblystate,o}!\text{,}
+\end{equation*}
+where $l=min(n_\worker,n_{\assemblystate,o})$ is either the number of available workers $n_\worker$ or the number of OR nodes with children $n_{\assemblystate,o}$, i.e. whichever is lower.
+\item The goal state $\assemblystate_g$ contains only OR nodes that correspond to atomic subassemblies.
+\item The cost of an action can be chosen from different possibilities and will be further elaborated below.
+\end{itemize}
+To illustrate the propagation of the search algorithm through the search space (i.e. the AND/OR graph) Fig.~\ref{fig:applications:planner:propagation} depicts an example. 
+
+\begin{figure}[ht!]
+\begin{center}
+\input{figures/svg/applications_planner_propagation.pdf_tex}
+\caption{Example propagation via search through search space.
+In the top graph agent $\worker_1$ has been assigned to the indicated AND node in state $\assemblystate$ and thus, the corresponding assembly action.
+This AND node has two children that are expanded and form the new state $\assemblystate^\prime$.
+In the bottom graph two parallel actions are assigned, which again yield two children, respectively.
+The dashed boxes depict the currently active state, the dotted ones the chosen allocation.}
+\label{fig:applications:planner:propagation}
+\end{center}
+\end{figure}
+
+
+\paragraph{2) Multi-Agent Considerations}
+
+Up to now, no particular assumptions regarding the number of workers were made in the problem statement.
+Although the AND/OR graph implicitly models parallelism, it is at no point required to have more than one worker available if the simplifications from Sec.~\ref{ch:foundations:planning:assumptions} are met.
+Yet, to potentially increase efficiency/speed of the assembly process, a team of agents is used.
+For this, some factors have to be considered, which are introduced into the planning process at team level.
+
+\paragraph{a) Actions and Interactions}
+
+Within a multi-agent scenario in the domain of collaborative assembly planning, actions are not just used to build the assembly but also to enable interactions between agents.
+Therefore, it is distinguished between actions that directly modify the assembly and actions that characterize an interaction between two agents.
+Also note, that at team level actions are considered to be atomic, i.e. they directly change the model of the world.
+At agent level the same actions are called skills which in turn map to the skill level.
+The actions at team level are formally defined as follows.
+
+
+\paragraph{Definition 2: Assembly action}
+
+Let $\assemblyaction(\text{type},\workerset)$ be a general action in the context of assembly processes.
+Let \emph{type} denote a descriptor that specifies the action type that is requested and $\workerset$ can either be a single assignment $\workerset=\worker_i$, or a pair assignment $\workerset=(\worker_i,\worker_j)$ depending on the type.
+Note that interactions, i.e., actions with a pair assignment, with at most two agents are considered.
+
+If e.g. \emph{type}$=$\emph{hand\_over} and $\workerset=(\worker_1,\worker_2)$, a needed part is not reachable by $\worker_1$ and must be provided by $\worker_2$ via a hand-over action.
+
+Note that there is no need to change the problem statement to include interactions, it is only necessary to integrate them into the expanded AND/OR graph $Y_{\assembly,\assemblystate}$ that is defined as follows.
+
+\paragraph{Definition 3: Expanded AND/OR graph}
+
+Let $Y_{\assembly,\assemblystate^\prime}$ be called the local AND/OR graph of the state $\assemblystate^\prime$, then $Y_{M,\assemblystate^\prime}$ is created as a copy of $Y_{\assembly,\assemblystate}$ of state $\assemblystate$, which is the predecessor of $\assemblystate^\prime$.
+The initial $Y_\assembly$ is the AND/OR graph of $\assemblystate_0$.
+
+Since every interaction is specific to the assigned agent pair and arises from a particular context (e.g one agent cannot reach a part, yet another can, or one agent needs the assistance of another agent to join two subassemblies), it makes sense to change the AND/OR graph only locally in the search problem, i.e. for the respective state $\assemblystate$.
+Over a sequence of states $\assemblystate$ the graph is expanding with the occurrence of interactions.
+
+If an interaction is necessary, a new OR node with the corresponding subassembly $\assemblypartset^\prime_s$ and a new AND node $v_a$, which represents the interaction, are inserted, see Fig.~\ref{fig:applications:planner:interaction}.
+The new AND node (i.e. the action) can then be assigned to an agent as described above.
+The new (intermediate) subassembly $\assemblypartset^\prime_s$ has the same parts as $\assemblypartset_s$ i.e. $\assemblypart(\assemblypartset^\prime_s)=\assemblypart(\assemblypartset_s)$.
+However, the state of $\assemblypart(\assemblypartset^\prime_s)$ is different from that of $\assemblypart(\assemblypartset_s)$ depending on the type of interaction. 
+
+\begin{figure}[ht!]
+\begin{center}
+\input{figures/svg/applications_planner_interaction.pdf_tex}
+\caption{To model an interaction between two agents in the AND/OR graph a new AND/OR node pair is inserted.
+In this example, the subassembly $\assemblypartset_k$ is created by agent $\worker_1$ via joining $\assemblypartset_i$ and $\assemblypartset_j$, which corresponds to the action $\assemblyaction_1 \coloneqq \assemblyaction(\text{assemble},\worker_a)$.
+Yet, some kind of interaction is necessary to complete the assembly step.
+E.g., the performing agent cannot reach $P_i$ so another agent $\worker_2$ needs to hand this part over.
+Therefore, $\assemblypartset^\prime_i$ and the AND node that corresponds to the interaction $\assemblyaction_2 \coloneqq \assemblyaction(\text{hand\_over},(\worker_1,\worker_2))$ are inserted on the right side.}
+\label{fig:applications:planner:interaction}
+\end{center}
+\end{figure}
+
+\paragraph{b) Synchronization}
+
+Another important aspect in a multi-agent scenario is synchronization.
+In an ideal situation, the nominal plan would be executed in the real world without any modifications.
+In practice, this is highly unlikely, in particular due to dynamically changing environments and uncertainty.
+Thus, it is not possible to guarantee e.g. a successful hand-over action without communication.
+Since the action sequences arise from the AND/OR graph, every need for synchronization can be dealt with by interactions.
+
+This means that agents do not need to synchronize their actions, as long as their action sequences $\alpha$ are not connected via an interaction.
+Since the team-level planner knows (via confirmation from the agents) which actions have been performed, it can let agents wait until the requirements for their next scheduled task are fulfilled.
+This way only tasks that are applicable are performed.
+The following example refers to Fig.~\ref{fig:applications:planner:assembly}, which is also the graph for the experiments in Sec.~\ref{ch:experiments:planning}.
+Consider an agent $\worker_1$ that performs action $\assemblyaction_{11}$ and is then scheduled to perform action $\assemblyaction_7$.
+Also consider agent $\worker_2$ that performs action $\assemblyaction_{10}$.
+$\worker_1$ can not perform $\assemblyaction_7$ as long $\worker_2$ does not confirm the completion of $\assemblyaction_{10}$.
+Hence, the structure of the AND/OR graph represents the agents actions.
+
+\paragraph{3) Optimization Metric and Heuristic}
+
+Although the most obvious way to evaluate the cost of an allocation is to measure the overall execution time, there may be other metrics that are more important in specific situations.
+Furthermore, it is unlikely that time constraints assumed by the team-level planner are adhered to by the human co-workers, since the daily work routine of a factory worker is undetermined over short periods of time.
+Considering this and the fact that it is not explicitly distinguished between humans and robots at team level, other cost metrics are needed that are more applicable in human-robot collaboration and encode all necessary information about the specific workers.
+For example, the assembly could involve the handling of dangerous and/or heavy material and thus the human workload and risk should be minimized.
+Therefore some example cost functions are introduced that are suitable candidates to the given problem:
+\begin{itemize}
+\item Execution Time: One may distinguish between overall execution time and local execution time, i.e. the time needed for the execution of a single action.
+\item Resource costs: Resources such as energy consumption, peak power, etc. could be taken into account.
+\item Risk factors: Danger to human, workload amplitude and frequency or ergonomic factors may be of relevance.
+\item Assumptions about the human worker: A worker profile could be generated that maps to a cost function, using properties such as attention level, general experience level, and reliability.
+\end{itemize}
+
+A cost function for a robot could e.g. look like $c_r(w,a)=\omega_1 f_t(\worker,\assemblyaction)+\omega_2 f_p(\worker,\assemblyaction)$, where $\worker$ and $\assemblyaction$ denote the worker-action pair of the assignment, $f_t$ the amount of time $\worker$ would need to perform $\assemblyaction$ and $f_p$ the amount of power consumption of $\worker$ when performing $\assemblyaction$.
+$\omega_1$ and $\omega_2$ are weighting factors.
+A human cost function could be $c_h(\worker,\assemblyaction)=\omega_1 f_a(\worker,\assemblyaction)+\omega_2 f_w(\worker,\assemblyaction)$, where $f_a$ is a measurement for the anticipated attention level of the human when performing action $\assemblyaction$ and $f_w$ is a workload measurement.
+Note that joint costs, i.e. costs that arise from interactions, can be treated explicitly.
+This is useful in order to integrate interdependencies between two specific agents into the cost function.
+
+Now, in order to make use of the advantages of the $A^\star$ algorithm, a suitable heuristic needs to be defined.
+The approach for the stated search problem is as follows.
+The minimum amount of assembly actions $n_{\assemblyaction,\text{min}}$ that need to be applied under the assumptions from Sec.~\ref{ch:foundations:planning:introduction} to get from the current state $\assemblystate$ to the goal state $\assemblystate_g$ are found to be
+\begin{equation*}
+n_{\assemblyaction,min}=\log_2(\max_i (n_\assemblypart(v_{o,i}))).
+\end{equation*}
+
+The function $n_\assemblypart$ yields the number of parts of the subassembly $\assemblypartset_s$ that corresponds to the OR node $v_{o,i}$.
+An admissible and consistent heuristic can then be derived by multiplying $n_{\assemblyaction,\text{min}}$ with the minimum cost an agent can achieve for any action that has not yet been applied.
+
+\paragraph{4) Problem Reduction}
+
+Due to the large number of possible agent assignments to actions if many agents are used, or a complex assembly with many possibilities is to be built, it is often more efficient to reduce the problem complexity first.
+The proposed method to achieve this, is to reduce the search space by simplifying the AND/OR graph.
+For this, reducible subassemblies are introduced.
+
+
+\paragraph{Definition 4: Reducible Subassembly}
+
+Let $v_{o,R}$ be the root node of the partial AND/OR graph $Y_R \subset Y_\assembly$ that is induced by the reducible subassembly $\assemblypartset_{s,R}$ and $V_{a,p}$ the set of parent nodes of $v_{o,R}$.
+If all edges $E=\{{(v_{o,R},v_o}|v_o \in V_{a,p}\}$ were removed, the result would be two distinct AND/OR graphs, i.e. $Y_R \cup Y^\prime_\assembly=\emptyset$, where $Y^\prime_\assembly=Y_\assembly \setminus Y_R$.
+Obviously, this scheme is a divide-and-conquer approach.
+The graph $Y^\prime_\assembly$ is now smaller because it only contains the root node $v_{o,r}$ of the reducible subassembly $P_{s,R}$.
+Hence, the allocation problem is easier to solve.
+This is the case because several small search spaces are now present instead of a single larger one.
+
+\subsubsection{Agent-Level Task Allocation}
+
+The agent level implements the autonomous behavior of a single robot to ensure the safe and successful execution of the actions that are assigned to the robot by the planner at team level.
+The assembly skills at agent level directly correspond to the actions received from the team-level planner.
+Arrow IV in Fig.~\ref{fig:foundations:planning:concept} depicts this connection.
+The \skillmodelabbr{} framework introduced in Sec.~\ref{ch:architecture:mios:ggtwrep} provides the necessary capabilities for the robot.

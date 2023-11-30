@@ -1,0 +1,244 @@
+This section presents experimental results on transfer learning.
+The experiments follow up on the discovery of a transfer effect as described in Sec.~\ref{ch:foundations:learning:rmm}.
+First, the experimental performance of state-of-the-art deep reinforcement learning to solve the transfer problem in tactile skill learning\footnote{Note that the focus is explicitly on blind, tactile-only manipulation, i.e., no cameras or other external sensors were considered.} is analyzed.
+Specifically, the well-adopted gold-standard algorithms soft-actor-critic (SAC) \cite{haarnoja2018soft} and deep deterministic policy gradient (DDPG) \cite{Lillicrap.2015} were evaluated.
+Then a large-scale experimental campaign to investigate the transfer learning capabilities of the \softwareabbr{} framework is described.
+The results are examined with regard to the hypothesis made in Sec.~\ref{ch:foundations:learning:rmm}.
+
+\subsubsection{Experimental Setup}
+The experimental setup consists of nine different, albeit somewhat similar insertion problems.
+The objects to insert are six cylinders with diameters ranging from $10$ to $60$ mm and three different keys (see Fig. \ref{fig:experiments:learning:transfer:setup}).
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/experiments/transfer_setup.png}
+    \caption{The analyzed reference tasks consist of six cylinders with increasing diameters and three different common household keys (bottom left). Five robots were used in total for the experiment.}
+    \label{fig:experiments:learning:transfer:setup}
+\end{figure*}
+The clearance for the cylinders is $< 0.1$ mm.
+Therefore, it is on an industrial level; thus, it is a non-trivial challenge that is still not considered solved in the manipulation and control community.
+Furthermore, to make the task even more challenging, the holes have no walls.
+This increases the chance of jamming with the cylinders during insertion - an effect that cannot yet be simulated.
+The keys are common household keys with a typical clearance of $<1$ mm, and their particular insertion mechanics are also far from being replicable in physics simulators today.
+In accordance with the taxonomy hierarchy there are level-$0$ transfers (each task is paired with itself), level-$1$ transfers (any cylinder is paired with any other cylinder, or any key with any other key), and level-$2$ transfers (any cylinder is paired with any key) (see Sec.~\ref{ch:foundations:learning:rmm}).
+
+Five \platformname{} arms \cite{Haddadin.2022} were used to learn the skills in parallel where possible.
+Each robot was connected to an off-the-shelf PC with an Intel i7 processor, $8$ GB RAM, an SSD, and no additional graphics card.
+All calculations by the learning algorithm were done on the PCs locally using \softwareabbr{} (see Sec.~\ref{ch:architecture:mios}).
+
+\subsubsection{Experimental Procedure}
+
+A robot learning a skill is referred to as an experiment, and one experiment consists of a number of trials.
+A trial consists of the following procedure.
+\begin{enumerate}
+    \item firmly grasp the object with two-finger gripper
+    \item move to a kinesthetically taught approach pose
+    \item execute the insertion skill until it is successful, or until an error occurs
+    \item reset the skill by extracting the object and retract back to approach pose
+\end{enumerate}
+
+The movement and extraction skills used to prepare and reset every trial were not part of the learning process but they were implemented by the \skillmodelabbr{} framework and were parameterized beforehand.
+
+\paragraph{Deep Reinforcement Learning}
+
+In the deep RL experiment, only the cylinders with the sizes $30$, $40$, and $60$~mm were considered. They were learned independently, and then the obtained policy was transferred to the other two cylinder scenarios, respectively.
+For each cylinder an experiment that consisted of $500$ trials was run.
+For statistical confidence, $10$ experiments per cylinder were performed, so there were $15.000$ trials in total.
+The deep RL methods were applied to the insertion problem in two different configurations: $1$) The same initial pose at each trial and $2$) with offsets in the $(x-y)$-plane of up to $\pm 5\text{ mm}$ (random uniform distribution).
+The reward function
+\begin{equation}
+    r(t)=100(-\delta z(t)+3|\delta x(t)|+3|\delta y(t)|),
+\end{equation}
+was used, where $\delta z$ is the change in height.
+Therefore, the reward correlates linearly with the achieved insertion depth at each time step.
+$|\delta x(t)|$ and $|\delta y(t)|$ are the changes in the deviation from the the goal position.
+When the item is successfully inserted, a reward of $r_\mathrm{succ}=20$ is added.
+The network architecture is deep deterministic policy gradient (DDPG) \cite{Lillicrap.2015}, and the implementation was kept close to the originally proposed design.
+The parameters of the implementation can be found in Tab.~\ref{tab:experiments:ddpg}.
+The soft-actor-critic (SAC) algorithm did not perform sufficiently well, therefore, its parameterization is not shown for sake of brevity.
+
+\begin{table}[ht!]
+\begin{center}
+\caption{DDPG parameters}\label{tab:experiments:ddpg}
+\begin{tabular}{l|l}
+ \hline
+ Parameter & Value\\ 
+  \hline
+ Optimizer & Adam~\cite{Kingma.2014}   \\ 
+ Learning rate (critic and actor)& $3*10^{-4}$  \\ 
+ Discount($\gamma$) & $0.99$  \\ 
+ Replay buffer size & $10^6$  \\ 
+ Number of hidden layers & $3$  \\ 
+ Number of units per hidden layer & $256$  \\ 
+ Number of samples per mini-batch & $64$  \\ 
+ Activation function & ReLU  \\ 
+ Output activation function & TanH  \\ 
+
+ Target smoothing coefficient ($\tau$ ) & $0.005$  \\ 
+ \hline
+ Action dimension size & $6$  \\ 
+ Observation dimension size & $18$\\
+ Initial exploration phase w/o learning (observations) & $1000$ \\
+ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Actions are limited to $\pm 1$ and scaled by factor $\boldsymbol{s}_a =[5,5,10,1,1,2]$ prior to robot application.
+The factor $\boldsymbol{s}_a$ was found empirically during experimentation.
+
+Since no successful insertions were observed for pure end-to-end learning on a joint level, a 6-dimensional wrench (action $\in \mathbb{R}^6$) in Cartesian space was applied.
+For the sensory feedback, the Cartesian pose, velocity, and external end effector wrench (each $\in \mathbb{R}^6$) was selected.
+Therefore, the stacked observation vector is $\mathbb{R}^{18}$.
+Each element of the action was limited between $\pm 1\unitnewton$.
+Before applying the action to the robot, it was multiplied by the factor $\boldsymbol{s}_a=[5,5,10,1,1,2]$.
+These values were found experimentally, and they seem to define a rather confined box, where the resulting forces are still high enough to solve the insertion task but also low enough to not trigger excessive forces during unwanted collisions and contact.
+Furthermore, when the values are too high, the robot tends to get stuck in undirected exploration phases, presumably because the task region of interest (\roi) is rather small.
+There is also the possibility of building up to much energy, which leads to safety violations during impact. 
+Finally, the amount of movement upward was limited to $1$ cm above the insertion hole, as subsequent downwards movement exerts too much kinetic energy during impact.
+
+\paragraph{\skillmodelabbr{}}
+
+In the \skillmodelabbr{} experiment, every skill was learned by itself without any prior knowledge, and the results were saved to a database.
+Then, every skill was learned again with the prior knowledge of every other skill so that every combination of skills was covered.
+They were also learned again using their own prior knowledge.
+In addition, every experiment was repeated $10$ times to ensure statistical confidence.
+The CMA-ES algorithm (see Sec.~\ref{ch:foundations:learning:algorithms}) was used to learn the skills, specifically, the implementation available at \cite{FrancoisMicheldeRainville.15.02.2021}.
+The number of generations was set to $10$.
+The other parameters were set according to the recommendations in \cite{FrancoisMicheldeRainville.15.02.2021}, which resulted in a total number of $130$ trials per experiment.
+Note that slightly better solutions may be found after more than $130$ trials since real-world manipulation learning is usually very noisy.
+Learning with or without prior knowledge may also end at slightly different costs after $130$ trials, but it should eventually converge to the same minimum for $t\rightarrow \infty$.
+For learning skills without prior knowledge, $c_0$ was set to $0.2 \; \params_{i,\text{max}}$ for every parameter $i$, except for $\Delta \boldsymbol{x}$ (an intentional deviation from the goal pose), which was set to $0.5\; \params_{i,\text{max}}$.
+This choice reflects an arbitrary, but safe, initialization.
+It considers that the process starts with low velocities and contact forces.
+The total number of experiments amounts to $900$, and the total number of evaluations, and thus real-world interactions, to $117.000$.
+The experiment took about five entire days to complete.
+
+\subsubsection{Knowledge Transfer: DDPG}
+
+The known network parameters $\paramsopt_{\mathrm{nn},i}$ from the source task $\task_i$ are used and applied to the target task $\task_j$, $\params_{\mathrm{nn},j}=\paramsopt_{\mathrm{nn},i}$ .
+This is straightforward, as all the networks in the deep RL implementation have the same number of layers and nodes.
+Note that no similarities between the network parameters $\params_{\mathrm{nn}}$ were examined in any of the tasks, and no form of soft update was used for this transfer.
+After this transfer, learning was not continued, as the networks did not converge reliably.
+It is acknowledged that this transfer approach is extremely greedy; however, it is not feasible to generate any kind of weighted mean due to the nonlinear nature of deep neural networks.
+In addition, the need to find generally applicable reordering methods for such networks in order to make them comparable, and the time needed to approximate their potential value (i.e., weight), are out of the scope of this work.
+
+\subsubsection{Knowledge Transfer: \skillmodelabbr{}}
+
+To transfer knowledge from task $\task_i$ to task $\task_j$ within the \skillmodelabbr{} framework, a set of already found optimal parameters $\paramsopt$ from $\task_i$ is used as an initial centroid $c_0$ for $\task_j$ (i.e., $c_{0,j}=\paramsopt_i$).
+This method of transferring knowledge is intentionally used, since, to the best of the author's knowledge, no general methods have been established yet for such new types of transfer learning.
+In order to acknowledge the simplicity of the solution, it is referred to this transfer learning as a "greedy type," as it is entirely uninformed about optimal prior choices.
+The optimal parameter set $\paramsopt_i$ for $\task_i$ is extracted from the successful trials of the experiment.
+However, simply using the parameters from the trial that generated the lowest cost may not be sufficiently robust.
+A set of parameters is considered robust if similar parameter sets lead to similar costs $\quality$, while strong fluctuations indicate lack of robustness.
+Therefore, successful trials are clustered first.
+From the parameters for the best performing cluster, a weighted mean is calculated as
+
+\begin{equation}
+    \paramsopt=\omega_1\params_1+\omega_2\params_2+\dots+\omega_n\params_n,
+\end{equation}
+where $n$ is the number of parameter sets in the best performing cluster.
+The associated weights $\omega_1,\dots,\omega_n$ decrease in logarithmic fashion and are normalized.
+\begin{equation}
+    \omega_i=\frac{\ln(n+0.5)-\ln(i)}{\sum_{j=1}^n \ln(n+0.5)-\ln(j)}
+\end{equation}
+For task $\task_i$, the weighted mean of the successful parameter sets $\paramsopt_i$ is used.
+
+
+
+
+\subsubsection{Results: Deep Reinforcement Learning}\label{sec:results:DeepRL}
+
+The results of the deep reinforcement learning experiments are depicted in Fig.~\ref{fig:results:drl_matrices}.
+No convergence could be observed for the soft-actor-critic (SAC) algorithm, despite best efforts, as is shown in the time plots at the bottom of Fig.~\ref{fig:results:drl_matrices}.
+ The time plots for the deep deterministic policy gradient (DDPG) algorithm \cite{Lillicrap.2015} were omitted, since learning the tasks worked in principle and the transfer learning results showcased by the matrices at the top of Fig.~\ref{fig:results:drl_matrices} were the focus of the experiment.
+The insertion times were considered as cost for the Level-0 and Level-1 knowledge transfers.
+The columns of the matrices denote the source tasks and the rows present the target tasks.
+During learning, the network parameters $\params$ were saved every $100$ trials, and were examined thereafter regarding reliable task execution.
+Note that this experiment was split into two parts as mentioned above.
+In the first experiment, there was no initial offset between initial pose and hole, while a random offset for the initial pose was applied in the second experiment.
+The first and second matrix show the results without an offset, and the third and fourth matrix show the results with uniform random offsets of up to $\pm 5\text{ mm}$.
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/experiments/transfer_ddpg_sac_comp.png}
+    \caption{\textbf{Top}) The transfer learning performance of DDPG. \textbf{Bottom}) A representation of the SAC algorithm's learning performance in the insertion task. 
+    Graphs are shown for the $30$~mm, $40$~mm, and $60$~mm pegs. The rewards above the green line indicate successful trials. For the 30 mm and the 40 mm pegs, no successful trials were observed. While successful trials were observed for the 60 mm peg, these were random and not systemically exploited. }
+    \label{fig:results:drl_matrices}
+\end{figure*}
+
+The time plots (bottom of \ref{fig:results:drl_matrices}) for the SAC algorithm show representative examples of the learning behavior.
+The $y$-axis shows the reward that was obtained for each trail, and the $x$-axis shows the trials.
+One exemplary episode is shown for each of the pegs.
+No solution could be obtained for any peg with this algorithm; therefore, no knowledge transfer could be observed.
+For the pegs with a diameter of $30$~mm or $40$~mm, not one successful insertion could be observed.
+The small rewards reflect the algorithm's struggle to manage even slight insertions.
+Successful insertions for the $60$~mm peg were observed during learning, however, when the successful parameters were tested without any additional learning or exploration, the performance was not reliable.
+In total, $25$ different parameter sets per peg were applied and there were $50$ trials per set over the course of learning.
+Note that since the observed level-0 transfer in the DDPG experiment without an offset was superior to that with an offset, any experiments with an initial offset were omitted for the SAC experiment.
+Furthermore, the experimental setup was the same for DDPG and SAC.
+This result was in stark contrast to initial expectations, as SAC performed best in simulations~\cite{haarnoja2018soft2}.
+One can only hypothesize why this discrepancy occurred.
+Presumably, the extremely complex nature of the examined contact-rich tasks differs dramatically from standard simulation problems and is indeed very hard to accurately capture and simulate physically.
+
+\paragraph{Observations}
+
+The DDPG algorithm did not converge reliably in the experiment.
+Reasonable policies were learned sometimes, with success rates of $ > 90\% $ in the first $100$ trials of an experiment.
+Regardless, the network later got stuck in policies with success rates of only $< 2\%$.
+In the experiment, vanilla end-to-end learning without carefully integrated model knowledge (e.g., by suitable coordinate choice and cost function design) was not able to successfully insert a cylinder, as was first indicated in \cite{Voigt.2021}.
+Moreover, an explicit reward function needs to be formulated to incorporate additional knowledge, including a substantial part of the insertion policy itself.
+Ultimately, knowledge generation and transfer were unreliable, although a slight knowledge transfer was observable.
+Apparently, no systematic representation of learned tasks, such as a dependable insertion policy, could be transferred.
+
+
+\subsubsection{Results: \skillmodelabbr{}-based Learning}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/experiments/transfer_results_cost.png}
+    \caption{ The logarithmic cost evolution of learning a single skill without prior knowledge (solid blue lines) and the mean cost when using a level-$0$ (dashed lines), level-$1$ (dotted lines), and level-$2$ transfer (dash-dotted lines), respectively. Each task was learned using prior knowledge from every other task. For clarity, the results from each subclass (cylinders and keys) were grouped by averaging the resulting costs and plotting the mean. The cylinder insertion tasks are $\task_1$ to $\task_6$, and the key insertion tasks are $\task_7$ to $\task_9$.}
+    \label{fig:results:cost}
+\end{figure*}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/experiments/transfer_results_calsc.png}
+    \caption{Average learning success rate (ALSR) in the same pattern as Figure \ref{fig:results:cost}.
+For better readability, the ALSR was approximated by time-window averaging and plotted as stair function.
+The black dashed line is the theoretical optimal case with a slope of 1. For each skill, the average ALSR is shown when taking prior knowledge from the cylinder tasks and from the key.
+Note that an ALSR<1 means that not enough learning time has passed to fully converge to a feasible solution.
+However, the difference between raw learning and transfer learning over time is of interest.}
+    \label{fig:results:calsc}
+\end{figure*}
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/experiments/transfer_results_matrices_and_means.png}
+    \caption{\textbf{Top}) The ET, speedup factor, and LER for each task combination. The black dividers separate the level-$0$, level-$1$, and level-$2$ transfers (see the legend on the right). On the left side, the target tasks are denoted, and, at the bottom, the source tasks. The color maps are depicted to the right of each plot. \textbf{Bottom}) The mean LER, ET, and speedup factor ($\log_{10}$) over all tasks for the respective transfer levels.}
+    \label{fig:results:matrices}
+\end{figure*}
+
+The results of the large-scale \skillmodelabbr{} experiment are depicted in Figures~\ref{fig:results:cost}-\ref{fig:results:matrices}.
+From observing the respective speedup results, it can be concluded that using prior knowledge (in this case, in the form of initial policy and control parameters) in real-world tactile manipulation learning is beneficial even to very simple transfer mechanisms and may lead to a significant increase in the learning speed.
+Interestingly, the learning speed decreased in some cases, which hints at possible adverse effects when attempting to use prior knowledge.
+Figure~\ref{fig:results:calsc} depicts a similar behavior for the learning success rate of skills. 
+Specifically, based on the results, the following observations can be made.
+
+\paragraph{Observations}
+
+In addition to the aforementioned benefits of transfer learning to the learning performance in general, the asymmetry of the empirical transferability (ET), learning effort ratio (LER), and speedup stands out when inspecting the results.
+Thus, it can be concluded that transferring knowledge from task $\task_i$ to task $\task_j$ may significantly speed up the learning process, but, in turn, this is not necessarily the case when knowledge is transferred from task $\task_j$ to task $\task_i$.
+
+Investigating the experimental results more deeply, it was observed that the learning time for all cylinders was significantly lower when using prior knowledge from other cylinders, while the same holds for the keys with prior knowledge from other keys (i.e., level-0 and level-1 transfers).
+On the other hand, when using prior knowledge from one of the keys on the cylinders or the other way around (i.e., level-2 transfer), the effect was considerably smaller - sometimes negligible or, in a few cases, even negative.
+This indicates that the transfer learning performance depends on the specific geometry of a given task.
+Although, no obvious geometric property stands out such as a diameter change (e.g. in level-1 transfers between the cylinders).
+In the context of the experiment, one can only speculate about the reasons for this.
+However, the most influential factors appear to be friction and almost unnoticeable tolerance differences between the cylinder-hole combinations.
+Note that the data differences in the transfer learning performance among the defined transfer levels support the taxonomy hierarchy proposed in Sec.~\ref{ch:foundations:representation:taxonomy}.
+In direct support, the initial ALSR also indicates higher initial success rates when prior knowledge was used.
+Tasks such as the third key ($\task_9$) are the exception, since using prior knowledge to learn it had a mostly negative effect (e.g., a slowdown of $50~$\%) even when using its own knowledge.
+This is presumably because task $\task_9$ belonged to the special case of simple-to-learn tasks, as is indicated by the high ALSR when learning $\task_9$ from scratch.
+This particular key has a simple geometry and can be inserted into the lock at a wide range of angles.
+Also, it requires very little pushing force and works even with significant initial offsets.
+This presumably leads to fewer learning benefits from previous knowledge, as it is already quite simple to learn the skill without any prior knowledge.

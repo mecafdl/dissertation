@@ -1,0 +1,167 @@
+In the following all policies used in the experiments are provided here.
+Note that for some piece-wise defined policies the conditions for the cases are transitions that activate the respective case, which do not have to remain true once they have been triggered.
+
+\begin{align*}
+&\policyi{1}=\begin{cases}
+\policyfun{\polmovetoposelin{1}}{\polwrenchgrasponly{}} & \forall t
+\end{cases},\,
+\policyi{2}=\begin{cases}
+\policyfun{\polmovetoposerot{1}}{\polwrenchgrasponly{}} & \forall t
+\end{cases}\\
+&\policyi{3}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \forall t
+\end{cases},\policyi{4}=\begin{cases}
+\policyfun{\polmovetoposelin{1}}{\polwrenchstatic{}} & \forall t
+\end{cases}\\
+&\policyi{5}=\begin{cases}
+\policyfun{\polmovetoposerot{1}}{\polwrenchstatic{}} & \forall t
+\end{cases},\;
+\policyi{6}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchstatic{}} & \forall t
+\end{cases}\\
+&\policyi{7}=\begin{cases}
+\policyfun{\polzero}{\polwrenchgrasponly{}} & \forall t
+\end{cases},\;
+\policyi{8}=\begin{cases}
+\policyfun{\polzero}{\polwrenchstatic{}} & \forall t
+\end{cases}\\
+&\policyi{9}=\begin{cases}
+\policyfun{\polzero}{\polwrenchstatic{}} & \forall t
+\end{cases}
+\end{align*}
+
+\begin{align*}
+&\policyi{10}=\begin{cases}
+\policyfun{\poltwistmovelinwiggle{1}}{\polwrenchgrasponly{}} & \forall t
+\end{cases}\\
+&\policyi{11}=\begin{cases}
+\policyfun{\poltwistmoverotwiggle{1}}{\polwrenchgrasponly{}} & \forall t
+\end{cases}\\
+&\policyi{12}=\begin{cases}
+\policyfun{\poltwistmovewiggle{1}}{\polwrenchgrasponly{}} & \forall t
+\end{cases}\\
+&\policyi{13}=\begin{cases}
+\policyfun{\polzero}{\polwrenchwiggle{}} & \forall t
+\end{cases}\\
+&\policyi{14}=\begin{cases}
+\policyfun{\polzero}{\polwrenchstaticwiggle{}} & \forall t
+\end{cases}\\
+&\policyi{15}=\begin{cases}
+\policyfun{\polmovetoposelin{1}}{\polwrenchwiggle{}} & \forall t
+\end{cases}\\
+&\policyi{16}=\begin{cases}
+\policyfun{\polmovetoposerot{1}}{\polwrenchwiggle{}} & \forall t
+\end{cases}\\
+&\policyi{17}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchwiggle{}} & \forall t
+\end{cases}\\
+&\policyi{18}=\begin{cases}
+\policyfun{\polmovetoposelin{1}}{\polwrenchstaticwiggle{}} & \forall t
+\end{cases}\\
+&\policyi{19}=\begin{cases}
+\policyfun{\polmovetoposerot{1}}{\polwrenchstaticwiggle{}} & \forall t
+\end{cases}\\
+&\policyi{20}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchstaticwiggle{}} & \forall t
+\end{cases}
+\end{align*}
+
+
+\begin{align*}
+&\policyi{21}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact}
+\end{cases}\\
+&\policyi{22}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchstatic{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact}
+\end{cases}\\
+&\policyi{23}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\polmovetopose{3}}{\polwrenchgrasponly{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact}
+\end{cases}\\
+&\policyi{24}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\polmovetopose{3}}{\polwrenchstatic{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact}
+\end{cases}
+\end{align*}
+
+\begin{align*}
+&\policyi{25}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\polmovetopose{3}}{\polwrenchgrasponly{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact} \\
+\policyfun{\polmovetopose{4}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{3}}
+\end{cases}\\
+&\policyi{26}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\polmovetopose{3}}{\polwrenchstatic{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact} \\
+\policyfun{\polmovetopose{4}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{3}}
+\end{cases}\\
+&\policyi{27}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\polmovetopose{3}}{\polwrenchstaticwiggle{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact}
+\end{cases}
+\end{align*}
+
+\begin{align*}
+&\policyi{28}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\poltwistmovewiggle{3}}{\polwrenchstaticwiggle{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact}
+\end{cases}\\
+&\policyi{29}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\poltwistmovewiggle{3}}{\polwrenchgrasponly{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact}
+\end{cases}\\
+&\policyi{30}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\poltwistmovewiggle{3}}{\polwrenchstatic{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact}
+\end{cases}\\
+&\policyi{31}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchstatic{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact} \\
+\policyfun{\polmovetopose{3}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{3}}
+\end{cases}
+\end{align*}
+
+
+\begin{align*}
+&\policyi{32}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\polmovetopose{3}}{\polwrenchstaticwiggle{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact} \\
+\policyfun{\polmovetopose{4}}{\polwrenchstatic{}} & \text{for } T \in \senvaround{\objectpose{3}}
+\end{cases}\\
+&\policyi{33}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\polmovetopose{3}}{\polwrenchstatic{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact}\\
+\policyfun{\polzero}{\polwrenchstatic{}} & \text{for } \extwrench \geq \boldsymbol{f}_\text{Const.}\\
+\policyfun{\polmovetopose{4}}{\polwrenchgrasponly{}} & \text{for } t>t_\text{wait}
+\end{cases}\\
+&\policyi{34}=\begin{cases}
+\policyfun{\poltwistmovewiggle{1}}{\polwrenchstaticwiggle{}} & \forall t
+\end{cases}\\
+&\policyi{35}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polzero{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polzero{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\polmovetopose{3}}{\polwrenchgrasponly{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact}
+\end{cases}
+\end{align*}
+
+
+\begin{align*}
+&\policyi{36}=\begin{cases}
+\policyfun{\polmovetopose{1}}{\polwrenchgrasponly{}} & \text{for } \emptyset \\
+\policyfun{\polmovetopose{2}}{\polwrenchgrasponly{}} & \text{for } T \in \senvaround{\objectpose{1}} \\
+\policyfun{\polmovetopose{3}}{\polzero{}} & \text{for } \extwrench > \boldsymbol{f}_\text{contact}\\
+\policyfun{\polmovetopose{4}}{\polzero{}} & \text{for } T \in \senvaround{\objectpose{3}}
+\end{cases}
+\end{align*}

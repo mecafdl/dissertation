@@ -1,0 +1,100 @@
+Two kinds of experiments were conducted.
+First, it was investigated how the planner works on team-level in a realistic setting, however, isolated from real-world effects.
+In the second experiment the whole framework was tested in a real human-robot collaborative assembly scenario.
+
+To show the output of the team level planner a computational experiment was conducted in which a small assembly, consisting of eight parts is to be assembled by a team of two robots and one human with two different cost metrics.
+The agents are denoted by $\workerset=\{r_1,r_2,h\}$.
+The corresponding AND/OR graph is shown in Fig.~\ref{fig:applications:planner:assembly}.
+None of the atomic parts are in the human worker's reach and the time needed for hand-over actions is estimated to be $8$ seconds.
+Except hand-over actions no interactions are involved.
+
+\begin{figure}[h!]
+\begin{center}
+\input{figures/svg/applications_planner_assembly.pdf_tex}
+\caption{AND/OR graph of the experiments assembly plan}
+\label{fig:applications:planner:assembly}
+\end{center}
+\end{figure}
+
+As cost function $c_m=\text{max}_i c(\langle \worker,\assemblyaction \rangle_i)$ was used.
+$\langle \worker,\assemblyaction \rangle$ denotes the assignment of an agent $\worker$ to an action $\assemblyaction$ in the state $\state$.
+The specific cost c for an assignment $\langle \worker,\assemblyaction \rangle$ is listed in Tab \ref{tab:applications:planner:cost}.
+The left table shows the amount of time the agents need for a specific action, i.e. the cost metric $C_1$.
+In the second cost metric $C_2$, human workload is considered as well.
+Metrics for measuring the human workload can for example be found in \cite{Michalos.2010}.
+The resulting action sequences are depicted in Fig.~\ref{fig:applications:planner:sequences}.
+
+The simulation experiments were performed on a computer with a Windows $7$ operating system, an Intel i7-3770 processor with $3.4$ GHz and $4$ GB RAM. The $A^\star$ algorithm took about $40$~ms, respectively $2$~ms to calculate the action sequences and expanded $74$, respectively $6$ nodes.
+A Fibonacci heap was used as data structure for the open list and a hash table for the closed set.
+In order to indicate the scalability of the presented approach an additional experiment with a strongly connected assembly \cite{HomemdeMello.1990} with $10$ parts, two workers and random costs for the worker-actions pairs was conducted.
+The amount of planning time averages at $15$~s.
+As another example the same experiment was conducted on a binary assembly with $32$ parts.
+All sub assemblies of a binary assembly can be divided into two sub assemblies with an equal number of parts.
+Here, the average execution time is $3.5$~s.
+
+The second experiment (its setting is not related to the previous simulations) was conducted with a real robot in a collaborative assembly scenario, see Fig. \ref{fig:applications:planner:exp}.
+Note, that for sake of simplicity the actions of the robot and the human in this experiment were not timed (apart from the implicit, discrete timing determined by the team-level).
+Nonetheless, it is straightforward to introduce an additional timing e.g. via simple human confirmation.
+Such an input would be incorporated on team-level.
+Other synchronization schemes that could be employed on agent- or real-time-level are for example time scaling, i.e. the robot would drive slower or even stop in the vicinity of the human.
+For such capabilities visual perception and/or real-time robot-to-robot communication would have to be available. 
+
+\begin{figure}[ht!]
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[width=\textwidth]{figures/experiments/applications_planner_exp_a.jpg}
+\subcaption{}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[width=\textwidth]{figures/experiments/applications_planner_exp_b.jpg}
+\subcaption{}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[width=\textwidth]{figures/experiments/applications_planner_exp_c.jpg}
+\subcaption{}
+\end{subfigure}
+\\
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[width=\textwidth]{figures/experiments/applications_planner_exp_d.jpg}
+\subcaption{}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[width=\textwidth]{figures/experiments/applications_planner_exp_e.jpg}
+\subcaption{}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+\includegraphics[width=\textwidth]{figures/experiments/applications_planner_exp_f.jpg}
+\subcaption{}
+\end{subfigure}
+\caption{The robot is started by the human (a), the robot uses its assembly skills (b), a tool is handed over to the human (c), the human co-worker and the robot work in parallel (d), the human stops the robot in order to finish an assembly step the robot would otherwise disturb (e), the human takes over an assembly step from the robot manually (f).}
+\label{fig:applications:planner:exp}
+\end{figure}
+
+
+\begin{table}[ht!]
+\caption{Cost Metrics $C_1$ (top) and $C_2$ (bottom)}
+\label{tab:applications:planner:cost}
+\centering
+\begin{tabular}{|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|}
+\hline
+$C_1$ & $a_1$ & $a_2$ &$a_3$ &$a_4$ &$a_5$ &$a_6$ &$a_7$ &$a_8$ &$a_9$ &$a_{10}$ &$a_{11}$ &$a_{12}$ \\
+\hline
+$r_1$ & $\infty$ & $\infty$ & $\infty$ & $10$ & $5$ & $20$ & $10$ & $\infty$ & $20$ & $10$ & $10$ & $10$ \\
+\hline
+$r_2$ & $\infty$ & $\infty$ & $\infty$ & $10$ & $5$ & $10$ & $5$ & $5$ &$20$ & $10$ & $10$ & $10$ \\
+\hline
+$h$ & $20$ & $5$ & $15$ & $20$ & $5$ & $3$ & $15$ & $10$ & $5$ & $5$ & $10$ & $10$ \\
+\hline
+\end{tabular}
+\\
+\begin{tabular}{|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|p{0.7cm}|}
+\hline
+$C_2$ & $a_1$ & $a_2$ &$a_3$ &$a_4$ &$a_5$ &$a_6$ &$a_7$ &$a_8$ &$a_9$ &$a_{10}$ &$a_{11}$ &$a_{12}$ \\
+\hline
+$r_1$ & $\infty$ & $\infty$ & $\infty$ & $10$ & $5$ & $20$ & $10$ & $\infty$ & $20$ & $10$ & $10$ & $10$ \\
+\hline
+$r_2$ & $\infty$ & $\infty$ & $\infty$ & $10$ & $5$ & $10$ & $5$ & $5$ &$20$ & $10$ & $10$ & $10$ \\
+\hline
+$h$ & $50$ & $50$ & $50$ & $200$ & $50$ & $30$ & $100$ & $100$ & $50$ & $50$ & $100$ & $100$ \\
+\hline
+\end{tabular}
+\end{table}

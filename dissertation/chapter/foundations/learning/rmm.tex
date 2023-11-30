@@ -1,0 +1,37 @@
+In a randomly performed demonstration of the tactile skill formalism \skillmodelabbr{} (see Sec.~\ref{ch:architecture:skill}), a significant speedup of roughly $10 \times$ was observed when simply reusing learned parameters from a cylinder insertion in a key insertion task \cite{Haddadin.2018}, leading to learning times of $1$ minute instead of $10$ minutes, see Fig.~\ref{fig:foundations:learning:rmm_pre_exp}.
+
+\begin{figure}
+    \centering
+    \input{figures/rmm.pdf_tex}
+    \caption{Transfer learning observation with a $10$x reduction in the learning time for task B. $\params_0$ denotes the initial parameters drawn from a normal distribution $\mathcal{N}(.)$ with a mean $\mu$ and standard deviation $\sigma$. $\paramsopt_A$ and $\paramsopt_B$ are the optimal parameters for tasks A and B, respectively.}
+    \label{fig:foundations:learning:rmm_pre_exp}
+\end{figure}
+
+In hindsight, it is hypothesized that the specific task-informed design of the tactile skill learning framework, which heavily depends on well-known principles from human motor control, made this straightforward transfer possible.
+This somewhat surprising finding encouraged further investigations into the effects of reusing knowledge from seemingly similar skills, which is also believed to be useful for further theoretical groundwork.
+
+Based on this initial experimental observation, it is believed that a transfer effect for tactile skills is embedded in the developed structure.
+This allows us to exploit inherent similarities between skills for faster learning, even without specially designed complex computational transfer mechanisms.
+The confirmation of such a behavior could be interpreted as an emerging robot motor memory (RMM) that plays a similar role as the motor memory effect in human motor control.
+However, no claim is made here that there is a connection between the two.
+Although the similarity between two skills as a whole may not be exactly quantifiable by experimental work, transferability might provide a way to ``sample'' the similarity locally.
+In other words, if two tactile skills are similar enough, a learned optimal policy solution for the first skill would speed up the time taken to find an optimal policy solution for the second skill.
+
+To structure and analyze skill similarities and achievable transfer learning, the taxonomy classifications \emph{skill class}, \emph{skill subclass}, and \emph{skill instance} from Sec.~\ref{ch:foundations:representation:taxonomy} are used (see Fig.~\ref{fig:foundations:learning:rmm_hypothesis}).
+This classification results in level-$2$, level-$1$, and level-$0$ transfers, respectively.
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/foundations/rmm_hypothesis.png}
+    \caption{Hierarchical three-level classification proposal of tactile manipulation skills}
+    \label{fig:foundations:learning:rmm_hypothesis}
+\end{figure*}
+
+A transfer learning process is denoted as level-$0$ between different tasks that belong to the same skill instance, level-$1$ from a \textit{skill instance} to another instance from the same \textit{skill sub class}, level-$2$ from a different \textit{skill sub class}, and level-$3$ from another \textit{skill class}.
+In this work level-$0$, level-$1$, and level-$2$ transfers are addressed.
+A level-$0$ transfer refers to, e.g., a cylinder insertion process in which the task was learned with prior knowledge from its own previous learning.
+Level-$1$ indicates that this cylinder was learned with knowledge from a different cylinder.
+In a level-$2$ transfer, the cylinder was successfully learned based on the knowledge from, e.g., a key insertion skill.
+Based on these definitions and the speedup metric introduced in Sec.~\ref{fig:foundations:learning:metrics} a hypothesis can be stated that on average across all investigated tasks the speedup factor is highest for level-$0$ transfers.
+Level-$1$ transfers are second and level-$2$ transfers have the lowest speedup.
+This also means that there is a learning effort ratio (LER) that increases with the transfer level.

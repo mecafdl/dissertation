@@ -1,0 +1,87 @@
+%% Creator: Inkscape 1.0 (4035a4fb49, 2020-05-01), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'software_learning.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{442.5bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.59322034)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/svg/software_learning.pdf}}%
+    \put(0.21186439,0.34745764){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Base Service\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/svg/software_learning.pdf}}%
+    \put(0.21186439,0.38983051){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Interface\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{figures/svg/software_learning.pdf}}%
+    \put(0.12711864,0.0254237){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\skillmodelabbr{} Implementation\end{tabular}}}}%
+    \put(0.74576265,0.44067797){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}MongoDB Database\end{tabular}}}}%
+    \put(0.13559322,0.54237288){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}User-Defined Experiment\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{figures/svg/software_learning.pdf}}%
+    \put(0.5762712,0.39830509){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Service B\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{figures/svg/software_learning.pdf}}%
+    \put(0.5762712,0.33050852){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Service C\end{tabular}}}}%
+    \put(0.62711866,0.29661018){\color[rgb]{0,0,0}\rotatebox{-90}{\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\dots\end{tabular}}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{figures/svg/software_learning.pdf}}%
+    \put(0.5762712,0.46610172){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Service A\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{figures/svg/software_learning.pdf}}%
+    \put(0.2457627,0.1864407){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Engine\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{figures/svg/software_learning.pdf}}%
+    \put(0.73728814,0.1864407){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Knowledge Base\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{figures/svg/software_learning.pdf}}%
+    \put(0.35593218,0.48305084){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Problem\end{tabular}}}}%
+    \put(0.35593218,0.44915255){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Definition\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{figures/svg/software_learning.pdf}}%
+    \put(0.05084746,0.27118645){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Trial\end{tabular}}}}%
+    \put(0.44915251,0.28813562){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Task\end{tabular}}}}%
+    \put(0.44915251,0.25423728){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Result\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{figures/svg/software_learning.pdf}}%
+    \put(0.21186441,0.11016949){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\params$\end{tabular}}}}%
+    \put(0.38135593,0.11016949){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\quality$\end{tabular}}}}%
+    \put(0.54237287,0.21186441){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\dataset$\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

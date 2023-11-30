@@ -1,0 +1,43 @@
+The set of fundamental research questions that are addressed in this thesis aim to provide convincing answers to help push the existing boundaries of robotics research and generate solutions to several of the aforementioned challenges:
+\begin{itemize}
+    \item Q1: How can robot expert knowledge be systematically encoded such that non-experts can use robots to automate complex manipulation processes?
+    \item Q2: For this, it is essential to understand how tactile manipulation skills can be encoded such that control, policy, learning, and planning are unified.
+    \item Q3: To generate breakthroughs in the robot learning problem, it needs to be understood how complex robot manipulation skills can be learned in a short amount of time and with low energy consumption and computational demands such that the solution is robust and of high performance.
+    \item Q4: Finally, this thesis aims to give answers to the question of whether systematic similarities between skills can be exploited by new ways of transfer learning so skill learning can be scaled up to large numbers of skills without running into the curse of dimensionality.
+\end{itemize}
+
+This thesis has made three core contributions that provide answers to above research questions.
+The contributions can be clustered into three major groups, namely tactile skill modeling, automatic skill synthesis, and autonomous skill learning.
+In Fig.~\ref{fig:introduction:title} they are summarized in an overview.
+
+\begin{figure}[ht!]
+    \centering
+    \input{figures/title_figure.pdf_tex}
+    \caption{The process descriptions that originate e.g. from human technicians are used to synthesize tactile skills based on a taxonomy. The skills are formulated as a learning problem and then optimized by an autonomous learning architecture. Finally, the optimized skills are used in an assembly planning system that solves problems provided by the technician.}
+    \label{fig:introduction:title}
+\end{figure}
+
+\paragraph{Contribution 1: Tactile Skill Modeling}
+
+The theoretical foundations for tactile skills are provided, consisting of tactile platform, tactile controller, tactile policy, and performance evaluator.
+The \skillmodel{} (\skillmodelabbr{}) framework is introduced as an algorithmic means of modeling tactile skills.
+It connects task goals with interaction control through a process-informed multi-layered structure and forms the basis for most experiments in this thesis.
+Furthermore, a versatile software stack \softwareabbr{} has been developed that implements the theoretical foundations.
+
+\paragraph{Contribution 2: Skill Synthesis Pipeline}
+
+A novel process-informed skill taxonomy is introduced that systematically connects manufacturing processes and tactile skills. It encodes robot expert knowledge and connects to learning algorithms so that laypeople such as technicians and shop-floor workers will be enabled to set up automation solutions without robotics knowledge.
+A synthesis pipeline selects a tactile policy based on formal process descriptions.
+The \skillmodelabbr{} framework then takes the selected policy and integrates it with the boundary conditions (e.g. success and error conditions) from the process description into a tactile skill model.
+In further validation experiments, a meaningful number of skills has been implemented and optimized, demonstrating the desired high robustness and performance also for challenging real-world manufacturing processes.
+A collaborative assembly planner is introduced that finds an optimal plan to solve an assembly with a team of humans and robots based on validated tactile skills.
+
+\paragraph{Contribution 3: Skill Learning}
+
+The skill model generated from the synthesis pipeline is formulated as a parameter learning problem, which can then be solved by a state-of-the-art compatible learning algorithm.
+Experiments demonstrate a very short learning time even for very difficult processes, e.g., such as insertion. 
+During these experiments a transfer learning effect was observed and was investigated through further large-scale experiments. The results indicate strong transfer capabilities of the \skillmodelabbr{} framework which further improves the versatility of the overall end-to-end approach.
+The learning and achieved manipulation performance of the skills were directly compared to human capabilities in a reference experiment setup. The results indicate comparable performance for a subset of the implemented skills, and provide insights on the still-existing gaps.
+\newline
+\newline
+With these fundamental contributions and to the best of the author's knowledge an unprecedented level of sophistication, performance and resource efficiency in terms of energy and computation has been achieved in robot learning. This constitutes a major step forward in making robots autonomous and learning-enabled as well as able to systematically leverage existing and well established process knowledge. 

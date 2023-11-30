@@ -1,0 +1,25 @@
+\begin{figure}[ht!]
+\begin{center}
+\input{figures/svg/applications_planner_sequences.pdf_tex}
+\caption{Agents' assembly sequences for $C_1(a)$, and $C_2(b)$.
+The solid arrows depict a precedence relation, i.e. the source of the arrows provides a needed sub assembly to the sink.}
+\label{fig:applications:planner:sequences}
+\end{center}
+\end{figure}
+
+
+
+It is shown in Fig.~\ref{fig:applications:planner:sequences} (top) that the planner produces parallelized execution schemes where possible, which leads to a short overall execution time.
+A disadvantage of such a parallelized assembly process is the dependency of the agents on each other.
+If one agent is disturbed in its task, other agents may have to wait.
+In Fig.~\ref{fig:applications:planner:sequences} (bottom) the human workload has been considered as well, resulting in an execution scheme where the robots work in parallel and the human is only assigned to a task the robots are not capable of performing.
+
+Note, that in order to formally incorporate the aspect of a (human) worker being distracted and therefore potentially disturbing the entire assembly process, one could use a cost function that encodes e.g. some form of worker profile.
+The probability of a worker being distracted from his task could depend, among others, on his daily routine and experience.
+
+The simulation experiments show that the planner can be adapted to the requirements of a specific scenario by providing a cost function that reflects the needs of the situation.
+E.g. consider that the assembly from Fig.~\ref{fig:applications:planner:assembly} is being built in large quantities by human-robot teams.
+When the demand is normal, a cost metric similar to $C_2$ could be used.
+The robots would do most of the work while the human co-workers could be available to other tasks as well.
+If the demand rises, a cost metric such as $C_1$ could be used, resulting in a higher production output at higher human workload.
+

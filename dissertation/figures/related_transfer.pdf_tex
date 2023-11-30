@@ -1,0 +1,95 @@
+%% Creator: Inkscape 1.0 (4035a4fb49, 2020-05-01), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'related_transfer.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{455bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.65934066)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0.06470105,0.09890113){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}to solve source task A\end{tabular}}}}%
+    \put(0.64986583,0.09890108){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}to solve target task B\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/related_transfer.pdf}}%
+    \put(0.35439561,0.41208791){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny\cite{Argall.2009,Konidaris.2012,Zhu.2018,Chernova.2014}}\\{\tiny\cite{Ravichandar.2020,Kronander.2014,AbuDakka.2018,Hueser.2006,YezhouYang.2015,Yang.2018,Wigness.2018,Pignat.2017,Kim.2018}}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/related_transfer.pdf}}%
+    \put(0.77472521,0.60989011){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Target System}\end{tabular}}}}%
+    \put(0.47802196,0.60989011){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Transfer}\end{tabular}}}}%
+    \put(0.0989011,0.60989011){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Source System}\end{tabular}}}}%
+    \put(0.04120879,0.44505495){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny Real-World Learning}\end{tabular}}}}%
+    \put(0.1978022,0.44505495){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny Simulated Learning}\end{tabular}}}}%
+    \put(0.34615385,0.44505495){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny Human Demonstration}\end{tabular}}}}%
+    \put(0.67582411,0.44505495){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny Real-World Learning}\end{tabular}}}}%
+    \put(0.84065934,0.44505495){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny Simulated Learning}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{figures/related_transfer.pdf}}%
+    \put(0.02295918,0.60812402){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}I\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{figures/related_transfer.pdf}}%
+    \put(0.01731606,0.32800524){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}II\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{figures/related_transfer.pdf}}%
+    \put(0.01108778,0.09681979){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}III\end{tabular}}}}%
+    \put(0.06593406,0.32967032){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}learns optimal policy $\policyopt$\end{tabular}}}}%
+    \put(0.06593406,0.2967033){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\text{min}_{\params} \quality \rightarrow \policyopt$ with $\params_{A,0}\sim \mathcal{N}(\mu,\sigma)$\end{tabular}}}}%
+    \put(0.06593406,0.26373626){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}with policy class:\end{tabular}}}}%
+    \put(0.06593406,0.23076925){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny Non-parametric}\\{\tiny policies}\end{tabular}}}}%
+    \put(0.18956044,0.23076925){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny Generic fixed-sized}\\{\tiny parametric policies}\end{tabular}}}}%
+    \put(0.33791208,0.23076925){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny Restricted parametric}\\{\tiny(goal-driven) policies}\end{tabular}}}}%
+    \put(0.65109884,0.32967032){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}learns optimal policy $\policyopt$ with\\transferred knowledge\end{tabular}}}}%
+    \put(0.65109884,0.26373626){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\text{min}_{\params} \quality \rightarrow \policyopt$ with $\params_{B,0}=\paramsopt_A$\end{tabular}}}}%
+    \put(0.5357143,0.28846154){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\paramsopt_A$\end{tabular}}}}%
+    \put(0.46030547,0.09890108){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny \textbf{Differences in:}}\end{tabular}}}}%
+    \put(0.04120879,0.41208791){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny\cite{Barrett.2010,Helwa.2017,Gu.2017,heiden2021bench,tobin2017domain}}\end{tabular}}}}%
+    \put(0.1978022,0.41208791){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny\cite{JeroenvanBaar.2018,BeltranHernandez.2020,Nguyen.2018,Rusu.2017,Golemo.2018,Chebotar.2019,Peng.2018,Matas.2018,Metzen.2014,vanBaar.2019,Lutter.2022,AhmedHQureshi.2021,buchler2022learning,sievers2022learning}}\end{tabular}}}}%
+    \put(0.06593406,0.16483516){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny\cite{Atkeson.1997,Vijayakumar.2000,Schaal.2000,Rasmussen.2004,Schneider.2010,NguyenTuong.2009,Engel.2005}}\end{tabular}}}}%
+    \put(0.18956044,0.16483516){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny\cite{Sutton.2018,GeorgeKonidaris.2011,Konidaris.2012,Levine.2015,Levine.2016}}\end{tabular}}}}%
+    \put(0.46030547,0.06593407){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny Spatial Relations}\end{tabular}}}}%
+    \put(0.46030547,0.0329671){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny Geometry}\end{tabular}}}}%
+    \put(0.59217359,0.06593407){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny\cite{Nemec.2013,laha2021reactive,Gu.2017}}\end{tabular}}}}%
+    \put(0.59217359,0.0329671){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny\cite{Devin.2018,NemanjaRakicevic.2019}}\end{tabular}}}}%
+    \put(0.33791208,0.16483516){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\tiny\cite{Niu.2018,DiazLedezma.2017,Schaal.2000,Schaal.2006,Ijspeert.2013,Matsubara.2011,Kulic.2012,Lee.2011,Park.2008}}\\{\tiny \cite{Namiki.2015,Mitrevski.2019,Nemec.2014,Levine.2015,PlattRobertJr..2010}}\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

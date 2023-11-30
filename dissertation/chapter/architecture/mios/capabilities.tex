@@ -1,0 +1,10 @@
+\softwareabbr{} has several controllers at its disposal.
+Among them are joint and (adaptive) Cartesian Impedance controller, and a force controller.
+It has two safety stages that ensure that only valid commands are sent to the robot platform.
+It is capable of running a complete cycle of generating skill and controller commands, sending the commands to the robots and receiving a new robot state within the bounds of a $1$~kHz real-time process.
+A modular toolset of implemented policies enables a programmer to extend the current library of manipulation skills according to the \skillmodelabbr{} model.
+It can also directly execute sequences of skills provided for example by the collaborative assembly planner (see Ch.~\ref{ch:foundations:planning}).
+A number of communication channels allows peer-to-peer, or even one-to-many communication and telepresence with other robots or user interfaces.
+\softwareabbr{} also supports a simplified Python interface for programming complex tasks.
+Its built-in mongodb database can store information about physical objects and locations and use it to reason about its skills.
+In summary, \softwareabbr{} is a platform and an enabler for various research fields ranging from manipulation learning and planning, over motion planning, control and safety, to telepresence and human-robot interaction.

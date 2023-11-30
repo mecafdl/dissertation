@@ -1,0 +1,104 @@
+In this section the metrics used for learning and specifically transfer learning are introduced.
+
+\subsubsection{Monotonically Decreasing Cost Function}
+
+The monotonically decreasing cost function $\quality_{c,m}$ always has the lowest already seen cost value at any particular time point.
+It gives a better impression of the learning progress than a pure cost function $\quality_{c}$.
+It it defined as
+\begin{equation}
+\quality_{{c,m}_i}=
+\begin{cases}
+\quality_{c_{i-1}} \text{if } \quality_{c_{i}} > \quality_{c_{i-1}} \\
+\quality_{c_{i}} & \text{else}
+\end{cases}
+\end{equation}
+Figure \ref{fig:foundations:learning:metrics} provides a visual aid for it.
+
+\subsubsection{Average Cost and Confidence Interval}
+
+A single learning process is strongly stochastic and can significantly vary from process to process.
+Therefore, learning a specific skill (i.e. a specific experiment) is repeated to collect enough data to derive statistically sound results.
+After repeating an experiment for $n$ times $n$ data sets $\dataset_i$ are available.
+Now, the monotonically decreasing cost function either based on trials or time can be averaged over the $n$ data sets.
+Also a confidence interval can be calculated from the data \cite{Box.1978}.
+To calculate a confidence interval $i_c$ one has to first select a confidence level (e.g. $90 \%$ or $95 \%$).
+Based on that the Z-value $Z$ can be taken from a Z-table and the formula
+\begin{equation}
+i_c = Z \frac{s}{\sqrt{n}}
+\end{equation}
+can be applied, where $s$ is the standard deviation and $n$ the number of samples.
+Thus, an average cost can be defined with the confidence interval given by
+\begin{equation}
+\bar{\quality}_c \pm Z \frac{s}{\sqrt{n}}.
+\end{equation}
+
+
+\subsubsection{Average Learning Success Rate}
+
+The results are not only analyzed in terms of the optimization goal and how fast learning converges to an optimum, but also in terms of actual success, i.e., how well the learning algorithm manages to find feasible areas in the parameter space.
+Therefore, the average learning success rate (ALSR) is defined to be
+\begin{equation}
+\text{ALSR}(t)=\frac{1}{n} \sum_{l=1}^{n_e} \quality_{s,l}(t)
+\end{equation}
+where $n_e$ denotes the number of repeated experiments to learn the same skill and $\quality_{s,l}(t)$ is the success indicator whether the trial at time $t$ for experiment $l$ was successful or not.
+This gives a statistical measure of how successful a skill is over time during learning.
+
+
+\subsubsection{Learning Effort and Transferability}
+
+To interpret the results of the transfer learning experiments in Sec. \ref{ch:experiments:learning:transfer}, a comparable quantification of the achieved transfer learning performance is required.
+The highly nonlinear and noisy nature of real-world robot manipulation learning makes standard existing metrics from system theory or image classification, such as MNIST or CIFAR, unsuitable.
+To the best of the author's knowledge, there are no metrics that explicitly analyze transfer learning in robot manipulation.
+There are some in the domain of image classification, such as LEEP \cite{CuongV.Nguyen.2020} or H-score \cite{YajieBao.2019}, but the problem at hand is fundamentally different since dynamic processes are compared.
+Existing metrics for comparing two systems with each other, such as $\mu$-gap \cite{Zhou.1998,MichaelJ.Sorocky.2020}, usually focus on linear or non-statistical problems.
+Statistical distance measures like the Bhattacharyya distance \cite{Kailath.1967}, K-S-Test \cite{MasseyJr.1951}, or the KL Divergence \cite{vanErven.2014} can be useful in constructing an evaluation metric.
+However, they are more difficult to interpret since they do not directly reflect the learning process itself.
+Thus, to analyze the learning results quantitatively, three metrics are introduced: learning effort (LE), learning effort ratio (LER) and empirical transferability (ET).
+These metrics are designed to capture the performance of the knowledge transfer over the entire experiment, as is detailed below. 
+
+Specifically, the learning effort LE is defined as
+
+\begin{equation}
+    \text{LE}=\int_\dataset \quality_{c,m}(t) dt
+    ,
+\end{equation}
+
+where $\dataset$ is the available sample data of the learning process in chronological order containing a tuple $(\params,\quality_{c,m})$ with chosen parameters and a resulting cost function for every sample $k$.
+The quantity $\quality_{c,m}(t)$ denotes the value of the monotonically decreasing cost function at time $t$.
+In consequence, LE measures the minimum total cost required to learn a skill.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/foundations/ler_explain.png}
+    \caption{Monotonically decreasing cost function, learning effort LE, and learning effort ratio LER}
+    \label{fig:foundations:learning:metrics}
+\end{figure}
+
+The learning effort ratio LER is the ratio between the LEs from data sets $\dataset_i$ and $\dataset_j$
+\begin{equation}
+    \text{LER}=\frac{\text{LE}_i-b}{\text{LE}_j-b}
+    ,
+\end{equation}
+
+where the factor $b$ is defined as $\min(\min(\quality_{c,m,i}(t))|\dataset_i|,\min(\quality_{c,m,j}(t))|\dataset_j|)$.
+It is the lowest value of $\quality_{c,m}(t)$ in either $\dataset_i$ or $\dataset_j$, and it is subtracted to remove the bias from the data that would otherwise be caused by the minimum reachable cost.
+The LER can be used to quantify the effectiveness of using prior knowledge from task $\task_j$ on task $\task_i$.
+Raw learning, i.e., learning $\task_i$ without prior knowledge, is represented by the dataset $\dataset_i$, and learning $\task_i$ with prior knowledge from $\task_j$ is represented by $\dataset_j$.
+
+Finally, the empirical transferability ET is defined as
+\begin{equation}
+    \text{ET}_{i,j}=\min\left(\frac{\text{LER}_{i,i}}{\text{LER}_{i,j}},1 \right)
+    .
+\end{equation}
+
+It relates the LER into the context of task $t_i$ by normalizing it.
+This is done by using $\text{LER}_{i,i}$, which is the LER of learning task $t_i$ with prior knowledge from itself.
+The underlying assumption is that, theoretically, this is the most effective knowledge transfer.
+Any $\text{LER}_{i,j}$ for any task $\task_j$ can then be seen with respect to the best-case scenario, which essentially amounts to a measured transferability between the two tasks.
+The ET cannot grow larger than $1$.
+
+\subsubsection{Learning Speedup}
+The learning speedup is defined as the reduction in the learning time when using prior knowledge compared to raw learning with an uninformed initialization.
+There is no practical way to determine the exact speedup a priori, since there is no reliable objective criterion for when a real-world skill is learned.
+For example, a task can be considered learned if it reaches a prespecified cost value or as soon as the cost changes remain within a predefined confidence interval.
+In this work, the latter is applied.

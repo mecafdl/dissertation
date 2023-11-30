@@ -1,0 +1,345 @@
+o Literature review
+
+> IDEAS: 
+	- Deep learning requires prohibitive amounts of data that need to be collected to physical interaction.
+	- Deep learning is good for interpolation but hardly perfoms correctly outiside the traning data (poor generalization, no extrapolation capabilities)
+	- When combinging physics based modeling with machine learning, structural knowledge improves generalization, reduces sample complexity, and prevents overfitting to spurious correlations
+	- Black, gray, and white box models
+	- Motivate the use of a specific type of gradient descent technique. Needs a comparison with simulations.
+	- Introduce the notion of sensorimotor contingencies as part of the model
+	- Discuss the benefits of using force-torque sensors
+	- Rephrase: "In order to generalize the learned models to a larger state space and to adapt the models for time-dependent changes, online learning of such models is necessary."
+	- Rephrase: " the role that the body plays in shaping the mind, suggesting that intelligent behavior emerges out of the interplay between the brain, body and physical environment"
+	- Rephrase: "The advantage of self-learned models is that they can be used without specific prior knowledge about the robot, for example its morphology or pre-defined forward and inverse models."
+	- Forward models are used for prediction, inverse models are used for control
+	- Unlike the circle point analys,  in which the motion of single joint in isolation is observed, using Cartesian variables (body velocity and acceleration) the parameters of the kinemati chain
+	  can be learned
+	- Tactile sensors complement proprioception (somatosensatoion) to extend the richness of he body morphology that can be inferred only from proprioception. However, touch and vision are not strictly
+	  necessary to learn the morphology of the robot and are, naturaly, irrelevant for inertial parameter learning
+	- Rephrase: "Improving the ability of robots to make predictions is a promising direction to enhance their skills, not only on motor control and prediction of their own body"
+	- Rephrase: " Well-established learning systems for motor prediction and control [2–4] are built on internal models, namely forward and inverse models."
+	- Rephrase: "The advantage of self-learned models is that they can be used without specific prior knowledge about the robot, for example its morphology or pre-defined forward and inverse models. This
+                     information might be unavailable in some cases, such as in soft robotics or after a mechanical damage. Self-learned models can enable robots to learn on their own how to behave in those
+                     circumstances [16,17]."
+        - Rephrase: "In developmental robotics, such models are acquired
+                     by designing learning mechanisms to let a robot build its own
+                     perceptive and behavioral repertoire. The focus is to investigate
+                     the acquisition of motor skills from sensorimotor interaction
+                     with the environment [30]. As a result, the developmental approach aims to endow robots with all the learning capabilities
+                     that may be necessary to build rich and flexible sensorimotor representations [31]"
+	- Use Hart's thesis and Matej's work to introduce and define the concept of body schema
+	- Discuss the relevance of body models, use Matej's paper to aid the discussion of the differnt type of models. Migrate to inverse dynamics models and kinematic calibration
+	  to then introduce the robotic body schema
+	- In the last decade, end-toend learning approaches have taken predominance,yet, recently the notion of introducing structure to improve generalization and sample efficiency has appeared
+	- Rephrase: "... learning an inverse dynamics model once is not enough as the robot’s dynamics changes while interacting with the real world. Instead, the dynamics models need to be adapted
+	  at run-time"
+	- Rephrase: " In order to take full advantage of a learning approach, online learning is absolute necessity as it allows the adaption to changes in the robot dynamics, load or the actuators"
+	- Nonparametric regression models: LWPR, GPR, and SVR	  
+	- On-line adaptation of models is a valuable strategy because it can capture non-stationarities in the mechanical properties of the plant.
+	- Rephrase: "Two approaches in that respect are the on-line parameter identification step of adaptive control [5], which tunes parameters of a given model given its mechanical structure [6] and model
+	   learning, which identifies mechanical models using supervised learning methods without any knowledge of the structure."
+	- Rephrase: "In traditional robotics, the importance of learning the mapping between different sensory modalities is often neglected. The robot geometry is generally assumed to be known, and the
+	  sensor properties are acquired offline, via a calibration process"
+	- Rephrase: "learning the sensorimotor contingencies is likely to bring significant advantages, as it amounts to a continuous self-calibration. "
+	- Discuss this: As mentioned by Hersch et al. "(Subjective body schema) Traditionally, the body schema has been considered as an objective account of the body characteristics, such as the
+	  arrangement of the limbs, their lengths or the positioning and effect of the joints. It is possible to oppose this “objective” body schema with a “subjective” view of the body schema, which would
+	  be dependent on the perceptual abilities of the robot. In this view, which is adopted in this paper, the body schema deals only indirectly with physical properties of the body. It primarily deals
+	  with the FOR transformations associated with the sensory signals. For example, given a proprioceptive input corresponding to a particular posture, the body schema can predict the corresponding
+	  visual perception. This depends not only on the physical properties of the body but also on the properties of the sensory system. Moreover, it can be that a precise account of the physical
+	  properties of the body is not necessary for the “subjective body schema,” depending on the sensory system. For example, in our case, if the robot can track only end-effector positions,
+	  many different body geometries will yield the same “subjective” body schema"
+	- The replay buffer with reservoir sampling helps preserving a representative set of samples from the state space (yes?)
+	- Cite work of Khalil on modeling robots with floating bases and flexible links and the work of humanoids with SO3 joints to motivate how the conventional representations can be leveraged to
+	  model more complex kinematic trees
+	- The ecological or sensorimotor self is the same as the body schema
+
+===================================================================
+           GENERAL WORKS ON DYNAMICS MODEL LEARNING
+===================================================================
+NOTE: the following two works should be mentioned together
+* Model learning for robot control: a survey
+	- "direct modeling approach, the model is learned directly from the observations"
+	- direct model learning is used for forward and inverse dynamics learning
+	- Classical methods include, regression techniques, neural networks, and statistial approximation techniques
+	- Challenges of real-world problems for machine learning, SEE TABLE 2
+	- Global (use all observed data to construct a single model) and local (estimate the model withing a neighborhood of a query point) techniques for learning a model
+* On-line regression algorithms for learning mechanical models of robots: a survey
+	- This paper provides a survey of state-of-the-art methods in the supervised learning approach
+	- This article discuses three lines of research (1) combining knowledge and regression, (2) active learning, and (3)
+
+* Towards robust online inverse dynamics learning
+	- Online learning control framework, that combines online learning of feedback terms with an online Gaussian process regression to learn a locally valid inverse dynamics error model
+	- Perhaps nothing interesting to mention and should be removed
+
+* Learning inverse dynamics models with contacts
+	- Present a method for learning the inverse dynamics of humanoid robots including contacts
+	- the method is a data-driven mixture-of-experts approach based on Gaussian processes
+	- it uses proximal fore/torque sensing and a distributed tactile sensing without needing a spatially calibrated model
+
+* Model learning with local gaussian process regression
+	- propose a local approximation to the standard GPR, called local GPR (LGP), for real-time model online-learning by combining the high accuracy of GPR and the fast speed of LWPR
+	- Gaussian Process Regression:  high computational load, not suitable for high dimensions
+	- LWPR: not straight forward to implement, tuning of hyperparameters
+
+* Incremental Online Learning in High Dimensions (LWPR)
+* Online Learning of Inverse Dynamics via Gaussian Process Regression
+
+* Inertial parameter identification in robotics: a survey
+	- A sample of the most popular approaches to inertial parameter identification for fixed-based robotic systems is evaluated and benchmarked
+
+* General Dynamic Algorithm for Floating Base Tree Structure Robots with Flexible Joints and Links (FROM KHALIL)
+	- Presents a general algorithm for the dynamic modeling of a general tree-structure system with fixed or floating base, rigid and flexible links, and active (actuated) and passive joints
+	
+* Learning and Adaptation of Inverse Dynamics Models: A Comparison
+	- This work compares the inverse dynamics problem using (1) classical least squares estimation using regression for inertial parameter estimation, (2) a feedforward neural network per robot joint,  
+	  and (3) dynamic Bézier maps
+
+
+* Encoding Physical Constraints in Differentiable Newton-Euler Algorithm
+* Discuss the work of Park about Riemannian geometry for inertial parameters
+
+===================================================================
+		GENERAL TOPICS RELATED TO LEARNING
+===================================================================
+* A Review of Robot Learning for Manipulation: Challenges, Representations, and Algorithms
+	- A robot, and whatever it interacts with is subject the laws of physics and the structure they impose
+	- Interactive perception: the robot physically interacts with its environment to obtain a better estimate of it
+	- Different actions result in different effects, faster learning by selecting informative actions
+
+
+===================================================================
+      KINEMATICS, SENSORIMOTOR AND BODY SCHEMA RELATED WORKS
+===================================================================
+* Robots that can adapt like animals
+	- Cite this work as an example of the benefits that body knowledge would bring to body adaption
+
+* Online body schema adaptation based on internal mental simulation and multisensory feedback
+	- EXAMPLE OF USING VISUAL FEEDBACK
+	- Presentes a novel system for simultaneous online body schema adaptation and end-effector pose estimation implemented on the iCub humanoid robot
+	- Evidence in neuroscience suggests that the human brain keeps an updated representation of the body that is empled to generate hypothesis of the limbs positions in space, and combines this
+	  hypothesis with the actual perception of the self in a Bayesian fashion
+
+* Robot Self-Modeling (Justin W. Hart, MUST CITE)
+	- EXAMPLE OF USING VISUAL FEEDBACK
+	- Calibrates the kinematic structure of a robot use a variant of circle point analysis and using a motion capture system as reference
+	- Discusses the terms physical self, ecological self, and body schema
+	- Motivates why it is important to learn models of the body
+	- "The understanding of the body, the senses, and their relationship to each other that is learned through this process is one of the
+	   earliest forms of self-awareness to develop during infancy. Developmental theorists refer to this knowledge of the body and senses as knowledge of the ecological self [3].
+	   The ecological self is the combination of the physical self as an object that can be controlled by one’s mind and the senses that take in information about this body and other physical objects."
+	- See Introduction for more interesting ideas
+* A Robotic Model of the Ecological Self
+	- Results included in the above thesis
+
+* Online learning of the body schema
+	- EXAMPLE OF USING VISUAL FEEDBACK
+	- Propose a mechanism by which a humanoid robot can learn its body schema through combining information from the proprioception (motor encoders), the stereovision and possibly tactile sensors
+	- The body schema is modeled by a hierarchy of frames of reference (FOR) transformations which are continuously adapted as sensory information is acquired by the robot.
+	- IMPORTANT: the kinematic learning method is similar to mine. The authors are also learning the location and orientation of the joint axes, expressed with the DH parametrization
+	- IMPORTANT: Note that the structure of this tree (i.e. the number of joints and the ordering) is given and remains fixed. This is a main difference since in my case the mutual information reveals
+          the mechanical topology
+	- IMPORTANT: "We assume that the robot is endowed with a stereovision system that can track the position of its end-effectors. This position is provided in a head-centered FOR." This means that
+	  they use exteroception!
+	- Perhaps this work should be described in more detail when cited on the thesis
+
+* Multimodal representation models for prediction and control from partial information
+	- a multimodal variational autoencoder is proposed to enable an iCub humanoid robot to learn representations of its sensorimotor capabilities from different sensor modalities. 
+	-  implemented an architecture that allows a robot to predict visual trajectories of other agents’ actions by using only self-learned internal models
+
+* Predictive learning: its key role in early cognitive development
+
+* Sensorimotor Representation Learning for an “Active Self” in Robots: A Model Survey
+	- This work discussed models for endow robots with bio-inspired capacities that emulated the sensory representations of body schema, peripersonal space, and the active self in humans. 
+	- Ensuring secure interactions between humans and robots necessitates robots having the capability to adapt their behavior appropriately in environments occupied by people. This involves addressing 		  the complexities of our dynamic and unorganized surroundings, rather than adhering to a fixed set of operational rules. In humans, these skills are believed to be associated with our capacity to
+	  sense the spatial positioning of our body, perceive the locations of our limbs during motion, maintain awareness of other objects and entities, and purposefully manipulate our body parts to
+	  interact with them.
+	  
+* Sensorimotor contingencies as a key drive of development: From babies to robots
+
+* Body models in humans, animals, and robots
+	- Robot body models are typically explicit, veridical, universal, centralized, and modular
+	- Concepts including superficial and postural schema, body schema, body image, corporeal schema, etc. have been put forth. One characteristic common to all these representations is their multimodal
+	  nature; they dynamically integrate information from different sensory modalities (visual, tactile, proprioceptive, vestibular, auditory)
+	- sensorimotor body representation --used for action planning and control-- (body schema), visuspatial body representation (body structural description or physical self?)
+	- long term "offline" representations, and short term "on-line" representations, updated from sensormotor afferent-efferent information
+	- Body schema is multimodal
+	- Automatic robot self-calibration is thus desired and solutions for this are being developed. For the robot to self-calibrate, it needs redundant sources of information about its body.
+	  There is a growing number of powerful yet economic sensors for robots available (cameras, RGB-D cameras, inertial measurement units, force/torque sensors, tactile sensors) and
+	  they can be exploited for calibration. Multimodality—another property of biological body representations—thus enables plasticity.
+
+
+===================================================================
+                   WORKS USING NEURAL NETWORKS
+===================================================================
+* Deep Lagrangian Networks: Using Physics as Model Prior for Deep Learning
+	- Two deep NN are proposed to learn the inertia matrix and potential energy in the Euler-Lagrange formulation of the robot dynamics
+	- Constraints on the symmetry and positiveness of the inertia matrix are imposed
+	- Online learning is enforced
+	- Can recover the contribution of the inertial-, gravitational and centripetal forces from sensor data
+
+* Structured Mechanical Models for Robot Learning and Control
+	- My impression is that this work is an extension to the Deep Lagrangian Networks and offers the idea that adding a NN to model the dissipative and input forces provides better performance
+	- Can be grouped together with Deepl Lagrangian networks and Hamiltonean Neural Networks
+	
+* Combining physics and deep learning to learn continuous-time dynamics models (MUST INCLUDE)
+	- An IJRR article that contains the Deep lagrangian paper, and further results 
+	
+* Body schema learning for robotic manipulators from visual self-perception (STURM, CITE)
+	- EXAMPLE OF USING VISUAL FEEDBACK
+	- Presents an approach to body schema learning and life-long body adaptation for a robotic manipulation system. Continuously learn a large set of local
+	  kinematic models using nonparametric regression and searches for the best arrangement of these models to represent the full system
+	  
+* Online incremental learning of inverse dynamics incorporating prior knowledge
+	- Prior knowledge is incorporated into the LWPR framework by initializing the local linear models with a first order approximation of the available prior information.
+
+* Real-time deep learning of robotic manipulator inverse dynamics (Polydoros)
+
+===================================================================
+                        EXTRAS
+===================================================================
+
+Works from Bongard and Lipson
+*Automated Synthesis of Body Schema using Multiple Sensor Modalities
+
+
+
+* ATKESONS PAPER !!!!
+
+* Intrinsically motivated goal exploration for active motor learning in robots
+* [thesis] manifold-based sensorimotor representations for bootstrapping of mobile agents
+* active learning of inverse models with intrinsically motivated goal exploration in robots
+* Online Goal Babbling for rapid bootstrapping of inverse models in high dimensions
+* Explorative learning of inverse models: A theoretical perspective
+
+*[thesis] modelling, estimation and identification of humanoid robots dynamics
+*[thesis] sensorimotor learning for an artificial body schema on humanoid robots
+
+
+
+
+* Learning control in robotics
+	- 
+
+
+
+* Learning Inverse Dynamics Models with Contacts
+* 
+* Learning motor dependent crutchfield's information distance to anticipate changes in the topology of sensory body maps
+
+* Quantifying the Evolutionary Self-Structuring of Embodied Cognitive Networks
+* Large scale graph learning from smooth signals
+
+* What is the use of the body schema for humanoid robots?
+* Sensorimotor learning of an artifical body schema in humanoid robots
+* Lie Group Formulation of Articulated Rigid Body Dynamics
+* Geometric Algorithms for Robot Dynamics: A Tutorial Review
+* Online Body Schema Adaptation Based on Internal Mental Simulation and Multisensory Feedback
+* Robotic Self-Models Inspired by Human Development
+* Natural Gradient Works Efficiently in Learning
+* Trajectory  synthesis for fisher information maximization
+* Modeling, parameter identification and model-based control of a lightweight robotic manipulator
+* Dynamic Modeling of Robots Using Newton-Euler Formulation & Dynamic modeling of robots using recursive newton-euler techniques (Khalil)
+
+* How cognitive models of human body experience might push robotics
+* An introduction to optimization on manifolds
+* Task-agnostic self-modeling machines (Lipson)
+* Learning and adaptation of inverse dynamics models a comparison
+* Online Multi-Target Learning of Inverse Dynamics Models for Computed-Torque Control of Compliant Manipulators
+* Resilient machines through continuous self-modeling (Lipson)
+* structured learning of rigid‐body dynamics  a survey and unified view from a robotics perspective
+* using physics knowledge for learning rigid-body forward dynamics with gaussian process force priors
+
+
+
+* Robot Self-Calibration Using Multiple Kinematic Chains
+	- EXAMPLE OF USING VISUAL FEEDBACK
+	- Investigates the potential of automatic self-contained kinematic calibration (DH parrameters including camera extrinsic parameters) of a humanoid robot employing different kinematic chains
+	  relying on self-observation and self-touch.
+
+
+===================================================================
+                   POTENTIAL TABLE OF CONTENTS
+===================================================================
+
+o INTRODUCTION
+
+o LITERATURE REVIEW
+	* Model learning in robotics
+	* Classical and recent works in system identification
+	* Local and gobal models linear models
+	* End-to-end learning (black box models)
+	* Data-driven lerning with structure information
+	* Model learning and the body schema
+	* Sensorimotor leaening
+	
+o THEORETICAL FRAMEWORK
+	* Robot equations of motion
+		- Forwad and inverse dynamics
+		- The Newton-Euler formualtion of the iverse dynamics (cite this as main reference: "Dynamic Modeling of Robots Using Newton-Euler Formulation")
+			+ The kinematics forward recursion
+			+ The dynamics backward recursion
+		- Compostion of the kinematis and dynamics		
+	* Basis of robot sytem identication
+		- Kinematic calibration
+		- Inertial parameter identification
+			+ For fixed based robots
+			+ For floating base robots
+	* Robot proprioception
+		- What is propriocetion for?
+		- Comparison between human and robot proprioception
+		- A sensor suite for robot proprioception
+
+	* State-of-the-art Gradient Descent
+		- Fundamentals
+			+ Mini batch gradient descent
+		- Momentum gradient descent
+		- ADAM gradient descent
+		- AMS gradient descent
+	* Fundamentals of graph theory
+		- What is a graph
+		- Graph representation, the adjacency matrix
+		- Metrics for graph comparison
+	* Network topology inference
+		- Based on covariance
+		- Based on GSP
+		- Base on statistics
+			+ Mutual information
+	* Information theory
+		- What is information
+		- The entropy of a random variable
+		- Mutual Information: The correlation of the 21st century 
+	* Differential geometry
+		- Fundamentals of differential geometry
+		- Manifolds and the tangent space
+		- Riemannian geometry and the metric
+		- Use in robotics
+		
+o Methodology
+	* Signal requirements
+	* Minding constraints
+	* Replay buffer and reservoir sampling: Discuss how reservouir sampling helps preserving a well distributed set of the history of samples seen
+	* Riemanning AMS
+	* Embodiment and mutual information
+	* Network topology inference using mutual information
+	* Kinematic description guided from topology and proprioceptive measurements
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+==============================================================================================
+INTERESTING PAPERS
+
+
+

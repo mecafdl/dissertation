@@ -1,0 +1,168 @@
+The \skillmodelabbr{} model is implemented within \softwareabbr{} as depicted in Fig. \ref{ch:architecture:mios:overview}
+The semantic and policy layers are mostly covered by three different classes, i.e. skill class, manipulation primitive class and policy class (abstracted by the skill engine), while the control and hardware layer are taken care of by other modules.
+In the following all relevant components are briefly described.
+Additionally, in Alg.~\ref{alg:software:esepo:core}-\ref{alg:software:esepo:body} pseudo code for the most important software routines is given.
+
+\paragraph{Core Loop}
+
+The \softwareabbr{} core module contains the base loop for skill execution.
+It calls all necessary components in the right order, see Alg.~\ref{alg:software:esepo:core}.
+
+\begin{algorithm}
+\caption{Core Loop}\label{alg:software:esepo:core}
+\begin{algorithmic}[1]
+\Procedure{StartSkill(skill)}{}
+\State ActiveSkill $=$ skill
+\State $\percept \gets$ UpdatePercept(Body.GetState())
+\State ActiveSkill.Initialize($\percept$)
+\State ControllerPipeline.Initialize($\percept$)
+\EndProcedure
+\Procedure{CoreLoop}{}
+\While {$\commands.stop = $ false}
+\State $\commands \gets $ ActiveSkill.SkillCycle($\percept$)
+\State $\torque \gets $ ControllerPipeline.Step($\percept$,$\commands$)
+\State $\percept \gets $ Body.Control($\torque$)
+\State $\percept \gets$ UpdatePercept($\percept$)
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{Skill Class}
+
+The skill class plays a central role for the \skillmodelabbr{} implementation.
+It contains the entire semantic layer and the manipulation graph which in turn holds a number of manipulation primitive classes.
+The skill class is an abstract base class from which the actual skill implementations inherit.
+The base class has a host of different methods to interface with other modules of \softwareabbr{} and to provide various support to the concrete skill instantiations.
+All concrete skills have to implement a set of methods to ensure basic functionality.
+
+The skill class runs its cycle in real time as indicated in Alg. \ref{alg:software:esepo:skill}.
+In this cycle the different conditions of the semantic layer are checked and acted upon if triggered.
+Then, the currently active event conditions are checked and the current primitive is switched if they are triggered.
+If no conditions were triggered, the currently active manipulation primitive is called to calculate its next command.
+
+\begin{algorithm}
+\caption{Skill}\label{alg:software:esepo:skill}
+\begin{algorithmic}[1]
+\Procedure{Initialize($\percept$)}{}
+\State CycleState $\gets$ Init
+\State ActiveMP $\gets$ MPGraph.GetInitialMP($\percept$)
+\State Success $\gets$ false
+\EndProcedure
+\Procedure{SkillCycle($\percept$)}{}
+\If {CycleState $=$ Init}
+	\If {CheckPreconditions($\percept$) $=$ true}
+		\State {CycleState $\gets$ Execution}
+	\Else
+		\State {$\commands \gets $ ActiveMP.stop()}
+		\State {CycleState $\gets$ Execution}
+	\EndIf
+\EndIf
+\If {CycleState $=$ Terminate}
+\EndIf
+\If {CycleState $=$ Execution}
+	\If {CheckErrorConditions($\percept$) $=$ true}
+		\State {$\commands \gets $ ActiveMP.stop()}
+		\State {CycleState $\gets$ Terminate}
+	\EndIf
+	\If {CheckSuccessConditions($\percept$) $=$ true}
+		\State Success $\gets$ true
+	\EndIf
+	\If {CheckTerminationConditions($\percept$) $=$ true and Success $=$ true}
+		\State {$\commands \gets $ ActiveMP.stop()}
+		\State {CycleState $\gets$ Terminate}
+	\EndIf
+	\If {SwitchMP($\percept$) $=$ true}
+		\State ActiveMP $\gets$ MPGraph.GetNextMP()
+	\EndIf
+	\State $\commands \gets $ ActiveMP.GetCommand($\percept$)
+\EndIf
+\Return $\commands$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{Manipulation Primitive Class}
+
+The manipulation primitive class is a container for multiple policies that can be executed in parallel.
+When queried for a command by the skill class, the primitive in turn queries the policies it contains.
+It makes sure that the resulting command $\commands$ is valid, such that e.g. no two contradicting pose commands are relayed down the command pipeline.
+The most important functionality of the manipulation primitive class is shown in Alg. \ref{alg:software:esepo:primitive}.
+
+\begin{algorithm}
+\caption{Manipulation Primitive}\label{alg:software:esepo:primitive}
+\begin{algorithmic}[1]
+\Procedure{GetCommand($\percept$)}{}
+\For {p in Policies}
+	$\commands \gets \commands + $ p.GetCommand($\percept$)
+\EndFor
+\If {CheckCommands($\commands$) $=$ false}
+	$\commands.stop = $ true
+\EndIf
+\Return $\commands$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{Policy Class}
+The policy class is an abstract base class from which concrete policies can be derived.
+The concrete policies have to implement basic functionality such as initialization, command calculation and a termination condition.
+Concrete implemented policies are e.g. a point-to-point motion generator, a twist generator, or a Lissajous wrench generator.
+In Alg. \ref{alg:software:esepo:policy} the example of a point-to-point motion generator is shown.
+
+\begin{algorithm}
+\caption{Policy}\label{alg:software:esepo:policy}
+\begin{algorithmic}[1]
+\Procedure{Initialize}{}
+MotionGenerator.Initialize($T_0,T_g,\dot{\V{X}}_d,\ddot{\V{X}}_d$)
+\EndProcedure
+\Procedure{GetCommand($\percept$)}{}
+MotionGenerator.Step($\percept$)
+\State $\commands.\twistd \gets $ MotionGenerator.GetTwist()
+\Return $\commands$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{Controller Pipeline Class}
+
+The controller pipeline class provides implementations of controllers to bridge the skill commands $\commands$ and the robot hardware.
+The pipeline class itself is an abstract base class and multiple concrete pipelines can be derived.
+Concrete pipelines have to take care of proper controller execution and context switches, i.e. the proper blending of commands between skill executions.
+\softwareabbr{} in its current state provides different pipelines for the various command interface levels of the \platformname{} arm.
+In this thesis, a pipeline consisting of a unified force / impedance controller including nullspace control with desired joint torque as output is used, see Alg. \ref{alg:software:esepo:controller} for an example.
+
+\begin{algorithm}
+\caption{Controller Pipeline}\label{alg:software:esepo:controller}
+\begin{algorithmic}[1]
+\Procedure{Initialize($\percept$)}{}
+\State CartImpCntr.Initialize($\percept$)
+\State NullSpaceCntr.Initialize($\percept$)
+\State ForceCntr.Initialize($\percept$)
+\EndProcedure
+\Procedure{Step($\percept$,$\commands$)}{}
+\State CartImpCntr.Step($\percept$,$\commands$)
+\State NullSpaceCntr.Step($\percept$,$\commands$)
+\State ForceCntr.Step($\percept$,$\commands$)
+\State $\torque \gets $ CartImpCntr.Gettorque() $+$ NullSpaceCntr.Gettorque() $+$ ForceCntr.Gettorque()
+\Return $\torque$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{Robot Body Class}
+
+The robot body class is the low-level bridge between \softwareabbr{} and the FCI of the \platformname{} arm.
+It uses the API of \emph{libfranka} to establish connection on various command interface levels, e.g. joint torque, Cartesian twist or joint positions.
+Its main functionality is to connect the specific libfranka control loop with the \softwareabbr{} core loop, see Alg \ref{alg:software:esepo:body}.
+Furthermore, it provides access to the gripper as well as high-level features such as locking and unlocking the brakes of the robot or searching for its IP address in a local network during the start up phase of \softwareabbr{}.
+
+\begin{algorithm}
+\caption{Panda Body}\label{alg:software:esepo:body}
+\begin{algorithmic}[1]
+\Procedure{Control($\torque$)}{}
+\State $\percept \gets $ libfranka.Control($\torque$)
+\Return $\percept$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

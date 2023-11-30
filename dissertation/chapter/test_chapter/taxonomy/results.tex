@@ -1,0 +1,119 @@
+Overall, high performance levels could be achieved in terms of the two cost functions' minimum \emph{execution time} and \emph{contact moments}.
+Table \ref{tab:experiments:taxonomy:results} summarizes the achieved \emph{robustness} against the \emph{goal pose randomization} and the \emph{average and standard deviation of these metrics}.
+The skills were either autonomously learned or domain expert-tuned.
+
+\renewcommand{\arraystretch}{0.9}
+\begin{table*}[ht!]
+\centering
+\caption{Experimental results for all skills}
+\label{tab:experiments:taxonomy:results}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 
+\multirow{2}*{Skill} & \multirow{2}*{Task} &  \multicolumn{2}{|l|}{Execution Time} &  \multicolumn{2}{|l|}{Contact Torques} \\ 
+\cline{3-6}
+ &  & Robustness & Value & Robustness & Value \\ 
+\midrule 
+\multirow{2}*{Insertion} & Cylinder & $94$ \%  & $1.76 \pm 0.36$ s& $92$ \% & $3.21 \pm 0.35$ Nm \\ 
+\cline{2-6}
+& Key & $100$ \%  & $1.1 \pm 0.18$ s& $98$ \% & $2.97 \pm 0.244$ Nm \\ 
+\cline{2-6}
+ & Ethernet Plug & $100$ \%  & $1.04 \pm 0.19$ s& $100$ \% & $2 \pm 0.55$ Nm \\ 
+\midrule
+\multirow{2}*{Extraction} & Cylinder & $100$ \%  & $0.35 \pm 0.05$ s& $100$ \% & $6.03 \pm 0.123$ Nm \\ 
+\cline{2-6}
+&Key & $100$ \%  & $0.31 \pm 0.02$ s& $100$ \% & $5.46 \pm 1.277$ Nm \\ 
+\cline{2-6}
+&Ethernet Plug & $100$ \%  & $0.23 \pm 0.001$ s& $100$ \% & $2.29 \pm 0.023$ Nm \\ 
+\midrule 
+\multirow{2}*{Press Mechanism} & Pedal & $100$ \%  & N/A & $100$ \% & $4.12 \pm 0.223$ Nm \\ 
+\cline{2-6}
+&Flip Switch & $100$ \%  & N/A & $100$ \% & $1.6 \pm 0.083$ Nm \\ 
+\cline{2-6}
+& User Stop & $100$ \%  & N/A & $98$ \% & $3.39 \pm 0.17$ Nm \\  
+\midrule
+\multirow{2}*{Tip} & Enter Key & $100$ \% & $0.82 \pm 0.005$ s & $100$ \% & $0.59 \pm 0.013$ Nm \\ 
+\cline{2-6}
+&Red Button & $100$ \% & $0.69 \pm 0.034$ s & $100$ \% & $1.41 \pm 0.137$ Nm \\ 
+\cline{2-6}
+&White Button & $100$ \% & $0.69 \pm 0.008$ s & $100$ \% & $1.32 \pm 0.023$ Nm \\ 
+\midrule
+Grab & HDMI Switch & $100$ \%  & $2.87 \pm 0.005$ s & N/A & N/A\\ 
+\midrule
+Place& HDMI Switch & $100$ \%  & $2.42 \pm 0.064$ s & N/A & N/A\\ 
+\midrule
+\multirow{2}*{Slide Object} & Wood & $100$ \% & $1.21 \pm 0.008$ s & $100$ \% & $8.34 \pm 0.125$ Nm \\ 
+\cline{2-6}
+&Cloth & $100$ \% & $1.21 \pm 0.005$ s & $100$ \% & $8.69 \pm 0.098$ Nm \\ 
+\cline{2-6}
+&Foil & $100$ \% & $1.21 \pm 0.005$ s & $100$ \%  & $9.56 \pm 0.077$ Nm \\ 
+\midrule
+\multirow{2}*{Drag} & Wood& $100$ \% & $1.02 \pm 0.06$ s & $100$ \% & $6.42 \pm 0.04$ Nm \\ 
+\cline{2-6}
+&Cloth & $100$ \% & $1.09 \pm 0.06$ s & $100$ \% & $6.5 \pm 0.016$ Nm \\ 
+\cline{2-6}
+&Foil & $100$ \% & $1.01 \pm 0.008$ s & $100$ \% & $11.86 \pm 0.078$ Nm \\ 
+\midrule
+%\multirow{2}*{Shove} & Wood& $100$ \% & $1.28 \pm 0.007$ s & $100$ \% & $4.2 \pm 0.19$ Nm \\ 
+%\cline{2-6}
+%&Cloth & $100 \%$ & $1.29 \pm 0.013$ s & $100 \%$ & $4.47 \pm 0.195$ Nm \\ 
+%\cline{2-6}
+%&Foil & $100 \%$ & $1.29 \pm 0.02$ s & $100 \%$ & $7.31 \pm 0.358$ Nm \\ 
+%\midrule
+\multirow{2}*{Cut} & Carton & $100$ \% & $1.69 \pm 0.009$ s & $100$ \% & $7.16 \pm 0.502$ Nm \\
+\cline{2-6}
+&Cloth & $100$ \% & $1.75 \pm 0.089$ s & $100$ \% & $6.08 \pm 0.105$ Nm \\ 
+\cline{2-6}
+&Foil & $100$ \% & $1.72 \pm 0.011$ s & $100$ \% & $5.92 \pm 0.145$ Nm \\ 
+\midrule
+Turn Mechanism & Key & $95$ \% & $0.71 \pm 0.19$ s & $100$ \% & $0.94 \pm 0.345$ Nm \\ 
+\midrule
+Swipe & Tablet & $100$ \% & $1.4 \pm 0.17$ s & $66$ \% & $3.1 \pm 0.155$ Nm \\ 
+\midrule
+Move Mechanism & Red Lever & $100$ \% & $1.33 \pm 0.036$ s & $86$ \% & $4 \pm 0.079$ Nm \\
+\midrule
+Bend & Cables & $100$ \% & $1.99 \pm 0.006$ s & $100$ \% & $4.37 \pm 0.195$ Nm \\ 
+\midrule
+Slide off & Battery Case & $98$ \% & $1.13 \pm 0.66$ s & $96$ \% & $7.22 \pm 0.623$ Nm \\ 
+\midrule
+\end{tabular}
+}
+\end{table*}
+ 
+The implementation of $28$ tactile skills exhibits a robust behaviour, and high performance in various industrial automation tasks that have been subjected to significant process disturbances.
+Importantly, the simple transfer of policies and the efficient learning through the parameter vector $\params$ demonstrate the versatility enabled by the taxonomy.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/experiments/energy_comparison.png}
+    \caption{A comparison of the required energy to learn a great number of skills. The deep deterministic policy gradient (DDPG) algorithm is compared with the \skillmodelabbr{} framework (see Sec.~\ref{ch:architecture:mios:ggtwrep} both with and without transfer learning.}
+    \label{fig:experiments:taxonomy:comparison}
+\end{figure}
+
+Surprisingly, the seeming disadvantage of having to design a large number of different skills is vastly mitigated by the fact that the vast majority of policies can be transferred without modifications within the same skill class.
+The same policy was used for each skill class, respectively, and only the parameters $\params=\left[\params_\pi,\params_c\right]$ needed to be adapted (or relearned) to find the new optimum.
+Some policies are even directly transferable between different classes.
+When looking at the building blocks of the selected policies, one might even say that many manipulation processes can be solved by using a small toolset of building blocks.
+This result supports the idea that the proposed approach is versatile enough to be relevant for realistic scenarios.
+
+As this approach enables the learning of a wide range of skills in realistic settings, the issue of energy consumption in real-world 24/7 skill acquisition settings becomes a pertinent concern.
+Therefore, the computational energy required for the presented approach is compared with that of an exemplary state-of-the-art deep learning system, as is illustrated in Figure \ref{fig:experiments:taxonomy:comparison}.
+The \skillmodelabbr{} framework used in this work is compared with the deep deterministic policy gradient method (DDPG) \cite{lillicrap2015continuous}.
+Furthermore, \skillmodelabbr{} is shown for the case in which every skill is learned from scratch as well as for the case in which learned solutions can be reused and transferred to subsequent learning.
+This suggests that using current state-of-the-art data-based methods to learn many skills may require significant resource demands, as was anticipated, for example, in \cite{thompson2020computational}. However, using the \skillmodelabbr{} framework requires an order of magnitude lower energy, and even significantly less energy than that with transfer learning.
+
+For the deep deterministic policy gradient (DDPG) framework, convergence was observed after $\sim300$ trials.
+However, contrary to previous expectations, no robust solution was achieved most of the time.
+A trial includes executing a skill and calculating the learning algorithm.
+Learning a skill with the use of prior knowledge from another skill within the same subclass (level-$1$ transfer) reduces the number of required trials to $\sim30$ for \skillmodelabbr{}, and to $\sim60$ for transfer across subclasses (level-$2$ transfer).
+DDPG, in its current form, does not achieve a reliable transfer.
+To compare all calculations with the same widely available computing platform, an Intel NUC with an i7 processor was used that has an average power consumption of $30$ W.
+To compare the power consumption for the different frameworks, only the CPU time allocated for the learning algorithm was considered, which is $1$ ms for \skillmodelabbr{} and $0.6$ s for DDPG.
+For a conservative analysis, it is assumed that the CPU worked at full capacity in both approaches.
+Consequently, the energy consumption per trial is estimated to be $0.03$~J for \skillmodelabbr{} and $18$~J for DDPG.
+The overall energy consumption is
+\begin{equation}
+    e_{n_s}=\sum_{i=0}^{n_s} \boldsymbol{d}_i,
+\end{equation}
+where $e_{n_s}$ denotes the energy consumption for $n_s$ number of sequentially learned skills, and $\boldsymbol{d}_i$ is the vector for the required number of trials for each learned skill.
+To make a reasonable comparison with transfer learning, it is assume that the goal is to sequentially learn $100$ skill subclasses with $10$ instances for each of a single skill class.

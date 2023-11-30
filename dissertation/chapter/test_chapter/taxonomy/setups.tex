@@ -1,0 +1,14 @@
+The taxonomy verification experiments are based on a common hardware base setup that consists of the following components.
+\begin{itemize}
+\item A \platformname{} arm \cite{Haddadin.2022}: This is a 7-DOF manipulator with link-side joint torque sensors and a $1$ kHz torque-level real-time interface, which allows us to directly connect the \skillmodelabbr{} framework to the system hardware, i.e., the real-time interface FCI \cite{Haddadin.2022}.
+\item A \platformname{} hand: A standard two-fingered gripper that is sufficient for a wide range of tasks.
+\item Intel NUC: A small PC that uses an Intel i7 CPU, 16 GB RAM, and an SSD. \footnote{The used learning approaches do not require GPU acceleration or distributed computing clusters.}
+\item Software: \softwareabbr{} is used.
+\end{itemize}
+
+Input processes for the taxonomy of manipulation skills (TMS) are directly derived from established standards such as the German curricula for trainees in metalworking \cite{Burmester.2020}, electronics \cite{Bumiller.2021}, and mechatronics \cite{Hebel.2020}.
+These standards provide the basis for almost any process in today's industry by defining boundary conditions, manipulation steps, requirements and objectives.
+By building on top of standard works the robot manipulation framework is then directly compatible with the current needs of industrial companies.
+As a first step, the TMS contains processes that range from the domain of machine tending (such as lever operation and button pressing), to assembly (such as insertion), or material processing (such as bending and cutting).
+To illustrate the power of the framework, $28$ real-world manipulation skills were implemented within the \skillmodelabbr{} framework as described in Table \ref{tab:experiments:taxonomy:setup}. 
+

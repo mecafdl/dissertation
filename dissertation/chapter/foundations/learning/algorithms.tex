@@ -1,0 +1,165 @@
+In this section the choice of algorithms that were tested in the real-word experiments in Sec.~\ref{ch:experiments:learning} are discussed.
+Due to its structure black-box optimization methods are best suited for the used \skillmodelabbr{} framework. 
+Within this subclass of machine learning the number of potential algorithms was reduced by comparing the requirements with the capabilities of candidate algorithms.
+
+Since the intention is to learn real-world physical manipulation problems, the algorithm will face various challenges that result in specific requirements:
+\begin{itemize}
+\item Generally, no feasible analytic solution is available, meaning simple models cannot be relied upon.
+\item Gradients are usually not available.
+\item Real-world problems are inherently stochastic due to various factors such sensor noise, actuator noise, model inaccuracies and noise coming from the task environment itself (e.g. wear and tear over time).
+\item No assumptions are possible on minimum or cost function convexity.
+\item Violation of safety, task or quality constraints have to be considered which means that discontinuities in the cost function are possible due to sudden failure events. In general this can be stated as the requirement to handle unknown constraints.
+\item Low computational effort is required.
+This is essential for real-world robot learning with limited computational resources (due to e.g. lack of network connection, low desired power consumption of the system, etc.)
+\item Low total learning time is desired which is a major factor for real-world robot learning which cannot be scaled up as easily as a simulation.
+\end{itemize}
+
+Thus, suitable learning algorithms must provide a numerical black-box optimization and cannot rely on gradients.
+Also, stochasticity must be considered and the method has to be able to optimize globally.
+Furthermore, it should handle unknown and noisy constraints and finally, it must use only few computational resources while still keeping the number of required samples low.
+
+\begin{table}[h!]
+\caption{Suitability of existing learning algorithms with respect to the desired properties}
+\label{tab:foundations:learning:algorithms:comparison}
+\begin{tabular}{|p{2.4cm}|p{1.8cm}|p{2.2cm}|p{1.7cm}|p{2cm}|p{3.3cm}|}
+\hline 
+Method & no \nohyphens{gradient} & stochasticity assumption & global optimizer & unknown constraints & low computational requirements \\ 
+\hline 
+Grid Search & $+$ & $+$ & $+$ & $-$ &$+$ \\ 
+\hline 
+Gradient-descent family & $-$ & $+$ & $-$ & $-$ & $+$\\ 
+\hline 
+Evolutionary algorithms & $+$ & $+$ & $+$ & $-$ & $+$\\ 
+\hline 
+Particle Swarm & $+$ & $+$ & $+$ & $-$ & $+$\\ 
+\hline 
+Bayesian Optimization & $+$ & $+$ & $+$ & $+$ & $-$ \\ 
+\hline 
+\end{tabular}
+\end{table} 
+
+Table \ref{tab:foundations:learning:algorithms:comparison} lists several groups of state-of-the-art optimization methods and compares them with respect to above requirements.
+In \cite{Calandra.2014} a similar reasoning can be found for a humanoid walking problem.
+Note that extensions exist for the stochastic case for all of the algorithms.
+
+Generally, gradient-descent-based algorithms are unsuitable since they rely on gradients and do not optimize globally.
+Grid search and evolutionary algorithms cannot handle unknown constraints very well without extensive knowledge about the problem they optimize, i.e. make use of well-informed barrier functions.
+The latter aspect applies also to particle swarm algorithms.
+Only Bayesian optimization (BO) in accordance to \cite{Snoek.2013} is capable of explicitly handling unknown noisy constraints during optimization.
+However, usually the best performing implementations of Bayesian optimization have high computational requirements if they run for a higher number of trials.
+Judging from the table all algorithms except gradient descent seem more or less suited for real-world robot learning, thus they are evaluated in an experimental setting.
+
+In later experiments also the hierarchical relative entropy search (HiREPS) algorithm and a newly developed SVM-based optimization method which partitions the parameter space to find an optimal (and robust) solution were compared.
+
+
+\subsubsection{Bayesian Optimization}
+
+
+In general, BO finds the minimum of an unknown objective function $f(\params)$ on some domain $\domain$ by developing a statistical model of $f(\params)$ where $\params$ is the set of parameters.
+Apart from the cost function, it has two major components, which are the prior and the acquisition function.
+
+\paragraph{Prior}
+
+A Gaussian process is used as prior to derive assumptions about the function being optimized.
+The Gaussian process has a mean function $m: \domain \rightarrow \mathbb{R}$ and a covariance function $B: \domain \times \domain \rightarrow \mathbb{R}$.
+As a kernel the automatic relevance determination (ARD) Mat\'{e}rn $5/2$ kernel is used which is given by
+\begin{align*}
+B_{M52}(\params,\params^\prime)=&\theta_0(1+\sqrt{5 r^2(\params,\params^\prime)}\\
+&+\frac{5}{3}r^2(\params,\params^\prime) e^{-\sqrt{5 r^2(\V{p},\V{p}^\prime)}},
+\end{align*}
+with
+\begin{equation*}
+r^2(\params,\params^\prime)=\sum_{i=1}^d \frac{(p_i-p_i^\prime)^2}{\theta_i^2}.
+\end{equation*}
+This kernel results in twice-differentiable sample functions which makes it suitable for practical optimization problems as stated in \cite{Snoek.2012}. 
+It has $d+3$ hyperparameters in $d$ dimensions, i.e. one characteristic length scale per dimension, the covariance amplitude $\theta_0$, the observation noise $\nu$ and a constant mean $m$.
+These kernel hyperparameters are integrated out by applying Markov chain Monte Carlo (MCMC) via slice sampling \cite{Neal.2003}.
+
+
+\paragraph{Acquisition function}
+
+Predictive entropy search with constraints (PESC) is used as a means to select the next parameters $\params$ to explore, as described in \cite{HernandezLobato.2015}.
+
+
+\subsubsection{Particle Swarm Optimization}
+
+Usually particle swarm optimization starts by initializing all particle positions $\V{x}_i(0)$ and velocities $\V{v}_i(0)$ with a uniformly distributed random vector, i.e. $\V{x}_i(0) \sim  U(\V{b}_\text{lb},\V{b}_\text{ub})$ and $\V{v}_i(0) \sim  U(-\vert \V{b}_\text{ub} - \V{b}_\text{lb} \vert,\vert \V{b}_\text{ub} - \V{b}_\text{lb} \vert)$ with $U$ being the uniform distribution. The particles are evaluated at their initial positions and their personal best $\params_i^\star$ and the global best $\paramsopt$ are set.
+Then, until a termination criterion is met, following steps are executed:
+\begin{enumerate}
+\item Update particle velocity:
+\begin{align*}
+\V{v}_i(t+1)=&\;\V{v}_i(t)+c_1(\params_i^\star-\V{x}_i(t))\V{R}_1\\
+&+\V{v}_i(t)+c_2(\paramsopt-\V{x}_i(t))\V{R}_2
+\end{align*}
+where $\V{R}_1$ and $\V{R}_2$ are diagonal matrices with random numbers generated from a uniform distribution in $[0,1]$ and $c_1,c_2$ are acceleration constants usually in the range of $[0,4]$.
+\item Update the particle position:
+\begin{equation}
+\V{x}_i(t+1)=\V{x}_i(t)+\V{v}_i(t+1)
+\end{equation}
+\item Evaluate the fitness of the particle $f(\V{x}_i(t+1))$.
+\item Update each $\params_i^\star$ and global best $\paramsopt$ if necessary.
+\end{enumerate}
+
+\subsubsection{Covariance Matrix Adaptation Evolution Strategy}
+
+The covariance matrix adaptation evolution strategy (CMA-ES) is an optimization algorithm from the class of evolutionary algorithms for continuous, non-linear, non-convex black-box optimization problems \cite{Hansen.2001,Hansen.2006}.
+
+The algorithm starts with an initial centroid $\V{c}_0 \in \mathfrak{R}^n$, a population size $\lambda$, an initial step-size $\sigma>0$, an initial covariance matrix $\V{C}=\V{I}$ and isotropic and anisotropic evolution paths $p_\sigma=0$ and $p_c=0$.
+$\V{c}_0$, $\lambda$ and $\sigma$ are chosen by the user.
+Then the following steps are executed until the algorithm terminates.
+\begin{enumerate}
+\item Evaluation of $\lambda$ individuals sampled from a normal distribution with mean $\V{c}$ and covariance matrix $\sigma C$.
+\item Update of centroid $\V{c}$, evolution paths $p_\sigma$ and $p_c$, covariance matrix $\V{C}$ and step-size $\sigma$ based on the evaluated fitness.
+\end{enumerate}
+
+\subsubsection{Latin Hypercube Sampling}
+
+Latin hypercube sampling (LHS) \cite{McKay.1979} is a method to sample a given parameter space in a nearly-random way.
+In contrast to pure random sampling LHS generates equally distributed random points in the parameter space.
+Such a method is useful in the present case to see whether systematic checking of the parameter space might come close to already good solutions without actually learning.
+It can be an indication as to how necessary learning actually is for the particular problem cases.
+
+\subsubsection{HiREPS}
+
+The Hierarchical Relative Entropy Search algorithm was proposed in \cite{Daniel.2012}. Here, its function is only briefly described.
+
+As input the algorithm takes an information loss tolerance $\epsilon$, an entropy tolerance $\kappa$, and a number of options $n$.
+It initializes the policy $\pi$ with $n$ Gaussians with random means.
+Then, for a number of $L$ episodes it executes the following steps:
+\begin{enumerate}
+\item The sample policy is set to $q(a|s)=\sum_\mathcal{O} \pi_\text{old}(\mathcal{O}|s)\pi_\text{old}(a|s,\mathcal{O})$
+\item Then new samples are collected from the sample policy and added to the current dataset: $\{s_j ~ p(s_0),a_j~q(a|s_j),R_j\}_j\in \{1,\dots,N\}$
+\item The importance weights are calculated to $v_i^k=\frac{q_k(s_i,a_i)}{\sum_{h=k-H}^k q_h(s_i,a_i)} \forall i$
+\item The proposal distribution is updated by $\tilde{p}(\mathcal{O}|s_i,a_i)=p_\text{old}(\mathcal{O}|s_i,a_i) \forall i$
+\item The dual function is minimized: $[\theta,\nu,\epsilon]=\text{arg} \min_{[\theta,\nu,\epsilon]} g(\theta,\nu,\epsilon)$
+\item Finally, the policy can be updated by $p(s_i,a_i,\mathcal{O}) v_i^k \tilde{p}(\mathcal{O},s_i,a_i)^{1+\frac{\epsilon}{\nu}} \exp(\frac{R_i-\theta^T \phi(s_i)}{\nu}$ and $\pi(\mathcal{O}|s)$ and $\pi(a|s,\mathcal{O})$ can be estimated.
+The output is a new policy $\pi(a,\mathcal{O}|s)$.
+\end{enumerate}
+
+\subsubsection{Parameter Space Partitioning Algorithm}
+
+The parameter space partitioning (PSP) algorithm \cite{Voigt.2021} runs for $k$ episodes.
+Each episode consists of a number of trials $n_e$.
+For each trial $i$ of an episode, parameters $\params_{s_i}$ are sampled $\in q(a)$
+in sample-space, i.e. the hypercube, with $q(a)$ being the sampling policy.
+These are translated into solution-space and applied to the optimization problem.
+The resulting reward $r_i$ is stored together with the parameters in sample-space $\params_{s_i}$.
+If a trial is unsuccessful, the reward $r_i$ is set to a negative value, $r_i = -1$.
+This is done to assure negative classification in the update step.
+At the end of each episode, the sampling policy $q(a)$ is updated.
+The sampling policy $q(a)$ consists of two elements, a proposal policy $p(a)$ and a filtering policy $f(p(a))$.
+$p(a)$ proposes parameters until a sample has been found which is accepted by the filtering policy $f(p(a))$.
+$p(a)$ proposes parameters $\params_p$, which are then classified by the filtering policy $f(\params_p)$.
+The filtering policy is a non-linear support vector machine (SVM).
+
+\paragraph{Proposal Policy}
+
+In the beginning, the proposal policy is a Latin hypercube sampler since there is not yet enough data to generate meaningful data.
+Instead the available solution space is more evenly sampled.
+After the first episode a uniform random sampler is used.
+In later episodes, assuming sufficient data is available, a Gaussian mixture model (GMM) is used as policy.
+
+\paragraph{Filtering Policy}
+
+The filtering policy is a non-linear SVM with rbf-kernels.
+It is only used if a sufficient number of successful samples (in the sense of a successful skill execution) is available to ensure a robust estimation.

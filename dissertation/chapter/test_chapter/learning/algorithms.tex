@@ -1,0 +1,82 @@
+This experiment provides a proof-of-concept for the learning architecture introduced in Ch.~\ref{ch:architecture} and its theoretical foundations in Ch.~\ref{ch:foundations}.
+Four different learning algorithms are compared and the results discussed.
+
+\subsubsection{Experimental Setup}
+
+The experimental setup consists of a Franka Emika Panda robot \cite{Haddadin.2017} and and three variations of the insertion problem as shown in Fig. \ref{fig:learning:exp_1_1:setup}, i.e. a key, a puzzle piece and an aluminum cylinder.
+
+\begin{figure}[ht!]
+\includegraphics[width=\columnwidth]{figures/experiments/learning_exp_1_1_setup.png}
+\caption{Experimental setup, puzzle (top right), key (bottom left) and cylinder (bottom right)}
+\label{fig:learning:exp_1_1:setup}
+\end{figure}
+
+The three tasks are as follows:
+\begin{itemize}
+\item Puzzle: The puzzle piece is an equilateral triangle with a side length of $0.075$ m.
+The hole has a depth of $0.005$ m.
+The tolerances between puzzle piece and hole are $< 0.1$ mm and there are no chamfers.
+Note that the same basic setup as in \cite{Stemmer.2006} was used.
+\item Key: The lock has a depth of $d=0.0023$ m.
+The lock and the key have chamfers to make the initial insertion easier by design.
+\item Cylinder: The aluminum cylinder has a diameter of $0.02$ m and the hole a depth $0.035$ m. The tolerances are $\ll 0.1$ mm and there is a $0.5$ mm chamfer on the cylinder.
+The hole has no walls which results in a higher chance of getting stuck during insertion, which further increases the difficulty.
+\end{itemize}
+
+The experiment has the following routine:
+\begin{enumerate}
+\item The learning problems are given as described above.
+\item The insertion skill is selected from the taxonomy (note that the parameters and structure of the \skillmodelabbr{} model in this early experiment differ from the current version. Please refer to \cite{Johannsmeier.2019} for details.).
+\item The objects (key, puzzle and cylinder) are taught kinesthetically by a human expert.
+\item Latin hypercube sampling (LHS), particle swarm optimization (PSO), Bayesian optimization (BO) and covariance matrix adaptation evolution strategy (CMA-ES) are selected as learning algorithms.
+\item Each combination of insertion problem and algorithm was run ten times to ensure a statistical confidence.
+\end{enumerate}
+
+For Bayesian optimization (BO) the spearmint software package \cite{Brochu.2010,Snoek.2012,Snoek.2013,Swersky.2013} was used in combination with predictive entropy search with constraints (PESC) \cite{HernandezLobato.2015} as acquisition function.
+For evolutionary algorithms Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES) \cite{Hansen.2001,Hansen.2006} was selected and for Particle Swarm Optimization (PSO) the standard implementation \cite{Poli.2007}.
+Furthermore, Latin Hypercube Sampling (LHS) \cite{McKay.1979,loh1996latin} is utilized, an uninformed grid-based sampler.
+The learning algorithms are configured as follows.
+
+\begin{itemize}
+\item LHS: The parameter space is sampled at $75$ points.
+\item CMA-ES: The algorithm ran for $15$ generations with a population of $5$ individuals and an initial standard deviation of $\sigma_0=0.1$.
+These values were found by initial try-outs.
+The initial centroid was set in the middle of the parameter space.
+\item PSO: $25$ particles were used and the algorithm ran for $3$ episodes.
+The acceleration constants were set to $c_1=2$ and $c_2=2$ (default values).
+\item BO: The algorithm is initialized with $5$ equally distributed random samples from the parameter space.
+\end{itemize}
+
+Execution time was used as cost function $\quality_c$.
+The maximum skill execution time was set to $t_\text{max}=15$ seconds.
+The heuristic $\quality_h$ of the insertion skill is given as the distance to its goal pose defined by the \textit{Container} object of the insertion skill.
+
+\subsubsection{Results}
+
+\begin{figure}[ht!]
+\includegraphics[width=\textwidth]{figures/experiments/learning_exp_1_1_results_b.png}
+\caption{Experimental results. The columns correspond to the learning algorithms (LHS, BO, PSO, CMA-ES) and the rows to the tasks (Puzzle, Key, Cylinder). The blue line denotes the cost of an algorithm/task combination averaged over $10$ experiments. The light blue area denotes the $90$ \% confidence interval.}
+\label{fig:learning:exp_1_1:results}
+\end{figure}
+
+The performance results are shown in Fig.~\ref{fig:learning:exp_1_1:results}.
+The blue line indicates the execution time over trials averaged over all ten experiments per problem/algorithm combination.
+The grey area indicates the $90 \%$ confidence interval.
+The results of BO for learning to insert the cylinder are not included since it was not able to find a solution in the given time frame.
+
+These results show that all four algorithms are suited to a certain degree to learn easier variations of the insertion task such as the puzzle and the key.
+However, it has to be noted that Bayesian optimization on average finds solutions not as good as the other methods.
+Furthermore, the confidence interval is notably larger.
+It also terminates early into the experiment since the model was at some point not able to find further suitable candidates.
+This might indicate a solution space with high noise and discontinuities that is difficult to model.
+
+The comparison with LHS indicates that the \skillmodelabbr{} approach sufficiently reduces the complexity of the manipulation skill design.
+Finding solutions with practically relevant execution times by sampling rather than explicit learning is possible for at least lower tactile difficulty.
+
+The plot showing the LHS results for the cylinder insertion indicates the high complexity of the problem.
+Random sampling leads to feasible solutions, however, the confidence interval is too large to conclude assurance.
+PSO achieves better solutions, yet it also has a very low confidence.
+CMA-ES outperforms both methods and is able to find a solution that is better in terms of absolute cost as well as confidence.
+
+Considering the best performing algorithm CMA-ES, a feasible solution for any of the tasks was already found after $2-4$ minutes and optimized after $5-20$ minutes depending on the task, significantly outperforming existing approaches for learning insertion.
+Note also that with the exception of BO no noteworthy computation time was necessary.

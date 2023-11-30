@@ -1,0 +1,35 @@
+In \cite{chen2022communication}, a pioneering experimental comparison between 5G communication and existing technologies in the context of haptic robotic telepresence was studied.
+For this purpose, a passivity-based control framework was proposed that is intuitive to understand and to implement as a baseline. 
+For the experiment and evaluation, three 7-DoF tactile robot arms were used as well as a flexible research communication link that implements 5G and 4G LTE as well as commercially available 5G, 4G LTE and WiFi technologies.
+The telepresence performance of these six communication methods in terms of tracking and force reflection is compared.
+From the results it is concluded that 5G communication technology is indeed superior in terms of tracking and force reflection, although existing methods may suffice for various, however, basic applications.
+Therefore it is believed that 5G campus networks will play an important role for wireless robotics applications due to the lower latency and increased stability.
+
+\begin{figure}[ht!]
+\includegraphics[width=\textwidth]{figures/architecture/arch_telepresence.png}
+\caption{(Top left) The teleoperation setup consists of a leader (LR), a
+follower (FR) and an human operator robot (HO) which
+is rigidly connected to the leader for providing repeatable
+experimental scenarios \cite{chen2022communication}. (Top right) The kickoff of the KI.Fabrik project \copyright{} TUM. (Bottom) The one-to-many telepresence showcase in the collective \copyright{} TUM.}
+\label{fig:architecture:system:telepresence}
+\end{figure}
+
+The experimental setup consists of three \platformname{} arms \cite{Haddadin.2022} as illustrated in Fig.~\ref{fig:architecture:system:telepresence} on the top left.
+The leader robot (LR) and the follower robot (FR) form the teleoperation system, while the third one, the human operator robot (HO), acts the role of a human operator.
+The motion-controlled HO is rigidly connected to the gravity-compensated LR, such that they both follow the same Cartesian motion.
+The LR motion passes through the communication layer to the FR.
+On the other hand, the contact wrench sensed by the FR is sent back to the LR through the same communication layer.
+Ideally, the FR should follow the exact Cartesian motion of the HO, and the external wrench sensed by the HO should be the same as the sensed external wrench by the FR.
+
+In order to realize this experiment, \softwareabbr{} was thoroughly extended with a UDP communication interface and telepresence skills.
+It is possible to use different telepresence modes such as direct joint or Cartesian pose as presented in \cite{chen2022communication}, or a joystick mode, where the leader robot acts as a joystick by employing impedance control.
+The latter was prototypical work for a telemedicine application \cite{naceri2022tactile}.
+
+Applications based on the telepresence capabilities of \softwareabbr{} have been shown at numerous occasions.
+At CeBit 2019 the first 5G-enabled telepresence case for robot arms has been presented togehter with TU Dresden and Vodafone.
+It has been used in combination with the collective (see Sec.~\ref{ch:architecture:learning:collective}) to enable external demonstrations.
+The most impressive example of this was the official opening of the Munich Institute of Robotics and Machine Intelligence (MIRMI) where one robot was used to directly control $36$ others at three different sites in Germany.
+Other noteworthy showcases were the Hannover Messe 2019 where the Chancellor of Germany Angela Merkel shook hands with the Scientific Coordinator of MIRMI across several hundred kilometers using bilateral telepresence, and the official start of the KI.Fabrik project where an operator at the MIRMI labs used a telepresence-controlled robot to insert a time capsule into its holding at the Deutsches Museum, see Fig.~\ref{fig:architecture:system:telepresence}.
+It has also impacted and directly supported scientific publications such as \cite{moortgat2020feeling} where a drone has been connected to a \platformname{} arm via telepresence.
+One showcase that might open up further lines of research is one-to-many telepresence as implemented within the robot collective at MIRMI, see Fig.~\ref{fig:architecture:system:telepresence} at the bottom.
+

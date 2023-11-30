@@ -1,0 +1,82 @@
+For the validation experiment, each skill model was executed $50 \times$ on the same setup.
+A single trial involves executing a particular skill model until it terminates.
+When appropriate, artificial errors were used to offset the skill's goal poses in the validation experiment to simulate a more realistic process environment.
+For example, in typical industrial environments, moving parts of heavy machines cause process disturbances that impact the robot's precision.
+The process-specific experiment setups are depicted in Fig. \ref{fig:experiments:taxonomy:taxonomy}.
+Considering the validation experiment, as well as the optimization experiments (both autonomous learning and manual tuning), roughly $6000$ trials were run, i.e., executions, for a single skill.
+Taking into account the optimization times and setup times (i.e., physically adjusting the robot's environment for the next experiment), the entire experimental work took about one month to complete.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/experiments/taxonomy.png}
+    \caption{Taxonomy of manipulation skills, experimentally validated skills are shown with the used setup. For clarity, the taxonomy ranks are indicated as family (F), domain (D), class (C), and subclass (S). Instances are omitted since they are represented by the pictures.}
+    \label{fig:experiments:taxonomy:taxonomy}
+\end{figure}
+
+\renewcommand{\arraystretch}{0.95}
+\begin{table*}[!ht]
+\centering
+\caption{Setup descriptions}
+\label{tab:experiments:taxonomy:setup}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|p{1.5cm}|p{13cm}|c|}
+\hline 
+Insert & A cylinder ($\err{x,y,z}{0.003}$) with $30$ mm diameter and very low tolerances ($<0.1$ mm), a household key, and an Ethernet plug (both $\err{x,y,z}{0.001}$). & $\policyi{27}$
+\\
+\hline
+Tip & A mechanical enter key and two different spring-loaded buttons.
+For the enter key $\transition_2$ was automatically triggered when the key was hit properly.
+$\err{x,y,z}{0.001}$ for all three cases.& $\policyi{23}$
+\\
+\hline
+Drag & A box filled with objects, resulting in roughly $2.1$ Kg of weight, was dragged over three different surfaces, i.e., wood, cloth and foil.& $\policyi{3}$
+\\
+\hline
+Slide & A common computer mouse and three different surfaces, i.e., wood, cloth and foil.
+The robot had to maintain a contact force of $15$ N.& $\policyi{6}$
+\\
+%\hline
+%Shove & A box filled with objects, resulting in roughly $2.1$ Kg of weight, was shoved over three different surfaces, i.e. wood, cloth and foil.\\
+\hline
+Press Mechanism & A pedal ($\err{x,y,z}{0.01}$), a user stop, and a flip switch (both $\err{x,y,z}{0.005}$).
+The pedal  must be pressed for $1$ s, the other two buttons have no minimum press time.
+The user stop required significantly more force to be pressed down than the other two button variations.
+The press button skill was only optimized for contact torques, since the execution time is mostly determined by the press time.& $\policyi{33}$
+\\
+\hline
+Extract & A cylinder ($\err{x,y,z}{0.003}$) with $30$ mm diameter and very low tolerances ($<0.1$ mm), a household key, and an Ethernet plug (both $\err{x,y,z}{0.001}$).& $\policyi{34}$
+\\
+\hline
+Cut & A cutter knife on a carton surface, a cloth surface and a foil surface.
+Success was confirmed manually and by visual inspection by a human experimenter depending on whether the surface has been cut properly.& $\policyi{26}$
+\\
+\hline
+Grab & An object (HDMI switch in this case) on a table with $\err{x,y,z}{0.005}$. Note that, the grab skill is very easy to test since it is a position-based task for the most part with little physical interaction.
+The grab skill was only optimized for execution time due to the minimal amount of physical interaction.& $\policyi{35}$
+\\
+\hline
+Place & An object (HDMI switch in this case) grasped by the robot to be placed on a flat table  with $\err{x,y,z}{0.005}$.
+The place skill was only optimized for execution time due to the minimal amount of physical interaction.& $\policyi{36}$
+\\
+\hline
+Swipe & A stylus on a tablet with $\err{x,y,z}{0.005}$.
+The success of the skill was determined visually by the human experimenter depending on a successful swipe operation on the tablet.& $\policyi{26}$
+\\
+\hline
+Bend & Two wooden plates connected by heavy cables which allow for a reset without too much wear on the setup ($\err{y}{0.005}$).& $\policyi{3}$
+\\
+\hline
+Turn Mechanism & A key inserted into a lock ($\err{x,y,z}{0.005}$).& $\policyi{2}$
+\\
+\hline
+Slide Off & A battery casing with a slideable lid ($\err{x,y,z}{0.005}$).
+The success of the skill was determined visually by the human experimenter.& $\policyi{4}$
+\\
+\hline
+Move Mechanism & A common lever ($\err{y}{0.005}$).& $\policyi{1}$
+\\
+\hline
+\end{tabular}
+}
+\end{table*}
+

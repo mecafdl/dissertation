@@ -1,0 +1,14 @@
+A process $\process$ is defined by the steps that are needed to achieve the process objective and by its boundary conditions.
+There are four process states; namely, the initial state $\stateinit$, the error state $\stateerror$, the final state $\statefinal$, and the policy state $\statepolicy$.
+The policy state $\statepolicy$ contains a number of substates, which are connected by transitions $\transition \in \transitionset$.
+The substates are later implemented by a compatible skill framework.
+Three boundary conditions determine the switch between the top-level states:
+\begin{itemize}
+\item The precondition $\condpre(\objectset)=\mathit{c}_{1,\text{pre}}(\objectset) \land \dots \land \mathit{c}_{n,\text{pre}}(\objectset)$ checks whether the process is ready to start, and it switches from $\stateinit$ to $\statepolicy$.
+\item The error condition $\conderr(\objectset) = \mathit{c}_{1,\text{err}}(\objectset) \lor \dots \lor \mathit{c}_{n,\text{err}}(\objectset)$ is triggered in the case of irreversible failure, and it immediately terminates the process, leading to the error state $\stateerror$. It switches from $\stateinit$ or $\statepolicy$ to $\stateerror$.
+\item The success condition $\condsuc(\objectset) = \mathit{c}_{1,\text{suc}}(\objectset) \land \dots \land \mathit{c}_{n,\text{suc}}(\objectset)$ indicates the success of the process. It switches from $\stateinit$ or $\statepolicy$ to $\statefinal$.
+\end{itemize}
+
+The conditions depend on a set of objects $\objectset$ that form the environment for the process.
+An object $\object \in \objectset$ is characterized by at least its Cartesian pose $T_{\object}$, and possibly other physical properties such as mass, center of mass, inertia, etc.
+All objects have a unique identifier (e.g., \textit{Object}) and a handle (e.g., $\object_1$).

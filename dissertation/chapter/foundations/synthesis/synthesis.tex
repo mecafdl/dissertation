@@ -1,0 +1,76 @@
+A synthesis procedure was devised to formally close the gap between process definition and skill implementation.
+The selection of a robot manipulation policy $\policy (\percept,\params_\pi)$ from a desired manipulation process $\process \in \processset$ is expressed by
+\begin{equation*}
+    \taxonomyalg = \taxonomyalg_1 \circ \taxonomyalg_2  \circ \taxonomyalg_3  \circ \taxonomyalg_4 : \process \rightarrow \policy,
+\end{equation*}
+where $\taxonomyalg$ is the taxonomic algorithm that maps $\process$ to a unique $\policy(.)$.
+$\policy$ is then learned with a suitable algorithm (i.e., the policy and controller parameters $(\params_\pi,\params_c)$ are learned) so that $\policy^* = \policy (\percept,\params_\pi^*)$ and $\torqued^* = \torqued (\params_c^*)$ are the optimal policy and controller, solving $\process$. The algorithm steps $\taxonomyalg_i$ correspond to the ranks in the taxonomy\footnote{Note that the family rank is omitted since, so far, only one element exists on its level.}.
+
+$\policyset_0$ is the initial set of all available policies.
+$\taxonomyalg$ iteratively narrows down $\policyset_0$ to a single $\policy$ by the following steps, which are currently being done manually but could be automated:
+\begin{enumerate}
+    \item The \emph{Domain} rank ($\taxonomyalg_1$) selects policies based on their desired wrench $\wrenchd$:\\ 
+    $\policyset_{1,1}=\{\policy \mid \wrenchd(t) = \zerovec \;\forall\; t\},\;
+    \policyset_{1,2}=\{\policy \mid \wrenchd(t) = \text{Const.} \;\forall\; t\},\\
+        \policyset_{1,3}=\{\policy \mid \wrenchd(t) \in \{\wrenchdd{1},\dots,\wrenchdd{n}\} \;\forall\; t\},\;
+        \policyset_{1,4}=\{\policy \mid \wrenchd(t) \in \mathbb{R} \;\forall\; t\}$
+    \item The \emph{Class} rank ($\taxonomyalg_2$) selects policies that reach $\statefinal$:\\ $\policyset_{1,i,j}=\{\policy \mid \worldstate(t) = \statefinal \text{ for } t\rightarrow\infty\}$
+    \item The \emph{Subclass} rank ($\taxonomyalg_3$) selects policies that follow the process steps defined by $\transitionset$:\\ $\policyset_{i,j,k}=\{\policy \mid \transition\rightarrow\text{true } \forall \transition \in \transitionset\}$
+    \item The \emph{Instance} rank ($\taxonomyalg_4$) selects the policy with the lowest number of parameters:\\
+    $\policy=\taxonomychoice(\{\policy \mid \min_{|\params_\pi|} \policy \in \policyset_{i,j}\})$.\\
+    $\taxonomychoice$ represents a choice if more than one policy is left.
+    Furthermore, the parameter domain $\domain$ is determined using constraints from the system and the process instance:\\
+    $\domain=f_\domain(\params_\pi,\params_c,\constraints)$\\
+        with constraints\\
+        $\constraints=\{\maxtorque,\maxwrench,\maxtime,\maxtwist,\maxacc\}$\\
+    This (so far manual) step is represented by $f_\domain$, i.e.
+\end{enumerate}
+
+For two example processes, inserting an Ethernet plug and cutting a piece of cloth, the synthesis procedure is described below.
+More details such as the available set of policies $\policyset$ can be found in App.~\ref{ch:appendix:policies}.
+
+\myparagraph{Synthesis: Inserting an Ethernet Plug}
+Process definition:\\
+$\objectset=\{\object_1,\object_2,\object_3\},\;\condpre=\emptyset,\;\conderr=\emptyset,\;\condsuc=\objectpose{1} \senvaround{\object_3},\\\transitionset=\{\transition_{1,2}:=\objectpose{1} \senvaround{\object_2},\transition_{2,3}:=\extwrench>\wrench_\text{contact}\}$
+\begin{enumerate}
+    \item \emph{Domain} ($\taxonomyalg_1$): The process involves a search process with complex interaction forces. Therefore $\policyset_{1,4}$ is selected:
+    \begin{equation*}
+        \policyset_{1,4}=\{\policyi{13},\policyi{14},\policyi{15},\policyi{16},\policyi{17},\policyi{18},\policyi{19},\policyi{20},\policyi{27},\policyi{28},\policyi{32}\}
+    \end{equation*}
+    \item \emph{Class} ($\taxonomyalg_2$): The policies that can reach the final state $\statefinal$ of the insert process are
+    \begin{equation*}
+        \policyset_{1,4,1}=\{\policyi{17},\policyi{20},\policyi{27},\policyi{28},\policyi{32}\}
+    \end{equation*}
+    \item \emph{Subclass} ($\taxonomyalg_3$): The policies that are not guaranteed to reach the process's substates are removed:
+    \begin{equation*}
+        \policyset_{1,4,1}=\{\policyi{27},\policyi{28},\policyi{32}\}
+    \end{equation*}
+    \item \emph{Instance} ($\taxonomyalg_4$):
+    From $\policyset_{1,4,1}$, the least complex policy is selected to be $\policyi{27}$.
+\end{enumerate}
+\myparagraph{Synthesis: Cutting Cloth}
+Process definition:\\
+    $\objectset=\{\object_1,\object_2,\object_3,\object_4,\object_5\},\;
+    \condpre=\emptyset,\;
+    \conderr=\{\extwrenchd{z}<\boldsymbol{f}_\text{cut}\},\;
+    \condsuc=\objectpose{1}\in \senvaround{\object_5},\\
+    \transitionset=\{\transition_{1,2}:=\objectpose{1} \in\senvaround{\object_2},\transition_{2,3}:=\extwrench>\V{f}_\text{cut},\transition_{3,4}:=\objectpose{1}\in \senvaround{\object_4}\}$
+    
+$\boldsymbol{f}_\text{cut}$ is the desired cutting force.
+\begin{enumerate}
+    \item \emph{Domain} ($\taxonomyalg_1$): The process requires a constant cutting force, but it also has phases without any contact. Therefore, $\policyset_{1,3}$ is selected:
+    \begin{equation*}
+        \policyset_{1,3}=\{\policyi{22},\policyi{24},\policyi{26},\policyi{30},\policyi{31}\}
+    \end{equation*}
+    \item \emph{Class} ($\taxonomyalg_2$): The policies that can reach the final state $\statefinal$ of the cut process are
+    \begin{equation*}
+        \policyset_{1,3,2}=\{
+        \policyi{26},\policyi{31}
+        \}
+    \end{equation*}
+    \item \emph{Subclass} ($\taxonomyalg_3$): The policies that are not guaranteed to reach the process's substates are removed:
+    \begin{equation*}
+        \policyset_{1,3,2}=\{\policyi{26}\}
+    \end{equation*}
+    \item \emph{Instance} ($\taxonomyalg_4$): From $\policyset_{1,3,2}$, the least complex policy is selected to be $\policyi{26}$.
+\end{enumerate}

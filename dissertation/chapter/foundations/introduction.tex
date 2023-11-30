@@ -1,0 +1,10 @@
+This chapter introduces the theoretical foundations on which the proposed learning architecture is built.
+The fundamental element of the framework is the tactile skill formalism described in Sec.~\ref{ch:foundations:representation} consisting of the tactile platform, tactile controller, tactile policy, and a performance evaluator.
+As a complementary component, a formal process definition is provided that describes industrial processes in terms of manipulation steps and boundary conditions such as error and success states.
+In order to connect these two elements, a taxonomy is devised with a hierarchical structure that organizes tactile policies according to process properties.
+Based on the tactile skill, process definition, and taxonomy, a synthesis procedure is presented that automatically selects a tactile policy that is suited to solve a given input process.
+In Sec.~\ref{ch:foundations:planning} an assembly planner is introduced that makes direct use of the tactile skill concept and extends it to skill sequences. The planner solves the allocation problem for a team of humans and robots for a given assembly problem.
+Finally, in Sec.~\ref{ch:foundations:learning} the basis for the learning architecture introduced in Ch.~\ref{ch:architecture} is introduced.
+It presents a number of state-of-the-art learning algorithms that are used throughout this thesis as well as useful performance metrics to realize the performance evaluator.
+Finally, a robot motor memory effect is described that was discovered in an earlier experiment. The effect forms the basis for the transfer learning experiments described in Ch.~\ref{ch:experiments}.
+This chapter was written based on \cite{Johannsmeier.2017,Johannsmeier.2019,Johannsmeier.2023,Johannsmeier.2023b}.

@@ -1,0 +1,124 @@
+\begin{figure}
+    \centering
+    \input{figures/tactile_skill.pdf_tex}
+    \caption{Tactile Skill Architecture. $\twistd$ is the desired twist, $\wrenchd$ is the desired wrench, $\torqued$ is the desired joint torques, $\twist$ is the actual twist of the robot, $\extwrench$ is the measured external wrench, $\percept$ is the percept vector, $\quality$ is the performance of the skill, $\params_\pi$ is the policy parameters, and $\params_c$ is the controller parameters.}
+    \label{fig:foundations:representation:tactile_skill}
+\end{figure}
+
+Tactility \cite{mcglone2014discriminative} refers to the capability to perceive external stimuli through touch in the form of, for example, force, surface texture, or hardness.
+In this work, a tactile skill is referred to as a computational policy-controller-learner complex that, together with a tactile platform, constitutes the system class of tactile robots that is introduced in \cite{haddadin2018tactile}.
+Tactile perception systems match corresponding levels in the fundamentally underlying physical event chain from contact pressure distribution to joint torque, ranging from joint torque sensors to endpoint force/torque sensors and high fidelity tactile skin feedback.
+Figure \ref{fig:foundations:representation:tactile_skill} depicts the overall architecture of a tactile skill, which is composed of three fundamental components and closely connected to a fourth one as follows.
+
+\paragraph*{I. Tactile Platform}
+The interaction of a tactile platform (i.e., the robot's hardware) with its environment is determined by the power pair ${<\twist,\extwrench>}$, where $\twist$ is the twist of the robot's end effector and $\extwrench$ is the external wrench. The dynamics of a robot that interacts with the environment is
+\begin{equation*}
+    \massmatrix(\q) \ddq + \coriolis(\q,\dq) \dq + \gravityvector(\q) = \torqued + \exttorque\,,
+\end{equation*}
+where $\massmatrix(\q)$ is the  mass matrix, $\coriolis(\q,\dq)$ is the coriolis matrix, $\gravityvector(\q)$ is the gravity vector, $\q$ is the joint position, $\dq$ is the joint velocity, $\ddq$ is the joint acceleration, and $\torqued$ is the desired motor torque.
+$\exttorque$ is the result of the physical event chain from the surface pressure distribution $\boldsymbol{u}$, which originates from a contact, to effective external joint torques in generalized coordinates. 
+\begin{equation*}\exttorque=\boldsymbol{f}_1(\boldsymbol{f}_2(\boldsymbol{f}_3(\boldsymbol{f}_4(\boldsymbol{u})))),
+\end{equation*}
+where $\{\boldsymbol{f}_i\}$ denote the subsequent stages of the physical event chain. The percept vector $\percept$ encodes the tactile platform's proprioceptive and exteroceptive sensor measurements, including tactile sensation. It is defined as the product of sensor matrix $\boldsymbol{\Psi}$ and physical state vector $\physicalstate$
+\begin{equation*}
+    \percept:= \boldsymbol{\Psi} \physicalstate(\boldsymbol{u}).
+\end{equation*}
+The physical state vector 
+\begin{equation*}    
+    \boldsymbol{\physicalstate}(\boldsymbol{u}) = \left[\begin{array}{rl}
+        \boldsymbol{u} & := \{\{{}^j\V{\sigma}_j,{}^j\V{\xi}_j\}_{j=1\dots k_i}\}_{i=1\dots n} \\
+        \{\{{}^i\V{\mathcal{F}}_j\}_{j=1\dots k_i}\}_{i=1\dots n} & = \boldsymbol{f}_4(\boldsymbol{u}) \\
+        \{{}^i \V{\mathcal{F}}_i\}_{i=1\dots n} & = \boldsymbol{f}_3(\{\{{}^i \V{\mathcal{F}}_j\}_{j=1\dots k_i}\}_{i=1\dots n})\\
+        \{{}^i m_{z_i}\}_{i=1\dots n} & = \boldsymbol{f}_2(\{{}^i \V{\mathcal{F}}_i\}_{i=1\dots n})\\
+        \exttorque & = \boldsymbol{f}_1(\{{}^i m_{z_i}\}_{i=1\dots n})\\
+        \q &  \\
+        \dq & \\
+        \boldsymbol{x}& :=\V{f}_{ik}(\q) \\
+        \twist &  \\ 
+    \end{array}\right]
+\end{equation*}
+contains the physical event chain and the robot state. ${}^j\V{\sigma}_j$ denotes the normal contact stresses and ${}^j\V{\xi}_j$ denotes the strains.
+${}^i\V{\mathcal{F}}_j$ is the wrench at link $i$ of the kinematic chain, ${}^i m_{z_i}$ represents the moments that act at joint $i$.
+The forward mapping $\V{f}_{ik}$ calculates the end-effector pose $\boldsymbol{x}$. 
+
+Note that, in this work, the focus lies on a sensor matrix $\boldsymbol{\Psi}$ with measurements $\exttorque$, $\q$, $\dq$, $\boldsymbol{x}$, and $\twist$. This is technologically feasible with state-of-the-art systems.
+However, future work will also cover $\percept$ with extensive sensing abilities of tactile skins, including interaction vibrations, temperature, surface humidity or chemistry, \cite{liang2019soft, koiva2020barometer}, as well as individual Cartesian link state measurements (which were introduced in \cite{dahiya2019large, birjandi2020observer}).
+
+\paragraph*{II. Tactile Controller}
+ A tactile controller - typically a unified force/impedance controller \cite{AlbuSchaffer.2007,schindlbeck2015unified} or an adaptive impedance controller \cite{li2018force} - receives $\percept$ and computes the desired joint torques $\torqued$.
+
+\mysubparagraph{Unified Force / Impedance Controller}
+
+ The most basic form is a parametric force / impedance controller that is able to adapt its stiffness via $\params_{c,\boldsymbol{K}}$ with a feedforward wrench and a desired wrench via $\params_{c,w}$
+\begin{align*}
+    \torqued (\params_c)=&\jacobian^T(\boldsymbol{q})[-\boldsymbol{K}(\params_{c,\!\boldsymbol{K}})\boldsymbol{e}(t) - \boldsymbol{D[\massmatrix(\q),\boldsymbol{K}(\params_{c,\boldsymbol{K}})]}\, \dot{\boldsymbol{e}}(t) - \boldsymbol{g}(\q) +\\ &\boldsymbol{k}_p(\params_{c,\V{f}}) (\wrenchd(t)-\extwrench)+\boldsymbol{k}_d(\params_{c,\V{f}}) (\dwrenchd(t)-\dot{\V{f}}_\text{ext})+\boldsymbol{k}_i(\params_{c,\V{f}}) \boldsymbol{h}_i(\extwrench,t)]\\
+    &+\wrenchff(\params_{c,\boldsymbol{f}},t),
+\end{align*}
+where $\boldsymbol{K}(\cdot)$ is the stiffness matrix, $\boldsymbol{D}(\cdot)$ is the damping matrix, $\wrenchff$ is a feedforward wrench, $\jacobian(\cdot)$ is the Jacobian (defined by $\twist=\jacobian \,\dq$\,), $\boldsymbol{e}=\boldsymbol{x}_d-\boldsymbol{x}$ is the pose error, and $\dot{\boldsymbol{e}}$ is the velocity error.
+$k_p(\cdot)$, $k_i(\cdot)$ and $k_d(\cdot)$ are the force controller parameters, and $\boldsymbol{f}_e=\wrenchd-\wrench$ is the force error.
+$\boldsymbol{h}_i$ is defined as
+\begin{equation*}
+    \boldsymbol{h}_i(\extwrench,t)=\int_0^t (\wrenchd(\sigma)-\extwrench(\sigma))d\sigma
+\end{equation*}
+
+\mysubparagraph{Adaptive Force / Impedance Controller}
+
+Another controller that is used in the experiments in Sec.~\ref{ch:experiments:learning:algorithms} is the adaptive force / impedance controller given by
+\begin{equation*}
+    \torqued=\jacobian(\q)(-\wrenchff(t)-\wrenchd(t)-\stiffnesscart(t)\boldsymbol{e}-\dampingcart[\massmatrix(\q),\boldsymbol{K}(t,\boldsymbol{K})] \dot{\boldsymbol{e}})
+\end{equation*}
+where $\wrenchff(t)$ is the adaptive feed forward wrench, $\wrenchd(t)$ is an additional predefined type-depended wrench trajectory that encodes potential prior knowledge, $\stiffnesscart(t)$ the adaptive stiffness matrix, $\dampingcart$ the damping matrix, and $\jacobian$ the Jacobian.
+The position and velocity error are $\boldsymbol{e}=\boldsymbol{x}_d-\boldsymbol{x}$ and $\dot{\boldsymbol{e}}=\twistd-\twist$, respectively.
+The adaptive feed forward wrench $\wrenchff(t)$ and stiffness $\stiffnesscart$ are
+\begin{align*}
+    \wrenchff(t)&=\int_0^t \dot{\wrenchff}(t)dt+\boldsymbol{f}_{ff,0}\\
+    \stiffnesscart(t)&=\int_0^t \dot{\stiffnesscart}(t)dt + \boldsymbol{K}_{x,0}
+\end{align*}
+where $\boldsymbol{f}_{ff,0}$ and $\boldsymbol{K}_{x,0}$ denote the initial values.
+The controller adapts feed forward and stiffness by
+\begin{align*}
+    \dot{\wrenchff}(t)&=\frac{1}{T}\text{diag}(\V{\alpha})(\epsilon-\text{diag}(\V{\gamma}_\alpha(t)) \wrenchff(t))\\
+    \dot{\stiffnesscart}(t)&=\frac{1}{T}\text{diag}(\V{\beta})(\text{diag}(\epsilon \circ \boldsymbol{e})-\text{diag}(\V{\gamma}_\beta(t)) \stiffnesscart(t))
+\end{align*}
+
+The positive-definite meta parameter vectors $\boldsymbol{\alpha}$, $\boldsymbol{\beta}$, $\boldsymbol{\gamma_\alpha}$, $\boldsymbol{\gamma_\beta}$ are the learning rates for feed forward commands, stiffness
+and the respective forgetting factors.
+The learning rates $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ determine stiffness and feed-forward adaptation speed.
+$\boldsymbol{\gamma_\alpha}$ and $\boldsymbol{\gamma_\beta}$ are responsible for slowing down the adaptation process, which is the main dynamical process for low errors.
+$T$ denotes the sample time of the controller.
+
+In order to constrain the subsequent meta learning problem the following well-known constraints are used that characterize essentially every physical real-world system.
+ For better readability the scalar case is discussed, which generalizes trivially to the multi-dimensional one.
+ The first constraint of an adaptive impedance controller is the upper bound of stiffness adaptation speed
+ \begin{equation*}
+     \dot{K}_\text{max}=\max_{t>0} \frac{1}{T} \left[\beta(\epsilon(t)e(t)-\gamma_\beta K(t)\right]
+ \end{equation*}
+
+ If it is assumed that $K(t=0)=0$ and $\dot{e}$ then $e_\text{max}$ may be defined as the error at which $\dot{K}_\text{max}=\frac{\beta e_\text{max}^2}{T}$ holds.
+ Then, the maximum value for $\beta$ can be written as
+ \begin{equation*}
+     \beta_\text{max}=\frac{\dot{K}_\text{max}T}{e_\text{max}^2}
+ \end{equation*}
+
+ Furthermore, the maximum decrease of stiffness occurs for $e=0$ and $K(t)=K_\text{max}$, where $K_\text{max}$ denotes the maximum stiffness, also being an important constraint for any real-world impedance controlled robot.
+ Thus, an upper bound for $\gamma_\beta$ may be calculated as
+ \begin{equation*}
+     \gamma_{\beta,\text{max}}=\frac{\dot{K}_\text{max}}{\beta_\text{max}K_\text{max}}
+ \end{equation*}
+
+ Finding the constraints of the adaptive feed forward wrench may be done analogously.
+ In conclusion, the upper limits of the meta parameters $\boldsymbol{\alpha}$, $\boldsymbol{\beta}$, $\boldsymbol{\gamma_\alpha}$, $\boldsymbol{\gamma_\beta}$ can be related to the inherent system constraints $\boldsymbol{K}_{x,\text{max}}$, $\boldsymbol{f}_\text{max}$, $\dot{\boldsymbol{K}}_{x,\text{max}}$, and $\dot{\boldsymbol{f}}_\text{max}$.
+
+\paragraph*{III. Tactile policy}
+ The tactile controller follows a suitable tactile policy $\policy (\percept,\params_\pi)=\left[\twistd,\wrenchd\right]$ that uses the percept feedback $\percept$ and the policy parameters $\params_\pi$ to learn and generate a global behavior with a local reaction ability, see Fig.~\ref{fig:foundations:representation:tactile_skill}.
+ This tactile policy may be the solution of a virtual impedance system as described in \cite{li2018force}, a tactile dynamic movement primitive \cite{shahriari2017adapting}, or a basic ODE system that inherently captures a coordinated motion and wrench reference, i.e.,
+ \begin{align*}F_{\boldsymbol{x}}\left[\params_\pi,\percept,\boldsymbol{x}_d(t),\dot{\boldsymbol{x}}_d(t),\ddot{\boldsymbol{x}}_d(t)\right]= & \boldsymbol{0} \\
+    F_{\boldsymbol{f}}\left[\params_\pi,\percept,\boldsymbol{f}_d(t),\dot{\boldsymbol{f}}_d(t),\ddot{\boldsymbol{f}}_d(t)\right]= & \boldsymbol{0}.
+\end{align*}
+where $\boldsymbol{x}_d(t)$, $\dot{\boldsymbol{x}}_d(t)$, and $\ddot{\boldsymbol{x}}_d(t)$ are the desired pose, velocity, and acceleration, respectively, and $\boldsymbol{f}_d(t)$, $\dot{\boldsymbol{f}}_d(t)$, and $\ddot{\boldsymbol{f}}_d(t)$ are the desired wrench and its derivatives.
+
+\paragraph*{IV. Performance Evaluator}
+Finally, the performance evaluator measures the skill performance $\quality$ based on a set of $n$ performance measures $\{\quality_i(\percept)\}$ weighted with $\{\omega_i\}$.
+\begin{equation*}
+    \quality(\percept)=\sum_{i=1}^{n} \!\quality_i(\percept) \, \omega_i \,, \,\,\,\text{where }\; \sum_{i=1}^{n} \omega_i = 1.
+\end{equation*}

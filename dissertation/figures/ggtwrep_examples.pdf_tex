@@ -1,0 +1,126 @@
+%% Creator: Inkscape 1.0 (4035a4fb49, 2020-05-01), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ggtwrep_examples.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{455bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.37802198)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{figures/ggtwrep_examples.pdf}}%
+    \put(0.04945057,0.84230772){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\primitive_1$: Approach\end{tabular}}}}%
+    \put(0.04945055,0.68571429){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\primitive_2$: Contact\end{tabular}}}}%
+    \put(0.04945055,0.52912085){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\primitive_3$: Insertion\end{tabular}}}}%
+    \put(0.24725275,1.04835169){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\stateinit$\end{tabular}}}}%
+    \put(0.42032972,0.85054942){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\statepolicy$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{figures/ggtwrep_examples.pdf}}%
+    \put(0.06593409,0.94120878){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\{\V{f}_\text{ext,g}>f_\text{grasp},T_\text{EE,g}\in \senvaround{T_{\object_1}}\}$\end{tabular}}}}%
+    \put(0.06593409,0.78461529){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\twistd=f_{pg}(T_{\object_3},\twist_{g,\primitive_1},\acc_{g,\primitive_1})$\end{tabular}}}}%
+    \put(0.06593409,0.74340663){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\wrenchd=\left[\zerovec \quad \mfgrasp\right]$\end{tabular}}}}%
+    \put(0.06593405,0.62802204){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\twistd=f_{tg}(T_{\object_2},\twist_{g,\primitive_2},\acc_{g,\primitive_2})$\end{tabular}}}}%
+    \put(0.065934,0.4796703){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\twistd=f_{pg}(T_{\object_2},\twist_{g,\primitive_3},\acc_{g,\primitive_3})$\end{tabular}}}}%
+    \put(0.06593405,0.58681314){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\wrenchd=\left[\zerovec \quad \mfgrasp\right]$\end{tabular}}}}%
+    \put(0.065934,0.43846154){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\wrenchd=\left[\V{a}\sin(2\pi \freq t) + \wrench_\text{push} \quad \mfgrasp\right]$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{figures/ggtwrep_examples.pdf}}%
+    \put(0.04120879,0.30659337){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\{T_{\object_1} \in \senvaround{T_{\object_2}}\}$\end{tabular}}}}%
+    \put(0.27197802,0.30659337){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\{\V{f}_\text{ext,g}<\mfgrasp\}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{figures/ggtwrep_examples.pdf}}%
+    \put(0.37912091,0.20769228){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\stateerror$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{figures/ggtwrep_examples.pdf}}%
+    \put(0.12362643,0.20769228){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\statefinal$\end{tabular}}}}%
+    \put(0.03296703,1.31208791){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\objectset= \{\object_1,\object_2,\object_3\}$\end{tabular}}}}%
+    \put(0.03296703,1.27912087){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\condpre= \emptyset$\end{tabular}}}}%
+    \put(0.03296703,1.24615384){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\conderr= \emptyset$\end{tabular}}}}%
+    \put(0.03296703,1.2131868){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\condsuc= \{T_{\object_1} \in \senvaround{T_{\object_2}}\}$\end{tabular}}}}%
+    \put(0.03296703,1.18021978){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\transitionset=\{T_{\object_1}\in \senvaround{T_{\object_2}},\extwrenchd{z}>\V{f}_\text{contact}\}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{figures/ggtwrep_examples.pdf}}%
+    \put(0.5357143,1.31208793){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\objectset=\{\object_1,\object_2,\object_3,\object_4,\object_5\}$\end{tabular}}}}%
+    \put(0.5357143,1.27912089){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\condpre= \emptyset$\end{tabular}}}}%
+    \put(0.5357143,1.24615385){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\conderr= \{\extwrenchd{z}<\boldsymbol{f}_\text{cut}\}$\end{tabular}}}}%
+    \put(0.5357143,1.21318681){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\condsuc= \{\objectpose{1}\in \senvaround{\object_5}\}$\end{tabular}}}}%
+    \put(0.5357143,1.18021979){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\transitionset=\{\objectpose{1} \in\senvaround{\object_2},\extwrench>\V{f}_\text{cut},$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{figures/ggtwrep_examples.pdf}}%
+    \put(0.54395614,0.84230768){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\primitive_1$: Approach\end{tabular}}}}%
+    \put(0.54395595,0.68571429){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\primitive_2$: Contact\end{tabular}}}}%
+    \put(0.54395595,0.52912094){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\primitive_3$: Cut\end{tabular}}}}%
+    \put(0.74175824,1.04835169){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\stateinit$\end{tabular}}}}%
+    \put(0.91483497,0.85054937){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\statepolicy$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{figures/ggtwrep_examples.pdf}}%
+    \put(0.56043953,0.94120873){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\{\V{f}_\text{ext,g}>f_\text{grasp},T_\text{EE,g}\in \senvaround{T_{\object_1}}\}$\end{tabular}}}}%
+    \put(0.56043953,0.78461524){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\twistd=f_{pg}(T_{\object_2},\twist_{g,\primitive_1},\acc_{g,\primitive_1})$\end{tabular}}}}%
+    \put(0.56043953,0.74340653){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\wrenchd=\left[\zerovec \quad \mfgrasp\right]$\end{tabular}}}}%
+    \put(0.55219783,0.62802209){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\twistd=f_{tg}(T_{\object_3},\twist_{g,\primitive_2},\acc_{g,\primitive_2})$\end{tabular}}}}%
+    \put(0.55219783,0.47967039){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\twistd=f_{pg}(T_{\object_4},\twist_{g,\primitive_3},\acc_{g,\primitive_3})$\end{tabular}}}}%
+    \put(0.55219783,0.58681333){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\wrenchd=\left[\zerovec \quad \mfgrasp\right]$\end{tabular}}}}%
+    \put(0.55219783,0.43846154){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\wrenchd=\left[\wrench_\text{cut} \quad \mfgrasp\right]$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{figures/ggtwrep_examples.pdf}}%
+    \put(0.5357143,0.15824173){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\{T_{\object_1} \in \senvaround{T_{\object_5}}\}$\end{tabular}}}}%
+    \put(0.74175824,0.15824173){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\{\V{f}_\text{ext,g}<\mfgrasp,$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{figures/ggtwrep_examples.pdf}}%
+    \put(0.87362641,0.03461535){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\stateerror$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{figures/ggtwrep_examples.pdf}}%
+    \put(0.61813182,0.03461535){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\statefinal$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{figures/ggtwrep_examples.pdf}}%
+    \put(0.55219783,0.33131884){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\twistd=f_{pg}(T_{\object_5},\twist_{g,\primitive_4},\acc_{g,\primitive_4})$\end{tabular}}}}%
+    \put(0.55219783,0.29011018){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\wrenchd=\left[\zerovec \quad \mfgrasp\right]$\end{tabular}}}}%
+    \put(0.271978,0.69395598){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$T_{\object_1}\in \senvaround{T_{\object_2}}$\end{tabular}}}}%
+    \put(0.271978,0.53736264){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\extwrenchd{z}>\V{f}_\text{contact}$\end{tabular}}}}%
+    \put(0.76648352,0.69395598){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\objectpose{1} \in\senvaround{\object_2}$\end{tabular}}}}%
+    \put(0.76648352,0.53736273){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\extwrench>\V{f}_\text{cut}$\end{tabular}}}}%
+    \put(0.76648352,0.38901108){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\objectpose{1}\in \senvaround{\object_4}$\end{tabular}}}}%
+    \put(0.55219783,0.38076939){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\primitive_4$: Retract\end{tabular}}}}%
+    \put(0.74175824,0.12527466){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\V{f}_\text{ext,z}<\V{f}_\text{cut} \mid \primitive_3\}$\end{tabular}}}}%
+    \put(0.60164834,1.14725274){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\objectpose{1}\in \senvaround{\object_4}\}$\end{tabular}}}}%
+    \put(0.01648352,1.3532967){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Insert Process\end{tabular}}}}%
+    \put(0.51923077,1.3532967){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Cut Process\end{tabular}}}}%
+    \put(0.02472527,1.05659341){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Insert Skill\end{tabular}}}}%
+    \put(0.51923077,1.05659341){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Cut Skill\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{figures/ggtwrep_examples.pdf}}%
+  \end{picture}%
+\endgroup%

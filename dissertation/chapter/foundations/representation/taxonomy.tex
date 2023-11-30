@@ -1,0 +1,33 @@
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/foundations/hierarchy.png}
+    \caption{Ranks of the taxonomy of manipulation skills}
+    \label{fig:taxonomy:hierarchy}
+\end{figure*}
+
+A constructive end-to-end manipulation framework with three distinct structural elements is introduced.
+The \emph{manipulation process definition} constitutes the abstraction and the interface that is compatible with the \emph{taxonomy of manipulation skills} (TMS), encoding the skill selection process.
+The actual implementation is realized by a \emph{process-compatible tactile skill framework}, which can utilize machine learning while still maintaining stability and guaranteeing safety in its control stack.
+With the help of this three-element approach, it is possible for a user or an autonomous planning system to select reliable tactile skills that perform well in industrial contexts.
+The skills can be used and optimized without domain-specific robotics or machine learning knowledge.
+
+The process definition is the input to the taxonomy.
+It is the interface for process experts such as technicians, robot operators, or shop-floor workers to frame their process knowledge.
+Overall, this abstraction is inherently compatible with AI planning systems such as the PDDL-based FastDownward planner \cite{helmert2006fast}, or the ASP-based clingo \cite{gebser2014clingo}.
+
+The developed TMS connects the two domains of process-centric and robot-centric representations.
+Specifically, it allows us to map a given process definition to a unique tactile skill model using its underlying classification scheme.
+The TMS contains five taxonomic ranks (see Fig.~\ref{fig:taxonomy:hierarchy}) in total; namely, \emph{family}, \emph{domain}, \emph{class}, \emph{subclass}, and \emph{instance}.
+Each rank represents a decision layer that reduces the set of possible solution policies for a given input process until a complete solution is determined.
+The family rank determines the type of interaction with the environment.
+So far, only processes with force interaction were considered in the taxonomy.
+The domain rank separates policies on the basis of the interaction forces between the process objects and the environment.
+At the class rank, further refinement is done based on well-defined, concrete manipulation steps that lead from the initial state of the process to its final state.
+The subclass rank groups the skill solutions according to the distinct geometries of the manipulated objects (e.g., plugs and keys).
+Finally, the instance rank contains skill solutions that represent an input process with a concrete physical setup.
+Note though that the configuration of the setup (i.e. the object poses) is not defined, meaning that one skill instance can have arbitrarily many tasks, i.e. physical instantiations.
+
+Input processes for the TMS are directly derived from established standards such as the German curricula for trainees in metalworking \cite{Burmester.2020}, electronics \cite{Bumiller.2021}, and mechatronics \cite{Hebel.2020}.
+These standards provide the basis for almost any process in today's industry by defining boundary conditions, manipulation steps, requirements, and objectives.
+By building on top of standard works, the presented framework is directly compatible with the current needs of industrial companies.
+As a first step, the TMS contains processes that range from machine tending (e.g. operating levers and pressing buttons), to assembly (e.g. insertion), or material processing (e.g. bending and cutting).

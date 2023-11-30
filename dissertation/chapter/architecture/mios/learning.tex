@@ -1,0 +1,51 @@
+Manipulation learning is enabled by the learning module which is implemented in Python.
+The reason for this is the high availability of third-party packages for machine learning in the Python language.
+The learning module consists of several connected components, as shown in Fig.~\ref{fig:architecture:mios:learning}.
+
+\begin{figure}[ht!]
+\begin{center}
+\input{figures/svg/software_learning.pdf_tex}
+\caption{Overview and working principle of the learning module}
+\label{fig:architecture:mios:learning}
+\end{center}
+\end{figure}
+
+\subsubsection{Functional Components}
+
+\paragraph{Services}
+
+Services implement the actual machine learning methods and are derived from a service base class which provides a common framework and functionality such as initialization of global parameters, parsing of the problem definition and coordination of the learning process.
+Concrete services have to implement method-specific initialization, learning and termination procedures.
+Examples for services are the PSP algorithm introduced in Sec. \ref{ch:foundations:learning:algorithms}, CMA-ES and Bayesian optimization.
+
+\paragraph{Interface}
+
+The interface is a network-capable point of communication for the learning module attached to the base service class.
+The communication is currently realized by the RPC protocol and allows for starting and stopping learning experiments remotely.
+
+\paragraph{Engine}
+
+The engine is the core mechanism of the learning module.
+Services push parameter sets $\params$ to the engine's queue which is processed asynchronously by sending the parameters including default execution settings defined in the problem definition to an available agent.
+Note that one service can work with an arbitrary number of agents to sample a given problem.
+The engine also takes care of setup, reset and termination routines as well as storing results into a local database.
+
+\paragraph{Knowledge Base}
+
+The knowledge base processes the results that are stored in the database.
+For example, it can derive a priori knowledge for transfer learning applications.
+
+\subsubsection{Data Structures}
+
+\paragraph{Problem Definition}
+
+The problem definition is a collection of various data items such as the domain $\domain$, the initial parameters $\params_0$ (if applicable to the used ML method) and cost function design (e.g. weights).
+Furthermore, it calculates the final cost function value according to the metrics in Sec. \ref{ch:foundations:learning:metrics}.
+
+\paragraph{Task Result}
+
+A task result is a simple container that holds all available information from a task execution, e.g. cost function value, heuristics and success indicator.
+
+
+
+

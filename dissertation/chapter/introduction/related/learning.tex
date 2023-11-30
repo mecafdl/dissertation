@@ -1,0 +1,168 @@
+Machine learning (ML) is a topic that is entangled with robotics for quite some time now since already 50 years ago first ideas were formulated \cite{Fikes.1972} and experiments were conducted.
+Early surveys can be found in \cite{Horne.1990,Moore.1992,Connell.1993,Bakker.1996,Kaelbling.1996,Atkeson.1997}, more recent ones in \cite{Argall.2009,Kober.2013,Arulkumaran.2017,Polydoros.2017,Zhu.2018,Nguyen.2019,Ravichandar.2020,Zhao.2020,Kroemer.2021,Cui.2021}.
+Although machine learning in general as well as in the context of robotics is a very broad field, in this section the focus explicitly lies on manipulation learning and related topics.
+
+In general, machine learning is often separated into supervised learning, unsupervised learning and reinforcement learning.
+Although, the focus of this work is on supervised learning.
+However, reinforcement learning is of significant importance to the field of robot manipulation learning \cite{Nguyen.2019}, thus related work from this field is also reviewed.
+Although used in robotics for some applications \cite{Xiao.2015,Finn.2016,Pinto.2016,Krishnan.2017}, unsupervised learning is not relevant for the present use case and is therefore omitted.
+
+Since this thesis focuses on real-world manipulation learning the following review is divided into simulation-based and real-world-based learning.
+Additionally, the special case of transfer learning is reviewed which also covers learning from demonstration and sim-to-real approaches.
+Finally, overview of algorithms used in robot manipulation learning is given.
+
+\subsubsection{Manipulation Learning in Simulation}
+
+Learning robot manipulation in simulation is a widely-spread practice for benchmarking learning methods and to avoid the costly and time-demanding setup of real-world systems.
+However, the gap between simulation and reality is, depending on the task, significant.
+Whereas simple position-based tasks such as moving, grasping and pushing objects can be realized in simulation, more contact-intensive interactions such as insertion or bending objects prove to be much more difficult in the real world.
+Nonetheless, the work done in simulation has provided the research community with much needed guidance in terms of algorithms and general experience with manipulation learning.
+Furthermore, sim-to-real is a term coined by the effort of transferring results acquired in simulation to the real world with no or only minimal additional learning.
+This specific branch of robot learning is reviewed in Sec. \ref{ch:related:learning:transfer}.
+
+Early work in this field can be found in \cite{Lin.1993} where reinforcement learning is used in a hierarchical context.
+First elementary skills are learned and then high-level coordination policies.
+The approach is demonstrated for a simulated mobile robot.
+
+Due to their straight-forward usability and reliance on computers alone Simulations have been leveraged to create various benchmark and test suites, especially for reinforcement learning approaches.
+Examples are SURREAL \cite{LinxiFan.2018} which is an open-source framework offering various benchmark manipulation or RLBench \cite{James.2020} which also offers a wide variety of tasks in terms of complexity. 
+In \cite{Devin.2017} a set of simple pushing and pulling tasks were learned on different simulated robots.
+The authors of \cite{Rozo.2017} propose an approach based on Gaussian mixture models to learn and reproduce manipulability ellipsoids from expert demonstrations.
+
+
+\subsubsection{Manipulation Learning in the Lab}
+
+Learning high-performance real-world robot manipulation is one of the most intriguing and important challenges in robotics research.
+Solving it would allow for completely different approaches to automation in industry, meaning faster setup times and lower energy consumption.
+However, to this date there has been no real application of autonomous robot learning to relevant, real-world problems in an industrial, commercial scenario.
+The jump out of the lab has not yet happended.
+The reasons are mostly robustness, task difficulty and lack in general autonomy of the robotic systems.
+Despite the still considerable obstacles, the research community has had impressive progress regarding real-world robot manipulation learning.
+In \cite{Kober.2009} learning of two motor skills, i.e. ball-in-a-cup and ball padding were learned on a real Barret WAM robot using both imitation and reinforcement learning.
+In \cite{Pastor.2011} the authors demonstrated learning a pool stroke and a box flipping task on a PR2 dual-arm robot.
+In \cite{Kormushev.2013} a survey of applications and real-world challenges for reinforcement learning in robotics is given.
+In \cite{Kroemer.2015} hierarchical learning of complex skills has been explored.
+The robot learns a probabilistic model of the various phases and phase transitions of a skill from human demonstrations.
+Basic motor primitives are used to transition between the phases.
+\cite{Tanwani.2016} demonstrates the usage of Gaussian mixture models for robot manipulation in both simulation and real-world experiments.
+The approach uses synergistic basis vectors tied to the covariance matrices of the Gaussian mixture model to allow for reuse of policy parts.
+\cite{Levine.2015,Levine.2016} showcases the learning of several manipulation tasks such as closing a bottle or stacking Lego blocks based on an end-to-end approach which maps the robot state and additional visual input to robot torques.
+This approach has found some popularity and was applied to other real-world tasks such as opening a door \cite{Gu.2017}, moving objects \cite{Devin.2018} and long-term tasks involving grasping and placing objects \cite{James.2019}.
+In \cite{Montgomery.2017} guided policy search is extended to be used for random initial states and a reset-free procedure, and demonstrated in simulation and a real-world placing task.
+The authors of \cite{Haarnoja.2018} demonstrate the application of soft Q-learning to real-world manipulation tasks and showcase a higher sample efficiency than model-free approaches typically used in reinforcement learning.
+In \cite{Ennen.2019} the application of generative motor reflexes to a real-world peg-in-hole task was demonstrated.
+
+In \cite{Ghadirzadeh.2017} a deep predictive policy training is proposed for data-efficient skill learning.
+The approach is demonstrated for a grasping and ball throwing task on a real robot.
+Deep reinforcement learning has in some cases also been applied to very difficult assembly problems as shown in \cite{Inoue.2017} where an industrial-grade insertion problem with very tolerances has been learned.
+
+The authors of \cite{RupamMahmood.2018} explicitly look at possible pitfalls and difficulties when setting up a reinforcement learning experiment for real-world problems.
+They also suggest some steps to mitigate these challenges.
+
+
+\subsubsection{Transfer Learning}\label{ch:related:learning:transfer}
+
+In general, the process of transferring knowledge is usually referred to as transfer learning, which is described in detail in \cite{Pan.2010,Weiss.2016} while good surveys can be found in \cite{Taylor.2009,Tan.2018,DaSilva.2019}.
+Interestingly most work on transfer learning and related topics can be found on classification, language processing and computer vision, and only few researchers address physical robotic applications, such as transfer between different manipulation skills and robot systems \cite{Devin.2017}.
+Moreover, in real-world robot applications one has to distinguish between mostly position-based problems (such as grasping, pick-and-place or positioning) and interaction-based problems with complex and hard-to-observe dynamics (such as insertion).
+The former is much easier to simulate (and transfer to the real world) since it is essentially a vision problem.
+Literature about transferring learned experience in robotics alone is filled with numerous different approaches.
+In order to give an overview of existing approaches, they are reviewed in terms of the source system and the variations between source and target tasks (such as goal state, cost function, environment etc.).
+Furthermore, only cases where the target system is a real-world robot are considered.
+
+Related works are categorized based on their respective i.) source and target system combination, ii.) underlying model of the manipulation skill policy, iii.) and differences between the source and target tasks such as goal state, environment, cost function, etc. (see Fig.~\ref{fig:introduction:related:transfer}).
+Note that policies are reviewed in Sec.~\ref{ch:introduction:related:modeling}.
+
+\begin{figure*}[ht!]
+    \input{figures/related_transfer.pdf_tex}
+    \caption{Categorization of transfer learning based on the source and target systems, policy representation, and source and target tasks. $\pi^\star$ denotes an optimal policy, $\quality$ a suitable quality metric, and $\params$ a set of parameters that define the policy $\pi$. The source system, policy, task space changes, and related work are all categorized.}
+    \label{fig:introduction:related:transfer}
+\end{figure*}
+
+\myparagraph{Source System}
+The source system denotes the origin of the transferred knowledge or information, i.e., by which system the source skill was learned.
+Three basic cases are distinguished:
+\begin{itemize}
+\item \textbf{Human demonstration:} Learning by (human) demonstration (LbD) is a well-researched topic that describes the process of a robot learning a skill by observing a human teacher \cite{Argall.2009,Konidaris.2012,Zhu.2018,Chernova.2014,Ravichandar.2020}.
+    The employed methods range from direct kinesthetic interaction \cite{Kronander.2014,AbuDakka.2018}, tracking and imitating human kinematics \cite{Hueser.2006}, to analyzing video recordings of humans \cite{YezhouYang.2015}.
+    Other source technologies, such as EMG signals, have also been used in \cite{Yang.2018} various applications, including navigation \cite{Wigness.2018}, household assistance, \cite{Pignat.2017} and cleaning \cite{Kim.2018}.
+    LbD assumes that robots and humans are kinematically similar enough, or that a human is able to compensate the dynamics of a robot arm during a demonstration.
+    \item \textbf{Sim-to-real:} Much effort has gone into researching sim-to-real approaches to utilize the advantages of fast and easily scalable simulations in robot learning by transferring the acquired knowledge to the real world \cite{JeroenvanBaar.2018,BeltranHernandez.2020,Nguyen.2018,Rusu.2017,Golemo.2018}.
+    \cite{Chebotar.2019} used simulations that were informed by real-world roll-outs to learn policies for real-world skills, such as opening a drawer, on two different robots.
+    In \cite{Peng.2018}, a transfer of manipulation policies was shown by first using randomized dynamics in simulation and then in the real world. \cite{Matas.2018} addressed the problem of learning manipulation skills that involve deformable objects in simulation.
+    This approach implies that the simulated world is accurate enough to forecast real-world processes (or, at least, they can be suitably informed via model fitting).
+    One example of using transfer learning on parameterized skills is \cite{Metzen.2014}, where a simulated robot was able to throw a ball to different target locations. \cite{vanBaar.2019} aimed to reduce the amount of fine-tuning when transferring the results to the real world by changing the simulation parameters.
+    Recently, \cite{Lutter.2022} introduced a robust value iteration algorithm to find more robust policies when transferring them from simulation to the real world.
+    They showcased superior robustness compared to state-of-the-art deep reinforcement learning methods.
+    In \cite{AhmedHQureshi.2021}, a simulation-trained approach was able to handle object rearrangement problems.
+    \cite{buchler2022learning} used hybrid sim and real training to enable a pneumatically-driven robot to learn to play table tennis.
+    In \cite{sievers2022learning}, an anthropomorphic hand was able to solve a rubiks cube solely based on the perception of the hand position and interaction torques, which were learned using an initial simulation step.
+    \item \textbf{Real-world robot:} There have not yet been many examples of using a real robot as a knowledge source.
+    However, a few examples do exist. For instance, \cite{Barrett.2010} transferred simple RL policies for a ball-hitting skill, and \cite{Helwa.2017} transferred learning for the controllers of two quadrotor platforms.
+    Another early work is \cite{Gu.2017}, where multiple robots learned to open (equivalent) doors collaboratively.
+    First methods to share policies between real-world agents were developed, although the differences between the tasks were only on the level of spatial displacements.
+    A different approach is to use real-world data to feed simulations \cite{heiden2021bench}.
+    However, the lack of real-world experiments in literature demonstrates how difficult this challenge is.
+    Partially unknown dynamics or dynamics that have not been considered for the used robot platforms contribute to the complexity of this challenge.
+    Furthermore, the material properties and interaction dynamics of the learned tasks also make it difficult.
+    This implies that standard big-data approaches will ultimately run into problems, since it is not possible to scale up the setups in the same way as in simulated worlds.
+    Domain randomization may help pushing the boundaries of this obstacle \cite{tobin2017domain}.
+\end{itemize}
+\myparagraph{Skill Variations}
+On the source system a skill is learned by performing it in a specific task environment.
+The differences between source and target skill are related to the specific configuration of the environment (kinematics), geometric properties of involved objects, a goal state and typically an explicit or implicit optimization goal.
+\begin{itemize}
+\item \textbf{Spatial Relations:} The spatial relations of the target skill may vary in terms of the goal poses or kinematic states of the environmental elements like dynamic objects.
+    Such differences could range from a few millimeters to completely different orientations and large translations.
+    Many works introduced minor variations \cite{Nemec.2013} to analyze the robustness of the learned skill.
+    However, generalization to arbitrary pose shifts for contact-rich manipulation problems (as for contact-free motion problems \cite{laha2021reactive}) were not yet achieved.
+    Another form of spatial difference is transferring between skills that have previously been learned on physically different but geometrically identical setups, e.g., \cite{Gu.2017}.
+    \item \textbf{Geometry:} The object geometry may change significantly \cite{Devin.2018,NemanjaRakicevic.2019}.
+    This type of change ranges from small variations in, for example, the length or diameter, to completely different object types, such as from a cylinder to a key.
+    \item \textbf{Goal State:} The goal state defines the desired final world state after the skill has been executed.
+    This is either expressed implicitly by a loss function and/or is explicitly encoded in the policy for goal-driven approaches.
+    If the goal is changed substantially, e.g., from inserting an object to pushing it, the knowledge transfer process becomes significantly more complicated.
+    At this point, the skill has changed on a more fundamental level compared to, for example, two insertion skills with different objects.
+    To the best of the author's knowledge, no works have yet explored this level of knowledge transfer.
+\end{itemize}
+
+It is important to note that without any change in the skill configuration, there is, by definition, no new skill to be learned.
+In that case, learning from human demonstration or a different real robot can be considered a \'head start\', since it is the same skill just with more information about the initial state.
+Similarly, transferring knowledge from simulation to the real world would be a test of the simulator's performance and accuracy in the case that also the source and target systems are the same.
+Scenarios with only small changes in the kinematic configuration may also be counted towards this.
+
+% \subsubsection{Algorithms}
+
+% There are many different algorithms used in machine learning in general and skill learning for robotics in particular and numerous application cases are already covered in the literature reviewed above.
+% In the following existing methods are reviewed with a focus on the algorithm itself and only mention the most important robotic use cases.
+
+% \myparagraph{Sampler}
+
+% Pure sampling algorithms are not informed and are therefore not a standalone machine learning method, nonetheless they find wide-spread application as support tools in various ML applications, e.g. for sampling initial parameter distributions \cite{Voigt.2021}.
+% Popular methods are random search, grid search and Latin Hypercube Sampling (LHS) \cite{McKay.2012}.
+
+% \myparagraph{Gradient Descent}
+
+% Gradient descent \cite{Ruder.15.09.2016} is a widely used algorithm in machine learning, e.g for backpropagation in neural network training.
+% In its basic form it is a first-order iterative optimization algorithm for finding a local minimum of a differentiable function.
+% There are extensions such as stochastic gradient descent \cite{Bottou.2012,Zinkevich.2010} and mini-batch gradient descent \cite{Hinton.2012}.
+
+% \myparagraph{Evolutionary Algorithms}
+
+% Evolutionary algorithms \cite{Back.1991,Das.2011} emulate the mechanisms of natural evolution such as mutation, recombination and reproduction to solve parameter optimization problems.
+% They are population-based methods where the individuals are candidate solutions to such problems and a fitness function determines the quality of the solution.
+% One example of evolutionary algorithms is the covariance matrix adaptation evolution strategy (CMA-ES) \cite{Hansen.2001,Hansen.2006b,Hansen.2016}, which samples from a part of the solution space determined by the covariance matrix which is adapted each step of the algorithm.
+% This method was applied to humanoid walking \cite{Farchy.2013,Hanna.2017}, robot navigation \cite{LeGoff.2020}, and manipulation learning \cite{Johannsmeier.2019}.
+
+% \myparagraph{Bayesian Optimization}
+
+% Bayesian optimization (BO) \cite{Pelikan.1999,Snoek.2012,Shahriari.2016,Frazier.2018} is a method for global optimization of black-box functions. It makes no assumptions on the form of the functions which makes it ideal for complex, noisy problems. It works by employing e.g. a Gaussian process to estimate the real function and using an acquisition function to decide on the next parameters to sample. BO is a popular method in robot learning and has been used e.g. in \cite{Calandra.2014,Calandra.2016} for finding optimal gait parameters, in \cite{Johannsmeier.2019} for learning a difficult insertion task, or control of a simulated drone \cite{Khattab.2018}.
+
+% \myparagraph{Particle Swarm Optimization}
+
+% Particle swarm optimization (PSO) \cite{Kennedy.1995,Poli.2007} is a global optimization algorithm that moves around so-called particles in the solution space of a given problem to find the optimal solution. The algorithm was initially used to study swarm behavior e.g. in bird flocks or fish schools. PSO makes no assumptions about the shape of the given problem, however, as for evolutionary algorithms, it is not guaranteed that a global optimum is found. In robotics PSO has especially been applied to multi-robot learning \cite{Pugh.2005,Pugh.2006,DiMario.2015}.
+
+% \myparagraph{Reinforcement Learning}
+
+% Reinforcement learning (RL) \cite{Sutton.2018} is one of the three basic machine learning paradigms alongside supervised learning and unsupervised learning. Its goal is to find an optimal policy which maps perceived states to actions that eventually lead to a reward. The environment is typically modeled by a Markov decision process (MDP).
+% RL has found wide application to robot learning \cite{Gullapalli.1994,Kober.2013,Peters.2013,Kormushev.2013}, especially in combination with neural networks as policy representation.

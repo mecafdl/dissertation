@@ -1,0 +1,128 @@
+
+
+This section introduces the \skillmodel{} (\skillmodelabbr{}) framework \cite{Johannsmeier.2019,Johannsmeier.2023}.
+It consists of multiple hierarchical layers.
+Each layer models a different aspect of tactile manipulation.
+This multi-layer structure descends from a high-level semantic layer down to the hardware system layer that is directly connected to the physical robot platform, which is coupled to the real world (see Fig.~\ref{fig:architecture:ggtwrep:overview}).
+$\worldstate \in \worldstatespace$ denotes an element of the world state space $\worldstatespace$ and contains, e.g., the robot poses, external forces, or object positions.
+$\percept \in \worldstatespace$ denotes the percept vector, and it contains information received by internal or external sensors (see also Sec.~\ref{fig:foundations:representation:tactile_skill}).
+% \subsubsection*{Terminology}
+
+% $\params:=\left[\params_\pi,\params_c \right]$ is the parameter vector, and it represents all externally visible skill parameters. $\params_\pi$, and $\params_c$ are the parameter subsets of the policy layer, and the control layer, respectively.
+% $\mtime=\left[\mtime_0,\mtime_1\right]$ denotes the skill time interval with the skill execution start $\mtime_0$ and end $\mtime_1$.
+
+\paragraph{Layers}
+
+The framework layers are described in detail in the sections below.
+Each layer receives inputs and additional parameters from the above layer, and provides outputs to the below layer.
+They also provide constraints $\constraints$ in terms of the context of the task and the system's limits.
+These constraints model the limits of the valid input of the respective layer (e.g., the maximum admissible velocities).
+Additionally, the percept processor updates and provides the world state $\worldstate$ to the other components based on the percept vector $\percept$ and internal models.
+Figure \ref{fig:architecture:ggtwrep:overview} provides an overview of the \skillmodelabbr{} framework with its different layers.
+
+\begin{figure}[ht!]
+    \centering
+    \input{figures/ggtwrep.pdf_tex}
+    \caption{Architectural overview of the \skillmodelabbr{} framework}
+    \label{fig:architecture:ggtwrep:overview}
+\end{figure}
+
+\begin{itemize}
+\item The semantic layer decides the currently active high-level state as well as the currently active policy in the policy layer.
+Furthermore, it is the point of communication with higher-level components such as learning and planning algorithms.
+\item The policy layer holds a set of ordinary differential equations (ODE), which are embedded in a graph structure, that produce tactile commands.
+\item The control layer implements a unified impedance / force controller that is fed by tactile commands sent from the policy layer.
+It then produces desired motor commands for the system layer. Also, safety mechanisms ensure the system and process constraints.
+\item The system layer is the lowest layer, and it sends motor commands from the control layer to the robot hardware.
+It also provides the current robot state to the other layers.
+\end{itemize}
+
+\paragraph{Objects}
+A skill is instantiated by using objects $\objectset$ that define the environment that is relevant to the skill, similar to the definition of manipulation processes introduced in Sec.~\ref{ch:foundations:representation:process}.
+Note that all skills also contain the end effector (\textit{End Effector}) as a default object.
+It has the handle \sendeffector.
+
+\paragraph{Semantic Layer}
+The semantic layer consists of a non-deterministic (non-realtime) component for interface purposes and a deterministic (realtime) component that contains a hierarchical state machine.
+
+The non-deterministic (non-realtime) interface consists of two parts: an execution interface $\semantica$ and a learning interface $\semanticb$, which are represented by the functional mappings
+\begin{align*}
+&\semantica:\objectset,\params_\pi,\worldstate_0 \rightarrow \req,\effects,\domain, \\
+&\semanticb:\objectset,\params_\pi \rightarrow \quality,\worldstate_1.
+\end{align*}
+$\req \in \worldstatespace$ describes the requirements in terms of the world state for executing the skill, $\effects \in \worldstatespace$ is the effect of the skill when it is applied to a user-defined world state $\worldstate_u$ with objects $\objectset$, and $\domain$ is the domain of valid parameters for every $\param \in \params$.
+
+The deterministic component contains a discrete two-layer state machine that consists of four high-level states; namely, the initial state $\stateinit$, the policy state $\statepolicy$, the error state $\stateerror$, and the final state $\statefinal$.
+$\stateinit$ is active in the beginning, $\statefinal$ is active at the end in a nominal case, $\stateerror$ is the end state in case an error occurs, and $\statepolicy$ activates the policy layer.
+Three transitions govern the switch behavior at the top level of the state machine.
+They directly implement the boundary conditions from the process definition introduced in Sec. \ref{ch:foundations:representation:process}, therefore the explanation of their meaning is omitted here.
+However, there are a number of default conditions coming from the robot system:
+\begin{itemize}
+\item There is a default precondition $\condprei=\{T_\sendeffector \in \roi \}$ which states that the robot has to be within a suitable region of interest (\roi{}).
+\item There are three default error conditions $\conderri=\{|\extwrench| > \V{f}_\text{ext,max},T_\sendeffector \notin \roi, t>t_\text{max} \}$ which state that the robot may not exceed the maximum external forces, may not leave the \roi, and may not exhaust a maximum time for skill execution.
+\end{itemize}
+
+The policy state $\statepolicy$ contains a state machine layer that is denoted as manipulation graph, and it implements the execution state from the process definition.
+The graph may be described by $G(\primitives,\transitionset)$, where $\primitives$ denotes the set of policy approximators (nodes), and $\transitionset$ denotes the set of transitions (edges).
+The transitions are conditions that, if true, trigger a switch of the current PA according to the graph structure.
+
+The deterministic component of the semantic layer is represented by the functional mapping
+\begin{equation}
+f_s: \objectset,\params_\pi,\worldstate \rightarrow \state,\primitive.
+\end{equation}
+
+\paragraph{Policy Layer}
+The policy layer contains a set of sets (which are denoted policy approximators) of ODEs.
+Each policy approximator (PA) implements one process state while maintaining the stated conditions.
+The currently active PA $\primitive$ is determined by the semantic layer.
+ 
+A single PA implements a tactile policy $\policy$.
+
+Overall, the policy layer functional mapping is expressed by
+\begin{equation}
+f_\pi: \state,\primitive,\params_\pi,\worldstate \rightarrow \commands,
+\end{equation}
+where $\primitive$ and $\state$ denote the currently active PA and high level state as determined by the semantic layer. For $\state \neq \statepolicy$, a default PA
+\begin{equation*}
+\commands=\left[\begin{array}{c}
+     \twistd \\
+     \wrenchd
+\end{array}\right]
+=\left[\begin{array}{c}
+     \V{0} \\
+     \left[\V{0}^T \quad \mfgrasp\right]^T
+\end{array}\right],
+\end{equation*}
+is activated, where $\mfgrasp$ denotes the current grasp force.
+
+\paragraph{Control Layer}
+The control layer receives commands $\commands$ from the policy layer and calculates the desired motor commands $\torqued$.
+It uses controllers such as the ones introduced in Sec.~\ref{fig:foundations:representation:tactile_skill}.
+Architecturally, the control layer is encoded by the functional mapping
+\begin{equation}
+f_c: \commands,\params_c,\worldstate \rightarrow \torqued.
+\end{equation}
+Furthermore, the control layer contains safety mechanisms such as value and rate limitations, collision detection, reflexes, and virtual walls.
+
+\paragraph{System Layer}
+The system layer is expressed by the functional mapping
+\begin{equation}
+f_h:\torqued \rightarrow \percept.
+\end{equation}
+It defines the control/sensing interface to the robot's hardware system and other devices.
+It encapsulates any subsequent hardware-specific control loops and other processes.
+It is the implementation of the \emph{Tactile Platform}.
+
+\paragraph{Input Processor}
+The input processor holds all of the models for internal and external processes. Examples of internal models are the estimated mass matrix $\hat{\massmatrix}(\q)$, Coriolis forces $\hat{\coriolis}(\q,\dot{\q})$, and gravity vector $\hat{\gravityvector}(\q)$. External models describe the state of environmental elements such as the physical objects handled by the robot.
+For example, if the robot were to place an object at a new location, a model of the object would be updated with the new pose.
+The processor continuously updates the models by using $\percept$ from the current world state $\worldstate$.
+The processor functional mapping is 
+\begin{equation}
+f_i: \percept \rightarrow \worldstate.
+\end{equation}
+
+\paragraph{Task Frame}
+
+The task frame $\taskframe$ defines a coordinate frame relative to the robot's origin frame O so that there exists the transformation ${}^\text{O}T_\taskframe$.
+All skill commands $\commands$ are then calculated in the task frame and transformed via this transformation matrix into the frame of origin.

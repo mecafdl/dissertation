@@ -1,0 +1,76 @@
+In this section, two examples of processes and their implementation as \skillmodelabbr{} models are presented.
+The examples are inserting an Ethernet plug and cutting a piece of cloth.
+Figure \ref{fig:materials:example} visualizes the process and the skill implementation.
+The details of the policy selection through $\taxonomyalg$ are described in Sec.~\ref{ch:foundations:synthesis} with the same process examples.
+
+\begin{figure*}[ht!]
+    \centering
+    \input{figures/ggtwrep_examples.pdf_tex}
+    \caption{The two examples show the process description and their corresponding \skillmodelabbr{} models.}
+    \label{fig:materials:example}
+\end{figure*}
+
+\subsubsection{Inserting an Ethernet Plug}
+
+In general, an insertion process can be described as fitting one object into another, i.e., matching their geometries by form-close.
+In an industrial context, this process is required for, for example, part mating.
+Details about insertion-related processes are described in specialized literature such as \cite{Feldmann.2014}, norms \cite{DeutschesInstitutfurNormung.01.09.2003}, and robotics-related publications such as \cite{Broenink.1996,Chhatpar.2001}.
+In the following section, the details of the skill implementation that uses the \skillmodelabbr{} framework are outlined.
+
+\paragraph{Process Description}
+
+The process definition states that the \textit{Insertable} $\object_1$ has to be moved toward an \textit{Approach} pose $\object_3$.
+From there, contact is established in the direction of the \textit{Container} $\object_2$.
+Finally, the \textit{Insertable} has to be inserted into the \textit{Container}.
+
+\paragraph{Conditions}
+
+The process definition states no preconditions.
+However, there is a default precondition that the robot has to be within the user-defined \roi, and an implementation-specific precondition that the robot must have grasped the \textit{Insertable} $\object_1$.
+
+The default error conditions are that the external forces and torques must not exceed a predefined threshold, the \roi{} must not be left, and the maximum execution time must not be exceeded.
+Additionally, the robot must not lose the \textit{Insertable} $\object_1$ at any time.
+Note that, for simplicity, the default conditions are not shown in Fig.~\ref{fig:materials:example}.
+
+The process definition states that, to be successful, $\object_1$ has to be matched with $\object_2$.
+In the implementation, this is expressed by a predefined maximum distance $\senvaround{\object_2}$.
+
+\paragraph{Tactile Policies}
+
+The insertion skill model consists of three distinct phases: 1) approach, 2) contact, and 3) insert.
+The approach phase uses a simple point-to-point motion generator to drive the robot through free space toward $\object_3$.
+The contact phase drives the robot into the direction of $\object_2$ until contact has been established, i.e., when external forces that exceed a defined contact threshold $f_\text{contact}$ have been perceived.
+The insertion phase attempts to move $\object_1$ toward $\object_2$ by pushing downward with a constant wrench while employing a Lissajous figure to overcome friction and material dynamics.
+Additionally, a simple motion generator takes care of the end effector's orientation and lateral motion toward the goal pose.
+A grasp force $f_\text{grasp}$ is applied simultaneously to all three phases to hold $\object_1$ in the gripper.
+
+\subsubsection{Cutting a Piece of Cloth}
+
+A cutting process can be described as dividing an object into two parts by using a cutting tool such as a knife.
+Details about cut-related processes are described in specialized literature such as \cite{dietrich2018schneiden} and in robotics-related publications such as \cite{bogue2008cutting}.
+
+\paragraph{Process Description}
+
+The process definition states that the \textit{Knife} $\object_1$ has to be moved toward an \textit{Approach} pose $\object_3$.
+From there, contact is established in the direction of the \textit{Surface} $\object_2$.
+Then, the $\object_1$ is moved toward a \textit{Goal} pose $\object_4$ while it maintains contact with the surface.
+Finally, $\object_1$ is moved to a final \textit{Retract} pose $\object_5$.
+
+\paragraph{Conditions}
+
+The process definition does not state any preconditions.
+However, there is a default precondition that the robot has to be within the user-defined \roi, and an implementation-specific precondition that the robot must have grasped the \textit{Knife} $\object_1$.
+
+The default error conditions are that the external forces and torques must not exceed a predefined threshold, the \roi{} must not be left, and the maximum execution time must not be exceeded.
+Additionally, the robot must not lose the \textit{Knife} $\object_1$ at any time, and $\extwrenchd{z}<f_\text{contact}$ must be maintained when moving from $\object_3$ to $\object_4$
+
+The process definition states that, to be successful, $\object_1$ has to be moved toward $\object_5$.
+
+\paragraph{Tactile Policies}
+
+The cutting skill model consists of four distinct phases: 1) approach, 2) contact, 3) cut, and 4) retract.
+The approach phase uses a simple point-to-point motion generator to drive the robot through free space toward $\object_3$.
+The contact phase drives the robot into the direction of $\object_2$ until contact has been established, i.e., when external forces that exceed a defined contact threshold $f_\text{contact}$ have been perceived.
+The cut phase moves $\object_1$ toward $\object_4$ by using a point-to-point motion generator combined with a constant downward pushing wrench.
+The retract phase moves $\object_1$ toward $\object_5$ by using a point-to-point motion generator.
+A grasp force $f_\text{grasp}$ is simultaneously applied to all four phases, a to hold $\object_1$ in the gripper.

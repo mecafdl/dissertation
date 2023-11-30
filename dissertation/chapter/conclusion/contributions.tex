@@ -1,0 +1,66 @@
+Future workplaces will make use of tactile robots that need to be equipped with a large variety of manipulation skills in order to cope with the highly dynamic production processes of tomorrow's industry.
+For example, autonomous factories will produce at lot size one within the context of the production-as-a-service paradigm, meaning that production lines have to be reconfigured regularly.
+This implies that new processes will constantly introduce new requirements that have to be met by autonomous robot capabilities since human expert programmers will not be able to meet the demand for new skills.
+The robots will be required to generate optimized skill solutions on-the-fly from simple process descriptions alone.
+Furthermore, these solutions have to be robust and ideally perform at or above human level.
+This thesis was inspired by the challenge of providing a way to completely automate the synthesis and optimization of reliable and performant tactile skills for relevant industrial tasks.
+
+An end-to-end manipulation framework has been developed that connects manufacturing processes and tactile skill models with a synthesis pipeline.
+A learning architecture can directly learn the parameters of those models and optimize them with respect to a given cost function.
+Thus, the framework is capable of automatically providing optimized tactile skills for given processes without the need for manual programming.
+This pipeline was validated with extensive experimental work which substantiates the theoretical foundations.
+Moreover, the experiments yielded sufficient robustness and performance for a number of manipulation skills that are relevant in real-world settings.
+A comparison study even showcased human-level performance for some cases.
+Additionally, an assembly planning system was developed to demonstrate the compatibility with advanced AI planning systems.
+Finally, during the work contained in this thesis, a number of demonstration systems were developed together with a software framework that showcased the various results of this thesis.
+
+\paragraph{Tactile Skill}
+A theoretical basis for tactile skills has been laid out that combines torque-controlled hardware systems with suitable tactile controllers, tactile policies and performance evaluation.
+It defines how tactile stimuli can be perceived and reacted to without necessarily making many assumptions on the used sensors, controllers, and policies.
+The tactile policies are defined to output energy-encoded commands, i.e. combined twist and wrench.
+The commands are turned into a desired joint torque by the tactile controller.
+In general, the tactile skill could make use of various sensors that are capable of perceiving strains and stresses, forces, moments, or external joint torques. However, this thesis focuses on the latter.
+
+\paragraph{Taxonomy and Synthesis}
+A taxonomy has been developed to formally organize manipulation processes in a hierarchical structure.
+Its purpose is to map formal process descriptions to tactile skill models through a synthesis procedure.
+The procedure selects the models based on process properties such as interaction forces and process steps in an iterative fashion.
+Each rank of the taxonomy hierarchy applies a selection step to reduce the set of tactile policies that can potentially solve the input process.
+The output is a single tactile policy that is combined with a suitable controller within a \skillmodel (\skillmodelabbr{}) model.
+The \skillmodelabbr{} framework was introduced as a way of modeling tactile skills while at the same time complying with process requirements, system limits, and safety.
+It consists of four layers, namely the semantic layer, the policy layer, the control layer, and the system layer.
+The semantic layer provides an interface to users and automatic planning systems. It also determines the current state of the skill model by considering the boundary conditions and manipulation steps coming from the process description.
+The policy layer implements a tactile policy and outputs a twist-wrench command that is fed to the subsequent control layer.
+The control layer was realized with a unified force / impedance controller.
+Finally, the system handles the connection to the robot platform, i.e. sends torque commands and receives the percept vector.
+A large validation experiment confirms the feasibility of the synthesis procedure as well as the \skillmodelabbr{} framework.
+The implementation of $28$ tactile skills using \skillmodelabbr{} models exhibits a robust behavior and high performance in various industrial automation tasks subjected to significant process disturbances.
+Importantly, the simple transfer of policies and the efficient learning through the parameter vector demonstrate the versatility enabled by the taxonomy which enables process experts without specific robotics knowledge to deploy robots in the field using little configuration time.
+
+\paragraph{Tactile Skill Learning}
+The output of the synthesis procedure is a tactile skill implemented by a \skillmodelabbr{} model that can directly be formulated as a learning problem.
+The skill model has defined parameters with process- and system-informed limits that form a domain on which a learning architecture can autonomously search for an optimal set of parameters that minimize a given cost function such as execution time and contact moments.
+The learning approach has been experimentally tested on various setups and skills with a strong focus on the insertion skill.
+The insertion problem (often called peg-in-hole) is representative for very contact-intensive manufacturing processes and therefore highly relevant for real-world industrial processes.
+A number of algorithms have been compared and it was found that evolutionary strategies such as the covariance matrix adaptation (CMA) method are very suitable for the black-box optimization problem formulated by \skillmodelabbr{}.
+Later, an SVM-based algorithm was developed that improved the learning performance even more.
+It finds an optimal solution with high robustness by iteratively partitioning the parameter space.
+The learning architecture was compared to state-of-the-art deep reinforcement learning approaches and outperformed them on the insertion problem both in learning time and final manipulation performance and robustness.
+During an experiment a transfer effect was observed which led to the hypothesis that \skillmodelabbr{} is capable of systematically transferring knowledge from one skill to another.
+The effect was described as robot motor memory (RMM) and connected to the taxonomy hierarchy in terms of skill classes, subclasses, and instances.
+The effect was verified in a large experimental campaign where nine different insertion skills have been learned and transferred.
+A total amount of 117.000 single real-world interactions of the robot with the environment have taken place over the course of a week during the completely autonomous experiment.
+The results clearly show a significant decrease in learning time for similar skills, but also possible adverse effects for specific combinations.
+An initially suspected linear dependency of the speedup on geometry (e.g. diameter) could not be found. However, a difference at least in terms of geometry classes (e.g. cylinders and keys) was present.
+Overall, transfer learning enables \skillmodelabbr{} to scale efficiently to large numbers of skills.
+
+\paragraph{Tactile Skill Planning}
+A planning system was devised that is able to allocate a team of robots and humans to tasks in an optimal way such that a given assembly problem is solved.
+The planner consists of three layers, i.e. the assembly level, the team level, and the agent level.
+The assembly level models the assembly problem using a modified AND/OR graph.
+The team level solves the problem of allocating agents (humans or robots) to the actions necessary to build the assembly.
+The action level connects to tactile skill models that are ordered in a sequence and achieve the planned assembly steps.
+The system was demonstrated in an experiment with an exemplary assembly where the robot had to pick and place parts, fit them together, and hand them over.
+The collaborative assembly planner is suited to solve real-world assembly problems by combining the capabilities of humans and robots in an optimal way.
+The layered architecture enables the system not only to generate nominal plans, but also react to and cope with unforeseen and possibly faulty events, a crucial capability to be prepared for the real-world.
+The layered planning scheme differentiates between the human-robot team as a whole, the single agent, i.e. every robot and human, and the real-time command structure of that agent. This makes the system able to deal with problems at the right level of abstraction in order to find the most efficient solution, respectively.

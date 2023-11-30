@@ -1,0 +1,14 @@
+This chapter discusses the extensive experimental work that verifies the theoretical foundations for tactile skills, skill synthesis, skill learning, and assembly planning.
+In Sec.~\ref{ch:experiments:taxonomy} a verification experiment demonstrates the implementation of $28$ different skills that solve a variety of challenging real-world industrial processes.
+The results indicate a high degree of robustness and performance as well as performance stability.
+It can also be shown that the tactile policies coming from the skill synthesis process are reusable across different skill classes.
+In Sec.~\ref{ch:experiments:learning} the learning architecture is experimentally verified.
+First, a number of relevant learning algorithms are compared and evaluated with regard to their performance on a difficult insertion problem, which is considered unsolved in robotics.
+Second, based on the insights from the first experiments, a novel SVM-based learning algorithm was developed and compared to state-of-the-art deep reinforcement learning approaches on the basis of a key insertion process.
+The results show superior learning performance, robustness and achieved manipulation performance.
+Third, in an earlier experiment a transfer effect has been observed that accelerates skill learning when using prior knowledge from an apparently similar skill.
+In order to investigate this further, a large experimental campaign was conducted that produced several essential insights with regard to similarity among skills such as dependency on geometry and asymmetry in transferability.
+Then, Sec.~\ref{ch:experiments:comparison} describes a reference experiment methodology for comparison of human and robot manipulation capabilities. Additionally, the learning performance of the robot was compared with the programming skills of a robot expert.
+The results indicate that human-level manipulation performance can already be reached for some skills and that autonomous learning at least achieves similar results to a human expert programmer, albeit slower.
+Finally, in Sec.~\ref{ch:experiments:planning} an experiment is shown in which a collaborative assembly planner that is compatible with the developed skill pipeline solves the task allocation problem for a complex assembly, which has also been tested on real-world production cases.
+This chapter was written based on \cite{Johannsmeier.2017,Johannsmeier.2019,Voigt.2021,Johannsmeier.2022,Johannsmeier.2023,Johannsmeier.2023b}

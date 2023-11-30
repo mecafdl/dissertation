@@ -1,0 +1,23 @@
+The \software{} (\softwareabbr{}) has been developed as a software platform for the \platformname{} arm with a focus on real-world manipulation and robot learning.
+Over time, it has proven to be an advantageous tool for other research topics as well as demonstrator for various use cases in the context of robot manipulation.
+Although it has only been developed and tested for the \platformname{} arm, its code structure is designed in a highly modular way so that it can easily be adapted to other robot platforms by utilizing their respective APIs.
+\softwareabbr{} consists of several modules which are coordinated by a core module.
+An overview of the most important components is shown in Fig.~\ref{fig:architecture:mios:overview}.
+The system is capable of various means of communication such as web socket, UDP or RPC.
+It is also compatible with the widely used ROS framework, enabling the use of a range of different third-party packages.
+Note that ROS was initially not used as a core component since the modules of MIOS are highly integrated and the node structure of ROS would have brought no benefit.
+\softwareabbr{} uses its own mongodb database to save environment data, global parameters and results from learning experiments.
+Since the code has been documented over the course of this thesis, it is straight-forward to extend in future development to approach not yet covered manipulation problems.
+Additionally, the software has been prepared to run with as little requirements as possible.
+Besides the usual requirements of the robot's API \emph{libfranka} itself (e.g. a real-time configured Linux kernel), \softwareabbr{} has only a few dependencies and can even be used in a Docker environment making it almost completely independent from the host system.
+It is mostly written in \verb!C++! using the 2017 standard, and Python 3.8.
+
+The most important part is the implementation of the \skillmodelabbr{} model which stretches over several of these modules as explained in Sec. \ref{ch:architecture:mios:modules}.
+
+\begin{figure}[ht!]
+\begin{center}
+\input{figures/svg/software_overview.pdf_tex}
+\caption{Overview of the \softwareabbr{} modules}
+\label{fig:architecture:mios:overview}
+\end{center}
+\end{figure}

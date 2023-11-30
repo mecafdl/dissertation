@@ -1,0 +1,98 @@
+This experiment compares the parameter space partition (PSP) algorithm introduced in \cite{Voigt.2021} in combination with the \skillmodelabbr{} framework to state-of-the-art deep learning methods for a difficult insertion problem.
+
+\subsubsection{Experimental Setup}
+
+The setup consists of a \platformname{} arm and a key insertion task, see Fig. \ref{fig:learning:exp_1_3:setup}.
+The lock has a depth of $d=0.0023$ m.
+The lock and the key have chamfers to make the initial insertion easier by design.
+
+\begin{figure}[ht!]
+\includegraphics[width=\columnwidth]{figures/experiments/learning_exp_1_3_setup.png}
+\caption{Experiment setup consisting of a robot arm and a key/lock combination}
+\label{fig:learning:exp_1_3:setup}
+\end{figure}
+
+The experiment was setup as follows:
+\begin{enumerate}
+\item The problem task is given by the key/lock setup.
+\item The insertion skill from the manipulation skill taxonomy was used.
+\item The problem was taught kinesthetically by a human expert.
+\item Multiple algorithms were compared, i.e. hierarchical relative entropy policy search (HiREPS), covariance matrix adaptation evolution strategy (CMA-ES), parameter space partition (PSP) and four deep reinforcement leaning approaches, namely deep determistic policy gradient (DDPG), asynchronous advantage actor-ritic (A3C), twin delayed deep deterministic policy gradient (TD3) and soft actor critic (SAC).
+\item Ten experiments for each algorithm were run, each consisting of $10$ episodes and $20$ trials per episode.
+\end{enumerate}
+
+The neural network-based approaches are applied to the insertion phase only, while approach and extraction are handled by \skillmodelabbr{}-based skills.
+HiREPS, CMA-ES and PSP make use of the \skillmodelabbr{} framework.
+The neural network-based methods are configured with a state space of $21$ dimensions, i.e. $\q$, $\dq$ and $\exttorque$ and an action space consisting of the $7$ dimensional motor torques $\torqued$.
+
+\subsubsection{Results}
+
+Figures~\ref{fig:learning:exp_1_3:results_1}~and~\ref{fig:learning:exp_1_3:results_2}, and Tab.~\ref{tab:learning:exp_1_3:results} show the results for the applied algorithms.
+None of the neural network-based learners was able to solve the task in the experiments.
+There is a clear learning behavior for PSP and HiREPS which seem to be similar.
+CMA-ES, while also reaching a similar optimized cost, shows a distinctively slower learning rate.
+Table \ref{tab:learning:exp_1_3:results} shows the average optimized cost over $10$ experiments for each algorithm.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/experiments/learning_exp_1_3.png}
+    \caption{Results of the comparison experiment for HiREPS, CMA-ES, and PSP. The blue line denotes the cost averaged over $10$ experiments. The light blue area denotes the $90$ \% confidence interval.}
+    \label{fig:learning:exp_1_3:results_1}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{figures/experiments/learning_exp_1_3_nns.png}
+    \caption{Results of the comparison experiment for A3C, DDPG, SAC, and T3D}
+    \label{fig:learning:exp_1_3:results_2}
+\end{figure}
+
+\begin{table}[ht!]
+\caption{Optimized costs for successful trials}
+\label{tab:learning:exp_1_3:results}
+\begin{center}
+\begin{tabular}{ | c | c | c | c | c | c | c | c |}
+			\hline
+			& PSP & HiREPS & CMAES & DDPG& TD3& SAC & A3C  \\ \hline
+			 Result  & success & success & success & failure & failure & failure & failure \\ \hline
+			$\bar c_o$ & 0.3514 & 0.3345 & 0.3384  & 14.842 & 14.816 & 14.834 & 14.831 \\ \hline
+			$\mathsf{var}(\bar c_o)$ & 0.0225 & 0.0366 & 0.0377 & 0.136 & 0.193 & 0.163 & 0.118 \\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Both PSP and HiREPS seem to fare similar in the experiment.
+However, the variance of HiREPS is higher, while the average cost is slightly lower.
+This stems from the fact that HiREPS finds unreliable solutions, which can yield slightly lower costs but are prone to failure.
+The mean and variance of the parameters for those costs were calculated and the data for parameter tuples within this range were checked.
+It could be verified that for those parameter tuples the probability of yielding those superior costs was around 38 \%, while 62 \% resulted in far higher costs (due to very high noise) or failure.
+The same investigation applied to PSP did not result in such findings.
+Tab. \ref{tab:learning:exp_1_3:results2} shows the average percentage of successful trials per episode over the course of learning.
+
+
+\begin{table}[ht!]
+	\begin{center}
+		\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c |c|}
+			\hline
+			Episode & 1 & 2 & 3& 4 & 5 & 6 & 7 & 8& 9 & 10  \textbf{} \\ \hline
+			PSP & 50.7 & 71.2 & 85.5 & 89.8 & 91.2 & 94.2  &96.2& 98.5& 98.3& 98.8\\ \hline
+			HiREPS & 57.5 & 54.5 & 60.5 & 61.5 & 69.5 & 67.5 & 72.0 &71.5&69.0&69.5\\ \hline
+			CMAES & 2.8 & 21.1 & 43.3 & 59.4 & 71.1 & 65.0 & 71.1 & 68.9 & 71.7 & 69.2\\ \hline
+		\end{tabular}
+	
+		\vspace{3pt}
+		\caption{Successful trials over episodes in \% (averaged over experiments)}
+		\label{tab:learning:exp_1_3:results2}
+	\end{center}
+\end{table}
+
+From the results one can see that the PSP algorithm is able to discriminate between successful and unsuccessful parameter spaces and therefore finds reliable optimized solutions.
+Also, due to its nature, it is able to not only provide a singular solution, but rather a solution subspace within the initial search space.
+CMA-ES needs several episodes to achieve a distinctive percentage of successful proposals, but still only manages to get on par with HiREPS.
+
+Thus, in this experiment the suitability of the PSP algorithm for difficult real-world robot learning in combination with the \skillmodelabbr{} framework was demonstrated.
+Not only are the converged solutions robust, but also the ones sampled directly from the learner, which allows to improve while achieving success to a certain margin.
+The general idea of defining and iteratively reducing sub spaces of interest seems a promising direction and allows to optimize parameters and to approximate sub spaces of parameters which may be applicable to a specific optimization problem variation.
+Furthermore, the algorithm in combination with the \skillmodelabbr{} framework was compared to the state of the art in robotic manipulation learning which is not able to find solutions to the considered (very challenging) manipulation problem, at least within the given frame of $200$ trials.
+
+These findings suggest that employing a meaningful structure may be beneficial for learning very challenging real-world manipulation problems such as key insertion.

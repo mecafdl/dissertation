@@ -1,0 +1,26 @@
+In a collaborative scenario where actions are distributed among several agents $\worker \in \workerset$, it may be desirable and more efficient that some of the actions are executed in parallel.
+In particular, when humans and robots work together, scenarios become possible where joining subassemblies may require rather complex and delicate procedures that are extremely difficult to automate, while assembly of subassemblies may be very easy to automate.
+Consequently, one possibility is that the human handles the complex task of joining the subassemblies, while the robotic co-workers prepare the mentioned subassemblies and 'feed' them to the human when needed.
+
+As mentioned above, AND/OR graphs are chosen as the representation of assembly plans because of their ability to explicitly facilitate parallel execution of assembly actions, as well as the time independence of parallel executable actions.
+Using AND/OR graphs for the representation of assembly sequences was first proposed in \cite{HomemdeMello.1990}.
+More recent applications can be found in \cite{Koc.2009}.
+The AND/OR graph of a particular assembly can be constructed by disassembling the complete assembly until only atomic parts $\assemblypart$ are left.
+Having this idea in mind, the graph of feasible assembly actions is built.
+
+\paragraph{Definition 1: AND/OR graph of feasible assembly sequences}
+A mechanical assembly is defined by $\assembly=(\assemblypartset,\text{st},\text{gf},\text{mf})$.
+The AND/OR graph $Y_\assembly$ of feasible assembly sequences of assembly $\assembly$ is defined as the hypergraph $(V,E)$, where
+\begin{align*} V &= \{ \assemblypartset_s \vert \assemblypartset_s \subseteq \assemblypartset \land st(\assemblypartset_s) \} {\rm{,}} \\ E & = \{ \{ \assemblypartset_{s,k}, \assemblypartset_{s,i}, \assemblypartset_{s,j} \} \vert \assemblypartset_{s,k}, \assemblypartset_{s,i}, \assemblypartset_{s,j} \in V \} {\rm{,}} \\ \text{and}\\ \assemblypartset_{s,k} & = (\assemblypartset_{s,i} \cup \assemblypartset_{s,j}) \land gf(\{ \assemblypartset_{s,i}, \assemblypartset_{s,j} \}) \land mf(\{ \assemblypartset_{s,i}, \assemblypartset_{s,j} \}).
+\end{align*}
+Note that, although each edge in the hypergraph is an unordered set, one of the three subassemblies, namely $\assemblypartset_{s,k}$ is distinguished because it is the union of the other two sets $\assemblypartset_{s,i}$ and $\assemblypartset_{s,j}$.
+Figure \ref{fig:foundations:planning:andor_example} shows an excerpt from an AND/OR graph of a four part assembly consisting of the parts $\assemblypartset=\{A,B,C,D\}$. 
+
+\begin{figure}[ht!]
+\begin{center}
+\input{figures/svg/applications_andor_example.pdf_tex}
+\caption{Partial AND/OR graph of an exemplary assembly.
+The blue colored rectangles depict OR nodes, the red colored circles AND nodes.}
+\label{fig:foundations:planning:andor_example}
+\end{center}
+\end{figure}

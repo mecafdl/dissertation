@@ -1,0 +1,253 @@
+In this section an experimental case study is presented which compares (learned) robot manipulation performance to human capabilities.
+The study consists of a tactile-only (meaning no vision) manipulation task, composed of a set of challenging tactile skills.
+The performance of the robot is compared against that of an adult human in terms of both execution time as well as learning time, see Fig.~\ref{fig:learning:comparison_intro}.
+In this the capabilities of the \skillmodelabbr{} framework for manipulation skill learning are further demonstrated.
+
+\begin{figure}[ht!]
+\includegraphics[width=\columnwidth]{figures/experiments/learning_comparison_intro.png}
+\caption{The intention of the case study is to draw a comparison between robot and human manipulation performance.
+This also entails a comparison between the learning and tuning approaches towards this performance level.
+For the presented case study a number of skills of varying tactile complexity was selected and a reference task was constructed based on them.}
+\label{fig:learning:comparison_intro}
+\end{figure}
+
+\subsection{Task Description}\label{ch:learning:comparison:task}
+
+For the comparative case study the following single-handed task was investigated.
+Given is a board with a lock and a button on it, and a matching key for the lock is nearby in a holding slit.
+A visual depiction of the task is shown in Fig.~\ref{fig:learning:exp3_1:setup}.
+The task has the following steps.
+\begin{enumerate}
+\item Grab the key from its storage.
+\item Insert the key into the lock.
+\item Turn the key by $90$ degrees clockwise and turn it back.
+\item Extract the key from the lock.
+\item Place the key back into its storage.
+\item Press the button.
+\end{enumerate}
+
+Each of these steps can be achieved by a single skill.
+These particular skills were chosen to cover multiple important aspects of manipulation.
+These are handling objects (\textit{grab} and \textit{place}), difficult contact-rich manipulation with changing contact state (\textit{insertion} and \textit{extraction}), manipulation without changing contact state (turn) and fast manipulation (\textit{press button}).
+Additionally, phases of free motion connect the skills.
+The skills are implemented using the \skillmodelabbr{} framework (see Sec.~\ref{ch:architecture:skill}).
+
+\begin{figure}[ht!]
+\includegraphics[width=\columnwidth]{figures/experiments/learning_exp3_1_setup.png}
+\caption{The left picture shows the overall setup. The right side shows the respective steps of the task. The arrows indicate the direction of movement for the task steps: 1. Grab the key, 2. Insert the key, 3. Turn the key and turn in back, 4. Extract the key, 5. Place the key, 6. Press the button.}
+\label{fig:learning:exp3_1:setup}
+\end{figure}
+
+
+The experiment compares 1) manual programming of the robot and autonomous learning to achieve optimal performance, and 2) the achieved performance with that of a human adult in terms of execution time.
+Note that in this case study the focus lies on execution time as a means of comparing human and robot performance since it is 1) the most interesting one and 2) the simplest to implement.
+Other cost functions such as energy or contact forces would require significant effort on the measuring part for the human and are therefore out of scope.
+
+\subsubsection{Expert Tuning}
+The manual parameter tuning was done by a robot expert skill by skill with execution time as an optimization goal in mind.
+The tuned parameters per skill and their domains from which valid values were chosen are given in Tab. \ref{tab:experiments:comparison:parameters}.
+To measure the execution time, each skill as well as the overall task was executed ten times and the average was taken.
+In addition, another expert robot programmer not familiar with the \skillmodelabbr{} framework or \softwareabbr{} was asked to tune the parameters of the skills while the time they required to achieve comparable performance was measured.
+
+\renewcommand{\arraystretch}{1.2}
+\begin{table*}[ht!]
+    \centering
+    \caption{Parameter domains}
+    \label{tab:experiments:comparison:parameters}
+    \begin{tabular}{|c|c|l|}
+    \hline
+    Parameter & Dimension & Domain \\
+    \hline
+    \multicolumn{3}{|c|}{Move} \\
+    \hline
+     $\dot{\V{X}}_{d}$  & $3 \times 1$ & $([0, 0.5], [0, 1], \text{N/A})$  \\
+         \hline
+         $\ddot{\V{X}}_{d}$ & $3 \times 1$ & $([0, 1], [0, 4], \text{N/A})$\\
+         \hline
+    \multicolumn{3}{|c|}{Grab} \\
+    \hline
+       $\dot{\V{X}}_{d,g}$  & $3 \times 1$ & $([0, 0.5], [0, 1], [0, 2])$  \\
+         \hline
+         $\ddot{\V{X}}_{d,g}$ & $3 \times 1$ & $([0, 1], [0, 4], \text{N/A})$\\
+         \hline
+    \multicolumn{3}{|c|}{Insertion} \\
+    \hline
+           $\dot{\V{X}}_{d,i}$  & $3 \times 1$ & $([0, 0.5], [0, 1], \text{N/A})$  \\
+         \hline
+         $\ddot{\V{X}}_{d,i}$ & $3 \times 1$ & $([0, 1], [0, 4], \text{N/A})$\\
+         \hline
+         $\V{a}$ & $6 \times 1$ & $([0,10],[0,10],[0,10],[0,3],[0,3],\text{N/A})$\\
+         \hline
+         $\V{f}$ & $6 \times 1$ & $([0,2],[0,2],[0,2],[0,2],[0, 2],\text{N/A})$\\
+         \hline
+         $\Delta \V{X}$ & $6 \times 1$ & $\begin{aligned}(&[-0.01,0.01],[-0.01,0.01],\text{N/A},\\
+         &[-0.0175,0.0175],[-0.0175,0.0175],\text{N/A})\end{aligned}$\\
+         \hline
+         $\dot{x}_\text{min}$ & $1$ & ([0, 0.5])\\
+         \hline
+          \multicolumn{3}{|c|}{Turn} \\
+          \hline
+                 $\dot{\V{X}}_{d,t}$  & $3 \times 1$ & $(\text{N/A}, [0, 2.5], \text{N/A})$  \\
+         \hline
+         $\ddot{\V{X}}_{d,t}$ & $3 \times 1$ & $(\text{N/A}, [0, 25], \text{N/A})$\\
+         \hline
+    \multicolumn{3}{|c|}{Extraction} \\
+    \hline
+           $\dot{\V{X}}_{d,e}$  & $3 \times 1$ & $([0, 0.5], [0, 1], \text{N/A})$  \\
+         \hline
+         $\ddot{\V{X}}_{d,e}$ & $3 \times 1$ & $([0, 1], [0, 4], \text{N/A})$\\
+         \hline
+         $\V{a}$ & $6 \times 1$ & $([0,10],[0,10],[0,10],[0,3],[0,3],\text{N/A})$\\
+         \hline
+         $\V{f}$ & $6 \times 1$ & $([0,2],[0,2],[0,2],[0,2],[0, 2],\text{N/A})$\\
+         \hline
+         $\dot{x}_\text{min}$ & $1$ & ([0, 0.5])\\
+         \hline
+    \multicolumn{3}{|c|}{Place} \\
+    \hline
+       $\dot{\V{X}}_{d,p}$  & $3 \times 1$ & $([0, 0.5], [0, 1], [0, 2])$  \\
+         \hline
+         $\ddot{\V{X}}_{d,p}$ & $3 \times 1$ & $([0, 1], [0, 4], \text{N/A})$\\
+         \hline
+     \multicolumn{3}{|c|}{Press Button} \\
+    \hline
+       $\dot{\V{X}}_{d,p}$  & $3 \times 1$ & $([0, 0.5], [0, 1], \text{N/A})$  \\
+         \hline
+         $\ddot{\V{X}}_{d,p}$ & $3 \times 1$ & $([0, 1], [0, 4], \text{N/A})$\\
+         \hline
+         $f_\text{push}$ & $1$ & $([0,10])$\\
+         \hline
+         \multicolumn{3}{|c|}{Controller} \\
+         \hline
+         $K$ & $6 \times 1$ & $([0, 2000], [0, 2000], [0, 2000], [0, 200], [0, 200], [0, 200])$\\
+         \hline
+    \end{tabular}
+\end{table*}
+
+\subsubsection{Parameter Learning}
+
+The parameter learning was done for each skill separately as follows.
+\begin{enumerate}
+\item The seven learning problems are given by the study task as described in Sec. \ref{ch:learning:comparison:task}.
+The seventh problem is the basic move skill responsible for the free-motion phases.
+\item The appropriate skills were selected from the taxonomy.
+\item All skills were grounded by kinesthetic teaching.
+\item The CMA-ES algorithm was used to learn solutions for the skills.
+The meta-parameters were chosen according to the recommendations found in \cite{FrancoisMicheldeRainville.15.02.2021} and the number of generations was set to $n_g=20$.
+The initial centroid $c_0$ was set to $0.1 \params_{i,\text{max}}$ for every parameter $i$ for all skills, except for $\Delta \V{x}$ of the insertion skill which was set to $0.5 \params_{i,\text{max}}$.
+This choice reflects a safe initialization considering the process starts with low velocities and contact forces.
+\item Each of the skills was learned separately and each experiment was repeated ten times resulting in $70$ learning experiments in total.
+Each skill was optimized for execution time with a maximum of $t_\text{max}=5$ s.
+\end{enumerate}
+
+Note that the approach velocities and accelerations were not learned for any of the skills but instead a separate move skill was learned.
+This skill is not explicitly part of the experiment task but its results are used for the approach phases of the various skills.
+
+\subsubsection{Measuring Human Performance}
+
+The human performance was measured in terms of execution time per skill and per overall task. The study protocol was as follows:
+\begin{enumerate}
+\item The general setup and the task are explained to the participant. The task is demonstrated once.
+\item Each skill is demonstrated once.
+\item The participant trained each skill until they were able to reliably execute it.
+\item Each skill was performed three times with normal speed and three times fast with distinct pauses in between and the performance was recorded per video.
+\item The participant performed the overall task at subjective normal speed. The performance was recorded per video.
+\item The participant performed the overall task as fast as they could. The performance was recorded per video.
+\end{enumerate}
+
+From the recorded videos the execution times per skill and overall task were extracted by always taking the time from the first movement until the hand stopped again.
+The task was performed by five healthy human participants between the age of $25-35$ on the same setup as the robot.
+Note that the human participants could rely on their eyesight whereas the robot was blind i.e. no cameras were involved.
+However, the robot knew the exact poses of all objects and locations.
+
+
+\subsection{Case Study}
+
+\subsubsection{Experimental Setup}
+
+The experimental setup looks as follows.
+A \platformname{} arm \cite{Haddadin.04.02.2021} is mounted on a table and has a board with the described task before it.
+Initially, the key is placed in the storage slit.
+The buttons on the board are connected to a micro controller which sends a conformation to the robot when a button has been successfully pressed.
+Figure \ref{fig:learning:exp3_1:setup} shows the overall setup and the single task steps.
+Note that the used two-fingered gripper is one of the most used gripper designs in real-world robotics and is therefore representative in such a case study.
+The overall task as well as the single steps in terms of execution time are compared.
+
+\subsubsection{Results}
+
+\paragraph{Task Learning}
+
+\begin{figure}[ht!]
+\includegraphics[width=\columnwidth]{figures/experiments/learning_exp_3_1_results_a.png}
+\caption{Learning process for all skills. The blue line denotes the cost over time averaged over $10$ experiments. The light blue area denotes the $95 \%$ confidence interval. The red triangles denote the tuning steps of the expert programmer.}
+\label{fig:learning:exp_3_1:results_a}
+\end{figure}
+
+Figure \ref{fig:learning:exp_3_1:results_a} shows the learning process for each of the skills as well as the progress of the expert programmer.
+The graphs show the cost $\mathcal{Q}_c$ over learning time averaged over $n_l=10$ experiments.
+The light blue area around it denotes the $95 \%$ confidence interval.
+The dashed line separates the learning guided by the heuristic $t_\text{max} + h$ and learning guided by the optimization criterion $t_e$.
+The red triangles denote the tuning steps of the expert.
+Note that the skills were tuned in the order of \textit{move}, \textit{grab}, \textit{place}, \textit{insertion}, \textit{extraction}, \textit{turn}, \textit{press button}.
+
+The robot is able to reliably learn and optimize each of the skills within a few minutes.
+This demonstrates the applicability of the \skillmodelabbr{} framework to a wider range of manipulation learning problems.
+The total time to learn and sufficiently optimize all skills autonomously was roughly about $80$ minutes on average whereas the expert programmer took only about $12$ minutes.
+
+\paragraph{Comparison}
+
+Table \ref{tab:learning:exp_3_1:comparison} lists the average execution time and standard deviation for each skill for the robot using expert-tuned parameters and learned parameters as well as the human performance at subjective normal and high speed.
+The last row shows the required time for the entire task.
+The success rate is not shown since human and robot (for the case of learning as well as manual tuning) achieved a $100 \%$ success rate.
+\renewcommand{\arraystretch}{1.2}
+\begin{table}[ht!]
+\begin{center}
+\caption{The average execution time and standard deviation in seconds of all skills (executed isolated) and the overall task for human performance (subjective normal and fast speed) and robot performance (expert-tuned and learned). The execution times for skills where human-level performance has been reached are written bold.}
+\label{tab:learning:exp_3_1:comparison}
+\begin{tabular}{|l|p{2.3cm}|p{2.3cm}|p{2.7cm}|p{2.7cm}|}
+\hline 
+Skill & Human (Normal) & Human (Fast) & Robot \nohyphens{(Expert)} & Robot (Learned) \\ 
+\hline 
+Grab & $1.2 \pm 0.18$ s & $0.62 \pm 0.13$ s & $3.21 \pm 0.05$ s & $3.08 \pm 0.06$ s \\ 
+\hline 
+Insertion & $1.43 \pm 0.43$ s& $0.82 \pm 0.2$ s& $0.85 \pm 0.02$ s& $\V{0.7} \pm \V{0.07}$ s\\ 
+\hline 
+Turn & $0.59 \pm 0.19$ s & $0.27 \pm 0.04$ s& $0.61 \pm 0.006$ s& $0.61 \pm 0.005$ s\\ 
+\hline 
+Extraction & $0.73 \pm 0.24$ s& $0.47 \pm 0.16$ s & $\V{0.37} \pm \V{0.004}$ s& $\V{0.39} \pm \V{0.003}$ s\\ 
+\hline 
+Place & $1.53 \pm 0.18$ s& $0.84 \pm 0.2$ s& $2.25 \pm 0.05$ s& $2.04 \pm 0.06$ s\\ 
+\hline 
+Press Button & $1.02 \pm 0.3$ s& $0.58 \pm 0.22$ s& $\V{0.53} \pm \V{0.01}$ s& $\V{0.6} \pm \V{0.05}$ s\\ 
+\hline 
+Complete Task & $5.5 \pm 0.88$ s& $3.73 \pm 0.63$ s& $10.43 \pm 0.3$ s& $10.32 \pm 0.39$ s\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{figure}[ht!]
+\includegraphics[width=\columnwidth]{figures/experiments/learning_exp_3_1_results_b.png}
+\caption{Comparison of skill execution times during task execution.}
+\label{fig:learning:exp_3_1:results_b}
+\end{figure}
+
+Figure \ref{fig:learning:exp_3_1:results_b} shows the execution times for each skill when executed not isolated but during the task.
+To answer the main question behind this case study, i.e. what is the state robotic manipulation performance compared to human manipulation performance:
+\begin{itemize}
+\item It could be shown that state-of-the-art manipulation learning systems on suitable robot hardware are capable of acquiring a range of complex manipulation skills to the same degree of performance as a human expert robot programmer could achieve given the underlying framework is human-understandable.
+\item Human expert programmers are still faster than learning approaches in programming skills, given a suitable formalism.
+One reason for this is the human ability of reusing acquired experience.
+However, note that the employment of robotic solutions in industry and other domains is increasing much more rapidly than the number of available expert programmers.
+\item The side-by-side comparison clearly demonstrates that current robot manipulation performance still lags behind what humans are capable of.
+\item The performance gap is mainly due to two factors, i.e. efficient blending of skills and coordinated tactile control, e.g. when grasping or placing an object.
+\item Considering isolated skill execution, however, robot manipulation performance is catching up and partially even beginning to surpass human performance for difficult skills such as insertion.
+\end{itemize}
+
+\textbf{(I)} From this it can be concluded, that future research should also focus on sequencing and blending skills.
+Although there has been some work on this topic already, e.g. \cite{Huang.2011}, it is mostly concerned with free-space motions and not contact-rich manipulation skills.
+
+\textbf{(II)} The results clearly hint at the importance of research into anthropomorphic hand-arm systems, related coordinated tactile control and the potential tactile dexterity and therefore performance increase that may be gained from it, see also \cite{Billard.2019}.
+
+\textbf{(III)} Comparing expert tuning and autonomous learning, it is obvious that human experts need significantly less time to tune the skills when they are able to reuse already acquired experience from previous programming.
+Therefore, transfer learning for real-world manipulation skills is identified as a third important research direction.

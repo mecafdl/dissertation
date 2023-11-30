@@ -1,0 +1,77 @@
+This section presents the state of the art in skill frameworks.
+The first parts focuses on skill model structures, and the second part on policy representation.
+
+Note that in the literature the terms skill, task, action, capabilities and others are often used to describe the same thing.
+In this thesis the terms skill and task are used.
+A task $\task$ is defined as a concrete manipulation problem, i.e. it is unique.
+A skill $\skill$ is the means to solve the task, but it is not restricted to solve only that particular task.
+However, it is valid to say that a skill is learned, despite the fact that the robot interacts only with one task.
+Thus, skill and task have a similar meaning when used in the context of learning.
+
+\subsubsection{Skill Models}
+
+There has been much work on representing robot manipulation skills or actions, yet no common representation has been established so far. In fact, in most cases there is no formal frame for manipulation skills since researchers and engineers tend to create their own custom solutions for most approaches. In \cite{Zech.2019} the authors thoroughly reviewed the current research in this area and came to the conclusion that a common basis for representing skills is missing, although there are numerous works that each partially cover the same or similar aspects and may finally lead to a unifying formalism.
+Specifically, they point several open research challenges regarding skill representations, i.e. effect grounding, couple forward and inverse models, exploiting language for action understanding, intrinsically motivated learning, selective attention, the correspondence problem, and sequence-based modeling.
+
+Early work on skill representations and frameworks can be found e.g. in \cite{Chella.1999} where an intermediate level between incoming sensor data and the symbolic level acts as a bridge, \cite{HomemdeMello.1990,Cao.1998} where AND/OR graphs are used to represent assembly plans and connect to a planning layer, or \cite{Yang.1997} where hidden Markov models are used to represent observed human actions.
+The authors of \cite{Nicolescu.2002} describe a hierarchical abstract behavior architecture combining hierarchical task structures with behavior-based systems.
+Their approach enables reuse of simple behaviors across multiple tasks suggesting a notion of atomic actions.
+It was experimentally validated on a mobile robot.
+\cite{Demiris.2003} provides an approach inspired by neuroscientific and psychological data.
+The authors describe a cognitive architecture designed for action recognition and imitation using a distributed system of inverse and forward models.
+\cite{Erlhagen.2006} proposes a bio-inspired process of imitation learning using goal-directed action sequences consisting of motor primitives.
+In \cite{Zoliner.2005} a hierarchical task representation using primitive action sequences is proposed.
+They are grounded by using human demonstrations.
+In \cite{Kruger.2010} an unsupervised learning approach for action primitives based on human demonstration is proposed.
+The primitives are represented by parametric hidden Markov models which encode motion trajectories for a robot.
+The authors discuss how such primitives can be learned, how they can be used to synthesize movements to achieve desired effects, and how the model can be used to detect action primitives and the entailing effect from observing human demonstrations.
+In \cite{Cohen.2010} a high-level reasoning framework was developed using DMPs as low-level policy.
+
+Sometimes, researchers adapt existing formal methods to robot manipulation such as Petri nets for higher-level components \cite{Cao.1994,Lima.1998,Costelha.2007,Costelha.2012} and behavior trees \cite{Marzinotto.2014,Rovida.2017,Banerjee.2018,French.2019} which are also often used to represent control policies to a certain degree.
+
+In \cite{Geib.2006}, object action complexes (OAC), one of the first attempts at bridging low-level control and high-level planning and learning, are introduced. In \cite{Kraft.2008,Huebner.2008} OACs are connected to a robot vision system to segment and extract properties of objects. The authors argue that objects and actions are inherently coupled. In \cite{Kruger.2009,Worgotter.2009} a formal definition and examples of OACs are provided. The authors of \cite{Wachter.2013} demonstrate the application of OACs to a programming by demonstration approach to create sequences of actions for a household kitchen scenario.
+
+The authors of \cite{Aein.2013} have developed a multi-layered architecture consisting of a semantic event chain (high-level), a finite state machine (mid-level), and a hardware level (low-level).
+On the high level actions are described in a symbolic and abstract way by relating them to relevant objects.
+The mid level utilizes a finite state machine to execute low-level action primitives in the correct sequence.
+This approach is tested on a variety of real-world manipulation problems.
+
+There are other approaches based on a strong link between actions and objects.
+For example, in \cite{Do.2014} actions and object representations are used to build generative models for internal simulations on action outcomes, in \cite{Tenorth.2012} representations for reasoning about the effects on objects due to actions are developed, and in \cite{Tenorth.2013} a knowledge base for action and object representations is introduced.
+
+The authors of \cite{Wahrburg.2015} have proposed an assembly skill framework which models skills based on trajectories described in pose-wrench space as well as a finite state machine.
+The approach has been tested in a real-world experiment involving a snap-fit problem.
+
+\cite{Diab.2020} introduces a planning and execution framework called SkillMaN which combines learned or user-provided knowledge on skills with geometric reasoning  and task planning.
+
+Many researchers combined the concepts of language and action due to their inherent similarity.
+\cite{Cangelosi.2010} discusses how actions and language can be represented and combined and suggests a number of research milestones and test scenarios for cognitive robotics.
+
+
+\subsubsection{Policy Representations}
+
+Manipulation policies express a solution to a manipulation problem in a formal, quantitative way. There are many ways how such policies can be represented and most of them can be separated into three classes (loosely based on (Kroemer et al. 2019)):
+\begin{itemize}
+\item Non-parametric policies: This is the most general and expressive type of policy.
+Although they are very flexible, these policies require large amounts of data. 
+Prominent examples are:
+\begin{itemize}
+\item Locally-weighted regression: Locally-weighted regression is a way of estimating a regression surface using a multivariate smoothing procedure. A function of the independent variables is fitted locally and based on a similar mechanism how a moving average for a time series is computed. In \cite{Atkeson.1997} a survey on locally weighted learning can be found, in \cite{Vijayakumar.2000} an application to learning high-dimensional problem spaces is shown. In \cite{Schaal.2000} locally weighted learning is applied to various high-dimensional robotics problems such as pole-balancing and inverse-dynamics learning.
+\item Gaussian processes: A Gaussian process is a stochastic process such that every finite linear combinations of the contained random variables is normally distributed. They provide a probabilistic non-parametric modeling approach for black-box identification problems for non-linear dynamic systems. In \cite{Rasmussen.2004}, applications to model-based predictive control. The authors of \cite{Schneider.2010} have used Gaussian processes to model robot tasks in a learning-by-demonstration approach. In \cite{NguyenTuong.2009} an application of Gaussian processes to learning the inverse dynamics of a robot. In \cite{Engel.2005} Gaussian processes have been utilized to control the high-dimensional space of a simulated octopus arm.
+\end{itemize}
+\item Generic fixed-size parametric Policies: This type of policy usually makes stronger assumptions about the structure of the policy.
+The representational capabilities are still very broad, however, much more design choices are involved that determine the frame.
+Examples are:
+\begin{itemize}
+\item Look-up tables: Usually, a look-up table is a data structure (e.g. an array or a hash map) which allows for quick access to data based on a key, since no additional computation is required. It is not often used as a policy representation, but a few application are shown in \cite{Sutton.2018}.
+\item Fourier basis: The Fourier basis is based on the Fourier series and used for linear function approximation. Applications for reinforcement learning can be found in \cite{GeorgeKonidaris.2011,Konidaris.2012}.
+\item Neural networks: Neural networks are one of the most widely used and popular policy representations today and are applied to a wide spectrum of domains such as image and object detection, speech recognition and robotics. They consist of multiple layers of artificial neurons containing specific parameterized activation functions such as rectified linear units, sigmoid functions or softmax. For example, neural networks have been used to learn basic manipulation tasks using a mapping from the robot state \cite{Levine.2015} and visual input \cite{Levine.2016} to robot torques. 
+\end{itemize}
+\item Restricted parametric (goal-driven) policies: These are specialized policy representations with limited representational capabilities. However, these types of policies usually exploit existing structures of the problems they are applied to. This exploitation is mostly based in their design and requires manual choices. In turn, their complexity is reduced which allows for much more sample-efficient learning. Examples are:
+\begin{itemize}
+\item Structured neural network architectures: These are neural networks with an inherent structure that allows for higher performance on specific problem domains. Examples are \cite{Niu.2018} which introduces a generalized value iteration network that is evaluated on a range of benchmark problems, and \cite{DiazLedezma.2017} where the authors describe a network based on first-order principles for inverse dynamics learning.
+\item Dynamic motion primitives: Dynamic motion primitives (DMP) \cite{Schaal.2000,Schaal.2006,Ijspeert.2013} consist of a nonlinear attractor dynamics and an additional oscillatory term. DMPs have been shown to be able to generate human-like motions and are also capable of handling contacts with the evironment. They are often used for programming by demonstration approaches \cite{Matsubara.2011,Kulic.2012,Lee.2011}.
+In \cite{Nemec.2012}, the authors introduce a method to sequence DMPs and demonstrate it in a real-world experiment with tasks such as pouring and table wiping. In \cite{Park.2008} DMPs have been used in combination with potential fields for obstacle avoidance. Other application of DMPs to physical manipulation include \cite{Namiki.2015}, where a multi-fingered hand folded a piece of paper, \cite{Mitrevski.2019} where DMPs were part of a framework including object detection, pose estimation and manipulation for grasping of everyday objects by a humanoid robot, and \cite{Nemec.2014} where a bimanual collaborative human-robot task was performed using DMPs.
+\item Linear Quadratic Regulators and Linear Quadratic Gaussian based methods: These methods attempt to describe the dynamics of a system by a set of linear quadratic equations. In \cite{Levine.2015} an example to robot manipulation learning can be found, in \cite{PlattRobertJr..2010} for planning grasping tasks.
+\end{itemize}
+\end{itemize}

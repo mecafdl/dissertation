@@ -1,0 +1,70 @@
+\subsubsection*{DDPG Hyperparameters}
+
+\begin{center}
+\begin{tabular}{l|l} 
+ \hline
+ Parameter & Value\\ 
+  \hline
+ Optimizer & Adam~\cite{Kingma.2014}   \\ 
+ Learning rate (critic and actor)& $3*10^{-4}$  \\ 
+ Discount($\gamma$) & $0.99$  \\ 
+ Replay buffer size & $10^6$  \\ 
+ Number of hidden layers & $3$  \\ 
+ Number of units per hidden layer & $256$  \\ 
+ Number of samples per mini-batch & $64$  \\ 
+ Activation function & ReLU  \\ 
+ Output activation function & TanH  \\ 
+
+ Target smoothing coefficient ($\tau$ ) & $0.005$  \\ 
+ \hline
+ Action dimension size & $6$  \\ 
+ Observation dimension size & $18$\\
+ Initial exploration phase w/o learning (observations) & $1000$ \\
+ 
+ \hline
+\end{tabular}
+\end{center}
+
+Actions are limited to $\pm 1$ and scaled by factor $\boldsymbol{s}_a =[5,5,10,1,1,2]$ prior to robot application.
+The factor $\boldsymbol{s}_a$ was found empirically during experimentation.
+
+\subsubsection{\skillmodelabbr{} Framework}
+
+The first few parameters are determined by the skill context, and they are chosen by the user.
+$T_{o_1}$ denotes the goal pose (the \textit{Container} object) of the insertion skill, $T_{o_2}$ is the initial approach pose (the \textit{Approach} object), and $T_{o,3}$ is the pose of the \textit{Insertable} object.
+The region of interest (\roi) defines the environment around $T_{o_1}$ as
+\begin{align*}
+ \text{\roi}=&[[(-0.02,0.02),(-0.02,0.02),(-0.1,0.1)] \text{m},\\
+ &[-0.26,0.26),(-0.26,0.26),(-0.1,0.1)] \text{rad}].
+\end{align*}
+$f_\text{contact}$ determines when an external force is interpreted as a contact, and it is set to $f_\text{contact}=5$~N.
+The maximum external wrench and torque thresholds are given by $\maxwrench=[50 \text{ N}, 30 \text{ Nm}]$, and $\maxtorque=[80,80,80,80,12,12,12]$ Nm.
+The maximum execution time is set to $\maxtime=10$ s.
+The damping factor is set to critical damping $\boldsymbol{\chi}=[0.7,0.7,0.7,0.7,0.7,0.7]$ and $f_\text{grasp} = 30$~N denotes the gripper grasp force.
+
+Table \ref{tab:materials:parameters} lists the learnable parameters and their respective domains for the insertion skill implementation used for the transfer learning experiment.
+In total $24$ continuous parameters are learned.
+N/A means that this specific parameter dimension was not learned due to practical reasons, e.g., velocity and acceleration of the gripper during a point-to-point motion where the gripper is not needed.
+
+\begin{table*}[ht!]
+    \centering
+    \caption{Learnable parameters for the insertion skill}
+    \label{tab:materials:parameters}
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    Parameter & Meaning & Size & Domain \\
+    \hline
+        $\dot{X}_d$ & Desired velocity & $3\times1$ & $[(0,0.5],[0,1],\text{N/A}]$ \\
+        \hline
+        $\ddot{X}_d$ & Desired acceleration & $3\times1$ & $[(0,1],[0,4],\text{N/A}]$ \\
+        \hline
+        $\V{a}$ & Amplitude of wrench oscillation & $5\times1$ & \\
+        \hline
+        $\V{f}$ & Frequency of wrench oscillation & $5\times1$ & \\
+        \hline
+        $\Delta X$ & Offset of approach pose & $4\times1$ & \\
+        \hline
+        $K$ & Stiffness of Cartesian impedance controller & $6\times1$ & $[(0,2000),(0,2000),(0,2000),(0,200),(0,200),(0,200)]$ \\
+        \hline
+    \end{tabular}
+\end{table*}
