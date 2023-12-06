@@ -2,7 +2,7 @@
 \usepackage[backend=biber,style=ieee,sorting=nty]{biblatex}
 \usepackage{blindtext}
 %\usepackage{cite}
-%\usepackage{draftwatermark}
+\usepackage{dirtytalk}
 \usepackage{enumitem}
 \usepackage{framed}
 \usepackage{soul}
@@ -94,7 +94,7 @@
 	\Task{open}{Nomenclature}
 	\Task{started}{Introduction}
 	\begin{CheckList}{Task}
-		\Task{started}{Motivation}
+		\Task{done}{Motivation}
 		\Task{started}{Problem statement}
 		\Task{started}{State of the art}
 		\Task{started}{Research questions}
@@ -374,7 +374,7 @@ This work:
 
 
 \subsection*{Abstract (text version)}
-\redtext{As robots become increasingly integral to human life, the imperative emerges for them to autonomously explore and construct models of their bodies. Robots should take cues from human capabilities, aspiring to build and utilize their body schema for advanced locomotion, finer manipulation, and adaptive interactions. Thus, a crucial foundation lies in seamlessly integrating the body schema to elevate learning, motor control, coordination, and spatial awareness. Furthermore, future robots should become self-sufficient entities that conduct monitoring, calibration, and adaptation exclusively through onboard sensing modalities. Standardizing constant self-monitoring nurtures spatial awareness and facilitates rapid error detection and correction. A profound understanding of their body structure will undoubtedly lead to enhanced, safe, and energy-aware interactions. However, current robot learning approaches encounter limitations, such as suboptimal generalization and sample efficiency, exhibiting a need for more structural knowledge. Versatile methods, like neural networks, confront challenges related to data and topology, confining learning to specific regions. On the other hand, learning robot physical attributes still rely on a presumed knowledge of the mechanical topology, often involving calibration and offline identification in controlled environments with a persistent reliance on external measurements, such as vision and motion-capturing systems. The research landscape generally reveals the lack of a unified framework that enables robots to build representations of their body schema to achieve improved body awareness and interaction capabilities. This study addresses these challenges by consolidating necessary and sufficient proprioceptive signal quantities, enabling robots to autonomously acquire knowledge about their body structure without relying on exteroceptive off-body sensors. It introduces an approach that reformulates robot kinematic calibration and system identification as a modular computational graph amenable to machine learning. This abstracted architecture, applied in online learning phases, seamlessly merges proprioceptive signals with first-order principles, extracting fundamental features of the robot body schema. Characterizing morphological properties of tree-like structures, the study infers mechanical topology through information-theoretic measures, validating and applying it independently of off-robot calibration. The research extends its scope by complementing the robot body schema by instantiating inertial properties, ensuring online learning and physical feasibility. Ultimately, this work challenges the uncritical application of end-to-end learning in physical systems, urging a reevaluation of its limitations when excluding principled knowledge. It underscores opportunities for machine learning frameworks in embodied systems, emphasizing the untapped potential of synergizing structural knowledge with data-driven methods. This study catalyzes future research in an incipient field that underscores building and maintaining a body schema by demonstrating that fundamental properties of a robot's morphology can be deduced from proprioceptive signals. Its implications are far-reaching, addressing the needs of conventional and dynamic robotic structures with diverse sensory modalities that require a more profound sense of self.}
+As robots become increasingly integral to human life, the imperative emerges for them to autonomously explore and construct models of their bodies. Robots should take cues from human capabilities, aspiring to build and utilize their body schema for advanced locomotion, finer manipulation, and adaptive interactions. Thus, a crucial foundation lies in seamlessly integrating the body schema to elevate learning, motor control, coordination, and spatial awareness. Furthermore, future robots should become self-sufficient entities that conduct monitoring, calibration, and adaptation exclusively through embodied sensing modalities. Standardizing constant self-monitoring nurtures spatial awareness and facilitates rapid error detection and correction. A profound understanding of their body structure will undoubtedly lead to enhanced, safe, and energy-aware interactions. However, current robot learning approaches encounter limitations, such as suboptimal generalization and sample efficiency. More importantly,  the generally exhibit a lack of fundamental structural knowledge of the complex systems at hand. Versatile methods, like neural networks, confront challenges related to data and topology, confining learning to specific regions. On the other hand, learning robot physical attributes still rely on a presumed knowledge of the mechanical topology, often involving calibration and offline identification in controlled environments with a persistent reliance on external measurements, such as vision and motion-capturing systems. The research landscape reveals the lack of a unified foundational framework that enables robots to build representations of their body schema to achieve improved body awareness and interaction capabilities. This study addresses these challenges by consolidating necessary and sufficient proprioceptive signal quantities, enabling robots to autonomously acquire knowledge about their body structure without relying on exteroceptive disembodied sensors. It introduces an approach that reformulates robot kinematic calibration and system identification as a modular computational graph amenable to machine learning. This abstracted architecture, applied in online learning phases, seamlessly merges proprioceptive signals with first-order principles, extracting fundamental features of the robot body schema. Characterizing morphological properties of tree-like structures, the study presents a method to infer mechanical topology through information-theoretic measures, validating and applying it independently from off-robot calibration. The research extends its scope by complementing the robot body schema by instantiating inertial properties, ensuring both the online learning and physical feasibility. The discussed methods are supported by experimental work in real and simulated robots with several degrees of freedom. Ultimately, this work challenges the uncritical application of end-to-end learning in physical systems, urging a reevaluation of its limitations when excluding principled knowledge. It underscores opportunities for machine learning frameworks in embodied systems, emphasizing the untapped potential of synergizing structural knowledge with data-driven methods. This study catalyzes future research in an incipient field that underscores building and maintaining a body schema by demonstrating that fundamental properties of a robot's morphology can be deduced from proprioceptive signals. Its implications are far-reaching, addressing the needs of conventional and dynamic robotic structures with diverse sensory modalities that require a more profound sense of self.
 
 % ===================================================================================================
 %                                                 |                                                 |
@@ -427,7 +427,7 @@ This thesis explores the potential for enhanced robot autonomy through a self-di
 \subsection*{Motivation}
 
 \begin{enumerate}
-	\item Empowering Robots
+	\item Empowering Robots to Learn and Control their Bodies
 	\begin{itemize}
 		\item Autonomous self-discovery is imperative for robots integrating into human life.
 		\item Awareness of the physical self through the body schema is foundational.
@@ -445,13 +445,13 @@ This thesis explores the potential for enhanced robot autonomy through a self-di
 		\item Enhances motor control through adaptive internal body representations.
 		\item Empowers robots to learn diverse tasks, providing versatility in dynamic settings.
 	\end{itemize}
-	\item Enhancing Locomotion, Manipulation, and Adaptability
+	\item Essential for Locomotion, Manipulation, and Increased Adaptability
 	\begin{itemize}
 		\item A well-integrated body schema improves adaptability and interaction.
 		\item Enables precise and coordinated movements, advanced locomotion, and motion planning.
 		\item Enhances manipulation capabilities with human-like dexterity and precision.
-		\item Coordination with other agents, both robots and humans, becomes more refined.
-		\item Anticipatory and adaptive capabilities are fundamental for safe and effective interactions.
+		\item Coordination with other agents, both robots and humans, becomes more meaningful and refined.
+%		\item Anticipatory and adaptive capabilities are fundamental for safe and effective interactions.
 	\end{itemize}
 	\item Constant Self-Monitoring for Autonomy
 	\begin{itemize}
@@ -459,9 +459,9 @@ This thesis explores the potential for enhanced robot autonomy through a self-di
 		\item Achieved through internal models and uninterrupted sensorimotor signals.
 		\item Enables dynamic, real-time understanding of the robot's state.
 		\item Successive error detection and correction phases enhance reliability.
-		\item Rapid formulation and execution of contingency motion strategies in dynamic environments.
+		\item Rapid formulation and execution of contingency motion and interaction strategies in dynamic environments.
 	\end{itemize}
-	\item Onboard Sensing for Self-Sufficiency 
+	\item Embodied Sensing for Self-Sufficiency 
 	\begin{itemize}
 		\item True autonomy requires robots to rely exclusively on onboard sensing.
 		\item Somatosensation (proprioception and touch) and vision are fundamental modalities.
@@ -471,7 +471,8 @@ This thesis explores the potential for enhanced robot autonomy through a self-di
 	\end{itemize}
 	\item Safety- and Energy-Awareness
 	\begin{itemize}
-		\item The body schema serves as a predictive tool, fostering safety in interactions.
+		\item Enhanced locomotion and manipulation, self-monitoring, and embodied sensing lead to anticipatory and adaptive capabilities fundamental for safe and effective interactions.
+		\item The body schema is a fundamental element for prediction, fostering transparent and safe interactions.
 		\item Facilitates dynamic adjustments in movements to prioritize safety.
 		\item Enables seamless coordination with other robots and humans, averting collisions.
 		\item Comprehension of body structure optimizes energy consumption.
@@ -492,114 +493,156 @@ This thesis explores the potential for enhanced robot autonomy through a self-di
 
 \newpage
 \subsection*{Problem Statement}
+
+\subsubsection*{Key points}
 \begin{itemize}
-	\item Prevalent challenges in robotics model learning include overlooking crucial structural knowledge, focusing primarily on global or local forward and inverse models without nuanced integration of essential structural information.
-	\item Challenges faced by machine learning frameworks involve limitations in global techniques like Gaussian process regression and sensitivity in local methods like \item Locally Weighted Projection Regression, emphasizing the need for a balanced approach between data-driven and knowledge-driven methods.
-	\item The dissertation aims to infer essential morphological properties of tree-like floating base structures, emulating the development of a body schema. Efforts in cognitive robotics stress the role of internal body models, enhancing spatial awareness, motor control, and adaptability, but lack consensus on defining the robot's body schema.
-	\item Classical robotics methods assume a known mechanical topology for identifying physical attributes, relying on calibration routines and offline system identification. However, these methods face challenges in floating base robots, and their integration into online learning frameworks is not well-established, limiting insights into the mechanical topology.
-	\item Research gaps include the absence of a clear definition and construction method for the robotic schema, challenges in determining a fundamental set of signals for body schema construction, limited exploration of the mechanical topology, and a lack of synergy between engineering approaches and online learning for realizing a first robot body schema.
-	\item The intricate connections between sensorimotor regularities and body structural knowledge in robotics remain poorly understood, requiring methods with plasticity to adapt to different motion policies and accurately reflect these effects. Addressing these gaps is crucial for advancing robotics and developing more sophisticated and adaptable embodied systems
+	\item Importance of understanding the body in robotics for enhanced autonomy.
+	\item Challenges in model learning due to oversight of vital structural knowledge.
+	\item Issues with global and local learning methods: risk of overfitting, limited generalization.
+	\item Challenges in deep learning: neglect of prior knowledge, low efficiency, extended training.
+	\item Growing acknowledgment of integrating structure in learning physical systems.
+	\item Dissertation focus: inferring morphological properties in tree-like structures for body schema.
+	\item Lack of consensus on a robot's body schema in cognitive robotics.
+	\item Varied approaches to body schema learning: kinematic structure, sensorimotor associations.
+	\item Model-based robotics identifies physical attributes based on known mechanical topologies.
+	\item Challenges in model-based robotics: integration into online learning, limited insights into mechanical arrangement.
+	\item Reliance on external measurement devices persists across different identification and learning approaches.
+	\item Gaps in current research: refining body models, defining robot body schema, identifying necessary signals.
+	\item Integration of advanced machine learning with prior information promises enhanced body models.
+	\item Lack of synergy between modeling and learning approaches, absence of a unified scheme.
+	\item Overall objective: address gaps for more sophisticated and adaptable embodied systems.
 \end{itemize}
 
+%\begin{enumerate}
+%\item {Importance of Understanding the Body in Robotics}
+%\begin{itemize}
+%	\item Crucial for enhancing robot locomotion, manipulation, and interaction.
+%	\item Capability of robots to acquire, refine, and adapt body models contributes to unprecedented autonomy.
+%\end{itemize}
+%
+%\item {Challenges in Model Learning for Robotics}
+%\begin{itemize}
+%	\item Oversight or intentional neglect of vital structural knowledge in intricate systems.
+%	\item Learning frameworks often focus on global or local approaches with associated challenges.
+%\end{itemize}
+%
+%\item {Issues with Global and Local Methods}
+%\begin{itemize}
+%	\item Global methods risk overfitting and computational overload.
+%	\item Local methods suffer from limited generalization and hyperparameter sensitivity.
+%\end{itemize}
+%
+%\item {Challenges in Deep Learning}
+%\begin{itemize}
+%	\item Neglect of prior principled knowledge hampers the determination of dedicated neural network architectures.
+%	\item Issues like low sample efficiency, extended training times, and limited generalization persist.
+%\end{itemize}
+%
+%\item {Growing Acknowledgment of Integrating Structure}
+%\begin{itemize}
+%	\item Importance of integrating structure into the learning of physical systems is recognized.
+%	\item Recent studies emphasize this integration.
+%\end{itemize}
+%
+%\item {Dissertation Focus}
+%\begin{itemize}
+%	\item Addressing the inference of essential morphological properties in tree-like floating base structures.
+%	\item Mimicking the development of a body schema.
+%\end{itemize}
+%
+%\item {Lack of Consensus on Robot's Body Schema}
+%\begin{itemize}
+%	\item Efforts in cognitive robotics stress the importance of internal body models.
+%	\item Lack of consensus on what constitutes a robot's body schema.
+%\end{itemize}
+%
+%\item {Varied Approaches to Body Schema Learning}
+%\begin{itemize}
+%	\item Some approaches focus on learning kinematic structure using off-body vision.
+%	\item Others explore sensorimotor associations but provide limited insights into the robot's physical structure.
+%\end{itemize}
+%
+%\item {Model-Based Robotics}
+%\begin{itemize}
+%	\item Offers reliable methods for identifying physical attributes based on known mechanical topologies.
+%	\item Conventional methods face challenges when applied to floating base robots without standardized identification procedures.
+%\end{itemize}
+%
+%\item {Challenges in Model-Based Robotics}
+%\begin{itemize}
+%	\item Conventional methods not initially designed for integration into online learning frameworks.
+%	\item Limited insights into the comprehensive understanding of joint and link arrangement (mechanical topology).
+%\end{itemize}
+%
+%\item {Reliance on External Measurement Devices}
+%\begin{itemize}
+%	\item Regardless of the approach (black-box machine learning, cognitive methods, or model-based robotics), reliance on external measurement devices persists.
+%	\item Overlooking embodied sensing modalities.
+%\end{itemize}
+%
+%\item {Gaps in Current Robotics Research}
+%\begin{itemize}
+%	\item Gaps in understanding and methods for refining body models.
+%	\item Need for a comprehensive interpretation of the robot body schema and determination of essential features.
+%	\item Identifying the fundamental set of necessary signals, both proprioceptive and embodied exteroceptive.
+%\end{itemize}
+%
+%\item {Integration of Advanced Machine Learning}
+%\begin{itemize}
+%	\item Promise of enhanced body models through the integration of advanced machine learning with prior information and first-order principles.
+%\end{itemize}
+%
+%\item {Lack of Synergy and Unified Scheme}
+%\begin{itemize}
+%	\item Lack of synergy between modeling and learning approaches.
+%	\item Absence of a unified scheme for relevant learning stages.
+%\end{itemize}
+%
+%\item {Overall Objective}
+%\begin{itemize}
+%	\item Notable gaps requiring attention to advance robotics into more sophisticated and adaptable embodied systems.
+%\end{itemize}
+%\end{enumerate}
+%\begin{itemize}
+%	\item Knowledge of the body is essential for improved locomotion, manipulation, and interaction. Robots capable of acquiring, refining, and adapting such knowledge will possess an unprecedented level of autonomy.
+%	\item Yet, prevalent challenges in robotics model learning include overlooking crucial structural knowledge about extremely complex systems, focusing primarily on global or local forward and inverse models.
+%	\item In general global machine learning frameworks involve challenges techniques like Gaussian process regression and sensitivity in local methods like \item Locally Weighted Projection Regression, emphasizing the need for a balanced approach between data-driven and knowledge-driven methods.
+%	\item The dissertation aims to infer essential morphological properties of tree-like floating base structures, emulating the development of a body schema. Efforts in cognitive robotics stress the role of internal body models, enhancing spatial awareness, motor control, and adaptability, but lack consensus on defining the robot's body schema.
+%	\item Classical robotics methods assume a known mechanical topology for identifying physical attributes, relying on calibration routines and offline system identification. However, these methods face challenges in floating base robots, and their integration into online learning frameworks is not well-established, limiting insights into the mechanical topology.
+%	\item Research gaps include the absence of a clear definition and construction method for the robotic schema, challenges in determining a fundamental set of signals for body schema construction, limited exploration of the mechanical topology, and a lack of synergy between engineering approaches and online learning for realizing a first robot body schema.
+%	\item The intricate connections between sensorimotor regularities and body structural knowledge in robotics remain poorly understood, requiring methods with plasticity to adapt to different motion policies and accurately reflect these effects. Addressing these gaps is crucial for advancing robotics and developing more sophisticated and adaptable embodied systems
+%\end{itemize}
+
+\newpage
 \subsubsection*{Assembled version}
 
-In robotics model learning, a pressing challenge is the prevalent oversight of incorporating crucial structural knowledge. Current efforts primarily concentrate on developing forward and inverse models, adopting either a global or local emphasis, often neglecting the nuanced integration of essential structural information \cite{NguyenTuong2011Modellearningrobot}. Challenges faced by prevalent machine learning frameworks include the limitations of global techniques like Gaussian process regression, influenced by the curse of dimensionality, and the sensitivity of local methods such as Locally Weighted Projection Regression to hyperparameters. Despite the growing computational power and data availability favoring end-to-end learning methods, deep learning in particular, the pervasive neglect of prior principled knowledge poses essential challenges. Determining dedicated neural network architectures remains elusive \cite{Baker2017Designingneuralnetwork,Elsken2019Neuralarchitecturesearch}. Similarly, deep learning approaches, like other learning techniques, grapple with issues of low sample efficiency, extensive training times, and limited generalization, emphasizing the need for a balance between data-driven and knowledge-driven approaches within the field \cite{Pierson2017Deeplearningrobotics,Suenderhauf2018limitspotentialsdeep}.
+A robust understanding of the body is crucial for enhancing robot locomotion, manipulation, and interaction. The capability of robots to acquire, refine, and adapt body models contributes to unprecedented autonomy. However, a key challenge in model learning for robotics is the oversight or intentional neglect of vital structural knowledge about these intricate systems. Existing learning frameworks often focus on developing forward and inverse models using either a global or local approach to capture input-output relationships \cite{NguyenTuong2011Modellearningrobot}.
 
-Parting from the need for structure in robot model learning, \redtext{this dissertation addresses the problem of inferring essential morphological properties of the broad class of tree-like floating base structures that emulate the development of a body schema.} Similar efforts have been discussed in cognitive robotics, emphasizing the pivotal role of developing and maintaining internal body models for embodied systems. Indeed, enhanced understanding of the physical self through developing and integrating a body schema improves spatial awareness, motor control, and adaptability \cite{Nguyen2021Sensorimotorrepresentationlearning,Hoffmann2010Bodyschemarobotics}. \redtext{Yet, consensus is missing on what constitutes the body schema for a robot. Several existing endeavors in learning a body schema in robotics center exclusively in learning the particulars of the kinematic structure and predominantly rely on (off-body) vision \cite{Hersch2008Onlinelearningbody,MartinezCantin2010Bodyschemaacquisition,Hart2011roboticmodelecological,Lipson2019Taskagnosticself,Chen2022Fullybodyvisual,Sturm2009Bodyschemalearning}.} Alternative efforts lay their focus on exploring the sensorimotor associations between proprioceptive, tactile and visual sensory modalities \cite{Fuke2007BodyImageConstructed,Malinovska2022connectionistmodelassociating,Nguyen2019Reachingdevelopmentvisuo,Pugach2019BrainInspiredCoding,Lanillos2016Yieldingselfperception} but \redtext{provide limited insights into the robot's embodiment, in particular its physical structure}.
+Global methods risk overfitting and computational overload, while local methods suffer from limited generalization and hyperparameter sensitivity \cite{Thrun2002Probabilisticrobotics,Goodfellow2016DeepLearning}. Despite advancements in computational power and data availability, deep learning faces challenges due to the neglect of prior principled knowledge, making it difficult to determine dedicated neural network architectures \cite{Baker2017Designingneuralnetwork,Elsken2019Neuralarchitecturesearch}. Issues such as low sample efficiency, extended training times, and limited generalization highlight the necessity of balancing data-driven and principle-driven approaches \cite{Pierson2017Deeplearningrobotics,Suenderhauf2018limitspotentialsdeep}. Recently, there has been a growing acknowledgment of the importance of integrating structure into the learning of physical systems \cite{Geist2021Structuredlearningrigid,Lutter2023Combiningphysicsdeep}.
 
-Classical robotics provides conventional methods for identifying the physical attributes of robots, typically assuming a known mechanical topology. Established techniques, such as conventional calibration routines \cite{Hollerbach1996CalibrationIndexTaxonomy} and offline system identification methods \cite{Swevers2007Dynamicmodelidentification,LeboutetInertialParameterIdentification}, have proven effective for known kinematic structures in controlled environments. However, these methods encounter challenges when applied to floating base robots, where standardization in identification procedures is lacking \cite{Ayusawa2014Identifiabilityidentificationinertial,Lee2022OptimizedSystemIdentification}. Importantly, \redtext{these conventional methods were not originally designed for integration into online learning frameworks}. While in addition to kinematic calibration classic robotics tackles forward and inverse kinematics problems, \redtext{it provides limited insights into a comprehensive understanding of the mechanical arrangement of joints and links, referred to as the mechanical topology.} Circling back to cognitive robotics, only a limited number of studies have approached the latter problem as a means to enhance self-modeling and monitoring, yet again depending on exteroceptive vision \cite{Bongard2006Automatedsynthesisbody,Bongard2006Resilientmachinescontinuous}. Last, be it the black-box machine learning, cognitive, or classical robotics paradigms, there is a strong dependence on external devices like cameras and motion-capturing systems, neglecting on-robot sensing. Despite modern robots having various sensor signals, determining the minimum set for constructing a body model solely from on-robot sensing remains unresolved.
+Building on the significance of structure in model learning for robotics, this dissertation addresses the inference of essential morphological properties in tree-like floating base structures, mimicking the development of a body schema. Efforts in cognitive robotics stress the pivotal role of internal body models in enhancing spatial awareness, motor control, and adaptability \cite{Nguyen2021Sensorimotorrepresentationlearning,Hoffmann2010Bodyschemarobotics}. However, consensus is lacking on what constitutes a robot's body schema. Some approaches focus solely on learning kinematic structure, relying predominantly on off-body vision \cite{Hersch2008Onlinelearningbody,MartinezCantin2010Bodyschemaacquisition,Hart2011roboticmodelecological,Lipson2019Taskagnosticself,Chen2022Fullybodyvisual,Sturm2009Bodyschemalearning}. Others explore sensorimotor associations between proprioceptive, tactile, and visual modalities \cite{Fuke2007BodyImageConstructed,Malinovska2022connectionistmodelassociating,Nguyen2019Reachingdevelopmentvisuo,Pugach2019BrainInspiredCoding,Lanillos2016Yieldingselfperception}, but they provide limited insights into the robot's physical structure.
 
-In summary, research in model learning for robotics reveals critical gaps hindering the construction and understanding of a comprehensive robot body schema. There needs to be a clear definition for the robotic schema and a method for its construction, coupled with the challenge of determining a fundamental set of proprioceptive and (on-body) exteroceptive signals essential for constructing a body schema, underscores the current limitations. Integrating cutting-edge machine learning techniques with prior information and first-order principles from mechanics offers a promising avenue to address challenges in data requirements, enhance generalization capabilities, and gain deeper insights into body structure and properties. However, limited exploration into the mechanical topology, a lack of synergy between engineering approaches and online learning for realizing a first robot body schema, and the absence of a unifying scheme defining relevant learning stages remain notable gaps. Furthermore, the intricate connections between sensorimotor regularities and body structural knowledge in robotics remain poorly understood, necessitating methods with plasticity to adapt to different motion policies and accurately reflect these effects. Addressing these gaps is crucial for advancing the field of robotics, enabling the development of more sophisticated and adaptable embodied systems.
+Model-based robotics offers reliable methods for identifying physical attributes of robots based on known mechanical topologies. Conventional calibration routines \cite{Hollerbach1996CalibrationIndexTaxonomy} and offline system identification methods \cite{Swevers2007Dynamicmodelidentification,LeboutetInertialParameterIdentification} are effective for known kinematic structures in controlled environments. However, these methods face challenges when applied to floating base robots without standardized identification procedures \cite{Ayusawa2014Identifiabilityidentificationinertial,Lee2022OptimizedSystemIdentification}. Importantly, these conventional methods were not initially designed for integration into online learning frameworks. While model-based robotics addresses kinematic calibration and forward/inverse kinematics, it provides limited insights into the comprehensive understanding of joint and link arrangement, known as mechanical topology. In cognitive robotics, only a few studies have approached this problem for self-modeling and monitoring, relying on exteroceptive vision \cite{Bongard2006Automatedsynthesisbody,Bongard2006Resilientmachinescontinuous}. Regardless of the approach taken—black-box machine learning, cognitive methods, or model-based robotics—reliance on external measurement devices persists, overlooking embodied sensing modalities.
 
-%This research aims to address identified challenges and gaps in existing machine learning frameworks for model learning in robotics, emphasizing the nuanced integration of structural knowledge. Furthermore, it seeks to advance the understanding of robot physical attributes, specifically focusing on the mechanical topology, proposing innovative methodologies beyond conventional calibration and system identification. The investigation extends into the realm of learning the physical self and the body schema, exploring modalities beyond vision and tactile inputs. By doing so, this research endeavors to bridge the identified gaps, fostering the development of more robust and adaptive robotic systems in diverse environments.
+In summary, current robotics research reveals gaps in understanding and methods for refining body models. A comprehensive interpretation of the robot body schema and the determination of essential features are crucial. Identifying the fundamental set of necessary signals, both proprioceptive and embodied exteroceptive, is paramount. Integrating advanced machine learning with prior information and first-order principles shows promise for enhanced body models, addressing data requirements and generalization issues. However, the lack of synergy between modeling and learning approaches, along with the absence of a unified scheme for relevant learning stages, represents notable gaps requiring attention to advance robotics into more sophisticated and adaptable embodied systems.
 
-%Research in model learning for robotics reveals several critical gaps that impede progress in understanding and constructing a comprehensive robot body schema. Firstly, there exists no clear definition of what constitutes the robotic schema, and the methodology for its construction remains elusive. Additionally, despite the wealth of proprioceptive and exteroceptive signals provided by modern robots, determining a fundamental set essential for constructing a body schema is yet to be established. The integration of state-of-the-art machine learning techniques with existing information and first-order principles from mechanics in the development of efficient learning algorithms for embodied systems presents a promising avenue for addressing challenges in data requirements, enhancing generalization capabilities, and gaining deeper insights into body structure and properties. However, limited exploration into the mechanical arrangement of joints and links, known as the mechanical topology, remains a notable gap in current research.
+%\hrule
+%A reliable model of the body is essential for improved locomotion, manipulation, and interaction. Robots capable of acquiring, refining, and adapting such models will possess unprecedented autonomy. A pressing challenge of model learning in robotics is the prevalent oversight and, at times, deliberate neglect of essential structural knowledge about these rather complex systems. Most learning frameworks primarily concentrate on developing forward and inverse models that adopt either a global or local approach to capture the relationships between the input and output variables \cite{NguyenTuong2011Modellearningrobot}. Global methods, on the one hand, may lead to overfitting and computational overload, while, on the other hand, local methods face limited generalization and exhibit sensitivity to hyperparameters \redtext{\cite{Thrun2002Probabilisticrobotics,Goodfellow2016DeepLearning}}. Furthermore, despite the growing computational power and data availability favoring end-to-end learning methods, deep learning, in particular, also faces comparable challenges resulting from the pervasive neglect of prior principled knowledge. Indeed, determining dedicated neural network architectures remains elusive \cite{Baker2017Designingneuralnetwork,Elsken2019Neuralarchitecturesearch}. Other relevant pitfalls like low sample efficiency, extensive training times, and limited generalization underline the need to strike a balance between data-driven and principle-driven approaches within the field \cite{Pierson2017Deeplearningrobotics,Suenderhauf2018limitspotentialsdeep}. Only recently has research begun to address the importance of integrating structure into the learning of physical systems \cite{Geist2021Structuredlearningrigid,Lutter2023Combiningphysicsdeep}.
 %
-%Furthermore, the potential synergy between engineering approaches for system identification and modern online learning techniques to realize a first robot body schema has not been extensively explored. A unifying scheme that defines relevant learning stages and their integration to produce a robot body schema from knowledge about sensorimotor signals and first-order principles, capturing essential properties of the robot body (physical self), is lacking. Despite the consensus on the crucial role of embodiment in shaping relationships among sensorimotor signals, the connections between sensorimotor regularities and body structural knowledge in robotics are poorly understood. Addressing this gap requires a method that not only acknowledges the variability in statistical properties of signals but also demonstrates plasticity to adapt to different motion policies and accurately reflects these effects, as highlighted by recent works \cite{Geist2021Structuredlearningrigid, Lutter2023Combiningphysicsdeep, Jacquey2019Sensorimotorcontingenciesas}. Closing these research gaps is essential for advancing the field of robotics and developing more sophisticated and adaptable embodied systems
+%Having as premise the relevance that structure holds for model learning in robotics, \redtext{this dissertation addresses the problem of inferring essential morphological properties of the broad class of tree-like floating base structures that emulate the development of a body schema.} Similar efforts have been discussed in cognitive robotics, emphasizing the pivotal role of developing and maintaining internal body models for embodied systems. Indeed, enhanced understanding of the physical self through developing and integrating a body schema improves spatial awareness, motor control, and adaptability \cite{Nguyen2021Sensorimotorrepresentationlearning,Hoffmann2010Bodyschemarobotics}. \redtext{Yet, consensus is missing on what constitutes the body schema for a robot. Several existing endeavors in learning a body schema in robotics center exclusively in learning the particulars of the kinematic structure and predominantly rely on (off-body) vision \cite{Hersch2008Onlinelearningbody,MartinezCantin2010Bodyschemaacquisition,Hart2011roboticmodelecological,Lipson2019Taskagnosticself,Chen2022Fullybodyvisual,Sturm2009Bodyschemalearning}.} Alternative efforts lay their focus on exploring the sensorimotor associations between proprioceptive, tactile and visual sensory modalities \cite{Fuke2007BodyImageConstructed,Malinovska2022connectionistmodelassociating,Nguyen2019Reachingdevelopmentvisuo,Pugach2019BrainInspiredCoding,Lanillos2016Yieldingselfperception} but \redtext{provide limited insights into the robot's embodiment, in particular its physical structure}.
+%
+%Model-based robotics provides reliable methods for identifying physical attributes of robots, typically built on the assumption of a known mechanical topology. Established techniques, such as conventional calibration routines \cite{Hollerbach1996CalibrationIndexTaxonomy} and offline system identification methods \cite{Swevers2007Dynamicmodelidentification,LeboutetInertialParameterIdentification}, have proven effective for known kinematic structures in controlled environments. However, these methods encounter challenges when applied to floating base robots, where standardization in identification procedures is lacking \cite{Ayusawa2014Identifiabilityidentificationinertial,Lee2022OptimizedSystemIdentification}. Importantly, \redtext{these conventional methods were not originally designed for integration into online learning frameworks}. Additionally, while model-based robotics tackles both kinematic calibration and forward and inverse kinematics problems, \redtext{it provides limited insights into a comprehensive understanding of the mechanical arrangement of joints and links, referred to as the mechanical topology.} Circling back to cognitive robotics, only a limited number of studies have approached the latter problem as a means to enhance self-modeling and monitoring, yet again depending on exteroceptive vision \cite{Bongard2006Automatedsynthesisbody,Bongard2006Resilientmachinescontinuous}. Finally, whether embracing black-box machine learning, cognitive approaches, or model-based robotics paradigms, a notable reliance persists on external measurement devices such as cameras and motion-capturing systems, often overlooking embodied sensing modalities. Despite the variety of sensory inputs in modern robots, identifying the necessary and sufficient modalities for constructing a body model still needs to be solved.
+%
+%In essence, current robotics research exposes gaps in the understanding and methods needed for refining body models. There is a critical need for a comprehensive interpretation defining the robot body schema and specifying essential features for constructing and maintaining it. Determining the fundamental set of necessary signals, both proprioceptive and embodied exteroceptive, is paramount. The intricate links between sensorimotor regularities and body structural knowledge pose an additional challenge. Integrating advanced machine learning with prior information and first-order principles holds promise for improved body models, addressing data requirements and generalization issues. However, the lack of synergy between modeling and learning approaches and the absence of a unified scheme for relevant learning stages represent notable gaps that need attention to propel robotics into more sophisticated and adaptable embodied systems.
+%
+%%In summary, research in robotics reveals gaps in the understanding that leads to the learning of better body models. Primarily, there needs to be a comprehensive interpretation that delineates the robot body schema and defines the essential features that methods for its construction and maintenance should posses. A clear determination of the fundamental set of proprioceptive and embodied exteroceptive signals essential for the robot body schema is also required. A closely connected challenge is the lack in understanding of the intricate connections between sensorimotor regularities and body structural knowledge in robotics. Integrating cutting-edge machine learning techniques with prior information and first-order principles offers a promising avenue to derive better body modes and gain deeper insights into body structure and properties while addressing challenges in data requirements and generalization capabilities. However, the limited synergy between modeling and learning based approaches and the absence of a unifying scheme defining relevant learning stages for realizing a robot body schema remain notable gaps. Addressing these gaps is crucial for advancing the field of robotics, enabling the development of more sophisticated and adaptable embodied systems.
+%
+
 
 \hrule
 \newpage
-In the realm of robotics model learning, a pressing challenge is the prevalent oversight of incorporating crucial structural knowledge. Current efforts primarily concentrate on developing forward and inverse models, adopting either a global or local emphasis, often neglecting the nuanced integration of essential structural information \cite{NguyenTuong2011Modellearningrobot}. Challenges faced by prevalent machine learning frameworks include the limitations of global techniques like Gaussian process regression, influenced by the curse of dimensionality, and the sensitivity of local methods such as Locally Weighted Projection Regression to hyperparameters. Despite the growing computational power and data availability favoring end-to-end learning methods, the pervasive neglect of prior principled knowledge poses recurrent challenges. Determining dedicated neural network architectures remains elusive \cite{Baker2017Designingneuralnetwork,Elsken2019Neuralarchitecturesearch}. Similarly, deep learning approaches, like other learning techniques, grapple with issues of low sample efficiency, extensive training times, and limited generalization, emphasizing the need for a balance between data-driven and knowledge-driven approaches within the field \cite{Pierson2017Deeplearningrobotics,Suenderhauf2018limitspotentialsdeep}.
-
-Additionally, the learning of a robot's physical attributes, fundamental for effective model learning, often assumes a known mechanical topology. Conventional calibration routines and offline system identification methods, well-established for known kinematic structures in controlled environments, face challenges when applied to floating base robots, where identification procedures lack standardization \cite{Hollerbach1996CalibrationIndexTaxonomy,Swevers2007Dynamicmodelidentification,LeboutetInertialParameterIdentification,Ayusawa2014Identifiabilityidentificationinertial,Lee2022OptimizedSystemIdentification}. Classical robotics research, while addressing kinematic calibration and standard inverse kinematics problems, offers limited insights into comprehensively learning the mechanical arrangement of joints and links, known as the mechanical topology.
-
-Simultaneously, a burgeoning research area emphasizes the pivotal role of developing and maintaining internal body models for embodied systems in robotics. Learning the physical self and cultivating a body schema enhance spatial awareness, motor control, and adaptability \cite{Nguyen2021Sensorimotorrepresentationlearning,Hoffmann2010Bodyschemarobotics}. Existing achievements in learning a body schema predominantly rely on off-body vision, with limited exploration of other modalities such as tactile inputs. While some studies integrate vision and tactile input or consider various sensory modalities together, a notable scarcity of research delves into the need to learn the mechanical topology of the robot, hindering a comprehensive understanding of the robot's physical structure beyond sensory data \cite{Hersch2008Onlinelearningbody,MartinezCantin2010Bodyschemaacquisition,Hart2011roboticmodelecological,Lipson2019Taskagnosticself,Chen2022Fullybodyvisual,Li2015Towardsbodyschema,Zenha2018Incrementaladaptationrobot,Gama2021Goaldirectedtactile,Fuke2007BodyImageConstructed,Malinovska2022connectionistmodelassociating,Nguyen2019Reachingdevelopmentvisuo,Pugach2019BrainInspiredCoding,Lanillos2016Yieldingselfperception,Bongard2006Automatedsynthesisbody,Bongard2006Resilientmachinescontinuous}.
-
-This research aims to address identified challenges and gaps in existing machine learning frameworks for model learning in robotics, emphasizing the nuanced integration of structural knowledge. Furthermore, it seeks to advance the understanding of robot physical attributes, specifically focusing on the mechanical topology, proposing innovative methodologies beyond conventional calibration and system identification. The investigation extends into the realm of learning the physical self and the body schema, exploring modalities beyond vision and tactile inputs. By doing so, this research endeavors to bridge the identified gaps, fostering the development of more robust and adaptive robotic systems in diverse environments.
-
-\hrule
-
-%Recent remarkable achievements have been made bur depend on off-body vision
-%
-%Works that exploit the power of end-to-end learning usually do it in systems of low dimensionality
-%
-%The proposition made in this work in the return to the basics, leveraging first-order principles of rigid body mechanics and enhance them with learning methods relying on onboard sensor signals. 
-%
-%
-%\begin{enumerate}
-%%	\item \textbf{Context.} Learning the physical self and developing a body schema are pivotal for robotics, enhancing spatial awareness, motor control, and adaptability. The body schema serves as a dynamic map, enabling precise movements and fostering efficient learning. As robots encounter diverse environments, their adaptive body schema allows them to navigate real-world scenarios effectively. This, coupled with continuous self-monitoring, enhances autonomy by providing real-time awareness and error correction. Moreover, the comprehension of their body structure optimizes energy consumption, contributing to energy-aware robotics. Overall, these advancements enable robots to interact more safely and efficiently with both humans and other machines.
-%%	\textbf{Provide references to \citeauthor*{Nguyen2021Sensorimotorrepresentationlearning} \cite{Nguyen2021Sensorimotorrepresentationlearning} and \citeauthor*{Hoffmann2010Bodyschemarobotics} \cite{Hoffmann2010Bodyschemarobotics}}
-%	
-%
-%%	. While physics-based models are well suited for
-%%	planning and predicting the outcome of actions, to function
-%%	on a real robot they require that all relevant model parameters
-%%	are known with sufficient accuracy and can be tracked over
-%%	time. This requirement poses overly challenging demands
-%%	on system identification and perception, resulting in systems
-%%	that are brittle, especially when direct interaction with the
-%%	environment is required.
-%%	Humans, on the other 
-%	
-%	\item \textbf{Implications:}
-%	\begin{itemize}
-%		\item Current machine learning (or more generally artificial intelligence) approaches demand high computation and energy demands \redtext{REFERENCE}
-%	\end{itemize}
-%	\item \textbf{Proposed solution}: The proposed approach revolutionizes robot self-awareness by consolidating necessary proprioceptive signals for autonomous knowledge acquisition, eliminating reliance on external sensors. It introduces a computational graph for kinematic calibration and identification, fostering modular machine learning. The method characterizes morphological properties of floating base structures, inferring mechanical topology with model-free measures. It concurrently validates and describes the body schema, incorporating inertial properties on the Riemannian manifold through an online learning method for constant physical feasibility. This innovative framework streamlines robot autonomy, ensuring real-time adaptation and self-monitoring without external dependencies.
-%\end{enumerate}
-
-
-%\subsubsection*{\textbf{\redtext{Specification and description of the problem (with appropriate citations)}}}
-%
-%\subsubsection*{\textbf{\redtext{Explain the consequences of NOT solving the problem. Who will be affected? How will they be affected? How important is it to fix the problem?}}}
-%
-%\subsubsection*{\textbf{\redtext{Explain what information (research) is needed in order to fix the problem}}}
-
-In contemporary robotics research, the field of model learning grapples with critical challenges, notably the oversight of incorporating structural knowledge. Current efforts predominantly focus on the development of forward and inverse models, exhibiting either a global or local emphasis, neglecting the nuanced integration of essential structural information \cite{NguyenTuong2011Modellearningrobot}. The limitations of global techniques like Gaussian process regression, stemming from the curse of dimensionality, and the sensitivity of local methods such as Locally Weighted Projection Regression to hyperparameters underscore the complexities faced by prevalent machine learning frameworks. Despite the increasing computational power and data availability favoring end-to-end learning methods, the pervasive neglect of prior principled knowledge poses recurrent challenges. Determining dedicated neural network architectures remains elusive \cite{Baker2017Designingneuralnetwork,Elsken2019Neuralarchitecturesearch}, and the extensive training times and limited generalization of deep learning approaches highlight the imperative need for a nuanced balance between data-driven and knowledge-driven approaches in robotics \cite{Pierson2017Deeplearningrobotics,Suenderhauf2018limitspotentialsdeep}.
-
-Moreover, the learning of a robot's physical attributes, a fundamental aspect for effective model learning, often assumes a known mechanical topology. Conventional calibration routines and offline system identification methods, although well-established for known kinematic structures in controlled environments, face challenges when applied to floating base robots, where identification procedures lack standardization \cite{Hollerbach1996CalibrationIndexTaxonomy,Swevers2007Dynamicmodelidentification,LeboutetInertialParameterIdentification,Ayusawa2014Identifiabilityidentificationinertial,Lee2022OptimizedSystemIdentification}. Classical robotics research, while addressing kinematic calibration and standard inverse kinematics problems, offers limited insights into comprehensively learning the mechanical arrangement of joints and links, known as the mechanical topology.
-
-In parallel, a burgeoning research area emphasizes the development and maintenance of internal body models as a pivotal capability for embodied systems in robotics. Learning the physical self and cultivating a body schema enhance spatial awareness, motor control, and adaptability \cite{Nguyen2021Sensorimotorrepresentationlearning,Hoffmann2010Bodyschemarobotics}. However, existing achievements in learning a body schema predominantly rely on off-body vision, with limited exploration of other modalities such as tactile inputs. While some studies integrate vision and tactile input or consider various sensory modalities together, a notable scarcity of research delves into the need to learn the mechanical topology of the robot, hindering a comprehensive understanding of the robot's physical structure beyond sensory data \cite{Hersch2008Onlinelearningbody,MartinezCantin2010Bodyschemaacquisition,Hart2011roboticmodelecological,Lipson2019Taskagnosticself,Chen2022Fullybodyvisual,Li2015Towardsbodyschema,Zenha2018Incrementaladaptationrobot,Gama2021Goaldirectedtactile,Fuke2007BodyImageConstructed,Malinovska2022connectionistmodelassociating,Nguyen2019Reachingdevelopmentvisuo,Pugach2019BrainInspiredCoding,Lanillos2016Yieldingselfperception,Bongard2006Automatedsynthesisbody,Bongard2006Resilientmachinescontinuous}.
-
-Identifying these challenges and gaps, the present research seeks to address the deficiencies in existing machine learning frameworks for model learning in robotics, focusing on the nuanced integration of structural knowledge. Additionally, it aims to advance the understanding of robot physical attributes, with a specific emphasis on the mechanical topology, proposing innovative methodologies that go beyond conventional calibration and system identification. The investigation extends into the realm of learning the physical self and the body schema, exploring modalities beyond vision and tactile inputs. By doing so, this research endeavors to bridge the identified gaps, fostering the development of more robust and adaptive robotic systems in diverse environments.
-
-\hrule
-
-Recent endeavors in model learning within robotics often neglect the incorporation of structural knowledge, instead focusing on developing forward and inverse models with either a global or local emphasis \cite{NguyenTuong2011Modellearningrobot}. While standard global machine learning techniques like Gaussian process regression face challenges related to the curse of dimensionality, rendering them computationally intractable, local methods such as Locally Weighted Projection Regression and support vector regression exhibit sensitivity to hyperparameters and struggle with generalization issues. The advent of increased computational power and abundant data has elevated end-to-end learning methods, particularly with deep learning as the flagship. Despite their remarkable results, the widespread neglect of prior principled knowledge poses clear challenges. A recurring challenge is the difficulty of determining dedicated neural network architectures \cite{Baker2017Designingneuralnetwork,Elsken2019Neuralarchitecturesearch}. Similarly, deep learning approaches, like other learning techniques, grapple with issues of low sample efficiency, extensive training times, and limited generalization, emphasizing the need for a balance between data-driven and knowledge-driven approaches within the field \cite{Pierson2017Deeplearningrobotics,Suenderhauf2018limitspotentialsdeep}. In general, most data-driven learning methods face limitations in generalization, restricting learning to specific input-output regions.
-
-The learning of a robot's physical attributes often assumes a known mechanical topology, primarily addressed through calibration routines for known kinematic structures \cite{Hollerbach1996CalibrationIndexTaxonomy} and conventional offline system identification methods conducted in controlled environments \cite{Swevers2007Dynamicmodelidentification,LeboutetInertialParameterIdentification}. However, for floating base robots, unlike their fixed-base counterparts, identification procedures are less standardized \cite{Ayusawa2014Identifiabilityidentificationinertial,Lee2022OptimizedSystemIdentification}. Classical robotics research, beyond addressing kinematic calibration and standard inverse kinematics problems, provides limited insights into learning the mechanical arrangement of joints and links that define the kinematic chain, referred to as the mechanical topology.
-
-Calibration and identification processes in robotics rely extensively on off-robot measurement devices, including vision, laser metrology, and motion-capturing systems, to discern properties related to the kinematic structure. This strong dependence on external measurements underscores the complexity of achieving accurate calibration and identification through on-robot sensing alone. Moreover, despite the availability of various sensor signals from modern robots, the challenge of determining the minimum set required for constructing a body model based solely on robot sensing remains unresolved.
-
-In the realm of robotics, there is a burgeoning research area emphasizing the development and maintenance of internal body models as a crucial capability for embodied systems, running parallel to current model learning and conventional system identification approaches. Learning the physical self and cultivating a body schema are pivotal for robotics, enhancing spatial awareness, motor control, and adaptability \cite{Nguyen2021Sensorimotorrepresentationlearning}. The body schema, functioning as a dynamic map, enables precise movements and facilitates efficient learning, allowing robots to navigate diverse environments effectively \cite{Hoffmann2010Bodyschemarobotics}. While recent achievements in learning a body schema for robots have been remarkable, they predominantly rely on (off-body) vision \cite{Hersch2008Onlinelearningbody,MartinezCantin2010Bodyschemaacquisition,Hart2011roboticmodelecological,Lipson2019Taskagnosticself,Chen2022Fullybodyvisual}, with some works incorporating tactile inputs \cite{Li2015Towardsbodyschema,Zenha2018Incrementaladaptationrobot,Gama2021Goaldirectedtactile}. Few efforts explore combinations of modalities, such as vision and tactile input \cite{Fuke2007BodyImageConstructed}, somatosensation (proprioception and touch) \cite{Malinovska2022connectionistmodelassociating}, and consideration of all these modalities together \cite{Nguyen2019Reachingdevelopmentvisuo,Pugach2019BrainInspiredCoding,Lanillos2016Yieldingselfperception}. However, very few works have delved into the need to learn the mechanical topology of the robot and the potential advantages it might bring \cite{Bongard2006Automatedsynthesisbody,Bongard2006Resilientmachinescontinuous}. 
-
-In the evolving landscape of robotics, a critical research gap exists, centering around the development and maintenance of internal body models. This area is gaining prominence alongside current model learning and traditional system identification approaches. Learning the physical self and cultivating a body schema are recognized as pivotal for robotics, enhancing spatial awareness, motor control, and adaptability. Despite recent remarkable achievements in learning a body schema for robots, these efforts primarily lean on (off-body) vision, with limited exploration of other modalities such as tactile inputs. While some works integrate vision and tactile input or consider the combined use of various sensory modalities, there is a notable scarcity of studies delving into the need to learn the mechanical topology of robots and the potential advantages it might offer. Understanding the intricacies of the robot's physical structure, beyond sensory data, remains an underexplored frontier in the pursuit of advancing embodied systems. Bridging this research gap is crucial for the holistic development of robots with enhanced spatial intelligence and adaptive capabilities in diverse environments.
-
-\newpage
-Recent endeavors in model learning within robotics research often overlook the incorporation of structural knowledge, instead focusing on the development of forward and inverse models with either a global or local emphasis \cite{NguyenTuong2011Modellearningrobot}. While standard global machine learning techniques like Gaussian process regression face challenges related to the curse of dimensionality, becoming computationally intractable, local methods such as Locally Weighted Projection Regression and support vector regression exhibit sensitivity to hyperparameters and struggle with generalization issues. The advent of increased computational power and abundant data has elevated end-to-end learning methods, particularly with deep learning as the flagship. Despite their remarkable results, the widespread neglect of prior principled knowledge poses clear challenges. A recurrent one is the difficulty to determine dedicated neural networks architectures  \cite{Baker2017Designingneuralnetwork,Elsken2019Neuralarchitecturesearch}. Similarly, deep learning approaches, like other learning techniques, grapple with issues of low sample efficiency, extensive training times, and limited generalization, emphasizing the need for a balance between data-driven and knowledge-driven approaches within the field \cite{Pierson2017Deeplearningrobotics,Suenderhauf2018limitspotentialsdeep}. In general, most data-driven learning methods face limitations in generalization, restricting learning to specific input-output regions.
-
-The learning of a robot's physical attributes often assumes a known mechanical topology, primarily addressed through calibration routines for known kinematic structures \cite{Hollerbach1996CalibrationIndexTaxonomy} and conventional offline system identification methods conducted in controlled environments \cite{Swevers2007Dynamicmodelidentification,LeboutetInertialParameterIdentification}. However, for floating base robots, unlike their fixed-base counterparts, identification procedures are less standardized \cite{Ayusawa2014Identifiabilityidentificationinertial,Lee2022OptimizedSystemIdentification}. Classical robotics research, beyond addressing kinematic calibration and standard inverse kinematics problems, provides limited insights into learning the mechanical arrangement of joints and links that define the kinematic chain, referred to as the mechanical topology.
-
-Calibration and identification processes in robotics rely extensively on off-robot measurement devices, including vision, laser metrology, and motion-capturing systems, to discern properties related to the kinematic structure. This strong dependence on external measurements underscores the complexity of achieving accurate calibration and identification through on-robot sensing alone. Moreover, despite the availability of various sensor signals from modern robots, the challenge of determining the minimum set required for constructing a body model based solely on robot sensing remains unresolved.
-
-In the realm of robotics, there is a burgeoning research area emphasizing the development and maintenance of internal body models as a crucial capability for embodied systems, running parallel to current model learning and conventional system identification approaches. Learning the physical self and cultivating a body schema are pivotal for robotics, enhancing spatial awareness, motor control, and adaptability \cite{Nguyen2021Sensorimotorrepresentationlearning}. The body schema, functioning as a dynamic map, enables precise movements and facilitates efficient learning, allowing robots to navigate diverse environments effectively \cite{Hoffmann2010Bodyschemarobotics}. While recent achievements in learning a body schema for robots have been remarkable, they predominantly rely on (off-body) vision \cite{Hersch2008Onlinelearningbody,MartinezCantin2010Bodyschemaacquisition,Hart2011roboticmodelecological,Lipson2019Taskagnosticself,Chen2022Fullybodyvisual}, with some works incorporating tactile inputs \cite{Li2015Towardsbodyschema,Zenha2018Incrementaladaptationrobot,Gama2021Goaldirectedtactile}. Few efforts explore combinations of modalities, such as vision and tactile input \cite{Fuke2007BodyImageConstructed}, somatosensation (proprioception and touch) \cite{Malinovska2022connectionistmodelassociating}, and consideration of all these modalities together \cite{Nguyen2019Reachingdevelopmentvisuo,Pugach2019BrainInspiredCoding,Lanillos2016Yieldingselfperception}. However, very few works have delved into the need to learn the mechanical topology of the robot and the potential advantages it might bring \cite{Bongard2006Automatedsynthesisbody,Bongard2006Resilientmachinescontinuous}.
-
-\textcolor{blue}{In the evolving landscape of robotics, there exists a critical research gap that centers around the development and maintenance of internal body models, an area gaining prominence alongside current model learning and traditional system identification approaches. Learning the physical self and cultivating a body schema are recognized as pivotal for robotics, enhancing spatial awareness, motor control, and adaptability. Despite recent remarkable achievements in learning a body schema for robots, these efforts primarily lean on (off-body) vision, with limited exploration of other modalities such as tactile inputs. While some works integrate vision and tactile input or consider the combined use of various sensory modalities, there is a notable scarcity of studies delving into the need to learn the mechanical topology of robots and the potential advantages it might offer. Understanding the intricacies of the robot's physical structure, beyond sensory data, remains an underexplored frontier in the pursuit of advancing embodied systems. Bridging this research gap is crucial for the holistic development of robots with enhanced spatial intelligence and adaptive capabilities in diverse environments.}
-
 
 \begin{itemize}
-			
-
 	\item \textbf{Challenges and limitations of current learning Approaches:}
 	\begin{enumerate}
 		\item Most of recent model learning endeavors in the robotics research has, unfortunately, excluded consideration of structural knowledge and rather centered around learning forward and inverse models with global or local focus \cite{NguyenTuong2011Modellearningrobot}.
@@ -607,7 +650,6 @@ In the realm of robotics, there is a burgeoning research area emphasizing the de
 		\item The rise in computational power and the availability of data has brought end-to-end learning methods to prominence. With deep learning as the flagship, these global methods have lead to remarkable results. Yet, they have had the unwanted effect of making deliberately neglecting prior principled knowledge more widespread.
 		\item In spite the prowess and potentials of deep learning approaches, such exclusion of available prior knowledge makes it difficult to determine dedicated neural networks architectures (number of nodes and layers, connectivity, and activation functions) \cite{Baker2017Designingneuralnetwork,Elsken2019Neuralarchitecturesearch} but, just like other learning techniques, deep learning approaches they still face problems related to the high demands of data to train (low sample efficiency), extensive training times, and performance that is tied to the training data, i.e. challenged generalization \cite{Pierson2017Deeplearningrobotics,Suenderhauf2018limitspotentialsdeep}.
 		\item In general, most data-driven learning methods suffer from generalization limitations, confining learning to specific input-output regions.
-		
 	\end{enumerate}	
 	
     \item \textbf{Limitations of conventional system identification:} 
@@ -615,7 +657,6 @@ In the realm of robotics, there is a burgeoning research area emphasizing the de
 		\item The learning of a robot's physical attributes parts from the assumption of a known mechanical topology and is often exclusive to calibration routines for known kinematic structures \cite{Hollerbach1996CalibrationIndexTaxonomy} and conventional offline system identification methods performed in controlled spaces (laboratories). \cite{Swevers2007Dynamicmodelidentification,LeboutetInertialParameterIdentification}.
 		\item In contrast to the conventional identification processes for fixed-base robots, the procedures for floating base robots are not as standardized \cite{Ayusawa2014Identifiabilityidentificationinertial,Lee2022OptimizedSystemIdentification}.    	
 		\item Besides kinematic calibration and standard inverse kinematics problems, classical robotics research offers limited insights on learning the mechanical arrangement of joints and links that define the essence of the kinematic chain, known as the mechanical topology.
-
 	\end{enumerate}
 		
 	\item \textbf{Reliance on External Measurements:}
@@ -623,81 +664,78 @@ In the realm of robotics, there is a burgeoning research area emphasizing the de
 		\item  Calibration and identification heavily depend on off-robot measurement devices, such as vision and motion-capturing systems, to discern kinematic structure properties. Despite various sensor signals from modern robots, determining the minimum set for constructing a body model based on robot sensing only remains unresolved.	
 		\item There is a strong dependence on off-robot measurement devices for calibration and identification, commonly involving exteroceptive measurements like vision, laser metrology, and motion-capturing systems, to determine the properties of the kinematic structure.	
 	\end{enumerate}	
-	
-	
+		
 	\item \textbf{Inference of body knowledge}:
 	\begin{itemize}
-		% "Building computational self-models of robot bodies that capture the entire body morphology and kinematics without prior knowledge of the body configurations is a key challenge"  \cite{Chen2022Fullybodyvisual}
 		\item In parallel to the current model learning and conventional system identification approaches there is a relatively young research area that underscores building and maintaining internal body models as a crucial capability for embodied systems
 		\item Learning the physical self and developing a body schema are pivotal for robotics, enhancing spatial awareness, motor control, and adaptability \cite{Nguyen2021Sensorimotorrepresentationlearning}. The body schema serves as a dynamic map, enabling precise movements and fostering efficient learning. As robots encounter diverse environments, their adaptive body schema allows them to navigate real-world scenarios effectively \cite{Hoffmann2010Bodyschemarobotics}. 
-
 		\item Recent remarkable achievements towards learning a body schema for robots have been made, yet the are strongly dependent bur depend on (off-body) vision \cite{Hersch2008Onlinelearningbody,MartinezCantin2010Bodyschemaacquisition,Hart2011roboticmodelecological,Lipson2019Taskagnosticself,Chen2022Fullybodyvisual,Sturm2009Bodyschemalearning}
 		\item Some other works require tactile inputs\cite{Li2015Towardsbodyschema,Zenha2018Incrementaladaptationrobot,Gama2021Goaldirectedtactile}
 		\item Few efforts explore combinations of these modalities, like the combination of vision and tactile input\cite{Fuke2007BodyImageConstructed}, somatosensation (proprioception and touch)\cite{Malinovska2022connectionistmodelassociating}, and the consideration of all these modalities \cite{Nguyen2019Reachingdevelopmentvisuo,Pugach2019BrainInspiredCoding,Lanillos2016Yieldingselfperception}
-
-
 		\item As stressed in current works \cite{Chen2022Fullybodyvisual}, and in spite of the very much desired distributed and multimodal properties of a body schema, in robotics it is certainly relevant to capture the body morphology.
 		\item Very few works have even contemplated the need to learn the mechanical topology of the robot and the advantages it might bring \cite{Bongard2006Automatedsynthesisbody,Bongard2006Resilientmachinescontinuous}
 	\end{itemize}	
 	
-	
 	\item \textbf{Research Gaps:}
 	\begin{enumerate}
 		\item No clear definition of what the robotic schema is and how to construct it
-		
-		\item Among the various proprioceptive and exteroceptive signals provided by modern robots' sensor suites, the determination of a fundamental set necessary to construct a body schema is yet to be established.		
-		
-		%\item For embodied systems, the integration of state-of-the-art machine learning techniques with available prior information  and well-established first-order principles from mechanics for more effective and efficient learning algorithms remains an area with many opportunities for development that can alleviate data needs, enhance generalization capabilities, and simultaneously provide more information about the body structure and its properties. Only recently, have interesting insights \cite{Geist2021Structuredlearningrigid} and works \cite{Lutter2023Combiningphysicsdeep} appeared that address this in depth.
-		
+		\item Among the various proprioceptive and exteroceptive signals provided by modern robots' sensor suites, the determination of a fundamental set necessary to construct a body schema is yet to be established.				
 		\item Identifying crucial research challenges in robotics involves delving into the integration of cutting-edge machine learning techniques with existing prior information and well-established first-order principles from mechanics, aiming to develop more effective and efficient learning algorithms for embodied systems. This area presents numerous opportunities for development, offering potential solutions to address data requirements, improve generalization capabilities, and gain deeper insights into body structure and properties. Recent contributions, such as the insightful work by Geist et al. \cite{Geist2021Structuredlearningrigid} and the comprehensive study by Lutter et al. \cite{Lutter2023Combiningphysicsdeep}, have started to address these challenges in depth, shedding light on promising avenues for advancement in robotics research.
-		
-				
-		%\item Despite the recognized significance of frameworks that capture structural properties of physical systems.
-
 		\item Unclear understanding of how object handling extends the robotic body schema
-		
 		\item Limited exploration of the mechanical arrangement of joints and links (mechanical topology).
-
 		\item Leveraging engineering approaches for system identification and modern online learning techniques to provide a first realized robot body schema has not been extensively explored.
-
 		\item There is a lack of a unifying scheme that narrows the gap to define the relevant learning stages and their corresponding integration required to produce a robot body schema from  knowledge about the sensorimotor signals and first-order principles that captures essential properties of the robot body (physical self).
-
 		\item Despite the general consensus that embodiment plays a crucial role in shaping the relationships among sensorimotor signals, the connections between sensorimotor regularities and body structural knowledge in robotics remain poorly understood \cite{Jacquey2019Sensorimotorcontingenciesas}. A desired method addressing this gap should not only acknowledge the variability in statistical properties of signals but also demonstrate plasticity to adapt to different motion policies and accurately reflect these effects.
-
-%		\item While there is a general consensus that embodiment shapes the relationships among sensorimotor signals, the connections between sensorimotor regularities and body structural knowledge in robotics are not well understood \cite{Jacquey2019Sensorimotorcontingenciesas}.
-%		\item As the statistical properties of signals and their relationships may vary depending on the motion policy, a desired method should exhibit plasticity to reflect these effects.
-		
 	\end{enumerate}
-
-%	\item \redtext{Additional points to consider:}
-%	\begin{itemize}
-%		\item \redtext{Exploration methodologies designed to collect data are inherently limited by the stringent requirement to ensure the safety of the robot and potential humans in proximity.}
-%		\item \redtext{The understanding of how the handling and manipulation of objects extend the robotic body schema remains unclear.}
-%	\end{itemize}
-	
 \end{itemize}
 
 \newpage
-	
 \pagebreak
-\newpage\subsection*{Research Questions and Contributions}
+\subsection*{Research Questions and Contributions}
 
 \subsubsection*{Research questions}
-Overall the research questions addressed in this thesis pertain the learning of the robotic body schema, at least from the engineering perspective. In particular:
-%---
--\begin{shaded}
-	\question{Which measurements are required to fully automate robot kinematics and inverse dynamics learning based on knowing only the adjacency graph along with kinematic and dynamic first-order principles?}
-\end{shaded}
-%---
+
+%--
 \begin{shaded}
-	\question{How to transform robot system identification or end-to-end learning with meta parameter guessing into an automated learning scheme that determines both the structure and dynamical properties of the robot with minimal information?}
+	\question{How to synergistically integrate machine learning methods and principled knowledge to enhance the autonomous online learning of body models for physical systems?}
 \end{shaded}
-%---
+% ---
 \begin{shaded}
-%	\question{How can information and graph theory be leveraged to devise a graphical representation of the proprioceptive signals of a robot from which properties of the robot's body can be inferred?}
-	\question{How to leverage the inherent structure of the robot's sensorimotor system to gradually develop an understanding of the body structure despite being initially oblivious to its physical characteristics?}
+	\question{How to leverage the structure imposed by a robot's embodiment on its sensorimotor signals to support the gradual development of a fundamental understanding of the body structure?}
 \end{shaded}
-%---
+% ---
+\begin{shaded}
+	\question{Which minimal set of sensor modalities are necessary and sufficient to enable the autonomous learning of fundamental properties of a robot's morphology?}
+\end{shaded}
+% --
+\begin{shaded}
+	\question{How can robots autonomously acquire and adapt knowledge about their body structure using essential proprioceptive signals, without depending on external sensors?}
+\end{shaded}
+% ---
+
+%\hrule
+%%---
+%\begin{shaded}
+%	\question{Which measurements are required to fully automate robot kinematics and inverse dynamics learning based on knowing only the adjacency graph along with kinematic and dynamic first-order principles?}
+%\end{shaded}
+%%---
+%
+%\begin{shaded}
+%	\question{How to transform classical robot system identification into a series of modular problems supported ba data-driven learning that leverage robot proprioception and first-order principles to infer fundamental features of the robot body schema?}
+%\end{shaded}
+%
+%
+%\begin{shaded}
+%%	\question{How can information and graph theory be leveraged to devise a graphical representation of the proprioceptive signals of a robot from which properties of the robot's body can be inferred?}
+%	\question{How to leverage the inherent structure of the robot's sensorimotor system to gradually develop an understanding of the body structure despite being initially oblivious to its physical characteristics?}
+%\end{shaded}
+%%---
+%\begin{shaded}
+%	\question{How to transform robot system identification or end-to-end learning with meta parameter guessing into an automated learning scheme that determines both the structure and dynamical properties of the robot with minimal information?}
+%\end{shaded}
+%%---
+
+\hrule
 
 \subsubsection*{Contribution 1: Robot body structure as a learning problem}
 This thesis
@@ -888,9 +926,89 @@ See abstract
 % -------------------------------------------- SECTION ---------------------------------------------|
 %                                                 |                                                 |
 % ===================================================================================================
+\newpage
 \section*{Conclusion}
+
+\subsection*{Summary}
+This dissertation centered on the acquisition of fundamental properties related to a robot's body morphology, with a focus on three key concepts: the body schema, model learning, and first-order principles. Throughout the discussions, significant emphasis was placed on the crucial role of integrating prior structural information into learning schemes to enhance their performance. The dissertation also highlighted the significance of a robot's ability to construct and maintain a body schema, providing them with heightened bodily awareness and improving capabilities in locomotion, motion planning, and interaction. In summary, the various chapters covered the following:
+\begin{itemize}
+	\item The \textit{Theoretical Foundations} chapter explored a versatile set of tools employed to construct a body schema. These tools were drawn from a broad spectrum of disciplines, encompassing state-of-the-art online learning methods, techniques for network topology inference, and analytical approaches derived from graph theory and information theory, as well as methods from differential geometry.
+	\item The \textit{Methodology} chapter's discussion introduced the reformulation of the robot system identification problem as a sequence of learning problems, guided by proprioceptive robot data and relevant first-order principles. It outlined the close connection between this reformulation and the learning of crucial aspects of a robot's body schema. The chapter covered the presentation of mechanical topology, kinematic characterization, and the learning of physically feasible inertial parameters for both fixed and floating base tree-structured robots.
+	\item The \textit{Results} chapter presented the outcomes of both virtual and physical experiments. It demonstrated the inference of a robot's mechanical topology through the analysis of proprioceptive signals, showcasing the learning of joint axes' locations and orientations as a consequential outcome. The presented results encompassed robot arms, hexapods, and humanoid robots, providing support for the outlined claims. Furthermore, the chapter introduced the online learning of physically feasible inertial parameters, validated through experiments conducted on a real seven-degree-of-freedom manipulator.
+	\item The \textit{Discussion} chapter delved into various aspects, with particular emphasis on the impact of excitation and sensor noise on the learning outcomes. Additionally, it addressed challenges related to the robot's structure and the types of joints, explored the interplay between motion policy and mutual information, evaluated sampling efficiency concerning the accuracy of estimated body properties, discussed the observability of parameters, and provided a comparison to end-to-end learning approaches.
+\end{itemize}
+\redtext{Summarize overall argument or key takeaways}
+
+\subsection*{Revisiting the research questions}
+\redtext{Show how the aims and objectives have been addressed}
+
+
+\question{How to synergistically integrate machine learning methods and principled knowledge to enhance the autonomous online learning of body models for physical systems?}\\
+\textbf{A.} 
+
+
+\question{How to leverage the structure imposed by a robot's embodiment on its sensorimotor signals to support the gradual development of a fundamental understanding of the body structure?}\\
+\textbf{A.} This work showed that tools from information and graph theory can be used to uncover and study the pairwise relationships among the robot's proprioceptive sensorimotor signals. The results lead to the proprioceptive information graph, from which the mechanical topology of the robot was successfully extracted.
+
+
+\question{Which minimal set of sensor modalities are necessary and sufficient to enable the autonomous learning of fundamental properties of a robot's morphology?}\\
+
+\textbf{A.} As with many works in the literature, the value of multimodal sensory set is recognized to have increased value to learn the body schema. Yet, the results showed that only proprioception is of utmost importance to characterized the kinematic and inertial properties of the body.
+
+% --
+\begin{shaded}
+	\question{How can robots autonomously acquire and adapt knowledge about their body structure using exclusively essential proprioceptive signals?}
+\end{shaded}
+
+\subsection*{Contributions and limitations}
+\redtext{Explain the contribution and limitations of the study}
+
+The assumptions taken, methods developed, and claims made in this dissertation are applicable only the classe of tree-like robotic structures with revolute joints and fixed or floating bases. Parallel mechanisms were not consider and so the applicability of the framework presented here is nor guaranteed to work. 
+
+\begin{itemize}
+\item[C1] Unifies essential proprioceptive signals, including afferent and efferent sensory inputs and commands, to enable robots in autonomously acquiring, monitoring, and adapting knowledge about their body structure, eliminating the dependence on external off-body sensors.
+\item[C2] Restructures the processes of robot kinematic calibration and parametric robot system identification into a machine-learning-friendly computational graph. The graph's modular topology, abstracted into a sequential online learning pipeline, integrates streams of proprioceptive signals with first-order principles, derived from the system's embodiment. This facilitates the extraction of fundamental features of the robot body schema.
+\item[C3]  Examines the fundamental proprioceptive signals to characterize key morphological properties in tree-like floating base structures. The mechanical topology, initially inferred using model-free information-theoretic measures, is simultaneously validated and utilized to establish the kinematic description of the robot's body, independent of external calibration devices.
+\item[C4] Augments the robot body schema description by determining the inertial properties of links within the inferred morphology. Introducing a method to learn these properties online, considering their existence on the Riemannian manifold of symmetric positive definite matrices, ensures continuous physical feasibility.
+\end{itemize}
+
+
+\subsection*{Future work}
+\redtext{Questions for further research}
+
+\redtext{\textbf{Do NOT introduce any new data or arguments.}}
+
+As it stands, robots are mostly rigid structures with and admittedly narrower spectrum of signals in comparison to biological beings. It makes sense to associate the body schema of robots with the models and methods from rigid multibody dynamics and system identification. Yet, as robots evolve and incorporate more sensing modalities and whose designs include more advanced actuation mechanisms that allow for elastic components then rigid body modeling starts covering only certain aspects of the models and the schema needs to be adapted to count for such features
+
+
+
+A core function of the conclusion chapter is to synthesise all major points covered in your study and to tell the reader what they should take away from your work. Basically, you need to tell them what you found, why it’s valuable, how it can be applied, and what further research can be done.
+
+\say{This chapter will conclude the study by summarising the key research findings in relation to the research aims and questions and discussing the value and contribution thereof. It will also review the limitations of the study and propose opportunities for future research.}
+
 \begin{itemize}
 	\item One potential application area: Self-discovery in robots is crucial for applications in prosthetics and wearable robotics, allowing devices to align with the user's body for natural and comfortable support.
+\end{itemize}
+
+\subsection*{Impact}
+\redtext{Explain the significance and implications of the findings}
+
+% ---
+\begin{itemize}
+	
+	%	\item \redtext{While acknowledging the undeniable versatility of end-to-end learning's representational power, this work scrutinizes its applicability in physical systems when lacking principled knowledge. In contrast, the arguments and findings presented here reveal avenues for machine learning in embodied systems. This research exposes the untapped potential arising from the synergistic integration of existing structural knowledge with data-driven methods}.
+	\item While acknowledging the undeniable versatility and representational power of current end-to-end learning approaches, this work incites to reconsider their naive application to physical systems and promote the assessment of their limitations when they deliberately exclude principled knowledge. In contrast, the arguments and findings presented here reveal avenues for machine learning frameworks for embodied systems. This research exposes the untapped potential arising from the synergistic integration of existing structural knowledge with data-driven method.
+	
+	\item The outlined concepts and methods demonstrate that crucial aspects of a robot's body schema can be deduced through a fundamental set of proprioceptive signals. As future mobile robots are anticipated to feature a diverse, enhanced, and reliable array of on-board sensing modalities, extending beyond proprioception, the findings discussed in this thesis serve as a catalyst for research into the integration of these modalities. This integration, coupled with the online learning of body morphological and dynamic properties, holds the promise of refining and adapting body models, ultimately empowering robots with heightened levels of autonomy.
+	
+	\item \redtext{This study contributes to an emerging research area that underscores building and maintaining a body schema as a crucial capability for embodied systems. Such a capability pertains robots characterized by conventional, immutable structures and a novel category of mechanical systems exhibiting dynamic morphologies and diverse multimodal sensory modalities. These systems will evolve their sense of self, recognizing the affordances inherent in their bodies.}.
+	
+	
+	%	\item \redtext{This capability implies that future embodied robotic agents will have to leverage their sensorimotor system’s inherent structure to gradually develop an understanding of their body despite being initially oblivious to its physical characteristics.}
+	
+	%	\item \TODO The integration of several methods, from state of the art, gradient descent, to optimization on Riemannian manifolds, including the network topology inference using information-theoretic measures enabled the definition of a pipeline that transforms robot system identification into a learning problem that provides these fundamental properties of the body schema and need not be constrained to a laboratory and that the technology and methods exist to infer the robot morphology and characterize its inertial properties producing physically feasible sets of the inertial parameters by learning on the appropriate space.
+	
+	%	\item The work in this thesis proves that indeed the pairwise relationships among the proprioceptive signals can be represented and analyzed with information-theoretic measures that enable their study under the scope of the information structure emerging from the robot embodiment.
 \end{itemize}
 
 
