@@ -124,6 +124,7 @@
 \usepackage{varwidth}
 
 \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+\DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
 
 
 
@@ -301,7 +302,7 @@
 %\printnomenclature
 
 
-%\input{nomenclature}
+\input{nomenclature}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % the main chapters
@@ -314,16 +315,19 @@
 
 \chapter{Introduction}\label{ch:introduction}
 \input{chapter/introduction/introduction.tex}
-\chapter{Literature Review}
-\input{chapter/literature_review/literature_review.tex}
-\chapter{Theoretical Framework: Fundamental concepts and tools}
-´\chapter{Methods: How to learn the robotic body schema}
-\chapter{Results}
-\chapter{Discussion}
-\chapter{Conclusion}
+\chapter{Related Work}
+\input{chapter/literature_review/related_work.tex}
+\chapter{Theoretical Foundations}
+\input{chapter/theoretical_foundations/theoretical_foundations.tex}
+%´\chapter{Methods: How to learn the robotic body schema}
+%\chapter{Results}
+%\chapter{Discussion}
+%\chapter{Conclusion}
+%
+%\chapter{Test Chapter}
+%\input{chapter/test_chapter/test_chapter}
 
-\chapter{Test Chapter}
-\input{chapter/test_chapter/test_chapter}
+
 %\chapter{Introduction}\label{ch:introduction}
 %\input{chapter/introduction/root}
 %\chapter{Theoretical Framework}\label{ch:foundations}
@@ -374,9 +378,9 @@
 	\phantomsection 
 \fi
 \addcontentsline{toc}{chapter}{\bibname}
+
 %\bibliographystyle{alpha}
 \bibliographystyle{./IEEEtran}
-%\bibliography{bibliography/bibliography}
 \bibliography{bibliography/dissertation_bibliography}
 %\printbibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
