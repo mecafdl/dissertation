@@ -65,6 +65,7 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{array}
 \usepackage{arydshln}
 %\usepackage[normal]{subfigure}
@@ -100,7 +101,7 @@
 \usepackage{multicol}
 \usepackage{multirow}
 \usepackage{myRCS}
-\usepackage[skip=10pt plus1pt, indent=20pt]{parskip}
+%\usepackage[skip=10pt plus1pt, indent=20pt]{parskip}
 \usepackage{pifont}
 \usepackage[grey,bookman]{quotchap} % Add-on for quotes at begin of chapter (not included in TeTex!!!)
 
@@ -122,6 +123,7 @@
 \usepackage{titlecaps}
 \usepackage[normalem]{ulem}
 \usepackage{varwidth}
+\usepackage{xcolor}
 
 \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
 \DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
@@ -242,6 +244,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % misc. helpers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{definition}
+\newtheorem{assumption}{Assumption}[chapter]
 \newtheorem{definition}{Definition}[chapter]
 
 \setcounter{tocdepth}{2}
@@ -321,7 +325,8 @@
 \input{chapter/theoretical_foundations/theoretical_foundations.tex}
 %´\chapter{Methods: How to learn the robotic body schema}
 %\chapter{Results}
-%\chapter{Discussion}
+\chapter{Discussion}
+The results and approach presented in this work bear resemblance to the work by Sturm \cite{Sturm2009Bodyschemalearning}, Hersch\cite{Hersch2008Onlinelearningbody}, Bongard \cite{Bongard2006Resilientmachinescontinuous}, and Lipson \cite{Chen2022Fullybodyvisual}
 %\chapter{Conclusion}
 %
 %\chapter{Test Chapter}
