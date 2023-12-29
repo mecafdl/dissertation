@@ -110,7 +110,13 @@
 %\singlespacing
 \onehalfspacing
 
-
+\usepackage{blindtext}
+%\usepackage{draftwatermark}
+\usepackage{enumitem}
+\usepackage{framed}
+\usepackage{soul}
+\usepackage{tikz,tkz-tab,amsmath}
+\usepackage{wrapfig}
 
 
 
@@ -153,6 +159,7 @@
 
 %\usepackage{titlesec, blindtext, color}
 \definecolor{gray75}{gray}{0.75}
+\definecolor{shadecolor}{gray}{0.9}
 %\newcommand{\hsp}{\hspace{20pt}}
 %\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
 
@@ -319,12 +326,25 @@
 
 \chapter{Introduction}\label{ch:introduction}
 \input{chapter/introduction/introduction.tex}
+
 \chapter{Related Work}
 \input{chapter/literature_review/related_work.tex}
+
 \chapter{Theoretical Foundations}
 \input{chapter/theoretical_foundations/theoretical_foundations.tex}
-%´\chapter{Methods: How to learn the robotic body schema}
-%\chapter{Results}
+
+\chapter{Methods: How to learn the robotic body schema}
+We envision learning the robotic body schema as a series of learning stages that the robot must go through to discover core features of its body morphology. These features are part of the set 
+% ---
+\begin{equation}
+	\mathcal{S} = \left\lbrace N, \mathcal{G}, \bm{A}, \bm{\lambda}, \bm{\theta} \right \rbrace
+	\label{eq:self_elements},
+\end{equation}
+% ---
+whose elements are the number of bodies $N$ in the kinematic chain, the graph $\mathcal{G}$ that describes the sensorimotor interactions that result from the robot's embodiment, the adjacency matrix $\bm{A}$ that captures the topology ---mechanical arrangement of the bodies and joints---, its kinematic description (basic geometry) $\bm{\lambda}$, and the inertial parameters of the links $\bm{\theta}$. Thus, a robot capable of acquiring knowledge of the elements of $\mathcal{S}$ is an agent that builds an understanding of its physical self. An overview of this process is depicted in Fig.~S1.
+
+\chapter{Results}
+
 \chapter{Discussion}
 The results and approach presented in this work bear resemblance to the work by Sturm \cite{Sturm2009Bodyschemalearning}, Hersch\cite{Hersch2008Onlinelearningbody}, Bongard \cite{Bongard2006Resilientmachinescontinuous}, and Lipson \cite{Chen2022Fullybodyvisual}
 %\chapter{Conclusion}

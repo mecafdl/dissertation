@@ -5,67 +5,24 @@ As mentioned already, the ability of robots to acquire, refine, and adapt body m
 
 As an anchoring point the concept of physical self will be briefly introduced and the relevant features that are pertinent for the discussion will be highlighted. 
 
-First of all this chapter will offer notions about the different interpretations of body knowledge. These encompass the definitions of the physical self and related concepts like emboidment, body morpholgy and the body schema. With the concepts extablished, a RECOPILACION of the important or fundamental features that are depicted by these definitions will be offered. These features will be contrasted against what is conventionally performed in model-based robotics to asses if methods exist to learn these features. To complete the picture, supporting methods to complement inconplete existing methodologies or to find aspecs of the body structure that have not been fully addressed are provided. %Once the concept has been appropriately delineated, basic elements from it will be identified and defined as fundamental components to build any robot body schema 
-
-
-%\begin{itemize}
-%	\item The physical self
-%	\item The body schema
-%	\item Body morphology
-%	\item The ecological self
-%	\item Embodiment
-%	\item Sensorimotor representations
-%\end{itemize}
-%
-%Physical self$\rightarrow$body schema$\rightarrow$Body features encoded in the body schema$\rightarrow$body schema in robotics$\rightarrow$model-based robotics$\rightarrow$kinematic calibration and system identification
+\redtext{First of all this chapter will offer notions about the different interpretations of body knowledge. These encompass the definitions of the physical self and related concepts like emboidment, body morpholgy and the body schema. With the concepts extablished, a RECOPILACION of the important or fundamental features that are depicted by these definitions will be offered. These features will be contrasted against what is conventionally performed in model-based robotics to asses if methods exist to learn these features. To complete the picture, supporting methods to complement inconplete existing methodologies or to find aspecs of the body structure that have not been fully addressed are provided.}
 
 % ===========================================================================================
 %                                           |                                               |
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\section{Body concepts}
+%\part{General body concepts}
+\section{Different views on the body}
 
 
 % SUBSECTION ================================================================================
 \subsection{The physical self}
-
-%The physical self in the context of robotics refers to the embodiment and physical structure of a robot, encompassing its morphology, adaptability, and reconfigurability. The physical self is crucial for a robot's interaction with its environment, task performance, and overall functionality. Research in robotics has emphasized the significance of self-assembly strategies, where autonomous mobile robots can form physical connections with each other to create larger composite robotic entities, enhancing their efficiency and capabilities \cite{OGrady2010Selfassemblystrategies,Ampatzis2009EvolvingSelfAssembly}. Additionally, the ability of a robot to simulate its physical self through fully body visual self-modeling is essential for motion planning, control, and decision-making processes \cite{Chen2022Fullybodyvisual}. Furthermore, the adaptability and modularity of a robot's physical self enable it to actively adapt to different environments, tasks, and obstacles, enhancing its overall performance and capabilities \cite{Cappelle2016MorphologicalModularityCan}. 
-%
-%The physical self encompasses the intricate interplay of various components, each contributing to an individual's subjective perception and evaluation of their own body. At its core is body awareness, a conscious and connected understanding of the body that includes aspects such as position, movement, and internal cues like hunger, thirst, and fatigue. This awareness is associated with numerous benefits, ranging from enhanced balance and stability to positive effects on emotional well-being and pain management. Within the realm of the physical self, several key factors shape an individual's self-perception:
-%
-%Firstly, body image is a mental representation encompassing beliefs, attitudes, and feelings regarding one's physical appearance. Influenced by genetic, cultural, and experiential factors, body image plays a pivotal role in shaping how individuals perceive themselves.
-%
-%Secondly, body schema represents an unconscious awareness of body position and posture in space, crucial for seamless tasks such as walking, reaching, and object manipulation. This internal map aids in coordinating movements and interacting effectively with the environment.
-%
-%Thirdly, body ownership involves the subjective experience of feeling that one's body belongs to them. This sense is rooted in the integration of sensory information, including proprioception, interoception, and exteroception, contributing to a cohesive and unified perception of the physical self.
-%
-%Lastly, body competence reflects an individual's confidence in controlling and using their body. Influenced by factors like physical fitness, motor skills, and self-efficacy, body competence plays a role in shaping one's overall sense of mastery and control over their physical capabilities. Together, these facets contribute to the holistic understanding of the physical self, encompassing not only appearance and abilities but also the intricate connections and perceptions that define our relationship with our bodies.
-%
-%\hrule
-
 The concept of the physical self is rooted in human psychology and consciousness \cite{Tsakiris2016multisensorybasisself,Overgaard2023selfitsbody}. It typically refers to an individual's perception and evaluation of their own physical body, encompassing appearance, abilities, and overall physicality. It involves the subjective experience of one's body and its relation to the environment, supported by sensory modalities like proprioception, touch, and interoception (sense of internal bodily sensations). This concept is explored in psychology, cognitive science, and related fields to understand how individuals perceive and interact with their bodies[1].
 
 In the context of robotics, although robots lack subjective experiences, self-awareness, and consciousness, the physical self remains a critical concept. Robots must perceive their bodies and positions in space to operate effectively, particularly in unstructured or dynamic environments. Aspects related to the physical self, such as body morphology, embodiment, and the body schema, are crucial considerations in robotics, see Fig.~\ref{fig:overlapping_concepts}. Body morphology, the physical structure of a robot, significantly influences its design based on intended tasks. For example, a robot designed for exploration might feature legs or wheels, while a robot for assembly line tasks may have a robotic arm \cite{Miller2018EmbodimentSituatednessMorphology}. Embodiment in robotics emphasizes how a robot's physical form and sensory-motor capabilities influence its interaction with the environment, shaping its perception and actions within its surroundings \cite{Wainer2006rolephysicalembodiment}. The concept of the physical self in robotics aligns closely with the body schema, representing an awareness of the robot's body, including the location, orientation, and relative motion of its parts.
 
 In robotics, achieving a sense of the physical self is vital, especially for tasks in dynamic environments. Sensors provide information about the robot's orientation, speed, and acceleration, while actuators enable the robot's body to move, allowing it to learn about its physical capabilities through observed effects on the environment. This information contributes to the creation of a model of the robot's body within its internal representation of the world.
-
-%The term \textit{physical self} typically refers to an individual's perception and evaluation of their own physical body, including its appearance, abilities, and overall physicality. It encompasses the subjective experience of one's own body and how it relates to the surrounding environment. This is supported by sensory modalities such as proprioception, touch, and interoception (sense of our internal bodily sensations). This concept is often explored in psychology, cognitive science, and related fields to understand how individuals perceive and interact with their bodies[1].
-%
-%In the context of robotics, the idea of the physical self is limited in machines, as robots lack subjective experiences, self-awareness, and consciousness. However, the physical self is still a critical concept. Robots need to be able to perceive their own bodies and their position in space in order to operate effectively. This is especially important for robots that are required to perform tasks in unstructured or dynamic environments. Certain aspects related to the physical self, such as body morphology, embodiment, and the body schema, have implications for robotics. The former refers to the physical structure or body morphology of a robot is a critical consideration in its design. Engineers and roboticists carefully design the physical form of robots based on the tasks they are meant to perform. For example, a robot designed for exploration might have a different body morphology, such as legs or wheels, compared to a robot designed for assembly line tasks with a robotic arm[3]. The latter refers, in robotics, to the idea that a robot's physical form and sensory-motor capabilities influence its interaction with the environment. A robot's body and the way it senses and moves play a role in how it perceives and acts within its surroundings[2]. The concept of the physical self in robotics is closely related to the body schema, which is a general term for the personal awareness of one's body, including the location and orientation of its various parts and their relative motion. 
-%
-%In robotics, the physical self is also a critical concept. Robots need to be able to perceive their own bodies and their position in space in order to operate effectively. This is especially important for robots that are required to perform tasks in unstructured or dynamic environments. One way that robots can achieve a sense of their physical self is through the use of sensors. Sensors can provide robots with information about their own bodies, such as their orientation, speed, and acceleration. Another way that robots can achieve a sense of their physical self is through the use of actuators. Actuators can cause the robot's body to move. By observing the effects of its actions on its environment, the robot can learn about its own physical capabilities. This information can then be used to create a model of the robot's body in the robot's internal representation of the world. 
-%
-%
-%In summary, while the concept of the physical self is rooted in human psychology and consciousness Overgaard2023selfitsbody, some of its aspects have practical applications in the design and interaction of robots. Engineers and researchers consider these aspects to create robots that are effective, adaptable, and capable of meaningful interactions in various environments[5].
-
-%Citations:
-%[1] https://theconversation.com/can-robots-ever-have-a-true-sense-of-self-scientists-are-making-progress-112315
-%[2] https://www.researchgate.net/publication/224058163_The_role_of_physical_embodiment_in_human-robot_interaction
-%[3] https://rrl.cse.unr.edu/media/documents/2017/10.10072F978-94-007-7194-9_130-1.pdf
-%[4] https://screenrant.com/robot-body-self-aware-experiment-results-impact/
-%[5] https://www.science.org/doi/10.1126/scirobotics.abn1944
-
 % ---
 \begin{figure}
 	\begin{center}
@@ -94,65 +51,27 @@ In summary, the body morphology of a robot plays a crucial role in its locomotio
 \subsubsection{General intuition}
 The human body relies on a sophisticated neural representation known as the \textit{body schema} to navigate and interact with the surrounding environment, playing a foundational role in shaping the human experience of the physical self and the external world. This dynamic internal map within the brain encodes a multitude of attributes, ensuring the ability to perceive, move, and coordinate the body effectively.
 
-The concept of the body schema has been defined in various ways in the scientific literature. One common definition is that it consists of sensorimotor representations guiding actions \cite{Maravita2003MultisensoryIntegrationBody}. Another widely accepted definition emphasizes the requirement for internal representations of the body's current posture and spatial extension \cite{Vignemont2010Bodyschemabody}. Fundamental to the body schema is the representation of the size and shape of different body parts, allowing for precise and coordinated movements. The brain's ability to accurately map the dimensions of the body contributes to the fluidity of human motion. Additionally, the body schema has been described as a means of obtaining information regarding body position in space from tactile, proprioceptive, visual, and other sensory modalities \cite{Medina2010mapsformspace}. %Sensations related to touch, pressure, temperature, and pain are seamlessly integrated into the body schema, enabling the perception and appropriate response to stimuli from the external environment. The tactile aspect of the body schema contributes to our ability to explore and understand the world through the sense of touch. 
-These definitions illustrate the multifaceted nature of the body schema, encompassing sensorimotor guidance, spatial representation, and the integration of multisensory information.
+The concept of the body schema has been defined in various ways in the scientific literature. One common definition is that it consists of sensorimotor representations guiding actions \cite{Maravita2003MultisensoryIntegrationBody}. Alternatively, it is seen as an internal representations of the body's current posture and spatial extension \cite{Vignemont2010Bodyschemabody}. Fundamental to the body schema is the representation of the size and shape of different body parts, allowing for precise and coordinated movements. The brain's ability to accurately map the dimensions of the body contributes to the fluidity of human motion. Additionally, the body schema has been described as a means of obtaining information regarding body position in space from tactile, proprioceptive, visual, and other sensory modalities \cite{Medina2010mapsformspace}. These definitions illustrate the multifaceted nature of the body schema, encompassing sensorimotor guidance, spatial representation, and the integration of multisensory information.
 
-%The body schema, as a dynamic internal representation, encompasses critical properties that shape the perception of the body and environment. Key features include spatial awareness, providing a continuous sense of body position and orientation. Proprioception allows for the perception of limb positions without visual cues, while motor programs facilitate purposeful movements. Multisensory integration combines information from vision, touch, and proprioception. Adaptability and plasticity enable adjustments through experience and learning. Joint angles and range of motion are crucial for coordinated movement. The incorporation of environmental cues allows responsive and context-specific actions. This multifaceted interplay of properties enables the body schema to play a central role in orchestrating seamless and adaptive interactions with the self and surroundings \cite{Vignemont20213C1Whatisbody,Morasso2015Revisitingbodyschema}.
-
-The body schema, a complex and dynamic representation, plays a fundamental role in facilitating our effective interaction with the world. This intricate construct incorporates various properties crucial for our sensory and motor experiences. Spatial properties, encompassing the position, posture, overall shape, and size of individual body parts, as well as the body's relationship to gravity and the environment, form the foundation of the body schema. Kinesthetic properties involve the sensations of movement, touch, generated muscle force, and the resistance encountered during interactions. Vestibular properties contribute to our sense of balance, orientation in space, and awareness of the body's movement through space. Somatosensory properties, including the perception of temperature, pain, and pressure, as well as awareness of the body's surface and internal organs, further enrich the body schema. Additionally, the representation of mass, inertia, muscle forces, object properties, environmental properties, body ownership, and body boundaries collectively shape this intricate representation. Adaptability and plasticity enable adjustments through experience and learning. By integrating these diverse elements, the body schema enables humans to navigate their surroundings, interact with objects, and maintain a coherent sense of self in dynamic environments \cite{Vignemont20213C1Whatisbody,Morasso2015Revisitingbodyschema,Asada2018168Proprioceptionbodyschema}.
+The body schema, a complex and dynamic representation, plays a fundamental role in facilitating our effective interaction with the world. This intricate construct incorporates various properties crucial for our sensory and motor experiences. Spatial properties, encompassing the position, posture, overall shape, and size of individual body parts, as well as the body's relationship to gravity and the environment, form the foundation of the body schema. Kinesthetic properties involve the sensations of movement, touch, generated muscle force, and the resistance encountered during interactions. Vestibular properties contribute to our sense of balance, orientation in space, and awareness of the body's movement through space. Somatosensory properties, including the perception of temperature, pain, and pressure, as well as awareness of the body's surface and internal organs, further enrich the body schema. \redtext{Additionally, the representation of mass, inertia, muscle forces, object properties, environmental properties, body ownership, and body boundaries collectively shape this intricate representation REF}. Adaptability and plasticity enable adjustments through experience and learning. By integrating these diverse elements, the body schema enables humans to navigate their surroundings, interact with objects, and maintain a coherent sense of self in dynamic environments \cite{Vignemont20213C1Whatisbody,Morasso2015Revisitingbodyschema,Asada2018168Proprioceptionbodyschema}.
 
 
 \subsubsection{The robot body schema}
-Generally, the notion of body schema comprises sensorimotor representations of the body used to guide movement and action. For robotics this is, however, a far too general definition and incites the the question: \textit{what concretely is the body schema in robotics?}. From the various takes on this topic, efforts to consolidate an answer to this baffling question were provided in the comprehensive work by Hoffmann et al. \cite{Hoffmann2010Bodyschemarobotics}. Relevant to this dissertation is the discussion that the authors provide on explicit, articulated, and implicit models of the body schema. The first two categories pertain models where there is a direct correspondence between the body parts of
-the robot and their representation in the sensors use to instantiate them measure variables associated to properties of the physical body. The main difference being that articulated models \cite{Grush2004emulationtheoryrepresentation} emphasize that the signals ought to come from embodied sensors. This latter property is referred as subjective or situated body schema by \cite{Hersch2008Onlinelearningbody}. The third category, implicit body schema, is more inline with traditional model learning methods in robotics and is aimed at constructing sensorimotor mappings.
+Generally, the notion of body schema comprises sensorimotor representations of the body used to guide movement and action \cite{Asada2018168Proprioceptionbodyschema}. For robotics this is, however, a far too general definition and incites the question: \textit{what concretely is the body schema in robotics?} From the various takes on this topic, efforts to consolidate an answer to this baffling question were provided in the comprehensive work by Hoffmann et al. \cite{Hoffmann2010Bodyschemarobotics}. Relevant to this dissertation is the discussion that the authors provide on explicit, articulated, and implicit models of the body schema. The first two categories correspond to models where there is a direct correspondence between the body parts of
+the robot and their representation in the model, given measured variables that can be associated to properties of the physical body. The main difference being that articulated models \cite{Grush2004emulationtheoryrepresentation} emphasize that the signals ought to come from embodied sensors. This latter property has been referred as subjective or situated body schema \cite{Hersch2008Onlinelearningbody}. The third category, implicit body schema, is more inline with traditional model learning methods in robotics and is aimed at constructing sensorimotor mappings.
 
-%Although the authors reluctantly consider the explicit and objective body representations derived from model-based robotics are called  as they attempt to express the physical reality of the robot. More recently in \cite{Neemeh2021Bodyschemaautonomous}
-
-As accentuated by the rich literature in model-based robotics, models of robots are required to achieve fine control and perform complex tasks. These models should include as much information as possible, explicit or implicit, of their body morphology (its embodiment). Most of the efforts associated with learning the body schema agree on the argument that an embodied robotic agent must autonomously learn and refine its body schema mainly proprioceptive information \cite{Morasso2015Revisitingbodyschema, Hoffmann2010Bodyschemarobotics}. Most the focus on calibration of a known kinematic structure \redtext{REF} with only few addressing the discovery of the body topology \redtext{REF}. \redtext{It is worth mentioning that there is no solid consensus in the literature about whether the body schema includes the inertial description of the parts composing the body. Yet, given that the body schema is used for planning and executing movements and that the sensation of effort (force and torque) is part of proprioception, it seems reasonable to assume the body schema must include such a representation.} Therefore, the question remains of what constitutes a body schema in robotics. %In this work we will bring back the discussion to the model-based robotics real and pair it with the understanding of the articulated model
-
-To continue the discussion in this work the following conceptual definition of the robot body schema will be used:
-
-\begin{definition}\label{def:robot_body_schema}
-	%	The robot body schema is a representation of its body morphology that is mainly built from proprioceptive information. This representation includes the arrangement, geometry, and inertial properties of its parts and grants the ability to perceive the relative positions of limbs, and plan and execute movements without relying on visual cues. Adaptive and self-acquired, the robot body schema is a fundamental part of forward and inverse models used to plan and predict sensorimotor interactions beyond proprioception.
-	The robot body schema is a representation of its body morphology primarily constructed from proprioceptive information. This representation encompasses the arrangement, geometry, and inertial properties of its parts, providing the capacity to perceive the relative positions of limbs and to plan and execute movements without relying on visual cues. Adaptive and self-acquired, the robot body schema plays a fundamental role in forward and inverse models, aiding in the planning and prediction of sensorimotor interactions beyond proprioception.
-\end{definition}
-
-%Ultimately, heightened spatial awareness is a product of the body schema, facilitating navigation and interaction with the environment. This attribute enables agents to move through space with precision, avoiding obstacles and adapting to changing surroundings, serving as a dynamic guide that shapes spatial understanding and enhances the ability to navigate the world.
-
-%\subsubsection{Properties}
-%The most important properties of the body schema include:
+%As accentuated by the rich literature in model-based robotics, models of robots are required to achieve fine control and perform complex tasks. These models should include as much information as possible, explicit or implicit, of their body morphology (its embodiment). Most of the efforts associated with learning the body schema agree on the argument that an embodied robotic agent must autonomously learn and refine its body schema relying mainly proprioceptive information \cite{Morasso2015Revisitingbodyschema, Hoffmann2010Bodyschemarobotics}. Yet, in spite of the many bodily features encoded in the body schema, the majority of research focus on calibration of a known kinematic structure \redtext{REF} and only a few works address the discovery of the body topology \redtext{REF}. \redtext{It is worth mentioning that there is no solid consensus in the literature about whether the body schema includes the inertial description of the parts composing the body. Yet, given that the body schema is used for planning and executing movements and that the sensation of effort (force and torque) is part of proprioception, it seems reasonable to assume the body schema must incorporates such a representation.} ultimately, the question remains of what constitutes a body schema in robotics. 
 %
-%1. Representation of the body's spatial properties: This encompasses the length of limbs and limb segments, their arrangement, the configuration of the segments in space, and the shape of the body surface.
+%To continue the discussion in this work the following conceptual definition of the robot body schema will be used:
 %
-%2. Integration of information from regions of the body and external space: The body schema is a set of fronto-parietal networks that integrate information originating from regions of the body and external space in a way that is functionally relevant to specific actions performed by different body parts.
-%
-%3. Short-term plasticity and reorganization: The body schema is characterized by short-term plasticity and reorganization, as demonstrated by the quick integration of tools into the body schema.
-%
-%4. Action-oriented overall coherence: It achieves an abstract or amodal representation while preserving an action-oriented overall coherence, allowing for the representation of the body for action.
-%
-%These properties highlight the dynamic and functional nature of the body schema, emphasizing its role in representing the body for action and its integration of spatial and sensory information from both the body and the external environment[1][3].
-%
-%Citations:
-%[1] https://www.frontiersin.org/articles/10.3389/fnhum.2015.00083
-%[2] https://academic.oup.com/book/41218/chapter-abstract/350687373?redirectedFrom=fulltext
-%[3] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4330890/
-%[4] https://psychology.fandom.com/wiki/Body_schema
-%[5] https://academic.oup.com/book/41218/chapter/350687373
-%The human body relies on an intricate neural representation known as the \emph{body schema} to navigate and interact with the surrounding environment. It plays a foundational role in shaping human experience of the physical self and the external world. This dynamic internal map within the brain encodes a multitude of attributes, ensuring our ability to perceive, move, and coordinate our bodies effectively.
-%The concept of body schema has been defined in various ways in the scientific literature. One common definition is that the body schema consists of sensorimotor representations of the body that guide actions \cite{Maravita2003MultisensoryIntegrationBody}. Another widely accepted definition emphasizes the requirement for internal representation(s) of the body's current posture and spatial extension \cite{Vignemont2010Bodyschemabody}. Fundamental to the body schema is the representation of the size and shape of different body parts. This encoding allows for precise and coordinated movements. The brain's ability to accurately map the dimensions of the body contributes to the fluidity of human motion. . Additionally, the body schema has been described as a means of obtaining information regarding body position in space from tactile, proprioceptive, visual and other sensory modalities \cite{Medina2010mapsformspace}. Sensations related to touch, pressure, temperature, and pain are seamlessly integrated into the body schema. This incorporation allows for the perception and appropriate response to stimuli from the external environment. The tactile aspect of the body schema contributes to our ability to explore and understand the world through the sense of touch. These definitions highlight the multifaceted nature of the body schema, encompassing sensorimotor guidance, spatial representation, and the integration of multisensory information. An embodied robotic agent must autonomously learn and refine its body schema as a model representation of its morphology.The body schema is mainly built from proprioceptive information\cite{Morasso2015Revisitingbodyschema, Hoffmann2010Bodyschemarobotics}---as it grants us the ability to perceive the relative positions of our limbs without relying on visual cues--- and generally refers to an internal representation of the body, including the arrangement and geometry of its parts. Adaptive and self-acquired, the body schema is part of an agent's internal forward and inverse models and is used to plan and predict sensorimotor interactions. Ultimately, a heightened spatial awareness is a product of the body schema, facilitating navigation and interaction with the environment. This attribute enables agents to move through space with precision, avoiding obstacles and adapting to changing surroundings. The body schema serves as a dynamic guide, shaping spatial understanding and enhancing the ability to navigate the world.
-% The body schema encodes information about joint angles and movements, providing the foundation for precise motor control.
+%\begin{definition}\label{def:robot_body_schema}
+%	%	The robot body schema is a representation of its body morphology that is mainly built from proprioceptive information. This representation includes the arrangement, geometry, and inertial properties of its parts and grants the ability to perceive the relative positions of limbs, and plan and execute movements without relying on visual cues. Adaptive and self-acquired, the robot body schema is a fundamental part of forward and inverse models used to plan and predict sensorimotor interactions beyond proprioception.
+%	The robot body schema is a representation of its body morphology primarily constructed from proprioceptive information. This representation encompasses the arrangement, geometry, and inertial properties of its parts, providing the capacity to perceive the relative positions of limbs and to plan and execute movements without relying on visual cues. Adaptive and self-acquired, the robot body schema plays a fundamental role in forward and inverse models, aiding in the planning and prediction of sensorimotor interactions beyond proprioception.
+%\end{definition}
+%% ---
 
-
+% SUBSECTION ================================================================================
 \subsection{Embodiment}
-
-%In the field of robotics, embodiment refers to the concept of how a robot's physical form and sensory-motor capabilities influence its interaction with the environment, shaping its perception and actions within its surroundings\cite{Duffy2000Intelligentrobotsquestion}. It involves the robot's physical structure, its situatedness, and its morphology, and how these factors go beyond mere functionality to impact human-robot interaction \cite{Miller2018EmbodimentSituatednessMorphology}. 
-
-%In the realm of robotics, it represents a pivotal concept that transcends the mere mechanics of machinery. It encapsulates the profound idea of providing robots with a physical form and seamlessly intertwining this form with their sensory and motor capabilities. The essence of embodiment lies in acknowledging the significance of a robot's body, understanding its role in shaping interactions with the external world.
-%Moreover, embodiment is evident in the way robots interact with their environment. Unlike purely computational models, embodied robots engage physically with their surroundings. They manipulate objects, traverse spaces, and respond directly to stimuli. This tangible interaction emphasizes the connection between a robot's physical presence and its functionality.
-
-%At the heart of embodiment lies the concept of the body schema ----the robot's internal representation of its body and its relationship to the external world. This intricate awareness includes the robot's posture, position, and movement capabilities. The body schema is instrumental in achieving effective sensorimotor control and spatial awareness, essential for navigating and interacting in complex environments.
-
-
 Embodiment, rooted in the notion that intelligence necessitates a body \cite{Pfeifer2006Howbodyshapes}, is a key concept in robotics. In this context, it refers to how a robot's physical form and sensory-motor capabilities shape its interactions within its environment, influencing perception and actions \cite{Duffy2000Intelligentrobotsquestion}. This involves considerations of the robot's physical structure, situatedness, and morphology, extending beyond functionality to impact interactions with the external world \cite{Miller2018EmbodimentSituatednessMorphology}.
 
 At the core of embodiment is the physical form and morphology of a robot, including joints, limbs, sensors, and actuators. Beyond aesthetics, the design of a robot's physical form significantly influences movement, interaction capabilities, and overall functionality \cite{Pfeifer2006MorphologicalComputationConnecting}. Engineers delve into nuances of body morphology to tailor robots for specific tasks, whether exploration or assembly line operations.
@@ -165,23 +84,34 @@ The concept of body schema, closely linked to embodiment, represents an internal
 
 In essence, embodiment in robotics transcends traditional boundaries, transforming robots into physically present, interactive agents. The intricate dance between physical form, sensorimotor integration, body schema, and adaptability enriches robotics, fostering the development of sophisticated, versatile, and context-aware systems.
 
-%Embodiment is associated to the idea that intelligence requires a body \cite{Pfeifer2006Howbodyshapes}. In the field of robotics, embodiment refers to the concept of how a robot's physical form and sensory-motor capabilities influence its interaction with the environment, shaping its perception and actions within its surroundings\cite{Duffy2000Intelligentrobotsquestion}. It involves the robot's physical structure, its situatedness, and its morphology, and how these factors go beyond mere functionality shaping the interactions with the external world. \cite{Miller2018EmbodimentSituatednessMorphology}. 
-%
-%Central to the concept of embodiment is the physical form and morphology of a robot. This encompasses the intricate arrangement of joints, limbs, sensors, and actuators---the very components that define a robot's structure. The design of a robot's physical form goes beyond aesthetics; it fundamentally influences its movement, interaction capabilities, and overall functionality \cite{Pfeifer2006MorphologicalComputationConnecting}. Engineers and researchers delve into the nuances of body morphology to create robots tailored for specific tasks, whether exploration, assembly line operations, or other applications.
-%
-%Embodying robots extends beyond their external structure; it involves  the idea that artificial agents have physical bodies and interact with their environment through the seamless integration of sensorimotor capabilities \cite{Lara2018EmbodiedCognitiveRobotics}. Sensors are the robot's sensory receptors that convey information about itself and its environment. Actuators are the means through which the robot acts upon this sensory input. The synthesis of sensing and acting results in adaptive behavior \cite{Pfeifer2007SelfOrganizationEmbodiment,Der2014RoleEmbodimentSelf}, allowing the robot to respond dynamically to environmental stimuli. This sensorimotor integration is a hallmark of embodied robotics, distinguishing it from abstract computational or simulation-based systems.
-%
-%Embodiment in robotics also encompasses the idea of situatedness, where robots are situated in the world and interact directly with their environment, influencing their behavior \cite{Brooks1991NewApproachesRobotics}. This direct interaction with the environment allows robots to experience the world and carry out tasks in unstructured environments, contributing to their autonomy and adaptability. Additionally, embodiment in robotics involves the incorporation of action and sensory-motor experiences as sources of statistical regularities that are learned and utilized by cognitive robots \cite{Pezzulo2013ComputationalGroundedCognition}.
-%
-%The concept of body schema is closely intertwined with embodiment in robotics, representing an internal model within a robot encompassing its body's arrangement, geometry, and movements. It serves as a dynamic and adaptive tool for the robot's awareness of its physical structure and spatial orientation. Embodiment, a broader concept, involves providing a robot with a physical form and integrating it with sensory and motor capabilities, emphasizing tangible interaction with the physical world. The relationship lies in the body schema's role as a crucial component of embodied robotics, serving as an internal map guiding the robot's movements and interactions, bridging the gap between its physicality and sensorimotor control systems. The body schema facilitates effective navigation, spatial awareness, and adaptability, contributing significantly to the embodiment process, where the robot embodies its presence through dynamic interactions in the external environment.
-%
-%Adaptability is another hallmark of embodied robots. Their movements and responses are not rigidly pre-programmed but are rather flexible and dynamic. This adaptability stems from the close coupling of a robot's physical body and its control systems. It allows robots to adjust their behavior based on changes in the environment, unexpected obstacles, or evolving task requirements.
-%
-%In essence, embodiment in robotics transcends the traditional boundaries of machinery and computation. It transforms robots from abstract entities into physically present, interactive agents. The intricate dance between the robot's physical form, sensorimotor integration, body schema, and adaptability enriches the field of robotics, opening avenues for the development of more sophisticated, versatile, and context-aware robotic systems.
+% SUBSECTION ================================================================================
+\subsection{Summary of the body concepts}
+The physical self, embodiment, body schema, and body morphology are interconnected concepts crucial for understanding human self-awareness and interaction with the world. The physical self involves our awareness of our body and its movements, incorporating proprioception and interoception. Embodiment posits that our thoughts and experiences are shaped by our physical bodies, influencing our mental representations of the world. The body schema, a dynamic internal model, reflects our body's structure and spatial position based on sensory feedback. Body morphology, encompassing size and shape, affects movement and interactions. These concepts are interrelated, with the physical self serving as the foundation for embodiment, the body schema manifesting embodiment, body morphology influencing embodiment, and embodiment shaping the physical self. In the realm of robotics, these concepts are pertinent for robots to effectively interact with the world, requiring a sense of their physical selves and an understanding of embodiment to develop grounded behaviors. Table~\ref{tab:body_concepts} condenses the meaning and relationships of these body concepts.
+
+\begin{table}
+\begin{center}
+	\begin{tabular}{ |m{0.3\textwidth}|m{0.34\textwidth}|m{0.34\textwidth}| } 
+		\hline
+		\textbf{Concept} & \textbf{Definition} & \textbf{Relationship} \\ 
+		\hline
+		Physical self & Our awareness of our own body and its interactions with the environment & Foundation of embodiment \\ 
+		\hline
+		Embodiment & The idea that our thoughts, feelings, and experiences are shaped by our physical bodies & Dynamic representation of body's physical structure and position in space \\ 
+		\hline
+		Body schema	 & Our internal model of our body's physical structure and its position in space & Manifestation of embodiment \\ 
+		\hline		
+		Body morphology & The physical structure of our body, including its size, shape, and proportions & Influences embodiment and the physical self\\
+		\hline
+	\end{tabular}
+\end{center}
+\caption{\textbf{Relationships between the body concepts}}
+\label{tab:body_concepts}
+\end{table}
+	
 
 
 
-\subsubsection{Embodiment and information structure}
+\subsubsection{\redtext{Embodiment and information structure}}
 \TODO
 According to \cite{LungarellaEmbodimentInformationCausal}
 
@@ -199,144 +129,538 @@ According to \cite{LungarellaEmbodimentInformationCausal}
 \end{figure}
 % ---
 
-
-\begin{center}
-	\begin{tabular}{ |m{0.3\textwidth}|m{0.35\textwidth}|m{0.35\textwidth}| } 
-		\hline
-		\textbf{Concept} & \textbf{Definition} & \textbf{Relationship} \\ 
-		\hline
-		Physical self & Our awareness of our own body and its interactions with the environment & Foundation of embodiment \\ 
-		\hline
-		Embodiment & The idea that our thoughts, feelings, and experiences are shaped by our physical bodies & Dynamic representation of body's physical structure and position in space \\ 
-		\hline
-		Body schema	 & Our internal model of our body's physical structure and its position in space & Manifestation of embodiment \\ 
-		\hline		
-		Body morphology & The physical structure of our body, including its size, shape, and proportions & Influences embodiment and the physical self
-	\end{tabular}
-\end{center}
 % ===========================================================================================
 %                                           |                                               |
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\section{Robot equations of motion}
-\subsection{Forward and inverse dynamics}
-\subsection{The Newton-Euler formulation of the inverse dynamics}
+\section{Robot body representation}
+In the subsequent discussion, embodiment and robot morphology will be considered as almost equivalent concepts that relate to the actual physical attributes of the robot body. As accentuated by the rich literature in model-based robotics, models of robots that capture these attributes are required to achieve fine control and perform complex tasks. These models should include as much information as possible, explicit or implicit, of their body morphology (or embodiment). Most of the efforts associated with learning the body schema agree on the argument that an embodied robotic agent must autonomously learn and refine its body schema relying mainly proprioceptive information \cite{Morasso2015Revisitingbodyschema, Hoffmann2010Bodyschemarobotics}. Yet, in spite of the many bodily features encoded in the body schema, the majority of research focus on calibration of a known kinematic structure \redtext{REF} and only a few works address the discovery of the body topology \redtext{REF}. \redtext{It is worth mentioning that there is no solid consensus in the literature about whether the body schema includes the inertial description of the parts composing the body. Yet, given that the body schema is used for planning and executing movements and that the sensation of effort (force and torque) is part of proprioception, it seems reasonable to assume the body schema must incorporates such a representation.} ultimately, the question remains of what constitutes a body schema in robotics. 
 
-Extension for floating base robots with flexible joints and links have been presented elsewhere \cite{Khalil2017GeneralDynamicAlgorithm}
+To continue the discussion in this work the following conceptual definition of the robot body schema will be used:
+% ---
+\begin{shaded}
+	\begin{definition}\label{def:robot_body_schema}
+		%	The robot body schema is a representation of its body morphology that is mainly built from proprioceptive information. This representation includes the arrangement, geometry, and inertial properties of its parts and grants the ability to perceive the relative positions of limbs, and plan and execute movements without relying on visual cues. Adaptive and self-acquired, the robot body schema is a fundamental part of forward and inverse models used to plan and predict sensorimotor interactions beyond proprioception.
+		The robot body schema is a representation of its body morphology primarily constructed from proprioceptive information. This representation encompasses the arrangement, geometry, and inertial properties of its body parts, providing the capacity to perceive their state of motion and to plan and execute movements independent from visual inputs. Adaptive and self-acquired, the robot body schema plays a fundamental role in forward and inverse models, aiding in the integration, planning and prediction of sensorimotor interactions beyond proprioception.
+	\end{definition}
+\end{shaded}
+% ---
+
+% SUBSECTION ================================================================================
+\subsection{Proprioception}
+Proprioception, crucial for executing coordinated movements, refers to the sense of the position and movement of the body or its segments \cite{Kenzie2017compositeroboticbased}. The signals emanate from mechanoreceptors (proprioceptors) like muscle spindles or Golgi tendon organs, embedded in joints, muscles, and tendons \cite{Proske2012proprioceptivesensestheir}. These receptors detect distinct features, such as joint position, movement, and effort. Proprioceptive signals are transmitted to the central nervous system, where they are integrated with information from other sensory systems, such as the visual and vestibular systems, to create an overall representation of the body's motion and orientation. This representation is essential for motor coordination and recovery. Proprioception is generally categorized into two submodalities: kinaesthesia, the sense of limb movement, and joint position sense, the sense of limb position \cite{DAntonio2021RoboticAssessmentWrist,Hillier2015AssessingProprioceptionSystematic}.
+
+Proprioceptive signals inform an agent about the position and movement of limbs and trunk, enabling it to maneuver the body around obstacles even in poor visibility conditions. Similarly, proprioception---in combination with the body schema---allows the manipulation of objects outside the field of vision. Traditionally confined to conscious sensations, proprioceptors include receptors for kinesthetic sensations (position, movement, balance), and those related to effort (tension, force, heaviness). The latter being directly in association  with motor commands. Indeed, various proprioceptive sensations can be attributed to a centrally originated sense of effort \cite{Proske2012proprioceptivesensestheir}. Lastly, a fundamental role of proprioception is to ensure the plasticity of the body schema \cite{Cardinali2016Proprioceptionisnecessary}.
+
+\subsection{Robot proprioception}
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.99\textwidth]{example-image-a}
+		\caption{\textbf{Examples of proprioceptive sensors.}}
+		\label{fig:example_proprioceptive_sensors}
+	\end{center}
+\end{figure}
+Akin to biological agents, robot proprioception refers to a robot's ability to sense and perceive the position, movement, orientation, and effort of its own body parts. Similar to how humans rely on proprioception to be aware of their body's position and movement, robots leverage proprioceptive capabilities to understand their own kinematics and dynamics. This information is crucial for robots to execute precise and coordinated movements, adapt to changes in their environment, and interact effectively. Typically, robotic proprioception is provided by the following sensors\cite{Siegwart2011Introductionautonomousmobile}:
+\begin{itemize}
+	\item \textbf{Joint Encoders:} Sensors that measure the angular position of each joint in a robot. They provide feedback on the angular displacement of the joints, allowing the robot to determine its joint angles accurately. Conventionally, numerical differentiation of these signals are used to convey joint velocity.
+	
+	\item \textbf{Gyroscopes:} They measure the rate body angular velocity of a body. They help in determining the robot's orientation and changes in orientation over time. Gyroscopic sensors contribute to maintaining stability and control in dynamic motions.
+	
+	\item \textbf{Accelerometers:} Accelerometers measure the linear acceleration of a body in various directions. By integrating acceleration data over time, robots can derive information about velocity and its changes. Accelerometers are vital for tasks requiring dynamic motion analysis.
+	
+%	\item \textbf{Inertial Measurement Units (IMUs):} IMUs combine data from accelerometers and gyroscopes to provide comprehensive information about a robot's linear acceleration and angular velocity. IMUs are often used for estimating the robot's pose (position and orientation) in three-dimensional space.
+
+	\item \textbf{Force/Torque Sensors:} Force and torque sensors measure the wrench applied to a robot's end-effector or joints. These sensors provide feedback on external forces acting on the robot, enabling it to respond and adapt to interactions with objects or the environment.
+	
+	\item \textbf{Vibration sensors:} Vibration sensors measure the vibration of a robot's body. They can be used to detect collisions with objects and to maintain stability in uneven terrain.
+	
+	\item \textbf{Strain Gauges:} Strain gauges are used to measure deformation or strain in robot components, providing information about the stress and load on specific parts. This is useful for monitoring structural integrity and preventing mechanical failures.
+	
+\end{itemize}
+
+%Apart from the typical measurements of the robot's joint position $ q $, velocity $ \dot{q}$, and joint torque $ \tau $, the use of inertial measurement units (IMU) to measure the acceleration $ \dot{\bm{v}} $ and angular velocity $\bm{\omega}$ of the robot's bodies has had applications in state \cite{DeLuca2007accelerationbasedstate} and joint velocity and acceleration estimation \cite{Birjandi2019Jointvelocityacceleration, Rotella2016Inertialsensorbased}, the control of mobile robots \cite{Dutta2019StabilityAnalysisHumanoid}, and in safe human-robot interaction\cite{Hamad2023ModularizeConquerGeneralized}.
+
+In addition to the standard measurements of joint position $q$, velocity $\dot{q}$, and joint torque $\tau$, using inertial measurement units (IMU) to measure the acceleration $\dot{\bm{v}}$
+and angular velocity $\bm{\omega}$ of the robot bodies has been used in state estimation \cite{DeLuca2007accelerationbasedstate}, kinematic estimation from incomplete sensor readings \cite{Rollinson2013RobustStateEstimation}, joint velocity and acceleration estimation \cite{Birjandi2019Jointvelocityacceleration, Rotella2016Inertialsensorbased}, mobile robot control \cite{Dutta2019StabilityAnalysisHumanoid}, and safe human-robot interaction \cite{Hamad2023ModularizeConquerGeneralized}.
+
+%\redtext{Vestibular properties are associated with the body schema, as evidenced by research indicating that vestibular signals play a role in modifying the body schema. Vestibular stimulation has been shown to influence the body schema, impacting the relative metric properties of body parts and contributing to more abstract cognitive representations of the body. Additionally, there is increasing evidence that vestibular signals and the vestibular cortex are involved in not only oculomotor and postural control, but also in the sense of body, self, and others. While vestibular signals may not serve to scale the internal representation of large parts of the body's metric properties, they do contribute to the body schema and its cognitive representations. Therefore, the vestibular system and its signals are integral to the body schema, impacting various aspects of bodily awareness and cognitive representations of the body.}
+%
+%Citations:
+%[1] https://www.sciencedirect.com/science/article/abs/pii/S0028393212001595
+%[2] https://www.sciencedirect.com/science/article/abs/pii/S0028393213001218
+%[3] https://open-mind.net/papers/@@zipview?comment=b03b62165a8c49df995cc0ab1e54da66&reply=4476da22bba84972b9c236d737008214&target=e04f7dbea19a4d96a348f678bf07b8bc&type=pdf
+%[4] https://www.allpsych.uni-giessen.de/rauisch10/readings/Angelaki&Cullen.AnnuRevNeuro.2008.pdf
+%[5] https://www.researchgate.net/publication/224914418_Vestibular_stimulation_modifies_the_body_schema 
+
+%Robot proprioception, enabled by these diverse sensors, allows robots to operate autonomously, adapt to dynamic environments, and execute tasks with precision and efficiency.
+
+\subsection{Body features in the body schema}
+%The body schema serves as a link structure that outlines connections among components in the robot arm. This explicit model relies on predefined parameters, with joint angles, typically measured using encoders, tracking the trajectory based on proprioception. In contrast, implicit models are applied in uncalibrated systems, where interaction with the environment estimates desired parameters. This mechanistic approach differs from the biological case, where the inherently flexible link structure adapts to changes in the environment and the self-body. Unlike in robotics, where knowledge is externally provided at a high cost for parameter estimation, biological systems are inherently self-learning, aligning with implicit model principles. Additionally, robotics lacks cross-modal association, whereas the integration of multi-modal sensory information is fundamental in the biological case, emphasizing sophisticated adaptability and sensory integration \cite{Asada2018168Proprioceptionbodyschema}.
+
+
+%The concept of body schema and its relevance to model learning in robotics is well-supported in the scientific literature. While there are no specific sources directly linking the concept of body schema to model learning in robotics, the following sources provide relevant information about the body schema and its implications:
+%\hrule
+%\subsubsection{Definition}
+%Proprioception refers to the sense of the position and movement of the body or body segments, and it is vital for executing coordinated movements \cite{Kenzie2017compositeroboticbased}. Proprioceptive signals arise from mechanoreceptors (proprioceptors) embedded in the joints, muscles, and tendons, such as muscle spindles or Golgi tendon organs \cite{Proske2012proprioceptivesensestheir}. In general, two submodalities of proprioception are distinguished: kinaesthesia, which is the sense of limb movement, and joint position sense, which is the sense of limb position \cite{DAntonio2021RoboticAssessmentWrist}.
+%
+%\TODO Paraphrase the following text$\ldots$
+%In robotics, the body schema functions as a link structure that delineates the connections among components in the robot arm, incorporating predetermined length and movable range data for each link. This explicit model relies on pre-defined parameters, and joint angles, typically measured using encoders, track the trajectory based on proprioception. In contrast, implicit models find application in uncalibrated systems, where interaction with the environment is employed to estimate desired parameters. This mechanistic approach contrasts sharply with the biological case, where the link structure is inherently flexible, adapting to changes in both the environment and the self-body. Unlike in robotics, where knowledge is externally provided at a high cost for parameter estimation, biological systems are inherently self-learning, aligning with the principles of implicit models. Furthermore, the absence of cross-modal association is a hallmark of robotics, whereas the integration of multi-modal sensory information stands as a fundamental aspect of the biological case, emphasizing the sophisticated adaptability and sensory integration inherent in biological systems \cite{Asada2018168Proprioceptionbodyschema}.
+%
+%
+%The position and movement of limbs and the trunk are informed by sensations arising in proprioceptors, allowing maneuvering around obstacles in the dark and manipulation of objects out of view. Traditionally, the term proprioceptor has been confined to receptors concerned with conscious sensations, encompassing limb position, movement, tension, force, effort, and balance. The importance of robot proprioception is underscored by examining its role in living systems. The distinction between kinesthetic sensations and those related to effort, force, and heaviness is considered, emphasizing that the latter are invariably associated with motor commands. It is concluded that various proprioceptive sensations, including limb position and movement, can be contributed to by a centrally originated sense of effort \cite{Proske2012proprioceptivesensestheir}. Furthermore, studies have regarded proprioception as fundamental to ensure the plasticity of the body schema \cite{Cardinali2016Proprioceptionisnecessary}.
+
+
+%\subsubsection{The role of proprioception}
+%Much of this knowledge about position and movement of the limbs and trunk is provided by sensations arising in proprioceptors. The information they provide allows us to maneuver
+%our way around obstacles in the dark and be able to manipulate objects out of view.
+%
+%Traditionally, however, the term proprioceptor has been restricted to receptors concerned with
+%conscious sensations, and these include the senses of limb position and movement, the sense of tension or force, the sense of effort, and the sense of balance.
+%
+%To motivate the importance of robot proprioception, this section first discusses the role it plays in living systems. This section relies on the material presented in As proprioceptive sensations, the senses of effort, force, and heaviness are distinct in that they are always associated with motor commands, while kinesthetic sensations can arise in a passive limb. It implies that for the senses of force and heaviness the peripheral input is always reafferent in origin. Another issue to consider is the meanings of the terms. What do we mean by a sense of effort as distinct from a sense of tension?
+%
+%It is concluded that a sense of effort, arising centrally in association with motor commands, is able to contribute to a number of proprioceptive sensations including the sense of limb
+%position and the sense of limb movement.
+
+%\subsubsection{A sensor suite for robot proprioception}
+%\TODO
+
+%\subsection{Essential body features}
+% ---
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.99\textwidth]{body_schema_properties.pdf}
+		\caption{\textbf{Properties of the body schema.} The body schema subsumes several properties of the body morphology and results in cognitive properties resulting from the robot embodiment.}
+		\label{fig:body_schema_properties}
+	\end{center}
+\end{figure}
+% ---
+
+The body schema representation encodes various attributes of the body morphology (see Fig.~\ref{fig:body_schema_properties}). %These attributes include:
+
+\paragraph*{Spatial properties} The brain has a representation of the size and shape of different body parts. This allows for accurate and coordinated movements and interactions. Additionally, the body schema includes information about the spatial orientation and position of body parts in relation to each other. This is essential for coordinating movements and maintaining balance.
+
+\paragraph*{Somatosensory properties} Proprioception is the sense of the relative position of one's own body parts and the effort being employed in movement. Proprioceptive information helps in knowing the positions of limbs without having to visually observe them. The body schema encodes information about the angles and movements of joints, allowing for smooth and coordinated motor control. Sensations related to touch, pressure, temperature, and pain are integrated into the body schema. This information helps in perceiving and responding to stimuli from the external environment.
+
+\paragraph*{Vestibular properties} Vestibular signals play a critical role in maintaining balance, spatial awareness, and facilitating coordinated movements. These signals offer vital information about the body's orientation in space, encompassing both linear and angular motion states. Whether engaged in locomotion, manipulation, or adjusting posture, vestibular signals seamlessly collaborate with proprioception. From everyday activities like walking to more intricate movements such as reaching, these signals intricately shape the body schema.
+
+\paragraph*{Inertial properties} 
+The inertial properties within the body schema encompass characteristics associated with the mass distribution and moments of inertia of the body. This knowledge holds crucial significance for both forward and inverse models in motor control. In the process of planning a movement, the inertial properties of the body schema come into play as they are utilized to estimate the forces and torques necessary for moving various body parts. Subsequently, this information is employed to generate motor commands. These properties, working in conjunction with vestibular information, play a pivotal role in maintaining balance.
+%The inertial properties of the body schema refer to the characteristics related to the body's mass distribution and moments of inertia. This knowledge is essential for forward and inverse models for motor control. When planning a movement, inertial properties of the the body schema are used to estimate the forces and torques required to move different parts of the body. This information is then used to generate motor commands that accurately control the movements of our muscles. These properties play an important role together with vestibular information in maintaining balance.
+%The body schema continuously updates its representation of the body's position, orientation, and mass distribution to maintain balance. 
+
+\paragraph*{Cognitive properties} The body schema enables the representation of body parts' position and orientation in space, facilitating tasks like reaching, grasping, and navigating. It also helps perceive the affordances of objects, indicating how they can be used. Enables meaningful interaction with objects based on their properties. Learning and Adaptation: The body schema's plasticity allows constant updates, incorporating new movements, environmental interactions, and changes in the body for improved motor performance and adaptation. Lastly, the body schema integrates information from various sensory modalities—sight, touch, proprioception, and vestibular input.
+
+\paragraph*{Motor Properties} The body schema is closely tied to motor control and the execution of movement. It helps in generating and executing motor programs for voluntary actions.
+
+\subsection{Learning the body schema}
+Model-based robotics is inherently linked to the concept of the body schema, as defined in Def.~\ref{def:robot_body_schema}. It encompasses a theoretical foundation and methods that consider the physical properties of robots and integrate them into their representations. However, these methods often treat body properties as immutable, relying on a single identification or calibration procedure. Some studies have compared the conventional characteristics of model-based robotics, such as being amodal, fixed, explicit, centralized, and modular, with the properties of a biological body schema \cite{Hoffmann2021Bodymodelshumans}. Unlike robotic body models, the body schema is dynamic, capable of modification based on experiences, learning, and changes in the body itself. Additionally, biological systems are inherently self-learning and rely on the integration of multi-modal sensory information \cite{Asada2018168Proprioceptionbodyschema}.
+
+The integration of learning techniques with model-based robotics allows conventional fixed descriptions to adapt. Frameworks that exploit and extend this combination bring traditional model-based body models closer to a body schema, enabling robots to construct, monitor, and adjust their understanding of their bodies by integrating information from multiple sensory modalities. Consequently, this integration aligns more closely with the concept of the robot body schema. This dissertation focuses on a subset of the body schema properties highlighted in Fig.~\ref{fig:body_schema_properties}, marked with triangles in the figure. The subsequent discussion will survey frameworks and methods that have been employed or could be utilized to infer quantities directly connected to the highlighted properties of the robot body schema.
+
+%First, we define the self as a set
+%S = {N, A, λ, θ},
+%(1)
+%whose elements are the number of degrees of freedom (i.e.
+%links) N , the adjacency matrix A of the robot defining
+%the connectivity of the kinematic tree, the morphological
+%description of every link in the robot λ, and the inertial
+%parameters of the links θ.
+%Figure 1 shows how elements of S are found in three dif-
+%ferent inverse dynamics identification/learning frameworks.
+%Fig. 1a shows that classical system identification assumes
+%a known calibrated kinematic model (i.e., N , A, λ) and
+%mostly focuses on learning θ
+
+
+
+%\redtext{The body schema outlines connections among components in the robot morphology. Explicit models rely on predefined parameters, typically identified measured using encoders, tracking the trajectory based on proprioception. In contrast, implicit models are applied in uncalibrated systems, where interaction with the environment estimates desired parameters. This mechanistic approach differs from the biological case, where the inherently flexible link structure adapts to changes in the environment and the self-body. Unlike in robotics, where knowledge is externally provided at a high cost for parameter estimation, biological systems are inherently self-learning, aligning with implicit model principles. Additionally, robotics lacks cross-modal association, whereas the integration of multi-modal sensory information is fundamental in the biological case, emphasizing sophisticated adaptability and sensory integration \cite{Asada2018168Proprioceptionbodyschema}.}
+
+
+%Model-based robotics is naturally connected to the concept of body schema as per Def.~\ref{def:robot_body_schema}, it includes a theoretical groundwork and methods that take into account physical properties of robots and include them in their representations. Yet, the body properties within the scope of these methods are typically considered immutable and are inferred from a single identification or calibration procedure. Some works have contrasted the conventional amodal, fixed, explicit, centralized, and modular representations provided by model-based robotics against the properties of a biological body schema \cite{Hoffmann2021Bodymodelshumans}. Indeed, unlike body models in robotics, the body schema is not fixed but can be modified based on experiences, learning, and changes in the body itself. Moreover, biological systems are inherently self-learning and depend on the integration of multi-modal sensory information \cite{Asada2018168Proprioceptionbodyschema}.
+%
+%Combining model-based robotics with learning techniques makes conventional fixed descriptions capable of adaptation. Frameworks that leverage and expand this combination make conventional model-based body models closer to a body schema allowing robots to build, monitor, and adapt the understanding of their bodies integrating information from multiple sensory modalities. Therefore, from this combination it is possible to be more in line with the concept of the robot body schema. In this dissertation attention is given to a subset of the body schema properties in Fig.~\ref{fig:body_schema_properties}, identified with triangles in the figure. In the following discussion frameworks and methods that have been used or could be used to infer quantities that have a direct connection with the highlighted properties of the robot body schema will be surveyed.
+
+
+%\say{The concept of body schema is related to model learning in robotics as it provides a framework for robots to understand and represent their own bodies and the surrounding environment. Research in this area aims to enable robots to improve their capabilities by automatically synthesizing, extending, or adapting a model of their body, similar to how the human body schema allows for adaptive and coordinated movement. This involves integrating information from multiple sensory modalities and controlling complex bodies, which are desirable capabilities for robots. By studying the body representations in biology from a functional or computational perspective, researchers seek to develop robotic systems that can effectively model their own bodies and interact with the environment in a more human-like manner. Therefore, the concept of body schema plays a crucial role in the development of robotic systems that can learn and adapt to their own physical characteristics and the surrounding world.}
+
+% ===========================================================================================
+%                                           |                                               |
+% -------------------------------------- SECTION -------------------------------------------|
+%                                           |                                               |
+% ===========================================================================================
+\section{Representing properties of the robot body schema}
+
+
+
+% ===========================================================================================
+%                                           |                                               |
+% -------------------------------------- SECTION -------------------------------------------|
+%                                           |                                               |
+% ===========================================================================================
+%\subsection{Robot dynamics modeling}
+\subsection{Kinematics: Body size, position, and posture}
+The focus in this work is on serial kinematic chains with either fixed or floating bases and revolute joints. This sections revisits the kinematic modeling essentials of such structures.
+
+A serial kinematic chain is a sequence of rigid bodies called links connected by joints. In a serial kinematic chain the output of one joint becomes the input for the next and there are no loops. Robots, such as manipulators, legged robots, and humanoids, are instances of serial kinematic chains. The motion of the robot is achieved by the controlled rotation or translation of each joint.  A robot is said to be of fixed base if the first link in the chain (base link) is rigidly connected to the world. The best example being robot manipulators. On the contrary, in floating base robots, the base and all other links can freely rotate and translate in space. Humanoid robots are a good example of this type.
+
+Robot joints can be classified into various types. One degree of freedom (DOF) joints include revolute joins (rotational motion about the joint axis), prismatic joints (translational motion along the direction of the joint axis), and  helical joints (simultaneous rotation and translation about a screw axis) \cite{Lynch2017Modernrobotics}. Joints can also have multiple degrees of freedom allowing independent translations and rotations about multiple axes. The configuration and number of joints in the chain determine the robot's total DOF. Typically a joint variable $q$ is used to express the translational or angular displacement between the links connected by a one-DOF joint \cite{Xie2003FundamentalsRoboticsLinking}. For a robot with $n$ joints, the configuration is described by the vector $\bm{q} = [q_1,\ldots,q_i,\ldots,q_n]^\intercal$.
+
+Joint axes are modeled as lines in space, represented as a vector, that indicate the direction about which a joint rotates or translates. In general, the range of mobility $\left[a,b\right] $ of a joint is mechanically constrained by upper $a$ and lower $b$ limits. The Cartesian product of all joint ranges is the configuration space of the robot.
+%% ---
+%\begin{figure}
+%	\begin{center}
+%		\includegraphics[width=0.5\textwidth]{example_serial_kinematic_chain.pdf}
+%		\caption{\textbf{An example of a serial kinematic chain.} A humanoid is a serial kinematic chain with a floating base. Two coordinate frames are shown, one at the base and one at the left hand link.}
+%		\label{fig:example_serial_kinematic_chain}
+%	\end{center}
+%\end{figure}
+%% ---
+
+% ---
+\begin{figure*}[!t]
+	\centering	
+	\hspace*{\fill}
+	\begin{subfigure}[t]{0.40\textwidth}
+		\subcaption{}
+		\includegraphics[width=\textwidth]{example_serial_kinematic_chain.pdf}
+		\label{fig:example_serial_kinematic_chain}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[t]{0.40\textwidth}
+		\subcaption{}
+		\includegraphics[width=\textwidth]{frame_transformation_sequence.pdf}
+		\label{fig:transformation_sequence}
+	\end{subfigure}	
+	\hspace*{\fill}
+	\caption{\label{fig:serial_kinematic_chain} \textbf{A serial kinematic chain and its transformations.} (\subref{fig:example_serial_kinematic_chain})  A humanoid is a serial kinematic chain with a floating base. Two coordinate frames are shown, one at the base and one at the left hand link. (\subref{fig:transformation_sequence}) The sequence of coordinate transformations from frame $\cframe{0}$ to $\cframe{E}$.}
+\end{figure*}
+% ---
+
+The pose of a rigid body in the kinematic chain represents the position and orientation of a coordinate frame rigidly attached to it with respect to a reference frame \cite{Siciliano2008RoboticsModellingPlanning}. A minimum of six parameters is needed to completely instantiate pose of a rigid body in Euclidean space \cite{Lynch2017Modernrobotics}. The pose of a given body is dependent on all the joint variables from the base to the current joint as well as on the geometry of the links. Considering the simplified humanoid robot shown in Fig.~\ref{fig:example_serial_kinematic_chain} as an example, the link corresponding to the left hand has the frame $\cframe{E}$ rigidly attached to it. Its pose can be expressed relative to the coordinate frame $\left\lbrace 0 \right\rbrace$ located at the humanoid's base link via the homogeneous transformation matrix $^{\{0\}}\bm{T}_{\{E\}}  \in \mathbb{R}^{4\times 4}$ defined as
+% ---
+\begin{equation}
+	^{\{0\}}\bm{T}_{\{E\}} = \begin{bmatrix}
+		^{\{0\}}\bm{R}_{\{E\}}(\bm{q}) & ^{\{0\}}\bm{r}_{0E}(\bm{q}) \\
+		\bm{0}_{1\times3} & 1
+	\end{bmatrix}.
+\end{equation}
+% ---
+The vector $^{\{0\}}\bm{r}_{0E}(\bm{q}) \in \mathbb{R}^3$ denotes the location of the origin of the coordinate frame $\cframe{E}$ relative to and expressed in frame $\cframe{0}$. Similarly, the rotation matrix $^{\{0\}}\bm{R}_{\{E\}}(\bm{q})  \in \mathbb{R}^{3\times 3}$ expresses the orientation of frame $\cframe{E}$ in frame $\cframe{0}$. Both terms are function of the robot configuration vector $\bm{q}$.
+
+A rotation matrix is orthogonal, that is $ \bm{R}^{-1} = \bm{R}^\intercal$, and has unit determinant. Any rotation matrix belongs to the set of all rotation matrices, which is a group known as the rotation group or the special orthogonal group SO(3) \cite{Lynch2017Modernrobotics}. A composition of rotations is achieved by the matrix product of two or more rotation matrices. Similarly, the set of all transformation matrices defines the special Euclidean group SE(3), which represents the group of rigid body motions in 3D space. Just like rotation matrices, all the elements of SE(3) are orthogonal and have determinant equal to 1. Referring back to Fig.~\ref{fig:example_serial_kinematic_chain}, the composition of transformation matrices from the left hand of the humanoid to its base yields the following expression
+\begin{equation}
+	^\cframe{0}\bm{T}_\cframe{E} = 
+	^\cframe{0}\bm{T}_\cframe{A}(q_1)~
+	^\cframe{A}\bm{T}_\cframe{B}(q_2)~
+	^\cframe{B}\bm{T}_\cframe{C}(q_3)~
+	^\cframe{C}\bm{T}_\cframe{D}(q_4)~
+	^\cframe{D}\bm{T}_\cframe{E}(q_5),
+\end{equation}
+a graphical depiction of this sequence of transformations is shown in Fig.~\ref{fig:transformation_sequence}.
+
+In general, the kinematic structure of a robot consists in describing the location and orientation of the frames attached to the composing links. Thus, as homogeneous transformation matrix is associated to each of the $n+1$ rigid bodies in the kinematic chain.
+
+\subsubsection{Representation of transformation matrices}
+% ---
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{mdh_frame_convention.pdf}
+		\caption{\textbf{MDH frame convention.} The location and orientation of the joint frames in the MDH convention depends on three fixed parameters $(a,\alpha,d)$ and the joint angle $q_C$.}
+		\label{fig:mdh_frame_convention}
+	\end{center}
+\end{figure}
+% ---
+\paragraph*{Modified Denavit-Hartenberg representation} The modified Denavit-Hartenberg (MDH) convention uses four unique parameters per link to describe the kinematics of robots. With reference to Fig.~\ref{fig:mdh_frame_convention}, the MDH parameters represent the
+link length $a$ (the offset distance between the joint axes $\bm{\zeta}_P$ and $\bm{\zeta}_C$), the link twist $\alpha$, the link offset $d$, and the joint angle $q_C$. The set of MDH parameters $\left(a,\alpha,d,q_C\right)$ describe the location and orientation of the joint frames in a robot \cite{Craig1989Introductionroboticsmechanics}. The MDH parameters of a joint are used to define the parameter vector  $\bm{\lambda}^{DH} = \left[\lambda_1,\lambda_2,\lambda_3,\lambda_4\right]^\intercal$ and build with it the following transformation matrix:
+% ---
+\begin{equation}
+ ^\cframe{P}\bm{T}_\cframe{C} =
+ \begin{bmatrix}
+   	\text{cos}(q_C)         &     -\text{sin}(q_C)    &      0    &      \lambda_1\\      
+   	\text{sin}(q_C)\lambda_3& \text{cos}(q_C)\lambda_3& -\lambda_2& -\lambda_2\lambda_4\\
+   	\text{sin}(q_C)\lambda_2& \text{cos}(q_C)\lambda_2&  \lambda_3&  \lambda_3\lambda_4\\
+   	0                       &         0               &      0    &           1          
+ \end{bmatrix},
+\end{equation} 
+% ---
+with $\lambda_1 = a$, $\lambda_2 = \text{sin}(\alpha)$, $\lambda_3 = \text{cos}(\alpha)$, and $\lambda_1 = d$. 
+
+\paragraph*{Euler angles representation} In the Euler angle representation \redtext{REF}, a vector $\bm{\lambda}^{EA} = \left[\lambda_1,\lambda_2,\lambda_3,\lambda_4,\lambda_5,\lambda_6\right]^\intercal$ is used to define a homogeneous transformation matrix based on the rotation matrix
+\begin{equation}
+	      ^\cframe{C}\bm{R}_\cframe{P} = (\text{Rot}_z(\lambda_1)\text{Rot}_x(\lambda_2)\text{Rot}_z(\lambda_3)\text{Rot}_z(q_C))^\intercal
+\end{equation}
+and the translation vector $ ^\cframe{P}\bm{r}_\cframe{C} = \left[\lambda_4,\lambda_5,\lambda_6\right]^\intercal $. The expression $\text{Rot}_i(j)$ defines a pure rotation of $j$ radians around the axis $i$. 
+
+\paragraph*{Axis-angle representation} A vector of parameters
+% ---
+\begin{equation}\label{eq:kinematic_parameters}
+	\bm{\lambda}^{AA} = \begin{bmatrix}
+		^\cframe{P}\bm{\xi}_{C}^\intercal & \phi & ^\cframe{C}\bm{\zeta}_{C}^\intercal & ^\cframe{P}\bm{r}^\intercal_C 
+	\end{bmatrix}^\intercal \in \mathbb{R}^{10}
+\end{equation}
+% ---
+is used to define the rotation matrix $^\cframe{P}\bm{R}^T_\cframe{C}$ in axis-angle form \redtext{REF} as
+% ---
+\begin{equation}\label{eq:rotation_matrix_axis_angle}
+	^\cframe{P}\bm{R}_\cframe{C}\left(q_{C};\bm{\gamma}\right) = \left(\exp^{\left[{^{\left\lbrace P\right\rbrace}}\bm{\xi}_{C}\right]\phi}\right) \left(\exp^{\left[{^{\left\lbrace C\right\rbrace}}\bm{\zeta}_{C}\right] q_C}	\right).
+\end{equation}
+%---
+%with $\bm{\gamma}$ defined as
+%% ---
+%\begin{equation}
+%	\bm{\gamma}=\begin{bmatrix}
+%		{^\cframe{P}}\bm{\xi}_{C}^\intercal & \phi & ^{\cframe{C}}\bm{\zeta}_{C}^\intercal
+%	\end{bmatrix}^\intercal.
+%\end{equation}
+% ---
+The terms $ \bm{\xi} \in \mathbb{R}^3$ and $ \bm{\zeta} \in \mathbb{R}^3$ being unitary rotation axes and  $ \left[~\cdot~\right] $ denoting a vector expressed as a skew-symmetric matrix. The vector $ \bm{\zeta}$ expresses the rotation axis of the joint that connects two bodies, expressed in the coordinate system $\cframe{C}$ of the child body. The angle $\phi$ defines the constant rotation about the axis $\bm{\xi}$ defined by the geometry of the links alone when the joint angle $q_C$ is zero.
+
+% ---
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{body_twist_illustration}
+		\caption{\textbf{Body twist.} A twist is composed of the linear and angular velocities at a point on a rigid body.}
+		\label{fig:body_twist_illustration}
+	\end{center}
+\end{figure}
+% ---
+
+
+%Revolute joins allow rotational motion about the joint axis, prismatic joints allows translational motion along the direction of the joint axis, and  helical joints allow simultaneous rotation and translation about a screw axis \cite{Lynch2017Modernrobotics}. All these joints have one degree of freedom. Joints can also have multiple degrees of freedom allowing independent translations and rotations about multiple axes.
+
+
+
+
+%For floating and mobile bases, the movement of the robot takes place not only via joint movement but also of the overall translation and rotation of the mechanism in space. As a result the number of degrees of freedom are increased. To represent this in a more straightforward manner, we treat floating base robots as fixed-base robots by means of attaching a virtual linkage that expresses the mobility of the root link.
+
+%It may be improper to think of a "base link" because there is no link attached to the environment, but it is customary to speak of a root link from which calculations begin. For a 2D floating base, the  (𝑥,𝑦)
+%translation and rotation  𝜃
+%of the robot's root link with respect to its reference frame can be expressed as a virtual linkage of additional 2PR manipulator. A similar construction gives the virtual linkage for a robot with a mobile base.
+
+% Such prismatic and revolute joints will be associated with joint limits, which define an interval of joint values  [𝑎,𝑏] that are valid irrespective of the configuration of the remaining links.
+
+%Some revolute joints may have no stops, such as a motor driving a drill bit or wheel, and these are known as continuous rotation joints. The revolute joints associated with virtual linkages also have continuous rotation. In these cases, the joint's degree of freedom moves in $SO(2)$.
+
+
+
+%As an example, consider a 2RPR mechanism where all the axes are aligned with the Z axis. The first two joints define position in the  (𝑥,𝑦)
+%plane, and are limited to the range  [−𝜋/2,𝜋/2]
+%. The third joint moves a drill up and down in the range  [𝑧𝑚𝑖𝑛,𝑧𝑚𝑎𝑥]
+%, and the final joint drives the continuous rotation of the drill bit. Here, the configuration space is
+%[−𝜋/2,𝜋/2]2×[𝑧𝑚𝑖𝑛,𝑧𝑚𝑎𝑥]×𝑆𝑂(2).(2)
+
+
+\subsubsection{Forward differential kinematics}
+The motion of a rigid body in a kinematic chain is a composition of pure translation and rotation. The twist vector $\bm{\nu}\in \mathbb{R}^6$ contains the Cartesian linear (translational) velocity $\bm{v}\in \mathbb{R}^3$ and the Cartesian angular velocity $\bm{\omega}\in \mathbb{R}^3$ of a point in the body; i.e., 
+% ---
+\begin{equation*}
+	\bm{\nu} = \left[\bm{v}^\intercal, \bm{\omega}^\intercal\right]^\intercal.
+\end{equation*}
+% ---
+The twist of a child body $C$ depends on the motion of its driving joint $(q_C,\dot{q}_C)$, the twist of the parent link $P$ $\left(\bm{v}_P,\bm{\omega}_P\right)$, and the geometry of the links. The corresponding expressions are
+% ---
+\begin{equation}\label{eq:cartesian_linear_velocity}
+	^\cframe{C}\bm{v}_C = ^\cframe{C}\bm{R}_\cframe{P}\left(q_C\right)\left(^\cframe{P}\bm{v}_P + \left[^\cframe{P}\bm{\omega}_p\right] {}^\cframe{C}\bm{r}_C\right)
+\end{equation}
+% ---
+for the linear velocity and 
+% ---
+\begin{equation}\label{eq:cartesian_angular_velocity}
+	^\cframe{C}\bm{\omega}_C = ^\cframe{C}\bm{R}_\cframe{P}\left(q_C\right)\left(^\cframe{P}\bm{\omega}_P + \dot{q}_C{}^\cframe{C}\bm{\zeta}_C\right)
+\end{equation}
+% ---
+for the angular velocity \cite{Featherstone2007RigidBodyDynamics}. The term $^\cframe{C}\bm{\zeta}_C \in \mathbb{R}^3$ in Eq.~\eqref{eq:cartesian_angular_velocity} is the unit vector that represents the joint rotation axis of the child joint. These quantities are depicted in Fig.~	\ref{fig:body_twist_illustration}. The time derivative of the twist vector gives the linear and angular acceleration of the rigid body \cite{Siciliano2008RoboticsModellingPlanning}; i.e.,
+% --
+\begin{equation}\label{eq:cartesian_linear_acceleration}
+	^\cframe{C}\dot{\bm{v}}_C = {}^\cframe{C}\bm{R}_\cframe{P}\left(q_C\right)\left(^\cframe{P}\dot{\bm{v}}_P + \left(\left[^\cframe{P}\bm{\omega}_P\right]\left[^\cframe{P}\bm{\omega}_P\right] + \left[^\cframe{P}\dot{\bm{\omega}}_P\right]\right) {}^\cframe{P}\bm{r}_C\right) 
+\end{equation}    
+% ---
+and
+% ---
+\begin{equation}\label{eq:cartesian_angular_acceleration}
+	^\cframe{C}\dot{\bm{\omega}}_C = ^\cframe{C}\bm{R}_\cframe{P}\left(q_C\right)\left(^\cframe{P}\dot{\bm{\omega}}_P + \ddot{q}_C{}^\cframe{C}\bm{\zeta}_C + \dot{q}_C\left[^\cframe{P}\bm{\omega}_P\right]{}^\cframe{C}\bm{\zeta}_C\right).
+\end{equation}
+% ---
+
+%\subsubsection{Forward and inverse dynamics}
+%\subsubsection{The Newton-Euler formulation of the inverse dynamics}
+
+\redtext{Extension for floating base robots with flexible joints and links have been presented elsewhere \cite{Khalil2017GeneralDynamicAlgorithm}}
 % The kinematics forward recursion
 % The dynamics backward recursion
-\subsection{Composition of the kinematics and dynamics}
+%\subsubsection{Composition of the kinematics and dynamics}
+\subsubsection{Kinematic calibration}
+
+
+%Robot kinematic calibration is a crucial procedure employed to enhance the precision of robots, especially in the context of industrial robotics, where high repeatability is accompanied by inherent inaccuracies \cite{ChenGang2014Reviewkinematicscalibration}. The objective is to identify and mitigate errors associated with the kinematic parameters of a robot, such as the relative positioning of its links and joints. Through this process, a significant enhancement in the absolute and relative positioning accuracy of a robot, particularly its end-effector, is achieved, making it well-suited for precise industrial applications \cite{Gan2019calibrationmethodrobot}. A variety of methods, both online and offline, have been developed to minimize kinematic errors, necessitating a reference measurement system. These methods encompass procedures involving modeling, measurement, and optimization of the robot's kinematic parameters \cite{Petrivc2023Kinematicmodelcalibration}. Classification of calibration methods can be based on the type of errors modeled, and it may include the direct compensation of mapped errors within the robot's workspace.
+%
+%Robot kinematic calibration can be approached through two main methods: model-based and model-less calibration. In the former, the process relies on a well-defined mathematical model of the robot's kinematics, typically describing the relationship between joint angles and end-effector pose using Denavit-Hartenberg (DH) parameters. The calibration entails measuring joint angles and end-effector pose for known configurations and utilizing these measurements to estimate the DH parameters. While model-based calibration benefits from a solid foundation provided by a mathematical model, its accuracy depends on the precision of the robot's model, which may vary over time due to wear and tear. On the other hand, model-less calibration avoids a predefined mathematical model, employing a set of reference points or features in the workspace to estimate the relationship between joint angles and end-effector pose. This approach is advantageous for robots with intricate geometries or in applications lacking a precise mathematical model. Model-less calibration tends to be more robust to changes in the robot's model but may pose challenges in implementation, often requiring more complex algorithms.
+%
+%
+%Choosing between model-based and model-less calibration depends on factors like robot geometry and the complexity of the model. Generally, model-based calibration is preferred for robots with simple geometries and known models, while model-less calibration suits complex geometries or unknown models. The decision relies on the specific application and robot requirements. Additional considerations include the cost of calibration, with model-based being potentially more expensive due to the need for a robot model and complex calibration algorithms. The time required for model-based calibration may be longer, involving the measurement and identification of reference points or features in the workspace. Moreover, expertise is a key factor, as model-based calibration may demand more knowledge in robotics and calibration techniques.
+
+% ----------------------------------------------------------------------------------------------------------------------
+%\hrule
+%\subsubsection{Kinematic calibration in a nutshell}
+%Kinematic calibration is a critical aspect of robotic systems, where high repeatability is accompanied by inherent inaccuracies \cite{ChenGang2014Reviewkinematicscalibration}. In It is of particular relevance for humanoid and legged robots, which exhibit complex kinematic structures and operate in dynamic environments. Through this process, a significant enhancement in the absolute and relative positioning accuracy of a robot, particularly its end-effector, is achieved, making it well-suited for precise industrial applications \cite{Gan2019calibrationmethodrobot}. Accurate kinematic calibration ensures that these robots can perform tasks with precision and safety, enabling them to interact effectively with their surroundings.  A variety of methods, both online and offline, have been developed to minimize kinematic errors, necessitating a reference measurement system. These methods encompass procedures involving modeling, measurement, and optimization of the robot's kinematic parameters \cite{Petrivc2023Kinematicmodelcalibration}. Classification of calibration methods can be based on the type of errors modeled, and it may include the direct compensation of mapped errors within the robot's workspace.
+
+Kinematic calibration is crucial for robotic systems, particularly for floating base multi limb kinematic structures. It involves enhancing the accuracy of a robot's positioning by adjusting its kinematics control model, all without making any alterations to its hardware \cite{ChenGang2014Reviewkinematicscalibration}. Accurate calibration ensures robots can perform tasks with precision and safety. Various online and offline methods have been developed, requiring a reference measurement system and involving modeling, measurement, and optimization of kinematic parameters \cite{Petrivc2023Kinematicmodelcalibration}.
+
+Two primary approaches have been developed for kinematic calibration: model-based and non-parametric (model-less) calibration \cite{ChenGang2014Reviewkinematicscalibration}. Model-based calibration utilizes a mathematical model of the robot's kinematic structure, typically represented by the DH parameters. The calibration process involves measuring joint angles and end-effector poses for various configurations and then estimating the DH parameters that best fit the observed data. Model-based calibration offers high accuracy but is sensitive to errors in the robot's model. Model-less calibration, on the other hand, does not rely on a predefined kinematic model. Instead, it estimates the relationship between joint angles and end-effector pose using a set of external markers, fiducial markers, or visual features in the robot's environment. Model-less calibration is more robust to model inaccuracies but can be more computationally demanding and complex.
+
+%Choosing between model-based and model-less calibration depends on factors like robot geometry and the complexity of the model. Generally, model-based calibration is preferred for robots with simple geometries and known models, while model-less calibration suits complex geometries or unknown models. The decision relies on the specific application and robot requirements. Additional considerations include the cost of calibration, with model-based being potentially more expensive due to the need for a robot model and complex calibration algorithms. The time required for model-based calibration may be longer, involving the measurement and identification of reference points or features in the workspace. Moreover, expertise is a key factor, as model-based calibration may demand more knowledge in robotics and calibration techniques.
+
+Calibrating floating base systems, like humanoid and legged robots, is challenging due to their complex kinematic structure, geometrical uncertainties, sensor noise, and dynamic environment. The hierarchical tree structure with multiple joints and links makes accurate calibration computationally challenging. Geometrical uncertainties from manufacturing tolerances, wear and environmental factors can introduce errors, affecting the accuracy of the estimated kinematic parameters. Sensor noise, from on-board and off-board measurement devices, adds uncertainty, impacting parameter accuracy, particularly in dynamic environments. The dynamic nature of these robots, with rapidly changing movements and environmental conditions, further complicates calibration, which requires continuous adaptation and monitoring.
+
+\paragraph*{Calibration devices.} %Kinematic calibration of floating base robots like humanoids or legged robots is a crucial process for ensuring their accurate and precise movements. 
+Several devices are typically used to perform this calibration, each with its own advantages and limitations.
+\begin{itemize}
+	\item Marker-based calibration.  This method relies on external markers attached to the robot's body. A camera system tracks the movements of these markers, and the calibration process estimates the relationship between joint angles and marker positions. This method is relatively accurate and can handle complex kinematic structures. However, it requires careful marker placement and is sensitive to marker occlusion.
+	\item Laser tracker-based calibration. Uses a laser tracker to measure the position and orientation of the robot's end-effector in space. The calibration process estimates the relationship between joint angles and end-effector pose based on these measurements. This method is highly accurate, especially for robots with large workspaces. However, it is more expensive and requires a dedicated laser tracker system.
+	\item Vision-based calibration. It utilizes a camera system to observe the robot's movements and identify reference points or features in the environment. The calibration process estimates the relationship between joint angles and reference points based on these observations. This method is can be used in unstructured environments; however, it can be sensitive to lighting conditions, camera calibration errors, and the difficulty of identifying suitable reference points.
+	\item IMU-based calibration. The process uses inertial measurement units (IMUs) to measure the robot's orientation and angular velocity and estimates the relationship between joint angles and IMU measurements based on the robot's known initial pose and orientation. This method can be used in real-time, but it is not as accurate as marker-based or laser tracker-based calibration, and it can be affected by sensor noise and drift.	
+S\end{itemize}
+
+\redtext{It is worth noting that calibration of robots has been conventionally performed in controlled environments relying mostly on external metrology devices. Current research explores methods and techniques to address the challenges of kinematic calibration of floating base robots. The ultimate goal is to achieve self-calibration by relying on on-board sensors and algorithms, thus eliminating the need for external measurements and reference points. Adaptive calibration should also be a part of this process to monitor the structure, consider potential changes, and adjust kinematic parameters or descriptions in real-time. Online calibration enables robots to calibrate themselves during operation, eliminating the need to pause or move to specific locations.}
+
+
+%The ultimate goal is to achieve self-calibration by relying on on-board sensors and algorithms, and detaching from the need of external measurements and reference points. Adaptive calibration should be also part of this process to monitor the structure, take potential changes into account, and adjust kinematic parameters or descriptions in real-time. On-line calibration allows robots to calibrate themselves during operation, without requiring them to pause or move to specific locations.
+
+% Adaptive calibration adapts the calibration parameters in real-time, taking into account changes in the robot's configuration and environment. Self-calibration enables robots to calibrate themselves without external measurements or reference points, relying on internal sensors and onboard algorithms. On-line calibration allows robots to calibrate themselves during operation, without requiring them to pause or move to specific locations.
+
+%Calibrating humanoid and legged robots poses several challenges, primarily due to their complex kinematic structure, geometrical uncertainties, sensor noise, and dynamic environment. The hierarchical structure of tree-structured robots, with multiple joints and links, makes them computationally challenging to calibrate accurately. The interdependence of these parameters and the high number of parameters involved can lead to convergence issues. Geometrical uncertainties arising from manufacturing tolerances, wear and tear, and environmental factors can introduce errors in the measured robot geometry. These inaccuracies can propagate into the calibration process, affecting the accuracy of the estimated kinematic parameters. Sensor noise, particularly from encoders and cameras, introduces additional uncertainty into the calibration process. These noise levels can significantly impact the accuracy of the estimated kinematic parameters, especially in dynamic environments. The dynamic nature of humanoid and legged robots, where movements and environmental conditions can change rapidly, further complicates the calibration process. Maintaining accurate calibration in such environments requires continuous adaptation and monitoring.
+%**Conclusion**
+%
+%Kinematic calibration is a crucial step in the development and operation of humanoid and legged robots, ensuring their ability to perform tasks with precision and safety. Ongoing research is focused on developing more accurate, robust, and efficient calibration methods to enable these robots to handle more complex and demanding tasks in real-world environments.
+%
+%Common methods for kinematic calibration of humanoid robots include:
+%\begin{itemize}
+%	\item \textbf{Marker-based calibration:} This method uses external markers attached to the robot's body to track its movements and estimate the relationship between joint angles and end-effector pose.
+%	\item \textbf{Camera-based calibration:} This method uses camera(s) to observe the robot's movements and estimate its kinematic parameters.
+%\end{itemize}
+
+
+
+
+
+%Laser tracker-based calibration: This method uses a laser tracker to measure the robot's position and orientation in space, and then uses this information to estimate the kinematic parameters.
+%
+%Vision-based calibration: This method uses cameras to track the robot's movements and estimate its pose and position in space.
+%
+%Gyroscope-based calibration: This method uses gyroscopes to measure the robot's orientation and angular velocity, and then use this information to estimate the kinematic parameters.
+%
+%Challenges in kinematic calibration
+%
+%Kinematic calibration of humanoid and mobile robots presents several challenges, including:
+%
+%Complex kinematic structure: Humanoid robots and mobile robots have complex kinematic structures with multiple degrees of freedom, making them difficult to calibrate.
+%
+%Geometrical uncertainties: The precise geometry of the robot's links and joints is often difficult to determine accurately.
+%
+%Sensor noise and uncertainty: Sensor measurements, such as from encoders and cameras, are often noisy and inaccurate, which can introduce errors in the calibration process.
+%
+%Dynamic environment: Humanoid robots and mobile robots operate in dynamic environments, which can further complicate the calibration process.
+%
+%Advancements in kinematic calibration
+%
+%Researchers are continuously developing new methods and techniques for kinematic calibration to improve accuracy, robustness, and efficiency. These advances include:
+%
+%Adaptive calibration: This approach uses real-time feedback from sensors to adapt the calibration parameters as the robot moves and changes its environment.
+%
+%Self-calibration: This approach allows the robot to calibrate itself without the need for external measurements or reference points.
+%
+%On-line calibration: This approach allows the robot to calibrate itself while it is in operation, without the need to stop or move to a specific location.
+%\hrule
+%
+%
+%
+%
+%
+%
+%The choice of calibration device depends on several factors, including the robot's structure, workspace, accuracy requirements, and budget. In general, marker-based calibration is a good choice for robots with complex kinematic structures and high accuracy requirements. Laser tracker-based calibration is suitable for robots with large workspaces and the need for high precision. Vision-based calibration is a cost-effective option for robots operating in unstructured environments. And IMU-based calibration is a good choice for real-time calibration or applications where marker placement is difficult.
+%
+%In addition to these devices, researchers are exploring the use of other techniques, such as ultrasound, magnetic fields, and sonic ranging, to improve the accuracy and robustness of kinematic calibration for floating base robots
+%\hrule
+%The devices typically used to perform kinematic calibration of floating base robots like humanoids or legged robots include:
+%
+%External markers: External markers are typically small reflective markers attached to the robot's body or its environment. These markers can be tracked using cameras or laser trackers to determine the robot's pose in space.
+%
+%Fiducial markers: Fiducial markers are similar to external markers, but they have a specific shape or pattern that can be easily identified by cameras. This makes them more robust to lighting conditions and occlusions.
+%
+%Visual features: Visual features can be extracted from the robot's environment using cameras. These features can be points, lines, or planes that are used to determine the robot's pose in space.
+%
+%Encoders: Encoders are devices that measure the angular position of the robot's joints. They can be used to provide feedback on the robot's joint angles during the calibration process.
+%
+%Gyroscopes: Gyroscopes are devices that measure the angular velocity of the robot. They can be used to estimate the robot's orientation during the calibration process.
+%
+%The choice of device depends on the specific robot and the environment in which it is being calibrated. For example, if the robot has a lot of external markers or fiducial markers attached to it, then these devices can be used for calibration. If the robot is working in a cluttered environment, then visual features or encoders may be a better choice.
+%
+%In addition to these devices, several software packages are available that can be used to perform kinematic calibration of floating base robots. These packages typically provide a user-friendly interface for setting up the calibration environment, collecting data, and processing the data to estimate the robot's kinematic parameters.
+%
+%Here are some examples of specific devices and software packages that can be used for kinematic calibration of floating base robots:
+%
+%Devices:
+%
+%External markers: OptiTrack, Vicon
+%Fiducial markers: AprilTags
+%Visual features: OpenCV, Matlab
+%Encoders: Robotiq, Hexapod
+%Gyroscopes: XSens, Murata
+%Software packages:
+%
+%OpenRAVE, KDL, RViz
+%MATLAB, Python
+%By using a combination of these devices and software packages, it is possible to perform accurate and reliable kinematic calibration of floating base robots. This is essential for ensuring that these robots can perform their tasks with precision and safety.
+%\hrule
+%Several devices are typically used to perform kinematic calibration of floating base robots like humanoids or legged robots. These devices typically fall into two categories:
+%
+%External Sensors:
+%
+%Cameras: Cameras are a versatile tool for kinematic calibration, as they can provide information about the robot's pose and the position of external reference points in the environment.
+%
+%Laser Trackers: Laser trackers are high-precision devices that can measure the distance between the robot and fixed points in the environment.
+%
+%Tactile Sensors: Tactile sensors can be used to measure the contact forces and torques between the robot and the environment, which can be used to estimate the robot's pose.
+%
+%Internal Sensors:
+%
+%Encoders: Encoders are devices that measure the angular position of robot joints.
+%
+%Inertial Measurement Units (IMUs): IMUs measure the robot's angular velocity and acceleration.
+%
+%The specific devices that are used for kinematic calibration will depend on the specific robot and the desired level of accuracy. In general, a combination of external and internal sensors is often used to provide the most accurate results.
+%Robot kinematic calibration is a process used to enhance the accuracy of robots, particularly industrial robots, which are highly repeatable but not entirely accurate \cite{ChenGang2014Reviewkinematicscalibration}. It involves identifying and minimizing errors in the kinematic parameters of a robot, such as the relative position of its links and joints. This process can remarkably improve the absolute and relative positioning accuracy of a robot, particularly its end-effector, for industrial applications \cite{Gan2019calibrationmethodrobot}. Various methods, both online and offline, have been developed to minimize kinematic errors and enable more accurate robot positioning. These methods typically require a reference measurement system, and they involve procedures for modeling, measuring, and optimizing the robot's kinematic parameters \cite{Petrivc2023Kinematicmodelcalibration}. The calibration can be classified in different ways based on the type of errors modeled, and it can involve the direct compensation of mapped errors in the robot's workspace. Overall, robot kinematic calibration is a critical process for ensuring the precise and reliable operation of industrial robots in various applications \cite{Gan2011RobotKinematicCalibration}.
+
+%Citations:
+%[1] https://www.researchgate.net/publication/278649160_Review_on_Kinematics_Calibration_Technology_of_Serial_Robots
+%[2] https://www.nature.com/articles/s41598-023-45156-6
+%[3] https://en.wikipedia.org/wiki/Robot_calibration
+%[4] https://journals.sagepub.com/doi/full/10.1177/1729881419883072
+%[5] https://link.springer.com/chapter/10.1007/978-3-642-18287-7_6
+
+\subsubsection{Inertial parameter identification}
 %bsection{Basics of robot system identification}
 %bsubsection{Kinematic calibration}
 %bsubsection{Inertial parameter identification}
 % For fixed based robots
 % For floating base robots
 
+
+
 % ===========================================================================================
 %                                           |                                               |
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\section{Robot proprioception}
-\TODO Paraphrase and reference this section. Use this \cite{Asada2018168Proprioceptionbodyschema}
 
-Proprioception is required to ensure the plasticity of the body schema \cite{Cardinali2016Proprioceptionisnecessary}
 
-\subsection{The role of proprioception}
-
-Much of
-this knowledge about position and movement of the limbs
-and trunk is provided by sensations arising in propriocep-
-tors. The information they provide allows us to maneuver
-our way around obstacles in the dark and be able to manip-
-ulate objects out of view.
-
-Traditionally, however, the term propri-
-oceptor has been restricted to receptors concerned with
-conscious sensations, and these include the senses of limb
-position and movement, the sense of tension or force, the
-sense of effort, and the sense of balance.
-
-To motivate the importance of robot proprioception, this section first discusses the role it plays in living systems. This section relies on the material presented in 
-As proprioceptive sensations, the senses of effort, force, and
-heaviness are distinct in that they are always associated with
-motor commands, while kinesthetic sensations can arise in a
-passive limb. It implies that for the senses of force and heavi-
-ness the peripheral input is always reafferent in origin. An-
-other issue to consider is the meanings of the terms. What do
-we mean by a sense of effort as distinct from a sense of tension?
-
- It is
-concluded that a sense of effort, arising centrally in associ-
-ation with motor commands, is able to contribute to a num-
-ber of proprioceptive sensations including the sense of limb
-position and the sense of limb movement.
+%\subsection{Some context}
+%\redtext{\say{The body schema is viewed as a set of fronto-parietal networks that integrate information originating from regions of the body and external space in a way that is functionally relevant to specific actions performed by different body parts$\ldots$ It represents the body's spatial properties, including the length of limbs and limb segments, their arrangement, the configuration of the segments in space, and the shape of the body surface$\ldots$ The body schema is characterized by short-term plasticity and reorganization, as shown by the quick integration of tools into the body schema}} \cite{Morasso2015Revisitingbodyschema}
 
 
 
-
-\subsection{Definition}
-\subsection{Human and robot proprioception}
-\subsection{A sensor suite for robot proprioception}
-
-
-\section{The body schema in robotics}
-
-\subsection{Biological body schema}
-The biological body schema refers to the internal representation that the brain maintains of the body's spatial configuration and the relationship between its parts. It is a dynamic and flexible neural map that integrates sensory information, motor commands, and past experiences to create a coherent and updated perception of one's own body. The body schema plays a crucial role in motor control, spatial awareness, and the ability to interact effectively with the environment.
-
-Key elements of the biological body schema include proprioception (awareness of the body's position in space), tactile sensations, and motor control. Proprioceptors, which are sensory receptors in muscles, tendons, and joints, provide information about the body's position and movement. This information is continuously processed by the brain to maintain an accurate and up-to-date representation of the body.
-
-The biological body schema is not static; it can be modified through experiences, learning, and adaptation. It is essential for various cognitive functions, including spatial orientation, hand-eye coordination, and the execution of complex motor tasks. Disruptions to the body schema, such as neurological disorders or injuries, can lead to difficulties in motor control and spatial perception. Understanding the biological body schema is crucial in fields like neuroscience, psychology, and rehabilitation, as it provides insights into how the brain perceives and interacts with the body and the external environment.
-
-
-\subsection{Body features encoded in the body schema}
-The body schema representation in the brain encodes various attributes of the body to facilitate perception and interaction with the environment. These attributes include:
-
-\paragraph*{Body Size and Shape} The brain has a representation of the size and shape of different body parts. This allows for accurate and coordinated movements and interactions.
-
-2. **Body Position:** The body schema includes information about the spatial orientation and position of body parts in relation to each other. This is essential for coordinating movements and maintaining balance.
-
-3. **Proprioception:** This is the sense of the relative position of one's own body parts and the effort being employed in movement. Proprioceptive information helps in knowing the positions of limbs without having to visually observe them.
-
-4. **Joint Angles:** The body schema encodes information about the angles and movements of joints, allowing for smooth and coordinated motor control.
-
-5. **Touch and Tactile Sensations:** Sensations related to touch, pressure, temperature, and pain are integrated into the body schema. This information helps in perceiving and responding to stimuli from the external environment.
-
-6. **Spatial Awareness:** The body schema contributes to spatial awareness, allowing individuals to navigate and interact with the surrounding space effectively.
-
-7. **Body Image:** While related, body image is a more complex concept that involves cognitive and emotional aspects of how an individual perceives their own body. The body schema contributes to this perception but is not the sole factor.
-
-8. **Motor Programs:** The body schema is closely tied to motor control and the execution of movement. It helps in generating and executing motor programs for voluntary actions.
-
-These attributes collectively contribute to a coherent and dynamic representation of the body, enabling individuals to interact with their environment in a purposeful and adaptive manner. The body schema is not fixed but can be modified based on experiences, learning, and changes in the body itself.
-
-
-
-\subsection{Some context}
-\redtext{\say{The body schema is viewed as a set of fronto-parietal networks that integrate information originating from regions of the body and external space in a way that is functionally relevant to specific actions performed by different body parts$\ldots$ It represents the body's spatial properties, including the length of limbs and limb segments, their arrangement, the configuration of the segments in space, and the shape of the body surface$\ldots$ The body schema is characterized by short-term plasticity and reorganization, as shown by the quick integration of tools into the body schema}} \cite{Morasso2015Revisitingbodyschema}
-
-\say{The concept of body schema is related to model learning in robotics as it provides a framework for robots to understand and represent their own bodies and the surrounding environment. Research in this area aims to enable robots to improve their capabilities by automatically synthesizing, extending, or adapting a model of their body, similar to how the human body schema allows for adaptive and coordinated movement. This involves integrating information from multiple sensory modalities and controlling complex bodies, which are desirable capabilities for robots. By studying the body representations in biology from a functional or computational perspective, researchers seek to develop robotic systems that can effectively model their own bodies and interact with the environment in a more human-like manner. Therefore, the concept of body schema plays a crucial role in the development of robotic systems that can learn and adapt to their own physical characteristics and the surrounding world.}
-
-
-The concept of body schema and its relevance to model learning in robotics is well-supported in the scientific literature. While there are no specific sources directly linking the concept of body schema to model learning in robotics, the following sources provide relevant information about the body schema and its implications:
-
-(1) The article "Influence of the Body Schema on Multisensory Integration: Evidence from the Mirror Box Illusion" in Scientific Reports - Nature discusses the influence of the body schema on multisensory integration, which is a fundamental aspect of robotic model learning.
-
-(2) The paper "Neuroplasticity in the blind and sensory substitution for vision" on ResearchGate explores neuroplasticity in the blind, which is relevant to understanding how the body schema is developed and adapted in the absence of vision, a concept that can be applied to robotics.
-
-(3) The article "Does visual experience influence arm proprioception and its lateralization? Evidence from passive matching performance in congenitally-blind and sighted adults" in ScienceDirect provides insights into the relationship between visual experience and proprioception, which is foundational to the development of the body schema and has implications for robotics.
-
-(4) The study "Degraded vision affects mental representations of the body" published on Taylor \& Francis Online discusses the impact of degraded vision on mental representations of the body, including the shift from a pictorial representation of the body to a somatosensory one, which is relevant to understanding the body schema in the context of robotic model learning.
-
-While these sources do not directly address the application of body schema to model learning in robotics, they provide valuable insights into the development and influence of the body schema, which can be extrapolated to understand its potential relevance to model learning in robotics.
-
-%Citations:
-%[1] https://www.nature.com/articles/s41598-017-04797-0
-%[2] https://www.researchgate.net/publication/262840022_Neuroplasticity_in_the_blind_and_sensory_substitution_for_vision
-%[3] https://www.sciencedirect.com/science/article/abs/pii/S030439402300294X
-%[4] https://www.tandfonline.com/doi/full/10.1080/13506285.2023.2186997
 
 % ===========================================================================================
 %                                           |                                               |
@@ -860,3 +1184,25 @@ Previous works have discussed metrics based on information entropy in the contex
 %\section{Model learning and the body schema}
 %\subsection{Internal representations}
 %\subsection{Sensorimotor maps}
+
+% ===========================================================================================
+%                                           |                                               |
+% -------------------------------------- SECTION -------------------------------------------|
+%                                           |                                               |
+% ===========================================================================================
+\section{Body modeling in congenitally blind individuals}
+(1) The article "Influence of the Body Schema on Multisensory Integration: Evidence from the Mirror Box Illusion" in Scientific Reports - Nature discusses the influence of the body schema on multisensory integration, which is a fundamental aspect of robotic model learning.
+
+(2) The paper "Neuroplasticity in the blind and sensory substitution for vision" on ResearchGate explores neuroplasticity in the blind, which is relevant to understanding how the body schema is developed and adapted in the absence of vision, a concept that can be applied to robotics.
+
+(3) The article "Does visual experience influence arm proprioception and its lateralization? Evidence from passive matching performance in congenitally-blind and sighted adults" in ScienceDirect provides insights into the relationship between visual experience and proprioception, which is foundational to the development of the body schema and has implications for robotics.
+
+(4) The study "Degraded vision affects mental representations of the body" published on Taylor \& Francis Online discusses the impact of degraded vision on mental representations of the body, including the shift from a pictorial representation of the body to a somatosensory one, which is relevant to understanding the body schema in the context of robotic model learning.
+
+While these sources do not directly address the application of body schema to model learning in robotics, they provide valuable insights into the development and influence of the body schema, which can be extrapolated to understand its potential relevance to model learning in robotics.
+
+%Citations:
+%[1] https://www.nature.com/articles/s41598-017-04797-0
+%[2] https://www.researchgate.net/publication/262840022_Neuroplasticity_in_the_blind_and_sensory_substitution_for_vision
+%[3] https://www.sciencedirect.com/science/article/abs/pii/S030439402300294X
+%[4] https://www.tandfonline.com/doi/full/10.1080/13506285.2023.2186997
