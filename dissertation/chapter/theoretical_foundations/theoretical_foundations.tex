@@ -15,7 +15,6 @@ As an anchoring point the concept of physical self will be briefly introduced an
 %\part{General body concepts}
 \section{Different views on the body}
 
-
 % SUBSECTION ================================================================================
 \subsection{The physical self}
 The concept of the physical self is rooted in human psychology and consciousness \cite{Tsakiris2016multisensorybasisself,Overgaard2023selfitsbody}. It typically refers to an individual's perception and evaluation of their own physical body, encompassing appearance, abilities, and overall physicality. It involves the subjective experience of one's body and its relation to the environment, supported by sensory modalities like proprioception, touch, and interoception (sense of internal bodily sensations). This concept is explored in psychology, cognitive science, and related fields to understand how individuals perceive and interact with their bodies[1].
@@ -32,8 +31,6 @@ In robotics, achieving a sense of the physical self is vital, especially for tas
 	\end{center}
 \end{figure}
 % ---
-
-
 
 % SUBSECTION ================================================================================
 \subsection{The body morphology}
@@ -87,7 +84,7 @@ In essence, embodiment in robotics transcends traditional boundaries, transformi
 % SUBSECTION ================================================================================
 \subsection{Summary of the body concepts}
 The physical self, embodiment, body schema, and body morphology are interconnected concepts crucial for understanding human self-awareness and interaction with the world. The physical self involves our awareness of our body and its movements, incorporating proprioception and interoception. Embodiment posits that our thoughts and experiences are shaped by our physical bodies, influencing our mental representations of the world. The body schema, a dynamic internal model, reflects our body's structure and spatial position based on sensory feedback. Body morphology, encompassing size and shape, affects movement and interactions. These concepts are interrelated, with the physical self serving as the foundation for embodiment, the body schema manifesting embodiment, body morphology influencing embodiment, and embodiment shaping the physical self. In the realm of robotics, these concepts are pertinent for robots to effectively interact with the world, requiring a sense of their physical selves and an understanding of embodiment to develop grounded behaviors. Table~\ref{tab:body_concepts} condenses the meaning and relationships of these body concepts.
-
+% ---
 \begin{table}
 \begin{center}
 	\begin{tabular}{ |m{0.3\textwidth}|m{0.34\textwidth}|m{0.34\textwidth}| } 
@@ -107,27 +104,9 @@ The physical self, embodiment, body schema, and body morphology are interconnect
 \caption{\textbf{Relationships between the body concepts}}
 \label{tab:body_concepts}
 \end{table}
-	
+% ---	
 
 
-
-\subsubsection{\redtext{Embodiment and information structure}}
-\TODO
-According to \cite{LungarellaEmbodimentInformationCausal}
-
-
-
-
-
-
-% ---
-\begin{figure}
-	\begin{center}
-		\includegraphics[width=0.7\textwidth]{implications_of_embodiment}
-		\caption{\textbf{Implications of embodiment.} From Pfeifer et al. \cite{Pfeifer2007SelfOrganizationEmbodiment}. Reprinted with permission from AAAS.}
-	\end{center}
-\end{figure}
-% ---
 
 % ===========================================================================================
 %                                           |                                               |
@@ -153,6 +132,7 @@ Proprioception, crucial for executing coordinated movements, refers to the sense
 
 Proprioceptive signals inform an agent about the position and movement of limbs and trunk, enabling it to maneuver the body around obstacles even in poor visibility conditions. Similarly, proprioception---in combination with the body schema---allows the manipulation of objects outside the field of vision. Traditionally confined to conscious sensations, proprioceptors include receptors for kinesthetic sensations (position, movement, balance), and those related to effort (tension, force, heaviness). The latter being directly in association  with motor commands. Indeed, various proprioceptive sensations can be attributed to a centrally originated sense of effort \cite{Proske2012proprioceptivesensestheir}. Lastly, a fundamental role of proprioception is to ensure the plasticity of the body schema \cite{Cardinali2016Proprioceptionisnecessary}.
 
+% SUBSECTION ================================================================================
 \subsection{Robot proprioception}
 \begin{figure}
 	\begin{center}
@@ -162,6 +142,7 @@ Proprioceptive signals inform an agent about the position and movement of limbs 
 	\end{center}
 \end{figure}
 Akin to biological agents, robot proprioception refers to a robot's ability to sense and perceive the position, movement, orientation, and effort of its own body parts. Similar to how humans rely on proprioception to be aware of their body's position and movement, robots leverage proprioceptive capabilities to understand their own kinematics and dynamics. This information is crucial for robots to execute precise and coordinated movements, adapt to changes in their environment, and interact effectively. Typically, robotic proprioception is provided by the following sensors\cite{Siegwart2011Introductionautonomousmobile}:
+% ---
 \begin{itemize}
 	\item \textbf{Joint Encoders:} Sensors that measure the angular position of each joint in a robot. They provide feedback on the angular displacement of the joints, allowing the robot to determine its joint angles accurately. Conventionally, numerical differentiation of these signals are used to convey joint velocity.
 	
@@ -178,6 +159,7 @@ Akin to biological agents, robot proprioception refers to a robot's ability to s
 	\item \textbf{Strain Gauges:} Strain gauges are used to measure deformation or strain in robot components, providing information about the stress and load on specific parts. This is useful for monitoring structural integrity and preventing mechanical failures.
 	
 \end{itemize}
+% ---
 
 %Apart from the typical measurements of the robot's joint position $ q $, velocity $ \dot{q}$, and joint torque $ \tau $, the use of inertial measurement units (IMU) to measure the acceleration $ \dot{\bm{v}} $ and angular velocity $\bm{\omega}$ of the robot's bodies has had applications in state \cite{DeLuca2007accelerationbasedstate} and joint velocity and acceleration estimation \cite{Birjandi2019Jointvelocityacceleration, Rotella2016Inertialsensorbased}, the control of mobile robots \cite{Dutta2019StabilityAnalysisHumanoid}, and in safe human-robot interaction\cite{Hamad2023ModularizeConquerGeneralized}.
 
@@ -195,6 +177,7 @@ and angular velocity $\bm{\omega}$ of the robot bodies has been used in state es
 
 %Robot proprioception, enabled by these diverse sensors, allows robots to operate autonomously, adapt to dynamic environments, and execute tasks with precision and efficiency.
 
+% SUBSECTION ================================================================================
 \subsection{Body features in the body schema}
 %The body schema serves as a link structure that outlines connections among components in the robot arm. This explicit model relies on predefined parameters, with joint angles, typically measured using encoders, tracking the trajectory based on proprioception. In contrast, implicit models are applied in uncalibrated systems, where interaction with the environment estimates desired parameters. This mechanistic approach differs from the biological case, where the inherently flexible link structure adapts to changes in the environment and the self-body. Unlike in robotics, where knowledge is externally provided at a high cost for parameter estimation, biological systems are inherently self-learning, aligning with implicit model principles. Additionally, robotics lacks cross-modal association, whereas the integration of multi-modal sensory information is fundamental in the biological case, emphasizing sophisticated adaptability and sensory integration \cite{Asada2018168Proprioceptionbodyschema}.
 
@@ -254,6 +237,7 @@ The inertial properties within the body schema encompass characteristics associa
 
 \paragraph*{Motor Properties} The body schema is closely tied to motor control and the execution of movement. It helps in generating and executing motor programs for voluntary actions.
 
+% SUBSECTION ================================================================================
 \subsection{Learning the body schema}
 Model-based robotics is inherently linked to the concept of the body schema, as defined in Def.~\ref{def:robot_body_schema}. It encompasses a theoretical foundation and methods that consider the physical properties of robots and integrate them into their representations. However, these methods often treat body properties as immutable, relying on a single identification or calibration procedure. Some studies have compared the conventional characteristics of model-based robotics, such as being amodal, fixed, explicit, centralized, and modular, with the properties of a biological body schema \cite{Hoffmann2021Bodymodelshumans}. Unlike robotic body models, the body schema is dynamic, capable of modification based on experiences, learning, and changes in the body itself. Additionally, biological systems are inherently self-learning and rely on the integration of multi-modal sensory information \cite{Asada2018168Proprioceptionbodyschema}.
 
@@ -273,8 +257,6 @@ The integration of learning techniques with model-based robotics allows conventi
 %a known calibrated kinematic model (i.e., N , A, λ) and
 %mostly focuses on learning θ
 
-
-
 %\redtext{The body schema outlines connections among components in the robot morphology. Explicit models rely on predefined parameters, typically identified measured using encoders, tracking the trajectory based on proprioception. In contrast, implicit models are applied in uncalibrated systems, where interaction with the environment estimates desired parameters. This mechanistic approach differs from the biological case, where the inherently flexible link structure adapts to changes in the environment and the self-body. Unlike in robotics, where knowledge is externally provided at a high cost for parameter estimation, biological systems are inherently self-learning, aligning with implicit model principles. Additionally, robotics lacks cross-modal association, whereas the integration of multi-modal sensory information is fundamental in the biological case, emphasizing sophisticated adaptability and sensory integration \cite{Asada2018168Proprioceptionbodyschema}.}
 
 
@@ -292,14 +274,7 @@ The integration of learning techniques with model-based robotics allows conventi
 % ===========================================================================================
 \section{Representing properties of the robot body schema}
 
-
-
-% ===========================================================================================
-%                                           |                                               |
-% -------------------------------------- SECTION -------------------------------------------|
-%                                           |                                               |
-% ===========================================================================================
-%\subsection{Robot dynamics modeling}
+% SUBSECTION ================================================================================
 \subsection{Kinematics: Body size, position, and posture}
 The focus in this work is on serial kinematic chains with either fixed or floating bases and revolute joints. This sections revisits the kinematic modeling essentials of such structures.
 
@@ -387,11 +362,13 @@ link length $a$ (the offset distance between the joint axes $\bm{\zeta}_P$ and $
 % ---
 with $\lambda_1 = a$, $\lambda_2 = \text{sin}(\alpha)$, $\lambda_3 = \text{cos}(\alpha)$, and $\lambda_1 = d$. 
 
-\paragraph*{Euler angles representation} In the Euler angle representation \redtext{REF}, a vector $\bm{\lambda}^{EA} = \left[\lambda_1,\lambda_2,\lambda_3,\lambda_4,\lambda_5,\lambda_6\right]^\intercal$ is used to define a homogeneous transformation matrix based on the rotation matrix
+\paragraph*{Euler angles representation} A vector $\bm{\lambda}^{EA} = \left[\lambda_1,\lambda_2,\lambda_3,\lambda_4,\lambda_5,\lambda_6\right]^\intercal$ is used to define a homogeneous transformation matrix based on a rotation matrix 
+% ---
 \begin{equation}
 	      ^\cframe{C}\bm{R}_\cframe{P} = (\text{Rot}_z(\lambda_1)\text{Rot}_x(\lambda_2)\text{Rot}_z(\lambda_3)\text{Rot}_z(q_C))^\intercal
 \end{equation}
-and the translation vector $ ^\cframe{P}\bm{r}_\cframe{C} = \left[\lambda_4,\lambda_5,\lambda_6\right]^\intercal $. The expression $\text{Rot}_i(j)$ defines a pure rotation of $j$ radians around the axis $i$. 
+% ---
+depending on the Euler angles \cite{Siciliano2008RoboticsModellingPlanning} $\left(\lambda_1,\lambda_2,\lambda_3\right)$ and the translation vector $ ^\cframe{P}\bm{r}_\cframe{C} = \left[\lambda_4,\lambda_5,\lambda_6\right]^\intercal $. The expression $\text{Rot}_i(j)$ defines a pure rotation of $j$ radians around the axis $i$. 
 
 \paragraph*{Axis-angle representation} A vector of parameters
 % ---
@@ -401,7 +378,7 @@ and the translation vector $ ^\cframe{P}\bm{r}_\cframe{C} = \left[\lambda_4,\lam
 	\end{bmatrix}^\intercal \in \mathbb{R}^{10}
 \end{equation}
 % ---
-is used to define the rotation matrix $^\cframe{P}\bm{R}^T_\cframe{C}$ in axis-angle form \redtext{REF} as
+is used to define the rotation matrix $^\cframe{P}\bm{R}^T_\cframe{C}$ in axis-angle form \cite{Lynch2017Modernrobotics} as
 % ---
 \begin{equation}\label{eq:rotation_matrix_axis_angle}
 	^\cframe{P}\bm{R}_\cframe{C}\left(q_{C};\bm{\gamma}\right) = \left(\exp^{\left[{^{\left\lbrace P\right\rbrace}}\bm{\xi}_{C}\right]\phi}\right) \left(\exp^{\left[{^{\left\lbrace C\right\rbrace}}\bm{\zeta}_{C}\right] q_C}	\right).
@@ -415,10 +392,19 @@ is used to define the rotation matrix $^\cframe{P}\bm{R}^T_\cframe{C}$ in axis-a
 %	\end{bmatrix}^\intercal.
 %\end{equation}
 % ---
-The terms $ \bm{\xi} \in \mathbb{R}^3$ and $ \bm{\zeta} \in \mathbb{R}^3$ being unitary rotation axes and  $ \left[~\cdot~\right] $ denoting a vector expressed as a skew-symmetric matrix. The vector $ \bm{\zeta}$ expresses the rotation axis of the joint that connects two bodies, expressed in the coordinate system $\cframe{C}$ of the child body. The angle $\phi$ defines the constant rotation about the axis $\bm{\xi}$ defined by the geometry of the links alone when the joint angle $q_C$ is zero.
-
+The terms $ \bm{\xi} \in \mathbb{R}^3$ and $ \bm{\zeta} \in \mathbb{R}^3$ being unitary rotation axes and  $ \left[~\cdot~\right] $ denoting a vector $\bm{u} = \left[u_x,u_y,u_z\right]^\intercal$ expressed as a skew-symmetric matrix; i.e.,
 % ---
-\begin{figure}
+\begin{equation}
+	[\bm{u}] = \begin{bmatrix}
+		0                & -u_z             & u_y \\
+		u_z              & 0                     & -u_x \\
+		-u_y             & u_x              & 0
+	\end{bmatrix}.
+\end{equation}
+% ---
+The vector $ \bm{\zeta}$ expresses the rotation axis of the joint that connects two bodies, expressed in the coordinate system $\cframe{C}$ of the child body. The angle $\phi$ defines the constant rotation about the axis $\bm{\xi}$ defined by the geometry of the links alone when the joint angle $q_C$ is zero.
+% ---
+\begin{figure}[t!]
 	\begin{center}
 		\includegraphics[width=0.5\textwidth]{body_twist_illustration}
 		\caption{\textbf{Body twist.} A twist is composed of the linear and angular velocities at a point on a rigid body.}
@@ -484,152 +470,29 @@ and
 \end{equation}
 % ---
 
-%\subsubsection{Forward and inverse dynamics}
-%\subsubsection{The Newton-Euler formulation of the inverse dynamics}
-
-\redtext{Extension for floating base robots with flexible joints and links have been presented elsewhere \cite{Khalil2017GeneralDynamicAlgorithm}}
-% The kinematics forward recursion
-% The dynamics backward recursion
-%\subsubsection{Composition of the kinematics and dynamics}
 \subsubsection{Kinematic calibration}
-
-
-%Robot kinematic calibration is a crucial procedure employed to enhance the precision of robots, especially in the context of industrial robotics, where high repeatability is accompanied by inherent inaccuracies \cite{ChenGang2014Reviewkinematicscalibration}. The objective is to identify and mitigate errors associated with the kinematic parameters of a robot, such as the relative positioning of its links and joints. Through this process, a significant enhancement in the absolute and relative positioning accuracy of a robot, particularly its end-effector, is achieved, making it well-suited for precise industrial applications \cite{Gan2019calibrationmethodrobot}. A variety of methods, both online and offline, have been developed to minimize kinematic errors, necessitating a reference measurement system. These methods encompass procedures involving modeling, measurement, and optimization of the robot's kinematic parameters \cite{Petrivc2023Kinematicmodelcalibration}. Classification of calibration methods can be based on the type of errors modeled, and it may include the direct compensation of mapped errors within the robot's workspace.
-%
-%Robot kinematic calibration can be approached through two main methods: model-based and model-less calibration. In the former, the process relies on a well-defined mathematical model of the robot's kinematics, typically describing the relationship between joint angles and end-effector pose using Denavit-Hartenberg (DH) parameters. The calibration entails measuring joint angles and end-effector pose for known configurations and utilizing these measurements to estimate the DH parameters. While model-based calibration benefits from a solid foundation provided by a mathematical model, its accuracy depends on the precision of the robot's model, which may vary over time due to wear and tear. On the other hand, model-less calibration avoids a predefined mathematical model, employing a set of reference points or features in the workspace to estimate the relationship between joint angles and end-effector pose. This approach is advantageous for robots with intricate geometries or in applications lacking a precise mathematical model. Model-less calibration tends to be more robust to changes in the robot's model but may pose challenges in implementation, often requiring more complex algorithms.
-%
-%
-%Choosing between model-based and model-less calibration depends on factors like robot geometry and the complexity of the model. Generally, model-based calibration is preferred for robots with simple geometries and known models, while model-less calibration suits complex geometries or unknown models. The decision relies on the specific application and robot requirements. Additional considerations include the cost of calibration, with model-based being potentially more expensive due to the need for a robot model and complex calibration algorithms. The time required for model-based calibration may be longer, involving the measurement and identification of reference points or features in the workspace. Moreover, expertise is a key factor, as model-based calibration may demand more knowledge in robotics and calibration techniques.
-
-% ----------------------------------------------------------------------------------------------------------------------
-%\hrule
-%\subsubsection{Kinematic calibration in a nutshell}
-%Kinematic calibration is a critical aspect of robotic systems, where high repeatability is accompanied by inherent inaccuracies \cite{ChenGang2014Reviewkinematicscalibration}. In It is of particular relevance for humanoid and legged robots, which exhibit complex kinematic structures and operate in dynamic environments. Through this process, a significant enhancement in the absolute and relative positioning accuracy of a robot, particularly its end-effector, is achieved, making it well-suited for precise industrial applications \cite{Gan2019calibrationmethodrobot}. Accurate kinematic calibration ensures that these robots can perform tasks with precision and safety, enabling them to interact effectively with their surroundings.  A variety of methods, both online and offline, have been developed to minimize kinematic errors, necessitating a reference measurement system. These methods encompass procedures involving modeling, measurement, and optimization of the robot's kinematic parameters \cite{Petrivc2023Kinematicmodelcalibration}. Classification of calibration methods can be based on the type of errors modeled, and it may include the direct compensation of mapped errors within the robot's workspace.
-
 Kinematic calibration is crucial for robotic systems, particularly for floating base multi limb kinematic structures. It involves enhancing the accuracy of a robot's positioning by adjusting its kinematics control model, all without making any alterations to its hardware \cite{ChenGang2014Reviewkinematicscalibration}. Accurate calibration ensures robots can perform tasks with precision and safety. Various online and offline methods have been developed, requiring a reference measurement system and involving modeling, measurement, and optimization of kinematic parameters \cite{Petrivc2023Kinematicmodelcalibration}.
 
 Two primary approaches have been developed for kinematic calibration: model-based and non-parametric (model-less) calibration \cite{ChenGang2014Reviewkinematicscalibration}. Model-based calibration utilizes a mathematical model of the robot's kinematic structure, typically represented by the DH parameters. The calibration process involves measuring joint angles and end-effector poses for various configurations and then estimating the DH parameters that best fit the observed data. Model-based calibration offers high accuracy but is sensitive to errors in the robot's model. Model-less calibration, on the other hand, does not rely on a predefined kinematic model. Instead, it estimates the relationship between joint angles and end-effector pose using a set of external markers, fiducial markers, or visual features in the robot's environment. Model-less calibration is more robust to model inaccuracies but can be more computationally demanding and complex.
 
-%Choosing between model-based and model-less calibration depends on factors like robot geometry and the complexity of the model. Generally, model-based calibration is preferred for robots with simple geometries and known models, while model-less calibration suits complex geometries or unknown models. The decision relies on the specific application and robot requirements. Additional considerations include the cost of calibration, with model-based being potentially more expensive due to the need for a robot model and complex calibration algorithms. The time required for model-based calibration may be longer, involving the measurement and identification of reference points or features in the workspace. Moreover, expertise is a key factor, as model-based calibration may demand more knowledge in robotics and calibration techniques.
-
 Calibrating floating base systems, like humanoid and legged robots, is challenging due to their complex kinematic structure, geometrical uncertainties, sensor noise, and dynamic environment. The hierarchical tree structure with multiple joints and links makes accurate calibration computationally challenging. Geometrical uncertainties from manufacturing tolerances, wear and environmental factors can introduce errors, affecting the accuracy of the estimated kinematic parameters. Sensor noise, from on-board and off-board measurement devices, adds uncertainty, impacting parameter accuracy, particularly in dynamic environments. The dynamic nature of these robots, with rapidly changing movements and environmental conditions, further complicates calibration, which requires continuous adaptation and monitoring.
 
-\paragraph*{Calibration devices.} %Kinematic calibration of floating base robots like humanoids or legged robots is a crucial process for ensuring their accurate and precise movements. 
-Several devices are typically used to perform this calibration, each with its own advantages and limitations.
+\paragraph*{Calibration devices.} Several devices are typically used to perform this calibration, each with its own advantages and limitations. \TODO~\redtext{Add the variables that are measured/identified in the following processes.}
+% ---
 \begin{itemize}
-	\item Marker-based calibration.  This method relies on external markers attached to the robot's body. A camera system tracks the movements of these markers, and the calibration process estimates the relationship between joint angles and marker positions. This method is relatively accurate and can handle complex kinematic structures. However, it requires careful marker placement and is sensitive to marker occlusion.
+	\item Marker-based calibration.  This method relies on external markers at a location $\bm{x}_i$ attached to the robot's body. A camera system tracks the movements of these markers, and the calibration process estimates the relationship between the measured joint angles $\bm{q}$ and marker positions. This makes use of the robot forward kinematics formulation
+	\begin{equation}
+		\bm{x}_i = f\left(\bm{q};\bm{\lambda}\right),
+	\end{equation}
+	relying on an initial (uncalibrated) estimate $\bm{\lambda}_0$. This method is relatively accurate and can handle complex kinematic structures. However, it requires careful marker placement and is sensitive to marker occlusion.
 	\item Laser tracker-based calibration. Uses a laser tracker to measure the position and orientation of the robot's end-effector in space. The calibration process estimates the relationship between joint angles and end-effector pose based on these measurements. This method is highly accurate, especially for robots with large workspaces. However, it is more expensive and requires a dedicated laser tracker system.
 	\item Vision-based calibration. It utilizes a camera system to observe the robot's movements and identify reference points or features in the environment. The calibration process estimates the relationship between joint angles and reference points based on these observations. This method is can be used in unstructured environments; however, it can be sensitive to lighting conditions, camera calibration errors, and the difficulty of identifying suitable reference points.
 	\item IMU-based calibration. The process uses inertial measurement units (IMUs) to measure the robot's orientation and angular velocity and estimates the relationship between joint angles and IMU measurements based on the robot's known initial pose and orientation. This method can be used in real-time, but it is not as accurate as marker-based or laser tracker-based calibration, and it can be affected by sensor noise and drift.	
-S\end{itemize}
-
+\end{itemize}
+% ---
 \redtext{It is worth noting that calibration of robots has been conventionally performed in controlled environments relying mostly on external metrology devices. Current research explores methods and techniques to address the challenges of kinematic calibration of floating base robots. The ultimate goal is to achieve self-calibration by relying on on-board sensors and algorithms, thus eliminating the need for external measurements and reference points. Adaptive calibration should also be a part of this process to monitor the structure, consider potential changes, and adjust kinematic parameters or descriptions in real-time. Online calibration enables robots to calibrate themselves during operation, eliminating the need to pause or move to specific locations.}
 
 
-%The ultimate goal is to achieve self-calibration by relying on on-board sensors and algorithms, and detaching from the need of external measurements and reference points. Adaptive calibration should be also part of this process to monitor the structure, take potential changes into account, and adjust kinematic parameters or descriptions in real-time. On-line calibration allows robots to calibrate themselves during operation, without requiring them to pause or move to specific locations.
-
-% Adaptive calibration adapts the calibration parameters in real-time, taking into account changes in the robot's configuration and environment. Self-calibration enables robots to calibrate themselves without external measurements or reference points, relying on internal sensors and onboard algorithms. On-line calibration allows robots to calibrate themselves during operation, without requiring them to pause or move to specific locations.
-
-%Calibrating humanoid and legged robots poses several challenges, primarily due to their complex kinematic structure, geometrical uncertainties, sensor noise, and dynamic environment. The hierarchical structure of tree-structured robots, with multiple joints and links, makes them computationally challenging to calibrate accurately. The interdependence of these parameters and the high number of parameters involved can lead to convergence issues. Geometrical uncertainties arising from manufacturing tolerances, wear and tear, and environmental factors can introduce errors in the measured robot geometry. These inaccuracies can propagate into the calibration process, affecting the accuracy of the estimated kinematic parameters. Sensor noise, particularly from encoders and cameras, introduces additional uncertainty into the calibration process. These noise levels can significantly impact the accuracy of the estimated kinematic parameters, especially in dynamic environments. The dynamic nature of humanoid and legged robots, where movements and environmental conditions can change rapidly, further complicates the calibration process. Maintaining accurate calibration in such environments requires continuous adaptation and monitoring.
-%**Conclusion**
-%
-%Kinematic calibration is a crucial step in the development and operation of humanoid and legged robots, ensuring their ability to perform tasks with precision and safety. Ongoing research is focused on developing more accurate, robust, and efficient calibration methods to enable these robots to handle more complex and demanding tasks in real-world environments.
-%
-%Common methods for kinematic calibration of humanoid robots include:
-%\begin{itemize}
-%	\item \textbf{Marker-based calibration:} This method uses external markers attached to the robot's body to track its movements and estimate the relationship between joint angles and end-effector pose.
-%	\item \textbf{Camera-based calibration:} This method uses camera(s) to observe the robot's movements and estimate its kinematic parameters.
-%\end{itemize}
-
-
-
-
-
-%Laser tracker-based calibration: This method uses a laser tracker to measure the robot's position and orientation in space, and then uses this information to estimate the kinematic parameters.
-%
-%Vision-based calibration: This method uses cameras to track the robot's movements and estimate its pose and position in space.
-%
-%Gyroscope-based calibration: This method uses gyroscopes to measure the robot's orientation and angular velocity, and then use this information to estimate the kinematic parameters.
-%
-%Challenges in kinematic calibration
-%
-%Kinematic calibration of humanoid and mobile robots presents several challenges, including:
-%
-%Complex kinematic structure: Humanoid robots and mobile robots have complex kinematic structures with multiple degrees of freedom, making them difficult to calibrate.
-%
-%Geometrical uncertainties: The precise geometry of the robot's links and joints is often difficult to determine accurately.
-%
-%Sensor noise and uncertainty: Sensor measurements, such as from encoders and cameras, are often noisy and inaccurate, which can introduce errors in the calibration process.
-%
-%Dynamic environment: Humanoid robots and mobile robots operate in dynamic environments, which can further complicate the calibration process.
-%
-%Advancements in kinematic calibration
-%
-%Researchers are continuously developing new methods and techniques for kinematic calibration to improve accuracy, robustness, and efficiency. These advances include:
-%
-%Adaptive calibration: This approach uses real-time feedback from sensors to adapt the calibration parameters as the robot moves and changes its environment.
-%
-%Self-calibration: This approach allows the robot to calibrate itself without the need for external measurements or reference points.
-%
-%On-line calibration: This approach allows the robot to calibrate itself while it is in operation, without the need to stop or move to a specific location.
-%\hrule
-%
-%
-%
-%
-%
-%
-%The choice of calibration device depends on several factors, including the robot's structure, workspace, accuracy requirements, and budget. In general, marker-based calibration is a good choice for robots with complex kinematic structures and high accuracy requirements. Laser tracker-based calibration is suitable for robots with large workspaces and the need for high precision. Vision-based calibration is a cost-effective option for robots operating in unstructured environments. And IMU-based calibration is a good choice for real-time calibration or applications where marker placement is difficult.
-%
-%In addition to these devices, researchers are exploring the use of other techniques, such as ultrasound, magnetic fields, and sonic ranging, to improve the accuracy and robustness of kinematic calibration for floating base robots
-%\hrule
-%The devices typically used to perform kinematic calibration of floating base robots like humanoids or legged robots include:
-%
-%External markers: External markers are typically small reflective markers attached to the robot's body or its environment. These markers can be tracked using cameras or laser trackers to determine the robot's pose in space.
-%
-%Fiducial markers: Fiducial markers are similar to external markers, but they have a specific shape or pattern that can be easily identified by cameras. This makes them more robust to lighting conditions and occlusions.
-%
-%Visual features: Visual features can be extracted from the robot's environment using cameras. These features can be points, lines, or planes that are used to determine the robot's pose in space.
-%
-%Encoders: Encoders are devices that measure the angular position of the robot's joints. They can be used to provide feedback on the robot's joint angles during the calibration process.
-%
-%Gyroscopes: Gyroscopes are devices that measure the angular velocity of the robot. They can be used to estimate the robot's orientation during the calibration process.
-%
-%The choice of device depends on the specific robot and the environment in which it is being calibrated. For example, if the robot has a lot of external markers or fiducial markers attached to it, then these devices can be used for calibration. If the robot is working in a cluttered environment, then visual features or encoders may be a better choice.
-%
-%In addition to these devices, several software packages are available that can be used to perform kinematic calibration of floating base robots. These packages typically provide a user-friendly interface for setting up the calibration environment, collecting data, and processing the data to estimate the robot's kinematic parameters.
-%
-%Here are some examples of specific devices and software packages that can be used for kinematic calibration of floating base robots:
-%
-%Devices:
-%
-%External markers: OptiTrack, Vicon
-%Fiducial markers: AprilTags
-%Visual features: OpenCV, Matlab
-%Encoders: Robotiq, Hexapod
-%Gyroscopes: XSens, Murata
-%Software packages:
-%
-%OpenRAVE, KDL, RViz
-%MATLAB, Python
-%By using a combination of these devices and software packages, it is possible to perform accurate and reliable kinematic calibration of floating base robots. This is essential for ensuring that these robots can perform their tasks with precision and safety.
-%\hrule
-%Several devices are typically used to perform kinematic calibration of floating base robots like humanoids or legged robots. These devices typically fall into two categories:
-%
-%External Sensors:
-%
-%Cameras: Cameras are a versatile tool for kinematic calibration, as they can provide information about the robot's pose and the position of external reference points in the environment.
-%
-%Laser Trackers: Laser trackers are high-precision devices that can measure the distance between the robot and fixed points in the environment.
-%
-%Tactile Sensors: Tactile sensors can be used to measure the contact forces and torques between the robot and the environment, which can be used to estimate the robot's pose.
-%
-%Internal Sensors:
-%
-%Encoders: Encoders are devices that measure the angular position of robot joints.
-%
-%Inertial Measurement Units (IMUs): IMUs measure the robot's angular velocity and acceleration.
-%
 %The specific devices that are used for kinematic calibration will depend on the specific robot and the desired level of accuracy. In general, a combination of external and internal sensors is often used to provide the most accurate results.
 %Robot kinematic calibration is a process used to enhance the accuracy of robots, particularly industrial robots, which are highly repeatable but not entirely accurate \cite{ChenGang2014Reviewkinematicscalibration}. It involves identifying and minimizing errors in the kinematic parameters of a robot, such as the relative position of its links and joints. This process can remarkably improve the absolute and relative positioning accuracy of a robot, particularly its end-effector, for industrial applications \cite{Gan2019calibrationmethodrobot}. Various methods, both online and offline, have been developed to minimize kinematic errors and enable more accurate robot positioning. These methods typically require a reference measurement system, and they involve procedures for modeling, measuring, and optimizing the robot's kinematic parameters \cite{Petrivc2023Kinematicmodelcalibration}. The calibration can be classified in different ways based on the type of errors modeled, and it can involve the direct compensation of mapped errors in the robot's workspace. Overall, robot kinematic calibration is a critical process for ensuring the precise and reliable operation of industrial robots in various applications \cite{Gan2011RobotKinematicCalibration}.
 
@@ -640,7 +503,356 @@ S\end{itemize}
 %[4] https://journals.sagepub.com/doi/full/10.1177/1729881419883072
 %[5] https://link.springer.com/chapter/10.1007/978-3-642-18287-7_6
 
-\subsubsection{Inertial parameter identification}
+% SUBSECTION ================================================================================
+\subsection{The inertial properties of the body schema}
+The dynamic parameters of the $i$-th rigid body in a kinematic chain include its mass $m_i$, the center of mass $\bm{C}_i= \left[X_i, Y_i, Z_i\right]^\intercal$, and inertia matrix $\bm{I}_i$. The latter is dependent on the reference frame in which it is expressed. The inertia matrix $\bm{I}_i \in \mathbb{R}^{3\times 3}$ of the $i$-th link defined in the coordinate frame of the $i$-th joint is given by:
+% ---
+\begin{equation}
+	\bm{I}_i= \bm{I}^\intercal_i= \begin{bmatrix}
+		XX_i & XY_i & XZ_i\\
+		XY_i & YY_i & YZ_i\\
+		XZ_i & YZ_i & ZZ_i
+	\end{bmatrix},
+\end{equation}
+% ---
+where the elements of the triplet $(XX_i,YY_i,ZZ_i)$ represent the moments of inertia and the terms $(XY_i,XZ_i,YZ_i)$ are the products of inertia. They can be summarized in the vector of inertial parameters
+\begin{equation}
+	\bm{\theta}_i = \begin{bmatrix}	m_i & \bm{mC}_i &XX_i&XY_i&XZ_i&YY_i&YZ_i&ZZ_i \end{bmatrix}^\intercal \in \mathbb{R}^{10}.
+\end{equation}
+% ---
+The term $\bm{mC}$ is the first moment of mass vector defined as
+\begin{equation}
+	\bm{mC}_i= \begin{bmatrix}
+		m_iX_i & m_iY_i & m_iZ_i
+	\end{bmatrix}^\intercal,
+\end{equation}
+% ---
+which is the product of the link mass and its center of mass vector.
+
+The inertial parameters $\bm{\theta}_i$ are related to the motion of link $i$
+by the Newton-Euler equations \cite{Atkeson1986Estimationinertialparameters}:
+% ---
+%\begin{equation}
+%	\bm{f}_{ii} = m_i\left(\dot{\bm{v}} - \bm{g}\right) + \left(\left[\dot{\bm{\omega}}_i\right] + \left[{\bm{\omega}}_i\right]\left[{\bm{\omega}}_i\right]\right)m_i\bm{C }_i
+%\end{equation}
+%\begin{equation}
+%	\bm{n}_{ii} = \left[\left(\bm{g}  - \dot{\bm{v}}\right)\right]m_i\bm{C}_i + \bm{I}_i\dot{\bm{\omega}}_i + \left[\bm{\omega}_i\right]\bm{I}\bm{\omega}_i
+%\end{equation}
+% ---
+\begin{equation}
+	\underbrace{
+		\begin{bmatrix}
+			^\cframe{i}\bm{f}_{ii} \\ ^\cframe{i}\bm{n}_{ii}
+	\end{bmatrix}}_{\bm{w_{ii}}}= 
+	\underbrace{
+		\begin{bmatrix}
+			\left(^\cframe{i}\dot{\bm{v}}_i - \bm{g}\right) & \left[^\cframe{i}\dot{\bm{\omega}}_i\right] + \left[^\cframe{i}{\bm{\omega}}_i\right]\left[^\cframe{i}{\bm{\omega}}_i\right] & \bm{0}_{3 \times 6} \\
+			\bm{0}_{3\times 1} & \left[\left(\bm{g}  - ^\cframe{i}\dot{\bm{v}}_i\right)\right] & \left[\bullet {}^\cframe{i}\dot{\bm{\omega}}_i\right] + \left[^\cframe{i}{\bm{\omega}}_i\right]\left[\bullet {}^\cframe{i}{\bm{\omega}}_i\right]
+	\end{bmatrix}}_{\bm{A}_i} \bm{\theta}_i,
+\end{equation}
+% ---
+where the definitions for the Cartesian linear and angular accelerations in Eq.~\eqref{eq:cartesian_linear_acceleration} and Eq.~\eqref{eq:cartesian_angular_acceleration} were used and term $\left[\bullet{\bm{\omega}}_i\right]$ is defined as
+% ---
+\begin{equation}
+	[\bullet \bm{\omega}] = \begin{bmatrix}
+		\omega_x & \omega_y & \omega_x & 0        & 0        & 0       \\
+		0        & \omega_x & 0        & \omega_y & \omega_z & 0       \\
+		0        & 0        & \omega_x & 0        & \omega_y & \omega_z
+	\end{bmatrix}.
+\end{equation}
+% ---
+The wrench $\bm{w}_{ii} =\left[\bm{f}_{ii}^\intercal, \bm{n}_{ii}^\intercal\right]^\intercal$ corresponds to the force and moment at joint $i$ due to the inertial properties of link $i$ only.
+
+As a result of joint $j$ exerting a wrench on its associated link $j$, there will be a reacting wrench onto to link $i$; as such, $^\cframe{i}\bm{w}_{ij} \in \mathbb{R}^6$ is the wrench at joint $i$ due to the movement of link $j$ alone. Given a transformation matrix $^\cframe{i}\bm{T}_\cframe{j}$ defined by a tuple $\left(^\cframe{i}\bm{R}_\cframe{j},^\cframe{i}\bm{p}_j\right)$, its adjoint representation \cite{Lynch2017Modernrobotics}
+\begin{equation}
+	\left[\text{Ad}_{\bm{T}_j}\right] =  
+	\begin{bmatrix}
+		^\cframe{i}\bm{R}_\cframe{j} & \bm{0}_{3\times 3} \\
+		\left[^\cframe{i}\bm{p}_j\right]{}^\cframe{i}\bm{R}_\cframe{j} & ^\cframe{i}\bm{R}_\cframe{j}
+	\end{bmatrix}
+\end{equation}
+% ----
+is understood as a wrench transmission matrix. With it $^\cframe{i}\bm{w}_{ij}$ can be computed as
+\begin{equation}
+		^\cframe{i}\bm{w}_{i,j}= \left[\text{Ad}_{\bm{T}_j}\right]{}^\cframe{j}\bm{w}_{j,j}.
+\end{equation}
+
+% ---
+\begin{figure}[t!]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{wrench_propagation.pdf}
+		\caption{\textbf{Wrench transmission.} Using the adjoint operator the wrenches at distal joints can be propagated backwards to proximal joints.}
+		\label{fig:wrench_propagation}
+	\end{center}
+\end{figure}
+% ---
+The effect of all the distal wrenches to a joint $i$ can be aggregated via the matrix product of the corresponding adjoint operators. For example, the effect of wrench $\bm{w}_{k,k}$ in Fig.~\ref{fig:wrench_propagation} is propagated to joint $j$ as
+%account for the effects of the wrenches in the distal links on the $i$-th link. The wrenches at joint $i$ resulting from the motion movements of the
+%j’h link, these matrices can be
+%cascaded as follows:
+% ---
+\begin{equation}
+	\bm{w}_{i,k} = \underbrace{\left[\text{Ad}_{\bm{T}_{j}}\right]\left[\text{Ad}_{\bm{T}_{k}}\right]}_{\bm{U}_{i,k}}\bm{w}_{k,k} = \left[\text{Ad}_{\bm{T}_{j}}\right]\left[\text{Ad}_{\bm{T}_{k}}\right]\overbrace{\bm{A}_{k,k}}^{\bm{U}_{k,k}}\bm{\theta}_k.
+	\label{eq:ext_wrench}
+\end{equation}
+% ---
+
+Finally, the total wrench 
+
+\begin{equation}
+	\bm{w}_{j} = \bm{w}_{jj} + \sum_{k=j+1}^{N} \bm{w}_{jk} 
+	\label{eq:wrench_link_i}
+\end{equation}
+% ---
+at each of the joints can be expressed in matrix form
+%For the simple 3 DOF manipulator in Fig.~\ref{fig:wrench_propagation}, this can be expressed in matrix form
+%% ---
+%\begin{equation}
+%\begin{bmatrix}
+%	\bm{w}_{i}\\
+%	\bm{w}_{j}\\
+%	\bm{w}_{k}
+%\end{bmatrix} = 
+%\begin{bmatrix}
+%\bm{U}_{i,i} & \bm{U}_{i,j} & \bm{U}_{i,k}\\
+%\bm{0} & \bm{U}_{j,j} & \bm{U}_{j,k}\\
+%\bm{0} & \bm{0} & \bm{U}_{k,k}\\
+%\end{bmatrix}¸
+%\begin{bmatrix}
+%	\bm{\theta}_{i}\\
+%	\bm{\theta}_{j}\\
+%	\bm{\theta}_{k}
+%\end{bmatrix}
+%\label{eq:wrench_inverse_dynamics}
+%\end{equation}
+%% ---
+% ---
+\begin{equation}
+	\begin{bmatrix}
+		\bm{w}_{i}\\
+		\bm{w}_{j}\\
+		\vdots \\
+		\bm{w}_{n}
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		\bm{U}_{i,i} & \bm{U}_{i,j} & \cdots & \bm{U}_{i,k}\\
+		\bm{0}       & \bm{U}_{j,j} & \cdots & \bm{U}_{j,n}\\
+		\vdots       & \vdots       & \ddots & \vdots      \\
+		\bm{0}       & \bm{0}       & \cdots & \bm{U}_{n,n}\\
+	\end{bmatrix}
+	\begin{bmatrix}
+		\bm{\theta}_{i}\\
+		\bm{\theta}_{j}\\
+		\vdots \\
+		\bm{\theta}_{n}
+	\end{bmatrix}.
+	\label{eq:wrench_inverse_dynamics}
+\end{equation}
+% ---
+This expression corresponds to the inverse dynamics of the robot, that is, its output gives the $n$ wrenches necessary to produce the rigid body motions captured by the quantities ${}^\cframe{i}\bm{\omega}_i$ $,{}^\cframe{i}\dot{\bm{\omega}}_i$, and ${}^\cframe{i}\dot{\bm{v}}_i$ for each of the $n$ joints. Given that typically only joint torque $\tau$ is measured, Eq.~\eqref{eq:wrench_inverse_dynamics} is projected onto the rotation axes of the joints \cite{Siciliano2007SpringerHandbookRobotics} yielding
+% ---
+\begin{equation}\label{eq:lip_inverse_dnamics}
+\bm{\tau} = \bm{Y}\left(
+\bm{\omega},\dot{\bm{\omega}},\dot{\bm{v}}
+;\bm{\lambda}\right)\bm{\theta} = \bm{Y}\left(\bm{q},\dot{\bm{q}},\ddot{\bm{q}};\bm{\lambda}\right)\bm{\theta}.
+\end{equation}
+%---
+This expression for the inverse dynamics is linear in the parameters (LIP) $\bm{\theta}$ . The regressor matrix $\bm{Y}\left(\cdot\right)$ is dependent exclusively on the motion of the robot and its geometry $\bm{\lambda}$. The vector $\bm{\theta} \in \mathbb{R}^{10n}$ contains the stacked inertial parameters $\left\lbrace \bm{\theta}_i \right\rbrace^n_{i=1}$. The expression in Eq.~\eqref{eq:lip_inverse_dnamics} is equivalent to
+%\begin{equation}
+%	\bm{\tau} = \bm{M}\left(\bm{q};\bm{\theta}\right)\ddot{\bm{q}} + \bm{C}\left(\bm{q},\dot{\bm{q}};\bm{\theta}\right)\dot{\bm{q}} + \bm{g}\left(\bm{q};\bm{\theta}\right),
+%\end{equation}
+\begin{equation}
+	\bm{\tau} = \bm{M}\left(\bm{q};\bm{\theta}\right)\ddot{\bm{q}} + \bm{c}\left(\bm{q},\dot{\bm{q}};\bm{\theta}\right) + \bm{g}\left(\bm{q};\bm{\theta}\right),
+\end{equation}
+% ---
+where $\bm{M}(\cdot)$ is the configuration-dependent mass matrix of the robot, $\bm{c}(\cdot)$ is the vector of centrifugal and Coriolis torques, and $\bm{g}(\cdot)$ is the gravitational torque. 
+
+\subsubsection{Estimation of the inertial parameters}
+
+\paragraph*{Fixed base} The state of maturity of the research on inertial parameter identification for fixed base robots has lead to a rather standard procedure \cite{Swevers2007Dynamicmodelidentification}. Concretely, the process involves the generation of an excitation trajectory \cite{Gautier1992ExcitingTrajectoriesRobot,Park2006Fourierbasedoptimal} ---according to some observability index \redtext{REF}--- to collect $P$ measurement points $\left(\bm{\tau}{(k)},\bm{q}{(k)},\dot{\bm{q}}{(k)},\ddot{\bm{q}}{(k)}\right)$ representing instances of Eq.~\eqref{eq:lip_inverse_dnamics}. The estimation of the vector of inertial parameters $\bm{\theta}$ consists in using this set of points to solve the linear problem
+% ---
+\begin{equation}
+	\bm{y} = \bm{F}\bm{\theta},
+\end{equation}
+% ---
+where $\bm{y} = [\bm{\tau}^\intercal{(1)},\ldots,\bm{\tau}^\intercal(k),\ldots,\bm{\tau}^\intercal(P)]^\intercal \in \mathbb{R}^{nP}$ and $\bm{F} = [\bm{Y}_1^\intercal,\ldots,\bm{Y}_k^\intercal,\ldots,\bm{Y}_P^\intercal]^\intercal \in \mathbb{R}^{nP \times 10n}$. 
+It is standard to follow a least-squares approach for the estimation of an optimal $\bm{\theta}$; i.e.
+% ---
+\begin{equation}
+	\bm{\theta} = \left(\bm{F}^\intercal\bm{F}\right)^{-1}\bm{F}^\intercal\bm{y}.
+\end{equation}
+% ---
+Methods to address the identifiability, numerical stability, and observability of the parameters have been discussed \cite{Siciliano2007SpringerHandbookRobotics}. For fixed base robots, specifically, it is known that some of the parameters of the links proximal to the base cannot be identified and methods to determine the base set of parameters have been developed \cite{Khalil2004Modelingidentificationcontrol}.
+
+
+%More recently, the physical feasibility of the identified parameters has taken a prominent role \cite{Wensing2017Linearmatrixinequalities,Ayusawa2010Identificationstandardinertial,Traversaro2016Identificationfullyphysical,Sousa2014Physicalfeasibilityrobot}. This is vital due to its important in ensuring stable control methods. For instance, physically feasible inertial parameters lead to always invertible symmetric positive definite mass matrices. For the inertial parameters of a rigid body to be physically feasible, it is required that its mass is
+%strictly positive and that its inertia matrix $ \bm{I}_i $ is symmetric positive definite (SPD)  with its eigenvalues ---$\lambda\left(\bm{I}_i\right) = [\lambda_1,\lambda_2,\lambda_3]^T$--- satisfying the triangle inequality, i.e.:\\
+%%---
+%\begin{equation}\label{eq:feasibility_constraints}
+%	m_i>0, 
+%	\quad
+%		\bm{I}_i \succ 0,
+%	\quad
+%	\begin{aligned}
+%		\begin{cases}
+%				\lambda_1 + \lambda_2 \geq \lambda_3\\
+%				\lambda_2 + \lambda_3 \geq \lambda_1\\
+%				\lambda_1 + \lambda_3 \geq \lambda_2
+%		\end{cases}
+%	\end{aligned} 
+%\end{equation}
+%\begin{equation}\label{eq:feasibility_constraints}
+%	m_i>0, 
+%	\quad
+%	\resizebox{0.4\hsize}{!}{$
+%		\bm{I}_i=\begin{bmatrix}
+%			XX_i & XY_i & XZ_i \\ XY_i & YY_i & YZ_i\\ XZ_i& YZ_i & ZZ_i
+%		\end{bmatrix} \succ 0$},
+%	\quad
+%	\begin{aligned}
+%		\resizebox{0.25\hsize}{!}{$\begin{cases}
+%				\lambda_1 + \lambda_2 \geq \lambda_3\\
+%				\lambda_2 + \lambda_3 \geq \lambda_1\\
+%				\lambda_1 + \lambda_3 \geq \lambda_2
+%			\end{cases}$}
+%	\end{aligned} 
+%\end{equation}
+%---
+
+%the mass must be strictly positive $m>0$ and its inertia matrix $\bm{I}$ ought to be symmetric positive definite. 
+
+
+
+
+%Various methods have been proposed for estimating the inertial parameters of humanoid and legged robots. For example, methods that use the base-link dynamics, requiring only the generalized coordinates of the base-link, joint angles, and external forces have been developed \cite{Ayusawa2008Identificationhumanoidrobots,Ayusawa2008Identificationinertialparameters,Ayusawa2009MinimalsetInertial,Iwasaki2012Identificationinertialparameters}. The work in \cite{Jovic2016HumanoidHumanInertia} introduced a hierarchical optimization approach that accurately reconstructs ground reaction forces and force moments. A method was proposed in \cite{Mistry2009Inertialparameterestimation} for whole body inertial parameter estimation using a partial force sensor set that demonstrated the feasibility of inertial parameter estimation for floating-base humanoid systems. A state-estimation technique for legged robots that combines forward kinematic and preintegrated contact factors was introduced in \cite{Hartley2018LeggedRobotState}. A more recent study \cite{Ayusawa2014Identifiabilityidentificationinertial} addressed the dynamics of legged systems and proposed a method for identifying inertial parameters based on the underactuated base-link dynamics. Buchanan et al. \cite{RussellBuchanan2021LearningInertialOdometry} has introduced a proprioceptive state estimator for legged robots based on a learned displacement measurement from IMU data, which significantly reduces drift in challenging scenarios. Extensions for floating base robots with flexible joints and links have been presented elsewhere \cite{Khalil2017GeneralDynamicAlgorithm}}.
+
+
+%Several methods have been proposed to estimate the inertial parameters of humanoid and legged robots. For instance, there are methods utilizing base-link dynamics, which require generalized coordinates of the base-link, joint angles, and external forces \cite{Ayusawa2008Identificationhumanoidrobots, Ayusawa2008Identificationinertialparameters, Ayusawa2009MinimalsetInertial, Iwasaki2012Identificationinertialparameters}. The work by Jovic et al. \cite{Jovic2016HumanoidHumanInertia} introduced a hierarchical optimization approach, accurately reconstructing ground reaction forces and force moments. Mistry et al. \cite{Mistry2009Inertialparameterestimation} proposed a method for whole-body inertial parameter estimation, demonstrating feasibility for floating-base humanoid systems using a partial force sensor set. Another state-estimation technique for legged robots, combining forward kinematics and preintegrated contact factors, was introduced by Hartley et al. \cite{Hartley2018LeggedRobotState}. Addressing the dynamics of legged systems, Ayusawa et al. \cite{Ayusawa2014Identifiabilityidentificationinertial} proposed a method based on underactuated base-link dynamics for identifying inertial parameters. Buchanan et al. \cite{RussellBuchanan2021LearningInertialOdometry} introduced a proprioceptive state estimator for legged robots based on learned displacement measurement from IMU data, significantly reducing drift in challenging scenarios. Extensions for floating-base robots with flexible joints and links have been presented elsewhere \cite{Khalil2017GeneralDynamicAlgorithm}. In general, unlike the methods for the inertial parameter estimation of fixed based robots, the methods for floating base robots are not as standardized.
+
+\paragraph*{Floating base} Research in robotics is actively exploring methods for estimating the inertial parameters of floating base systems; in particular, humanoid and legged robots. For instance, there are methods utilizing base-link dynamics, which require generalized coordinates of the base-link, joint angles, and external forces \cite{Ayusawa2008Identificationhumanoidrobots, Ayusawa2008Identificationinertialparameters, Ayusawa2009MinimalsetInertial, Iwasaki2012Identificationinertialparameters}. The work by Jovic et al. \cite{Jovic2016HumanoidHumanInertia} introduced a hierarchical optimization approach, accurately reconstructing ground reaction forces and force moments. Mistry et al. \cite{Mistry2009Inertialparameterestimation} proposed a method for whole-body inertial parameter estimation, demonstrating feasibility for floating-base humanoid systems using a partial force sensor set. Another state-estimation technique for legged robots, combining forward kinematics and preintegrated contact factors, was introduced by Hartley et al. \cite{Hartley2018LeggedRobotState}. Addressing the dynamics of legged systems, Ayusawa et al. \cite{Ayusawa2014Identifiabilityidentificationinertial} proposed a method based on underactuated base-link dynamics for identifying inertial parameters. Buchanan et al. \cite{RussellBuchanan2021LearningInertialOdometry} introduced a proprioceptive state estimator for legged robots based on learned displacement measurement from IMU data, significantly reducing drift in challenging scenarios. Extensions for floating-base robots with flexible joints and links have been presented elsewhere \cite{Khalil2017GeneralDynamicAlgorithm}. In general, unlike the methods for the inertial parameter estimation of fixed based robots, the methods for floating base robots are not as standardized.
+
+% SUBSECTION ========================================================================================
+\subsection{Physical feasibility of the inertial parameters}\label{sec:spd_manifold}
+%A \emph{differentiable manifold} $\mathcal{M}$ is a topological space that is locally similar to Euclidean space and has a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. $\mathcal{T}_{\bm{P}}\mathcal{M}$ is the \emph{tangent space} at a point $\bm{P}\in \mathcal{M}$ and represents the vector space of all the possible tangent vectors to the manifold that pass through $\bm{P}$. The pair $(\mathcal{M},\rho)$ defines a \emph{Riemannian manifold} if $ \mathcal{M} $ is differentiable and is equipped with a positive definite metric tensor $\rho$ at each point \cite{Pennec2006Riemannianframeworktensor}. 
+More recently, the physical feasibility of the identified parameters has taken a prominent role \cite{Wensing2017Linearmatrixinequalities,Ayusawa2010Identificationstandardinertial,Traversaro2016Identificationfullyphysical,Sousa2014Physicalfeasibilityrobot}. This is vital due to its importance in ensuring stable control methods. For instance, physically feasible inertial parameters lead to always invertible symmetric positive definite mass matrices. For the inertial parameters of a rigid body to be physically feasible, it is required that its mass is
+strictly positive and that its inertia matrix $ \bm{I}_i $ is symmetric positive definite (SPD)  with its eigenvalues ---$\bm{s}\left(\bm{I}_i\right) = [s_1,s_2,s_3]^T$--- satisfying the triangle inequality, i.e.:\\
+%---
+\begin{equation}\label{eq:feasibility_constraints}
+	m_i>0, 
+	\quad
+	\bm{I}_i \succ 0,
+	\quad
+	\begin{aligned}
+		\begin{cases}
+			s_1 + s_2 \geq s_3\\
+			s_2 + s_3 \geq s_1\\
+			s_1 + s_3 \geq s_2
+		\end{cases}
+	\end{aligned} 
+\end{equation}
+% ---
+
+The physical feasibility constraints can be expressed in the language of differential geometry. First, it is necessary to define a differentiable manifold $\mathcal{M}$. It is a topological space that exhibits local similarity to Euclidean space and possesses a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. At any point $\bm{P}$ on the manifold there is an associated tangent space, denoted as $\mathcal{T}_{\bm{P}}\mathcal{M}$, that encompasses the vector space containing all possible tangent vectors to $\mathcal{M}$ that pass through $\bm{P}$. A Riemannian manifold is defined by the pair $(\mathcal{M},\rho)$, where each point $\bm{P}$ in $\mathcal{M}$ is equipped with a positive definite metric tensor $\rho$ \cite{Pennec2006Riemannianframeworktensor}.
+
+%A differentiable manifold, denoted as $\mathcal{M}$, is a topological space that exhibits local similarity to Euclidean space and possesses a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. The tangent space at a point $\bm{P}$ in $\mathcal{M}$, denoted as $\mathcal{T}_{\bm{P}}\mathcal{M}$, encompasses the vector space containing all possible tangent vectors to the manifold that pass through $\bm{P}$. A Riemannian manifold is defined by the pair $(\mathcal{M},\rho)$, where $\mathcal{M}$ is a differentiable manifold and each point in $\mathcal{M}$ is equipped with a positive definite metric tensor $\rho$ \cite{Pennec2006Riemannianframeworktensor}.
+
+%Denoting $\mathcal{S}^n \triangleq\left\lbrace \bm{S} \in \mathbb{R}^{n \times n} : \bm{S} = \bm{S}^T\right\rbrace$ as the space of real square symmetric matrices of dimension $n \times n$. Then, the space of $n \times n$ SPD matrices $ \mathcal{S}^n_{++}\triangleq \left\lbrace \bm{P}\in \mathcal{S}^n : \bm{P} \succ 0 \right\rbrace $  defines a smooth submanifold $\mathcal{M}$ of $\mathcal{S}^n$. By definition, its tangent space $\mathcal{T}\mathcal{M} \in \mathcal{S}^n$ is equipped with an \emph{affine invariant Riemannian metric} $\rho$ \cite{Lee2018geometricalgorithmrobust}. Consequently, $ \mathcal{S}^n_{++} $ defines a Riemannian manifold. Finally, the product manifold $ \mathcal{M}^N $ of SPD manifolds is the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$. It is the set of matrices  $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}_i\in\mathcal{M}_i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho_{1},\ldots, \rho_{N} \right) $. %Similarly, the generalizations of the operators mentioned above to $\mathcal{M}^N$ are the concatenations of the individual operators for each $\mathcal{M}_i$.
+
+The inertial parameters of rigid body, and by extension of a robot, are associated to the manifolds of SPD matrices. To make clear this relation, let $\mathcal{S}^n$ be the space of real square symmetric matrices with dimension $n \times n$, denoted as $\mathcal{S}^n \triangleq\left\lbrace \bm{S} \in \mathbb{R}^{n \times n} : \bm{S} = \bm{S}^T\right\rbrace$. The space of $n \times n$ SPD matrices, $\mathcal{S}^n_{++}\triangleq \left\lbrace \bm{P}\in \mathcal{S}^n : \bm{P} \succ 0 \right\rbrace$, defines a smooth submanifold $\mathcal{M}$ within $\mathcal{S}^n$. Its tangent space $\mathcal{T}\mathcal{M} \in \mathcal{S}^n$ is equipped with an \emph{affine invariant Riemannian metric} $\rho$ \cite{Lee2018geometricalgorithmrobust}, thereby making $ \mathcal{S}^n_{++} $ a Riemannian manifold. Finally, the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$ defines the product manifold of SPD manifolds.  It represents the set of matrices $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}_i\in\mathcal{M}_i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho{1},\ldots, \rho{N} \right) $. The physical feasibility constraints of the inertial parameters $\bm{\theta}_i$ of the $i$-th link, summarized in Eq.~\eqref{eq:feasibility_constraints}, are satisfied if the pseudo inertia matrix 
+%---
+%\begin{equation}\label{eq:pseudo_inertia_matrix}
+%\bm{P}_i(\bm{\theta}_i)=f(\bm{\theta}_i)=\begin{bmatrix}
+%	\bm{\Sigma}_i && \bm{h} \\ \bm{h}^T && m
+%\end{bmatrix} \in \mathcal{S}^4,
+%\end{equation}
+\begin{equation}\label{eq:pseudo_inertia_matrix}
+	\bm{P}_i(\bm{\theta}_i)=f(\bm{\theta}_i)=\begin{bmatrix}
+		\frac{1}{2}\text{tr}(\bm{I}_i)\mathbb{1} - \bm{I}_i && \bm{h} \\ \bm{h}^T && m
+	\end{bmatrix} \in \mathcal{S}^4,
+\end{equation}
+%---
+defined for each rigid body is symmetric positive-definite \cite{Wensing2017Linearmatrixinequalities}; that is, $\bm{P}_i(\bm{\theta}_i)\in \mathcal{S}_{++}^4$. Note that $\mathbb{1}$ is used to denote the $3 \times 3$ identity matrix. %Here $ \bm{\Sigma}_i = \frac{1}{2}\text{tr}(\bm{I}_i)\mathbb{1} - \bm{I}_i\in \mathcal{S}^3 $ is called the \emph{density weighted covariance matrix}. Conversely,  $ \bm{I}_i = \text{tr}\left(\bm{\Sigma}_i\right)\mathbb{1} - \bm{\Sigma}_i \in \mathcal{S}^3_{++} $, where $\mathbb{1}$ is the $3 \times 3$ identity matrix. 
+The requirement that $\bm{P}_i(\bm{\theta}_i) \succ 0$ implies the fully physically feasible inertial parameters are in the manifold $\mathcal{S}^4_{++}=\left\lbrace \bm{P}_i(\bm{\theta}_i) \in \mathcal{S}^{4}: \bm{P}_i(\bm{\theta}_i) \succ 0 \right\rbrace$. For every rigid body $i$ in the kinematic chain, there exist a pseudo inertia matrix  \cite{Lee2018geometricalgorithmrobust}. Consequently, this means that the inertial parameters of a robot define a point $\left\lbrace \bm{P}_i\right\rbrace_{i=1}^N$ in the Riemannian product manifold $\mathcal{M}^N$.
+
+
+%\TODO
+%\redtext{Research in robotics is actively exploring methods for estimating the inertial parameters of floating base robots. Various innovative approaches have been developed to accurately determine the inertial properties of these systems. Legged robots equipped with Inertial Measurement Units (IMUs) in their pelvis link can leverage gyroscopes and accelerometers to estimate the orientation of the floating base with respect to an external frame. Another approach \cite{Mistry2009Inertialparameterestimation} involves partial force sensing, demonstrating the feasibility of inertial parameter estimation for floating-base humanoid systems. A model-free approach has been introduced for precise control of humanoid robot joints, incorporating an input-output online identification procedure to estimate inertial parameters. Additionally, a proprioceptive base estimator for humanoid robots has been developed using extended Kalman filtering on matrix Lie groups, focusing on estimating IMU biases, floating base, and feet positions. These diverse methods showcase the ingenuity applied to address the unique challenges associated with estimating inertial parameters in floating-base legged robots, considering their complex dynamics and locomotion intricacies. Extension for floating base robots with flexible joints and links have been presented elsewhere \cite{Khalil2017GeneralDynamicAlgorithm}}
+%Research in robotics is actively exploring methods for estimating the inertial parameters of floating base robots. Various innovative approaches have been developed to accurately determine the inertial properties of these systems. One notable method involves an iterative primitive shape division, presented in a research paper, for the inertia parameter identification of floating-base robots. Legged robots equipped with Inertial Measurement Units (IMUs) in their pelvis link can leverage gyroscopes and accelerometers to estimate the orientation of the floating base with respect to an external frame, employing techniques such as integration of angular velocities and the use of Kalman or complementary filters. Another approach involves partial force sensing, demonstrating the feasibility of inertial parameter estimation for floating-base humanoid systems. This method has been successfully applied to both simulated bipedal humanoid robots and real robot dogs navigating challenging terrains. A model-free approach has been introduced for precise control of humanoid robot joints, incorporating an input-output online identification procedure to estimate inertial parameters. Additionally, a proprioceptive base estimator for humanoid robots has been developed using extended Kalman filtering on matrix Lie groups, focusing on estimating IMU biases, floating base, and feet positions. These diverse methods showcase the ingenuity applied to address the unique challenges associated with estimating inertial parameters in floating-base legged robots, considering their complex dynamics and locomotion intricacies. \redtext{Extension for floating base robots with flexible joints and links have been presented elsewhere \cite{Khalil2017GeneralDynamicAlgorithm}}
+
+
+%\hrule
+%, Af is a 6 X 10 matrix,
+%and Oi is the vector of the ten unknown inertial pa-
+%rameters.
+%according to Newton's third law. As a result, the dynamic parameters of link $i$ inside an open kineto-dynamic chain will include:
+%\begin{itemize}
+%	\item $m_i$: the mass of link $i$
+%	\item $\bm{I}^{CoM}_i$: the inertia matrix of link $i$, calculated with respect to the center of mass of the link
+%	\item $\bm{I}_i$: the inertia matrix of link $i$, calculated with respect to the joint frame
+%	\item $\bm{g}$: the gravitational force vector
+%\end{itemize}
+%
+%
+%• fc the acting force exerted by joint i on link i;
+%• —fi+i\ the reacting force exerted by joint i + 1 on link i;
+%• Tii the acting torque exerted by joint i on link i;
+%• — Tj+i: the reacting torque exerted by joint i + l o n link i.
+%
+%
+%%By default, all dynamic parameters are expressed with respect to the
+%%common reference frame (frame 0).  A well-known result, the parallel-axis theorem, is one way
+%%of computing how the inertia tensor changes under translations of the reference
+%%coordinate system. 
+%
+%
+% 
+%% 
+%
+%
+%
+%
+%
+%\subsubsection{Something}
+%Let $\bm{\omega} = \begin{bmatrix}\omega_x & \omega_y & \omega_z \end{bmatrix}^\intercal$ represent any real vector in $\mathbb{R}^3$ and let $vec(\cdot)$ indicate the vectorization of a matrix; then, the terms in equations (\ref{eq:self_wrench}) and (\ref{eq:ext_wrench}) are defined as follows:
+%%\begin{multicols}{2}
+%\begin{equation*}
+%	\bm{I}_{i,vec} = [XX_i, XY_i , XZ_i , YY_I , YZ_i , ZZ_i ]
+%\end{equation*}
+%\begin{equation*}
+%	\bar{\bm{I}_i}= \begin{bmatrix}
+%		\bm{I}_{i,vec}               & \bm{0}_{1\times6} & \bm{0}_{1\times6}\\
+%		\bm{0}_{1\times6} & \bm{I}_{i,vec}               & \bm{0}_{1\times6}\\
+%		\bm{0}_{1\times6} & \bm{0}_{1\times6} & \bm{I}_{i,vec}
+%	\end{bmatrix}
+%\end{equation*}
+%\begin{equation*}
+%	\bm{mC}_i = \begin{bmatrix}
+%		mX_i & mY_i & mZ_i
+%	\end{bmatrix}^\intercal
+%\end{equation*}
+%\begin{equation*}
+%	\tilde{\bm{mC}_i}= \begin{bmatrix}
+%		\bm{mC}_i^\intercal              & \bm{0}_{1\times3} & \bm{0}_{1\times3}\\
+%		\bm{0}_{1\times3} & \bm{mC}_i^\intercal              & \bm{0}_{1\times3}\\
+%		\bm{0}_{1\times3} & \bm{0}_{1\times3} & \bm{mC}_i^\intercal
+%	\end{bmatrix}
+%\end{equation*}
+%
+%\begin{equation*}
+%	\tilde{\bm{\omega}}=vec([\bm{\omega} \times]^\intercal[\bm{\omega} \times]^\intercal)
+%\end{equation*}
+%\begin{equation*}
+%	\bar{\bm{\omega}}=vec([\bullet \bm{\omega}]^\intercal[\bm{\omega} \times]^\intercal)
+%\end{equation*}
+%
+%\subsubsection{Identification of the inertial parameters}
+
+
+
+%\begin{equation}
+%	\prescript{}{q}{\bm{n}}_i = \bm{n}_{i} + \left[\bm{f}_{ii}\right]\bm{c}_i =  
+%\end{equation}
+
 %bsection{Basics of robot system identification}
 %bsubsection{Kinematic calibration}
 %bsubsection{Inertial parameter identification}
@@ -659,7 +871,363 @@ S\end{itemize}
 %\subsection{Some context}
 %\redtext{\say{The body schema is viewed as a set of fronto-parietal networks that integrate information originating from regions of the body and external space in a way that is functionally relevant to specific actions performed by different body parts$\ldots$ It represents the body's spatial properties, including the length of limbs and limb segments, their arrangement, the configuration of the segments in space, and the shape of the body surface$\ldots$ The body schema is characterized by short-term plasticity and reorganization, as shown by the quick integration of tools into the body schema}} \cite{Morasso2015Revisitingbodyschema}
 
+% ===========================================================================================
+%                                           |                                               |
+% -------------------------------------- SECTION -------------------------------------------|
+%                                           |                                               |
+% ===========================================================================================
+\section{Describing body shape: Connectivity and graph theory}
 
+%As discussed in \cite{Featherstone2007RigidBodyDynamics}, the connectivity of a kinematic chain describes how its parts are connected to each other. This is known as the mechanical topology; i.e., the arrangement of joints and links. \redtext{The topology is a fundamental piece of knowledge to describe the body structure. Without it, the individual geometry of the parts lacks meaning. Similarly, knowledge of the inertial properties of each of the bodies in a kinematic chain is insufficient to understand the dynamics associated to their coupling. Thus, a robotic agent must be capable of inferring the topology of its body before it can instantiate its kinematic and dynamic properties.}
+As outlined by Featherstone \cite{Featherstone2007RigidBodyDynamics}, the connectivity of a kinematic chain delineates the interconnection of its components, constituting what is known as the mechanical topology---essentially, the configuration of joints and links. Understanding this topology is crucial as it serves as a foundational element for describing the body structure. Without this information, the individual geometry of the components lacks significance. Similarly, knowledge of only the inertial properties of each body in a kinematic chain is insufficient for describing the dynamics associated with their coupling. Therefore, a robotic agent must possess the capability to deduce the topology of its body before instantiating its kinematic and dynamic properties.
+
+Having the topology of the body such relevance, the fact is that a scarce number of works have pondered the problem of how to learn it (see, for example, \cite{Bongard2006Resilientmachinescontinuous}). It seems reasonable to assume that the this stems from the typical premise that this information is known a priori. Yet, a fully independent robotic agent that is to develop an understanding of its body through the development of a body schema needs to obtain this information exclusively by itself. This gains prominence as gradually robots become more adaptable and modular. Therefore, if there is access to the number and modalities of the robot's sensorimotor signals, an indication of the body topology must be extracted from them. But, how?
+
+\subsection{Embodiment and information structure}
+To find an answer to the question of how to learn the body topology, this dissertation shares the well-accepted hypothesis that the interaction of an agent with its environment and its body morphology induce statistical regularities in its sensorimotor signals \cite{Pfeifer2006InformationTheoreticImplications,Pfeifer2007SelfOrganizationEmbodiment,LungarellaEmbodimentInformationCausal,Pfeifer2006Howbodyshapes}. These statistical regularities, connected to the concept of sensorimotor contingencies \cite{Jacquey2019Sensorimotorcontingenciesas}, have been captured using information-theoretic quantities, which measure the information between the different modalities in the robot's sensorimotor system \cite{Schmidt2013Bootstrappingperceptionusing,Lungarella2006Mappinginformationflow,Polani2009Modelsinformationprocessing,Bossomaier2016introductiontransferentropy,Olsson2006unknownsensorsactuators}. Fig.~\ref{fig:emobodiment_and_info_structure} illustrates how information structure in the sensorimotor signals can result from embodiment. It shows a number of bodies equipped with a set of sensors (Fig.~\ref{fig:f1a_embodiment_and_information_structure}). These sensors can be considered information sources that have a relationship tied to information sharing with each other. The strength of these relationships is visually represented by the blue lines (edges) connecting the sensors. Due to the morphology of the robot, stronger connections exist between certain sensors---represented by dark blue edges. These strong connections indicate the body topology of the robot, depicted in Fig.~\ref{fig:f1b_embodiment_and_information_structure}, which is a tree-like structure where the strongest sharing of information  occurs between sensors in adjacent bodies. The main message of this example is that the structure of the robot's body becomes a hypothesis for the strength of information sharing.
+
+%The embodiment of a robot determines its perceptual and behavioral capabilities and influences the emergence of sensorimotor regularities arising from body-environment interaction\cite{Pfeifer2006Howbodyshapes}. Information-theoretic quantities have been used to capture these regularities as information flows between the various modalities in the sensorimotor system\cite{Schmidt2013Bootstrappingperceptionusing,Lungarella2006Mappinginformationflow,Polani2009Modelsinformationprocessing,Bossomaier2016introductiontransferentropy,Olsson2006unknownsensorsactuators}. To illustrate how embodiment influences information structure, consider a hypothetical robot equipped with a set of sensors, depicted on Fig.~\ref{fig:f1a_embodiment_and_information_structure}. From an information-theoretic perspective, these sensors are information sources that share information with each other. The strength of these relations is represented graphically as edges connecting the sensors (light blue edges). As a result of the underlying embodiment of the robot, stronger connections between sensors exist (dark blue edges). These strong connections hint at the robot's body topology (Fig.~\ref{fig:f1b_embodiment_and_information_structure}), a tree-like serial kinematic structure where the stronger exchange of information occurs between sensors of adjacent bodies. Succinctly, body structure becomes the hypothesis behind the strength of information sharing. 
+% ---
+\begin{figure*}[!t]
+	\centering	
+	\hspace*{\fill}
+	\begin{subfigure}[t]{0.40\textwidth}
+		\subcaption{}
+		\includegraphics[width=\textwidth]{f1a_embodiment_and_information_structure.pdf}
+		\label{fig:f1a_embodiment_and_information_structure}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[t]{0.40\textwidth}
+		\subcaption{}
+		\includegraphics[width=\textwidth]{f1b_embodiment_and_information_structure.pdf}
+		\label{fig:f1b_embodiment_and_information_structure}
+	\end{subfigure}	
+	\hspace*{\fill}
+	\caption{\label{fig:emobodiment_and_info_structure} \textbf{Embodiment and information structure.} (\subref{fig:f1a_embodiment_and_information_structure}) Sensors on a robot exchange information at different strength levels. (\subref{fig:f1b_embodiment_and_information_structure}) This strength is associated with the embodiment of the robot, a kinematic tree in this case.}
+\end{figure*}
+% ---
+
+\subsection{Definition of a graph}
+A graph $\mathcal{G} = \left(\mathcal{V}, \mathcal{E}\right)$ is a mathematical construct the represents the interconnections between the elements of a system \cite{West2001Introductiongraphtheory}. These elements are represented as a set $ \mathcal{V}=\left\lbrace v_i\right\rbrace^n_{i=1}$ of $n$ \emph{nodes} (also called \emph{vertices}) and their connections are depicted as a set of \emph{edges} $ \mathcal{E}= \left\lbrace e_i\right\rbrace^m_{i=1} \subseteq \mathcal{V} \times \mathcal{V} $. Note that it is possible that an edge connects a node to itself, in which case the edge defines a self loop.
+% ---
+%\begin{figure}[th!]
+%	\begin{center}
+	%		\includegraphics[width=0.5\textwidth]{example_graph.pdf}
+	%		\caption{Example graph.}
+	%		\label{fig:example_graph}
+	%	\end{center}
+%\end{figure}
+% ---
+\begin{figure*}[!h]
+	\centering	
+	\hspace*{\fill}
+	\begin{subfigure}[t]{0.32\textwidth}
+		\subcaption{}
+		\includegraphics[width=\textwidth]{example_graph.pdf}
+		\label{fig:example_graph}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[t]{0.32\textwidth}
+		\subcaption{}
+		\includegraphics[width=\textwidth]{example_digraph.pdf}
+		\label{fig:example_digraph}
+	\end{subfigure}
+	\hspace*{\fill}	
+	\caption[] {\label{fig:graph_examples} \textbf{Two basic types of graphs}. (\subref{fig:example_graph}) An undirected and (\subref{fig:example_digraph}) a directed graph.}
+\end{figure*}
+
+%\begin{figure*}[!h]
+%	\centering	
+%	\hspace*{\fill}
+%	\begin{subfigure}[t]{0.32\textwidth}
+	%		\subcaption{}
+	%		\includegraphics[width=\textwidth]{f6a_phantomx_hexapod.pdf}
+	%		\label{fig:phantomx_robot}
+	%	\end{subfigure}	
+%	\hfill
+%	\begin{subfigure}[t]{0.32\textwidth}
+	%		\subcaption{}
+	%		\includegraphics[width=\textwidth]{f6b_phantomx_pi_graph_kinematics.pdf}
+	%		\label{fig:phantomx_pigraph_kin_clusters}
+	%	\end{subfigure}
+%	\hfill
+%	\begin{subfigure}[t]{0.32\textwidth}
+	%		\subcaption{}
+	%		\includegraphics[width=\textwidth]{f6c_phantomx_morphology.pdf}
+	%		\label{fig:phantomx_morphology}
+	%	\end{subfigure}	
+%	\hspace*{\fill}
+%	\\
+%	\hspace*{\fill}
+%	\begin{subfigure}[t]{0.96\textwidth}
+	%		\subcaption{}
+	%		\includegraphics[width=\textwidth]{f6d_phantomx_morphology_errors_offline.pdf}
+	%		\label{fig:phantomx_morphology_errors_offline}
+	%	\end{subfigure}	
+%	\hspace*{\fill}
+%	\\
+%	\hspace*{\fill}
+%	\begin{subfigure}[t]{0.96\textwidth}
+	%		\subcaption{}
+	%		\includegraphics[width=\textwidth]{f6e_phantomx_morphology_errors_online.pdf} 		
+	%		\label{fig:phantomx_morphology_errors_online}
+	%	\end{subfigure}	
+%	\hspace*{\fill}	
+%	\caption[] {\label{fig:hexapod_simulated_results} \textbf{The hexapod robot}. (\subref{fig:phantomx_robot}) the PhantomX hexapod robot with its IMUs (red spheres), (\subref{fig:phantomx_pigraph_kin_clusters}) the kinematics graph $\mathcal{G}^{\mathcal{K}}_\pi$, (\subref{fig:phantomx_morphology}) the learned kinematic structure, errors in the estimated body structure via (\subref{fig:phantomx_morphology_errors_offline}) offline learning and (\subref{fig:phantomx_morphology_errors_online}) online learning (blue: difference rotation errors $\bar{\delta}~[\text{rad}]$, orange: sensor-to-sensor vector errors $\bar{\tilde{r}}~[\text{m}]$).}
+%\end{figure*}
+Two nodes $i$ and $j$ are said to be \emph{adjacent} if there is an edge $e$ connecting them. Similarly, the edge $e$ connecting the nodes is called \emph{incident} to $i$ and $j$. For example, the nodes $v_1$ and $v_4$ in Fig.~\ref{fig:example_graph} are adjacent to each other and the edge $e_4$ is incident to both nodes. The number of edges that are incident to a node is the \emph{degree} of the vertex. 
+
+A \emph{path} represents a potential sequence of edges connecting any two given nodes. The number of edges determines the \emph{length} of the path. A graph is said to be \emph{connected} if there is at least one path between every pair of nodes; otherwise, it is labeled \emph{disconnected}. A \emph{cycle} constitutes a path comprising a minimum of three edges, where the initial and final vertices are identical, and no vertices are repeated in between. Lastly, a graph is \emph{complete} if there exists a path connecting every pair of nodes. Notice that the maximum number of edges in an undirected graph with $n$ nodes is $n(n-1)/2$
+
+An \emph{undirected} graph lacks any specified direction assigned to its edges, meaning the connections between nodes are bidirectional. On the other hand, a \emph{directed} graph, commonly referred to as a \emph{digraph}, introduces directionality to its edges. In a directed graph, each edge has an explicit direction, indicating a one-way flow from one node to another. This directional information adds an extra layer of complexity to the relationships within the graph, as opposed to the bidirectional nature of edges in an undirected graph.
+
+%A graph (or network) is a structure  that expresses the relationships between a set of vertices $ \mathcal{V}=\left\lbrace v_i\right\rbrace^m_{i=1}$ via a set of edges $ \mathcal{E}\subseteq \mathcal{V} \times \mathcal{V} $ with weights $ \bm{W}: \mathcal{V} \times \mathcal{V}\to \mathbb{R}_+$. Known as the weighted adjacency matrix, $ \bm{W} $ serves as the algebraic representation of $\mathcal{G}$.
+A \emph{weighted} graph $ \mathcal{G}\big(\mathcal{V},\mathcal{E},\bm{W}\big) $ associates numerical value, a weight, to each edge. The weights with weights $ \bm{W}: \mathcal{V} \times \mathcal{V}\to \mathbb{R}_+$ express some quantitative measure such as distance, cost, time, or any other relevant metric depending on the context of the graph. Unlike an unweighted graph, where edges simply represent connections between nodes, a weighted graph provides additional information about the relationships between nodes. For a weighted graph, the \emph{strength} of a vertex corresponds to the sum of the edge weights associated with it.
+
+
+\subsection{Algebraic representation of a graph}
+A graph with $n$ vertices can be represented as a square $n\times n$ matrix $\bm{A}$. This algebraic representation is called the \emph{adjacency matrix} and depicts the graph's connectivity pattern; that is, the elements of the matrix indicate whether pairs of vertices $\left(i,j\right)$ are adjacent or not in the graph. Formally,
+the elements of a \emph{binary} adjacency matrix $\bm{A}$ are determined as follows
+% ---
+\begin{equation}
+	\left(\bm{A}\right)_{i,j} =
+	\begin{cases}
+		1 & \text{if and edge connects nodes $i$ and $j$}\\
+		0 & \text{otherwise}.
+	\end{cases}
+\end{equation}
+% --
+By extension, a \emph{weighted} adjacency matrix $\bm{W}$ denotes a weighted connection for some of the $\left(i,j\right)$ entries, i.e $\left(\bm{W}\right)_{i,j} \in \mathbb{R}_+$. If the graph is undirected, the adjacency matrix is symmetric, which implies that $\bm{A}=\bm{A}^\intercal$ and $\bm{W}=\bm{W}^\intercal$respectively. Note, however, that for the case of digraphs, the adjacency matrix is not necessarily symmetric. To illustrate this, refer to the graph in Fig.~\ref{fig:example_graph}, the corresponding binary and weighted adjacency matrices are
+% ---
+\begin{equation*}
+	\bm{A} = \begin{bmatrix}
+		0 & 1 & 0 & 1 & 1\\
+		1 & 0 & 1 & 0 & 0\\
+		0 & 1 & 0 & 1 & 0\\
+		1 & 0 & 1 & 0 & 0\\
+		1 & 0 & 0 & 0 & 0\\
+	\end{bmatrix}
+\end{equation*} 
+% ---
+and
+\begin{equation*}
+	\bm{W} = \begin{bmatrix}
+		0 & 0.7 & 0 & 0.5 & 0.4\\
+		0.7 & 0 & 0.1 & 0 & 0\\
+		0 & 0.1 & 0 & 0.3 & 0\\
+		0.5 & 0 & 0.3 & 0 & 0\\
+		0.4 & 0 & 0 & 0 & 0\\
+	\end{bmatrix}.
+\end{equation*} 
+% ---
+Similarly, for the digraph in Fig.~\ref{fig:example_digraph}, the adjacency matrix is
+% ---
+\begin{equation*}
+	\bm{A}_D = \begin{bmatrix}
+		0 & 1 & 0 & 0 & 0\\
+		0 & 0 & 1 & 0 & 0\\
+		0 & 0 & 0 & 1 & 0\\
+		1 & 0 & 0 & 0 & 0\\
+		1 & 0 & 0 & 0 & 0\\
+	\end{bmatrix}.
+\end{equation*} 
+% ---
+Notice that unless there are self loops in the graph, the main diagonal of an adjacency matrix contains only zero entries. Two other important matrices related to a graph $ \mathcal{G} $ are the degree matrix $ \bm{D}: (\bm{D}_{ii})=\sum_{j=1}^{m} w_{ij} $, a diagonal matrix whose entries are the sum of the rows of $ \bm{W} $, and the combinatorial graph Laplacian (CGL), defined as $ \bm{L}_\text{CGL} = \bm{D} - \bm{W} $ \cite{Mateos2019ConnectingdotsIdentifying}.
+
+\subsubsection{The normalized adjacency matrix} 
+The normalized adjacency matrix, defined as
+% ---
+\begin{equation}
+	\mathbfcal{W} = \bm{D}^{-\frac{1}{2}} \bm{W} \bm{D}^{-\frac{1}{2}},
+\end{equation}
+% --- 
+is particularly employed in spectral graph theory \cite{Spielman2012Spectralgraphtheory} and related analyses. Normalization helps account for variations in node degrees and provides a more balanced representation of the graph structure. One common application is in spectral clustering algorithms \cite{VonLuxburg2007tutorialspectralclusteringa}, where the normalized adjacency matrix is used to compute eigenvectors and eigenvalues, aiding in the identification of clusters or communities within a graph. %It also finds applications in various graph-based machine learning and data mining tasks.
+
+\subsection{Subgraphs and spanning trees}
+A \emph{subgraph} $\mathcal{G}_1$ is obtained by selecting a subset of the nodes of another graph $\mathcal{G}$ and a corresponding subset of the edges connecting those nodes. Formally, a graph $\mathcal{G}_1\left(\mathcal{V}_1, \mathcal{E}_1\right)$ is a subgraph of $\mathcal{G}$ if and only if $\mathcal{V}_1 \subseteq  \mathcal{V}$ and $\mathcal{E}_1 \subseteq \mathcal{E}$. This is written $\mathcal{G}_1 \subseteq \mathcal{G}$. One particular subgraph of interest in this work are spanning trees. First, a \emph{tree graph} is a graph that does not contain cycles. Such structure usually depicts a hierarchical arrangement. Consequently, a \emph{spanning tree} $\mathcal{G}_1$ of a graph $\mathcal{G}$ is a subgraph containing all the nodes in $\mathcal{G}$ and whose edges form a tree that defines paths that ensure that all the nodes remain connected. The edges of $\mathcal{G}_1$ are denoted as the branches of the tree. In general, a graph $\mathcal{G}_1$ is said to be a spanning subgraph of $\mathcal{G}$ if and only if $\mathcal{V}_1 = \mathcal{V}$ and $\mathcal{E}_1 \subseteq \mathcal{E}$. It is worth noting that every connected graph has a spanning tree and that there are $n^{n-2}$ distinct spanning trees with $n - 1$ edges on a connected graph with $n$ vertices \cite{West2001Introductiongraphtheory}. Examples of spanning trees are shown in Fig.~\ref{fig:tree_examples}.
+
+\subsubsection{Minimum spanning tree and Kruskal's algorithm}
+The minimum spanning tree of an undirected, connected, and weighted graph is the spanning tree whose edge weight sum is less than or equal to that of all other spanning trees \cite{Sefidgarminimumspanningtree}. Kruskal's algorithm \cite{Kershenbaum1972Computingminimumspanning} is the standard method to find th minimum spanning tree of a graph. In this work we use an equivalent concept, the \emph{maximum spanning tree} (MST), which corresponds to the spanning tree with maximum edge weight sum.
+% ---
+\begin{figure*}[!t]
+	\centering	
+	\hspace*{\fill}
+	\begin{subfigure}[t]{0.32\textwidth}
+		\subcaption{}
+		\includegraphics[width=\textwidth]{example_tree_1.pdf}
+		\label{fig:example_tree_1}
+	\end{subfigure}	
+	\hfill
+	\begin{subfigure}[t]{0.32\textwidth}
+		\subcaption{}
+		\includegraphics[width=\textwidth]{example_tree_2.pdf}
+		\label{fig:example_tree_2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.32\textwidth}
+		\subcaption{}
+		\includegraphics[width=\textwidth]{example_tree_3.pdf}
+		\label{fig:example_tree_3}
+	\end{subfigure}	
+	\hspace*{\fill}	
+	\caption[] {\label{fig:tree_examples} \textbf{Different spanning trees for the same graph}.}
+\end{figure*}
+
+% SUBSECTION ================================================================================
+\subsection{Metrics for graph comparison}
+Several works cover a number of metrics and measures to asses the similarity of any two given graphs. Commonly used metrics include eigenvalue distribution analysis \cite{Crawford2017GraphStructureSimilarity,Gera2018Identifyingnetworkstructure}, and the graph adjacency spectral and matrix distances \cite{Wills2020Metricsgraphcomparison}. This dissertation will use the latter two measures as they allow the local and global comparison of the graph structure.
+
+\paragraph*{Spectral distance.} The spectrum of a graph $\mathcal{G}$ is the vector $ \bm{s}^{\bm{W}}$ containing the eigenvalues $s_k$ of its weighted adjacency matrix $\bm{W}$ sorted in descending order; that is
+% ---
+\begin{equation}
+	\bm{s}^{\bm{W}} = [s_1,s_2,\ldots,s_k,\ldots,s_n]^\intercal.
+\end{equation}
+% ---
+The spectral distance between two graphs $\bm{W}_1$ and $\bm{W}_2$ is simply the $L_2$ norm of the difference between their spectra
+% ---
+\begin{equation}
+	d_{\bm{s}}\left(\mathcal{G}_1,\mathcal{G}_2\right) = \sqrt{\left(\bm{s}^{\bm{W}_1}-\bm{s}^{\bm{W}_2}\right)^\intercal\left(\bm{s}^{\bm{W}_1}-\bm{s}^{\bm{W}_2}\right)}.
+\end{equation}
+% ---
+
+\paragraph*{Matrix distance.} This distance expresses the a direct comparison of the pairwise affinities between the graphs $\bm{W}_1$ and $\bm{W}_2$. From the many potential matrix distances, here the Frobenius distance is used; i.e,
+% ---
+\begin{equation}
+	d_{\bm{W}}\left(\mathcal{G}_1,\mathcal{G}_2\right) =\lvert \lvert \bm{W}_1- \bm{W}_2\rvert \rvert_F.
+\end{equation}
+% ---
+
+% ===========================================================================================
+%                                           |                                               |
+% -------------------------------------- SECTION -------------------------------------------|
+%                                           |                                               |
+% ===========================================================================================
+\section{Network topology inference}
+The process of identifying and visually representing relationships among various elements within a system, based on the available measurements, is termed \emph{network topology inference} (NTI) \cite{Dong2019Learninggraphsdata}. Unveiling the structure of a network or graph through topology learning facilitates the analysis of interactions among entities. 
+
+\subsection{Types connectivity}
+%Finding and graphically representing the relationships among the different constituent elements of a system given the available measurements is known as \emph{network topology inference} (NTI) \cite{Dong2019Learninggraphsdata}. By learning the topology of a network/graph, it is possible to reveal a structure that aids in the analysis of the interaction among the entities. As discussed in \cite{Friston2011Functionaleffectiveconnectivity}, one method to represent interaction is via \emph{functional connectivity} (FC), which is an information-theoretic
+%measure that characterizes dependencies based on the probability distributions of the observed signals (examples include correlations and mutual information). FC can be further subdivided into non-directed and directed, with the latter being related to statistical causation from the data \cite{Bastos2016tutorialreviewfunctional}. In contrast, \emph{effective connectivity} refers explicitly to the dynamic (state-dependent) influence that one element on the network has on another under a particular network model of causal dynamics; i.e, it refers to coupling or directed causal influence \cite{Park2013Structuralfunctionalbrain}. Exemplary works that use the concepts above can be found in biology\cite{Zhang2017Networkbasedmachine} and neuroscience \cite{Karwowski2019Applicationgraphtheory,Sporns2018Graphtheorymethods}.
+
+\begin{figure*}[!h]
+	\centering	
+	\hspace*{\fill}
+	\includegraphics[width=0.9\textwidth]{types_of_connectivity.pdf}
+	\hspace*{\fill}	
+	\caption[] {\label{fig:types_of_connectivity}\textbf{Types of connectivity.} Every rigid body in the robot represents a node in the graphs.}
+\end{figure*}
+
+Often used in the field of neuroscience \cite{Karwowski2019Applicationgraphtheory}, three different types of connectivity are distinguished\cite{Park2013Structuralfunctionalbrain,FaskowitzEdgesbrainnetworks}:
+
+\paragraph*{Structural Connectivity (SC).} Refers to the physical connections between different elements in a network. In the context of neuroscience, it typically involves the anatomical connections between brain regions. It is measured with techniques such as diffusion-weighted imaging (DWI) or diffusion tensor imaging (DTI) are commonly used to infer structural connectivity in the brain.
+
+\paragraph*{Functional Connectivity (FC).} Refers to the statistical dependencies or temporal correlations between the activity of different elements in a network. As explained in \cite{Friston2011Functionaleffectiveconnectivity}, FC is an information-theoretic metric that characterizes dependencies using probability distributions of observed signals. It can be categorized into non-directed and directed forms, with the latter being associated with statistical causation derived from the data \cite{Bastos2016tutorialreviewfunctional}. %FC is often assessed through statistical methods applied to time-series data to identify patterns of correlated activity between different brain regions.
+
+\paragraph*{Effective Connectivity (EC).} Specifically addresses the dynamic, state-dependent influence that one network element has on another within a particular causal dynamics model. Essentially, effective connectivity denotes coupling or directed causal influence \cite{Park2013Structuralfunctionalbrain}. Exemplary applications of these concepts can be observed in the fields of biology \cite{Zhang2017Networkbasedmachine} and neuroscience \cite{Karwowski2019Applicationgraphtheory,Sporns2018Graphtheorymethods}.
+
+A representation of the intricate relationships among the three types of connectivity is given in Fig.~\ref{fig:types_of_connectivity}. It depicts a simple robot arm as an example. The nodes represent the three links that compose the robot. Regarding SC and FC, a nuanced connection exists, albeit not strictly one-to-one. For example, the SC reflect the actual physical composition of the body, three bodies connected by two joints (the edges in the SC graph). Sensory signals coming from these bodies might lead to potential functional interactions of varied degree (the edges in the FC graph) that have a foundation on the bodily structure of the robot; yet, it does not ensure their occurrence. Actually, functional relationships can appear even in the absence of direct structural connections, not the light edge between nodes $A$ and $C$ in the FC graph. Moving to EC and FC, the former extends the latter by seeking to model the direction and strength of influence between different elements. While FC identifies statistical associations, EC strives to unveil the underlying causal relationships, the directed edges in the EC graph. In summary, these three connectivity types are interrelated components in the complex landscape of NTI. Structural connections provide the anatomical substrate, functional connections depict statistical dependencies, and effective connections aspire to model causal relationships within the network.
+
+
+%\redtext{The relationships between SC, FC, and EC in NTI are intricate and multifaceted. Regarding structural and functional connectivity, a nuanced connection exists, albeit not strictly one-to-one. Structural connectivity establishes the anatomical foundation for potential functional interactions, but it doesn't ensure their occurrence. Notably, functional correlations can manifest even in the absence of direct structural connections. Moving to effective connectivity and functional connectivity, the former extends the latter by seeking to model the direction and strength of influence between different elements. While functional connectivity identifies statistical associations, effective connectivity delves deeper, striving to unveil the underlying causal relationships. In summary, these connectivity types are interrelated components in the complex landscape of network topology inference. Structural connections provide the anatomical substrate, functional connections depict statistical dependencies, and effective connections aspire to model causal relationships within the network.} %While these concepts are often explored within the realm of neuroscience, their principles are versatile and applicable to understanding other intricate systems beyond the brain.
+%**Relationships:**
+%- **Structural and Functional Connectivity:** There is a relationship between structural and functional connectivity, but it's not one-to-one. Structural connectivity provides the anatomical substrate for potential functional interactions, but structural connections do not guarantee functional interactions, and functional correlations can occur in the absence of direct structural connections.
+%
+%- **Effective Connectivity and Functional Connectivity:** Effective connectivity builds upon functional connectivity by attempting to model the direction and strength of the influence between different elements. While functional connectivity identifies statistical associations, effective connectivity aims to infer the underlying causal relationships.
+%
+%In summary, structural, functional, and effective connectivity are interrelated aspects of network topology inference, with structural connections providing the anatomical substrate, functional connections representing statistical dependencies, and effective connections aiming to model causal relationships within the network. Techniques from neuroscience are often applied to study these aspects in the context of brain networks, but similar principles can be extended to other complex systems.
+
+\subsection{Inferring the connectivity}
+\TODO
+In NTI the elements $\mathcal{V}$ of a graph $\mathcal{G}$ are known but its connectivity (i.e. how these elements relate to each other) is unknown. Then, the graph topology inference problem consists in finding the edges $\mathcal{E}$ that best explain the relationships among the nodes $\mathcal{V}$ given some prior knowledge, such as  data distribution, the location of the sensors, the physical relationships between the signals, or the data similarity \cite{Dong2019Learninggraphsdata,Stankovic2019Introductiongraphsignal}. Commonly, NTI methods are subdivided in statistical models, psychically motivated models, and more recently, in methods from graph signal processing.  
+\begin{itemize}
+	\item Statistical methods. section, networks typically encode simi-
+	larities between signal elements. Thus, a natural starting point
+	toward constructing a graph representation of the data is to
+	associate edge weights with nontrivial correlations or coher-
+	ence measures between signal profiles at incident nodes. 
+	\item Graph from smooth signals.
+	\item Network diffusion processes.
+\end{itemize}
+
+
+As a result, each column of the data matrix X becomes a
+graph signal defined on the node set of the estimated graph,
+and the observations can be represented as X =F G ( ),
+where F represents a certain generative process or func
+tion on the graph
+
+Generally speaking, inferring graph topologies from observations is an ill-posed problem, and there are many ways
+of associating a topology with the observed data samples
+
+Therefore, a main challenge with NTi is to define such a model for the generative process or
+function F, so that it captures the relationship between the
+observed data X and the learned graph topology, G. Typically, such models often correspond to specific criteria to
+describe or estimate structures between the data samples, e.g.,
+models that put a smoothness assumption on the data, or that
+represent an information diffusion process on the graph
+
+
+Historically, there have been two
+general approaches for learning graphs
+from data: one based on statistical
+models and one based on physically
+motivated models. From the statistical perspective, F G ( ) is modeled as a
+function that draws realizations from a
+probability distribution over the variables, which is determined by the structure of G. 
+
+For physically motivated models, F G ( ) is defined based
+on the assumption of an underlying physical phenomenon
+or process on the graph. , the problem
+is equivalent to learning a graph structure on which the generative process of the observed signals may be explained
+
+The fast-growing field of GSP [3], [12] offers a new perspective on the problem of graph learning. In this setting, the
+columns of the observation matrix X are
+explicitly considered as signals that are
+defined on the vertex set of a weighted
+graph, G. The learning problem can then
+be cast as one of learning a graph G, such
+that F G ( ) permits certain properties or
+characteristics of the observations X to be
+explicit, e.g., smoothness with respect to
+G or sparsity in a basis related to G. 
+
+
+NTI purely from data is ill-posed, some constratints are needed, 
+
+With \textbf{mutual information} \cite{Villaverde2014MIDERnetworkinference}
+
+With \textbf{GSP} \cite{Dong2019Learninggraphsdata}. We consider a method \cite{Kalofolias2016Howlearngraph} which learns a relational matrix $ \bm{W}_{GSP} $ without prior structural information considering the signals in $\bm{x}(t) $ as graph signals\cite{Dong2019Learninggraphsdata}. $ \bm{W}_{GSP} $ is derived under the assumption that the signals on the graph change smoothly between connected nodes. Likewise, the Graph Signal Processing Toolbox (GSPBOX) from \cite{Perraudin2014GSPBOXtoolboxsignal} was used to compute $ \bm{W}_{GSP} $ using $\alpha = 0.6$, $\beta  = 1$ (parameters that control the edge weight magnitude and the sparsity of $ \bm{W}_{GSP} $, respectively) and normalizing the required pairwise distance matrix $\bm{Z}$ between $[0,1]$.
+
+With \textbf{correlation}. The first technique \cite{Olsson2006unknownsensorsactuators} upgrades standard correlation-based NTI by searching for an inverse covariance matrix with Laplacian (to find valid adjacency matrices $ \bm{W}_{cor} $) and structural constraints (requiring a sparse matrix to reduce the graph edge density). We used the Graph Laplacian Learning (GLL) package \cite{Egilmez2021GraphLaplacianLearning} to calculate $ \bm{W}_{cor} $, with regularization parameter $\gamma = 0.07$ and using a matrix $\bm{W}_0$ as connectivity prior with zero diagonal elements and ones elsewhere (denoting lack of structural knowledge).
+
+
+
+
+
+
+
+
+
+
+\hrule
+
+%\subsubsection{Challenges in NTI}
+%NTI brings with it challenges such as noisy measurements, lack of ground truth, large parameter spaces, and varying model complexity \cite{Brugere2018Networkstructureinference}. Moreover, inferring graph topology only from data is an ill-posed problem, having statistical models (e.g. correlation, entropy, mutual information) and physically motivated models (e.g. network diffusion) as general approaches \cite{Dong2019Learninggraphsdata}. %Statistics-based models entail methods based on correlation, probabilistic graphical models, as well as methods based on concepts such as entropy, mutual information and transfer entropy. Physically motivated models consider the data to be generated by an underlying physical phenomenon on the graph, such as network diffusion. 
+%Finally, the recently introduced paradigm of Graph Signal Processing (GSP) \cite{Stankovic2019Introductiongraphsignal} considers samples from the signals at a given time as \emph{graph signals}, whose properties are a consequence of the underlying graph. %Excellent works that discuss NTI via GSP methods can be found in \cite{Dong2019Learninggraphsdata,Mateos2019ConnectingdotsIdentifying,Stankovic2019Introductiongraphsignal}.
+
+
+\subsection{Detecting linear dependencies with covariance}
+\subsection{Graph signal processing}
+The fairly recent field of Graph Signal Processing (GSP) \cite{Mateos2019ConnectingdotsIdentifying}
+
+\redtext{Under the assumption that the signals are related to the topology of the graph where they are supported, the goal of GSP is to develop algorithms that fruitfully leverage this relational structure and can make inferences about these
+	relationships even when they are only partially observed.}
+
+A network may represent a conceptual model of pairwise relationships
+
+A fundamental question in GSP is how to use the graph signals to infer the underlying structure of the network.
+
+\subsection{Based on statistic measures}
 
 
 % ===========================================================================================
@@ -667,13 +1235,15 @@ S\end{itemize}
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\section{Driving online learning: Gradient descent}
-\begin{figure}[h!]
+\section{Driving learning and adaption: Advanced gradient descent}
+% ---
+\begin{figure}[t!]
 	\begin{center}
 		\includegraphics[width=0.5\textwidth]{gradient_descent_concept.pdf}
 	\end{center}
-	\caption{Concept art gradient descent. Image credits: \url{https://www.cs.umd.edu/~tomg/projects/landscapes/}}
+	\caption{\textbf{Concept art gradient descent.} Image credits: \url{https://www.cs.umd.edu/~tomg/projects/landscapes/}}
 \end{figure}
+% ---
 \subsection{Offline and online learning}
 In the realm of machine learning, online learning and offline learning represent distinct approaches to model training. Online learning, or incremental learning, involves learning the model as new data becomes available, typically processing one observation at a time. In this scenario, the learning algorithm's parameters are updated after each individual training instance, making it particularly advantageous for systems dealing with a continuous flow of data that must rapidly adapt to changing conditions. On the other hand, offline learning, also known as batch learning, entails training the model over all observations in a dataset $\mathcal{D}$ simultaneously. The model is trained with a static dataset, and the parameters are updated once the learning process is complete for the entire dataset. %Offline learning is more prevalent in industry due to its various advantages, such as simplicity and ease of implementation. In essence, online learning is a dynamic approach where the model adapts to new data in real-time, while offline learning is a more static method where the model is trained on a fixed dataset.
 
@@ -805,263 +1375,55 @@ excludes also the regularization of the first momentum term. The alteration to t
 
 In essence, AMSGrad aims to provide a more stable and consistent learning rate, preventing scenarios where the learning rate diminishes rapidly and adversely affects convergence. By addressing this issue, AMSGrad aims to offer improved convergence behavior and generalization, particularly in cases where Adam might exhibit erratic behavior due to the uncorrected bias in the second-order moment estimate.
 
-
-% ===========================================================================================
-%                                           |                                               |
-% -------------------------------------- SECTION -------------------------------------------|
-%                                           |                                               |
-% ===========================================================================================
-\section{Fundamentals of graph theory}
-
-\subsection{Definition of a graph}
-A graph $\mathcal{G} = \left(\mathcal{V}, \mathcal{E}\right)$ is a mathematical construct the represents the interconnections between the elements of a system. These elements are represented as a set $ \mathcal{V}=\left\lbrace v_i\right\rbrace^n_{i=1}$ of $n$ \emph{nodes} (also called \emph{vertices}) and their connections are depicted as a set of \emph{edges} $ \mathcal{E}= \left\lbrace e_i\right\rbrace^m_{i=1} \subseteq \mathcal{V} \times \mathcal{V} $. Note that it is possible that an edge connects a node to itself, in which case the edge defines a self loop.
-% ---
-%\begin{figure}[th!]
-%	\begin{center}
-%		\includegraphics[width=0.5\textwidth]{example_graph.pdf}
-%		\caption{Example graph.}
-%		\label{fig:example_graph}
-%	\end{center}
-%\end{figure}
-% ---
-\begin{figure*}[!h]
-	\centering	
-	\hspace*{\fill}
-	\begin{subfigure}[t]{0.32\textwidth}
-		\subcaption{}
-		\includegraphics[width=\textwidth]{example_graph.pdf}
-		\label{fig:example_graph}
-	\end{subfigure}	
-	\hfill
-	\begin{subfigure}[t]{0.32\textwidth}
-		\subcaption{}
-		\includegraphics[width=\textwidth]{example_digraph.pdf}
-		\label{fig:example_digraph}
-	\end{subfigure}
-	\hspace*{\fill}	
-	\caption[] {\label{fig:graph_examples} \textbf{Two basic types of graphs}. (\subref{fig:example_graph}) An undirected and (\subref{fig:example_digraph}) a directed graph.}
-\end{figure*}
-
-%\begin{figure*}[!h]
-%	\centering	
-%	\hspace*{\fill}
-%	\begin{subfigure}[t]{0.32\textwidth}
-%		\subcaption{}
-%		\includegraphics[width=\textwidth]{f6a_phantomx_hexapod.pdf}
-%		\label{fig:phantomx_robot}
-%	\end{subfigure}	
-%	\hfill
-%	\begin{subfigure}[t]{0.32\textwidth}
-%		\subcaption{}
-%		\includegraphics[width=\textwidth]{f6b_phantomx_pi_graph_kinematics.pdf}
-%		\label{fig:phantomx_pigraph_kin_clusters}
-%	\end{subfigure}
-%	\hfill
-%	\begin{subfigure}[t]{0.32\textwidth}
-%		\subcaption{}
-%		\includegraphics[width=\textwidth]{f6c_phantomx_morphology.pdf}
-%		\label{fig:phantomx_morphology}
-%	\end{subfigure}	
-%	\hspace*{\fill}
-%	\\
-%	\hspace*{\fill}
-%	\begin{subfigure}[t]{0.96\textwidth}
-%		\subcaption{}
-%		\includegraphics[width=\textwidth]{f6d_phantomx_morphology_errors_offline.pdf}
-%		\label{fig:phantomx_morphology_errors_offline}
-%	\end{subfigure}	
-%	\hspace*{\fill}
-%	\\
-%	\hspace*{\fill}
-%	\begin{subfigure}[t]{0.96\textwidth}
-%		\subcaption{}
-%		\includegraphics[width=\textwidth]{f6e_phantomx_morphology_errors_online.pdf} 		
-%		\label{fig:phantomx_morphology_errors_online}
-%	\end{subfigure}	
-%	\hspace*{\fill}	
-%	\caption[] {\label{fig:hexapod_simulated_results} \textbf{The hexapod robot}. (\subref{fig:phantomx_robot}) the PhantomX hexapod robot with its IMUs (red spheres), (\subref{fig:phantomx_pigraph_kin_clusters}) the kinematics graph $\mathcal{G}^{\mathcal{K}}_\pi$, (\subref{fig:phantomx_morphology}) the learned kinematic structure, errors in the estimated body structure via (\subref{fig:phantomx_morphology_errors_offline}) offline learning and (\subref{fig:phantomx_morphology_errors_online}) online learning (blue: difference rotation errors $\bar{\delta}~[\text{rad}]$, orange: sensor-to-sensor vector errors $\bar{\tilde{r}}~[\text{m}]$).}
-%\end{figure*}
-Two nodes $i$ and $j$ are said to be \emph{adjacent} if there is an edge $e$ connecting them. Similarly, the edge $e$ connecting the nodes is called \emph{incident} to $i$ and $j$. For example, the nodes $v_1$ and $v_4$ in Fig.~\ref{fig:example_graph} are adjacent to each other and the edge $e_4$ is incident to both nodes. The number of edges that are incident to a node is the \emph{degree} of the vertex. 
-
-A \emph{path} represents a potential sequence of edges connecting any two given nodes. The number of edges determines the \emph{length} of the path. A graph is said to be \emph{connected} if there is at least one path between every pair of nodes; otherwise, it is labeled \emph{disconnected}. A \emph{cycle} constitutes a path comprising a minimum of three edges, where the initial and final vertices are identical, and no vertices are repeated in between. Lastly, a graph is \emph{complete} if there exists a path connecting every pair of nodes. Notice that the maximum number of edges in an undirected graph with $n$ nodes is $n(n-1)/2$
-
-An \emph{undirected} graph lacks any specified direction assigned to its edges, meaning the connections between nodes are bidirectional. On the other hand, a \emph{directed} graph, commonly referred to as a \emph{digraph}, introduces directionality to its edges. In a directed graph, each edge has an explicit direction, indicating a one-way flow from one node to another. This directional information adds an extra layer of complexity to the relationships within the graph, as opposed to the bidirectional nature of edges in an undirected graph.
-
-%A graph (or network) is a structure  that expresses the relationships between a set of vertices $ \mathcal{V}=\left\lbrace v_i\right\rbrace^m_{i=1}$ via a set of edges $ \mathcal{E}\subseteq \mathcal{V} \times \mathcal{V} $ with weights $ \bm{W}: \mathcal{V} \times \mathcal{V}\to \mathbb{R}_+$. Known as the weighted adjacency matrix, $ \bm{W} $ serves as the algebraic representation of $\mathcal{G}$.
-A \emph{weighted} graph $ \mathcal{G}\big(\mathcal{V},\mathcal{E},\bm{W}\big) $ associates numerical value, a weight, to each edge. The weights with weights $ \bm{W}: \mathcal{V} \times \mathcal{V}\to \mathbb{R}_+$ express some quantitative measure such as distance, cost, time, or any other relevant metric depending on the context of the graph. Unlike an unweighted graph, where edges simply represent connections between nodes, a weighted graph provides additional information about the relationships between nodes. For a weighted graph, the \emph{strength} of a vertex corresponds to the sum of the edge weights associated with it.
-
-
-\subsection{Algebraic representation of a graph}
-A graph with $n$ vertices can be represented as a square $n\times n$ matrix $\bm{A}$. This algebraic representation is called the \emph{adjacency matrix} and depicts the graph's connectivity pattern; that is, the elements of the matrix indicate whether pairs of vertices $\left(i,j\right)$ are adjacent or not in the graph. Formally,
-the elements of a \emph{binary} adjacency matrix $\bm{A}$ are determined as follows
-% ---
-\begin{equation}
-	\left(\bm{A}\right)_{i,j} =
-	\begin{cases}
-		1 & \text{if and edge connects nodes $i$ and $j$}\\
-		0 & \text{otherwise}.
-	\end{cases}
-\end{equation}
-% --
-By extension, a \emph{weighted} adjacency matrix $\bm{W}$ denotes a weighted connection for some of the $\left(i,j\right)$ entries, i.e $\left(\bm{W}\right)_{i,j} \in \mathbb{R}_+$. If the graph is undirected, the adjacency matrix is symmetric, which implies that $\bm{A}=\bm{A}^\intercal$ and $\bm{W}=\bm{W}^\intercal$respectively. Note, however, that for the case of digraphs, the adjacency matrix is not necessarily symmetric. To illustrate this, refer to the graph in Fig.~\ref{fig:example_graph}, the corresponding binary and weighted adjacency matrices are
-% ---
-\begin{equation*}
-	\bm{A} = \begin{bmatrix}
-		0 & 1 & 0 & 1 & 1\\
-		1 & 0 & 1 & 0 & 0\\
-		0 & 1 & 0 & 1 & 0\\
-		1 & 0 & 1 & 0 & 0\\
-		1 & 0 & 0 & 0 & 0\\
-	\end{bmatrix}
-\end{equation*} 
-% ---
-and
-\begin{equation*}
-	\bm{W} = \begin{bmatrix}
-		0 & 0.7 & 0 & 0.5 & 0.4\\
-		0.7 & 0 & 0.1 & 0 & 0\\
-		0 & 0.1 & 0 & 0.3 & 0\\
-		0.5 & 0 & 0.3 & 0 & 0\\
-		0.4 & 0 & 0 & 0 & 0\\
-	\end{bmatrix}.
-\end{equation*} 
-% ---
-Similarly, for the digraph in Fig.~\ref{fig:example_digraph}, the adjacency matrix is
-% ---
-\begin{equation*}
-	\bm{A}_D = \begin{bmatrix}
-		0 & 1 & 0 & 0 & 0\\
-		0 & 0 & 1 & 0 & 0\\
-		0 & 0 & 0 & 1 & 0\\
-		1 & 0 & 0 & 0 & 0\\
-		1 & 0 & 0 & 0 & 0\\
-	\end{bmatrix}.
-\end{equation*} 
-% ---
-Notice that unless there are self loops in the graph, the main diagonal of an adjacency matrix contains only zero entries. Two other important matrices related to a graph $ \mathcal{G} $ are the degree matrix $ \bm{D}: (\bm{D}_{ii})=\sum_{j=1}^{m} w_{ij} $, a diagonal matrix whose entries are the sum of the rows of $ \bm{W} $, and the combinatorial graph Laplacian (CGL), defined as $ \bm{L}_\text{CGL} = \bm{D} - \bm{W} $ \cite{Mateos2019ConnectingdotsIdentifying}.
-
-\subsubsection{The normalized adjacency matrix} 
-The normalized adjacency matrix, defined as
-% ---
-\begin{equation}
-	\mathbfcal{W} = \bm{D}^{-\frac{1}{2}} \bm{W} \bm{D}^{-\frac{1}{2}},
-\end{equation}
-% --- 
-is particularly employed in spectral graph theory \cite{Spielman2012Spectralgraphtheory} and related analyses. Normalization helps account for variations in node degrees and provides a more balanced representation of the graph structure. One common application is in spectral clustering algorithms \cite{VonLuxburg2007tutorialspectralclusteringa}, where the normalized adjacency matrix is used to compute eigenvectors and eigenvalues, aiding in the identification of clusters or communities within a graph. %It also finds applications in various graph-based machine learning and data mining tasks.
-
-\subsection{Subgraphs and spanning trees}
-A \emph{subgraph} $\mathcal{G}_1$ is obtained by selecting a subset of the nodes of another graph $\mathcal{G}$ and a corresponding subset of the edges connecting those nodes. Formally, a graph $\mathcal{G}_1\left(\mathcal{V}_1, \mathcal{E}_1\right)$ is a subgraph of $\mathcal{G}$ if and only if $\mathcal{V}_1 \subseteq  \mathcal{V}$ and $\mathcal{E}_1 \subseteq \mathcal{E}$. This is written $\mathcal{G}_1 \subseteq \mathcal{G}$. One particular subgraph of interest in this work are spanning trees. First, a \emph{tree graph} is a graph that does not contain cycles. Such structure usually depicts a hierarchical arrangement. Consequently, a \emph{spanning tree} $\mathcal{G}_1$ of a graph $\mathcal{G}$ is a subgraph containing all the nodes in $\mathcal{G}$ and whose edges form a tree that defines paths that ensure that all the nodes remain connected. The edges of $\mathcal{G}_1$ are denoted as the branches of the tree. In general, a graph $\mathcal{G}_1$ is said to be a spanning subgraph of $\mathcal{G}$ if and only if $\mathcal{V}_1 = \mathcal{V}$ and $\mathcal{E}_1 \subseteq \mathcal{E}$. It is worth noting that every connected graph has a spanning tree and that there are $n^{n-2}$ distinct spanning trees with $n - 1$ edges on a connected graph with $n$ vertices \cite{West2001Introductiongraphtheory}. Examples of spanning trees are shown in Fig.~\ref{fig:tree_examples}.
-
-\subsubsection{Minimum spanning tree and Kruskal's algorithm}
-The minimum spanning tree of an undirected, connected, and weighted graph is the spanning tree whose edge weight sum is less than or equal to that of all other spanning trees \cite{Sefidgarminimumspanningtree}. Kruskal's algorithm \cite{Kershenbaum1972Computingminimumspanning} is the standard method to find th minimum spanning tree of a graph. In this work we use an equivalent concept, the \emph{maximum spanning tree} (MST), which corresponds to the spanning tree with maximum edge weight sum.
+%\subsubsection{Riemannian gradient descent on $ \mathcal{S}^{4}_{++} $}
+\subsubsection{Gradient descent on Riemannian manifolds}
 % ---
 \begin{figure*}[!t]
 	\centering	
 	\hspace*{\fill}
-	\begin{subfigure}[t]{0.32\textwidth}
-		\subcaption{}
-		\includegraphics[width=\textwidth]{example_tree_1.pdf}
-		\label{fig:example_tree_1}
-	\end{subfigure}	
-	\hfill
-	\begin{subfigure}[t]{0.32\textwidth}
-		\subcaption{}
-		\includegraphics[width=\textwidth]{example_tree_2.pdf}
-		\label{fig:example_tree_2}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[t]{0.32\textwidth}
-		\subcaption{}
-		\includegraphics[width=\textwidth]{example_tree_3.pdf}
-		\label{fig:example_tree_3}
-	\end{subfigure}	
+	\includegraphics[width=0.5\textwidth]{manifold_operators.pdf}
 	\hspace*{\fill}	
-	\caption[] {\label{fig:tree_examples} \textbf{Different spanning trees for the same graph}.}
+	\caption[] {\label{fig:manifold_operators}\textbf{Gradient descent on a manifold.} The figure illustrates the curved space of the manifold and its associated tangent space. The logarithmic and exponential maps enable to project a point from the tangent space to the manifold space and vice-versa.}
 \end{figure*}
+% ---
+The gradient descent methods discussed above are thought to operate in Euclidean (flat) spaces. Some of the operators and quantities that describe the kinematics and dynamics of a robot are elements of curved manifold spaces and hence are more difficult to update following the update rules of Euclidean gradient descent methods. Considering again a cost function $J\left(\bm{P}\right)$, the \emph{Riemannian gradient} at a point $\bm{P}$ in a manifold space $\mathcal{M}$ is the orthogonal projection of the gradient in ambient Euclidean space
+% ---
+\begin{equation}
+	\bm{G} = \nabla J(\cdot)=\frac{\partial J}{\partial \bm{P}}\in \mathbb{R}^{n \times n}
+\end{equation}
+% ---
+onto the associated tangent space $\mathcal{T}_{\bm{P}}\mathcal{M}$ \cite{Boumal2014Optimizationestimationmanifolds.}; that is,
+% ---
+\begin{equation}
+	\text{grad}_{\bm{P}}J(\bm{P}) = \Pi_{ \mathcal{T}_{\bm{P}}}\left(\nabla J(\bm{P})\right) \in \mathcal{T}_{\bm{P}}\mathcal{M},
+\end{equation} 
+% ---
+with the projection operator defined as
+% ---
+\begin{equation}
+	\Pi_{ \mathcal{T}_{\bm{P}}}(\bm{G})\triangleq\bm{P}\left(\frac{\bm{G}+\bm{G}^T}{2}\right)\bm{P},
+\end{equation} 
+% ---
+for all the points in the manifold \cite{Brooks2019Riemannianbatchnormalization}. As described in \cite{Bonnabel2013Stochasticgradientdescent}, Riemannian gradient descent uses
+% ---
+\begin{equation}
+	\bm{P}^{k+1}= \text{Exp}_{\bm{P}^k}\left(-\gamma \text{grad}_{\bm{P}^k}J(\bm{P}^k)\right),
+\end{equation} 
+% ---
+with $ \gamma \in (0,1]$, to compute the update to the parameter $\bm{P}$ on $\mathcal{M}$. The exponential map $ \text{Exp}_{\bm{P}^k}\left(\cdot\right)$ of a Riemannian manifold at a point $\bm{P}^k$ projects a point on the tangent space to the manifold space; i.e., $ \text{Exp}_{\bm{P}^k}: \mathcal{T}_{\bm{P}^k}\mathcal{M}\rightarrow \mathcal{M}$. Conversely, the logarithmic map takes a point on the manifold and projects it onto the associated tangent space; that is, $ \text{Log}_{\bm{P}^k}: \mathcal{M}\rightarrow \mathcal{T}_{\bm{P}^k}\mathcal{M}$. Fig.~\ref{fig:manifold_operators} illustrates these maps and their involvement in Riemannian gradient descent. The particular definitions for the exponential and logarithmic maps depend on the considered Riemannian manifold $\mathcal{M}$.
+
+%Motivated by the stability and convergence speed of  AMSGrad, this dissertation makes use of its manifold version, the Riemannian AMS gradient descent ---RAMSGrad for short \cite{Becigneul2018Riemannianadaptiveoptimization}. Core steps for RAMSGrad involve computing the moving averages for the gradient and its Riemannian norm, as well as the aggregation of the previous gradients by considering the curvature of the manifold. \redtext{This algorithm will be discussed in more detailed in the next chapter}. 
+
+Inspired by the stability and convergence speed of AMSGrad, this thesis utilizes its Riemannian counterpart, referred to as RAMSGrad for short \cite{Becigneul2018Riemannianadaptiveoptimization}. Essential features of RAMSGrad encompass the computation of moving averages for the gradient and its Riemannian norm, as well as the amalgamation of previous gradients, taking into account the curvature of the manifold. A more detailed discussion of this algorithm will be provided in the upcoming chapter.
+
+%Likewise, the Riemannian gradient of a function $J(\bm{P})$ at a point $\bm{P}=(\bm{P}_1,\ldots,\bm{P}_N)\in\mathcal{M}^N$ is expressed by $
+%\text{grad}_{\bm{P}}J=\left(\text{grad}_{\bm{P}_i}J_1, \ldots, \text{grad}_{\bm{P}_N}J_N\right)$;  with $\bm{P}_i\in\mathcal{M}_i$, i.e. defined on a product manifold.
+%%
+%Here the term $\text{grad}_{\bm{P}_i}J_i$ represents the Riemannian gradient of the partial map $
+%J_i:\bm{Q}\in \mathcal{M}_i \mapsto f\left(\bm{P}_1,\ldots,\bm{P}_{i-1},\bm{Q},\bm{P}_{i+1},\ldots,\bm{P}_N\right)$. 
 
 
 
-\subsection{Metrics for graph comparison}
-\TODO
-
-Several works cover a number of metrics and measures to asses the similarity of any two given graphs. The most named metrics include: eigenvalue distribution analysis \cite{Crawford2017GraphStructureSimilarity,Gera2018Identifyingnetworkstructure}, the graph adjacency spectral and matrix distances \cite{Wills2020Metricsgraphcomparison}$\ldots$
-
-% ===========================================================================================
-%                                           |                                               |
-% -------------------------------------- SECTION -------------------------------------------|
-%                                           |                                               |
-% ===========================================================================================
-\section{Network topology inference}
-The process of identifying and visually representing relationships among various elements within a system, based on the available measurements, is termed \emph{network topology inference} (NTI) \cite{Dong2019Learninggraphsdata}. Unveiling the structure of a network or graph through topology learning facilitates the analysis of interactions among entities. 
-
-\subsection{Types connectivity}
-%Finding and graphically representing the relationships among the different constituent elements of a system given the available measurements is known as \emph{network topology inference} (NTI) \cite{Dong2019Learninggraphsdata}. By learning the topology of a network/graph, it is possible to reveal a structure that aids in the analysis of the interaction among the entities. As discussed in \cite{Friston2011Functionaleffectiveconnectivity}, one method to represent interaction is via \emph{functional connectivity} (FC), which is an information-theoretic
-%measure that characterizes dependencies based on the probability distributions of the observed signals (examples include correlations and mutual information). FC can be further subdivided into non-directed and directed, with the latter being related to statistical causation from the data \cite{Bastos2016tutorialreviewfunctional}. In contrast, \emph{effective connectivity} refers explicitly to the dynamic (state-dependent) influence that one element on the network has on another under a particular network model of causal dynamics; i.e, it refers to coupling or directed causal influence \cite{Park2013Structuralfunctionalbrain}. Exemplary works that use the concepts above can be found in biology\cite{Zhang2017Networkbasedmachine} and neuroscience \cite{Karwowski2019Applicationgraphtheory,Sporns2018Graphtheorymethods}.
-
-\begin{figure*}[!h]
-	\centering	
-	\hspace*{\fill}
-	\includegraphics[width=0.9\textwidth]{types_of_connectivity.pdf}
-	\hspace*{\fill}	
-	\caption[] {\label{fig:types_of_connectivity}\textbf{Types of connectivity.} Every rigid body in the robot represents a node in the graphs.}
-\end{figure*}
-
-Often used in the field of neuroscience \cite{Karwowski2019Applicationgraphtheory}, three different types of connectivity are distinguished\cite{Park2013Structuralfunctionalbrain,FaskowitzEdgesbrainnetworks}:
-
-\paragraph*{Structural Connectivity (SC).} Refers to the physical connections between different elements in a network. In the context of neuroscience, it typically involves the anatomical connections between brain regions. It is measured with techniques such as diffusion-weighted imaging (DWI) or diffusion tensor imaging (DTI) are commonly used to infer structural connectivity in the brain.
-
-\paragraph*{Functional Connectivity (FC).} Refers to the statistical dependencies or temporal correlations between the activity of different elements in a network. As explained in \cite{Friston2011Functionaleffectiveconnectivity}, FC is an information-theoretic metric that characterizes dependencies using probability distributions of observed signals. It can be categorized into non-directed and directed forms, with the latter being associated with statistical causation derived from the data \cite{Bastos2016tutorialreviewfunctional}. %FC is often assessed through statistical methods applied to time-series data to identify patterns of correlated activity between different brain regions.
-
-\paragraph*{Effective Connectivity (EC).} Specifically addresses the dynamic, state-dependent influence that one network element has on another within a particular causal dynamics model. Essentially, effective connectivity denotes coupling or directed causal influence \cite{Park2013Structuralfunctionalbrain}. Exemplary applications of these concepts can be observed in the fields of biology \cite{Zhang2017Networkbasedmachine} and neuroscience \cite{Karwowski2019Applicationgraphtheory,Sporns2018Graphtheorymethods}.
-
-To understand the intricate relationships among the three types of connectivity refer to Fig.~\ref{fig:types_of_connectivity}. The figure depicts a simple robot arm as an example. The nodes represent the three links that compose the robot. Regarding SC and FC, a nuanced connection exists, albeit not strictly one-to-one. For example, the SC reflect the physical composition of the body, three bodies connected by two joints (the edges in the SC graph). Sensory signals coming from these bodies might lead to potential functional interactions of varied degree (the edges in the FC graph) that have a foundation on the bodily structure of the robot; yet, it does not ensure their occurrence. Actually, functional relationships can appear even in the absence of direct structural connections, not the light edge between nodes $A$ and $C$ in the FC graph. Moving to EC and FC, the former extends the latter by seeking to model the direction and strength of influence between different elements. While FC identifies statistical associations, EC strives to unveil the underlying causal relationships, the directed edges in the EC graph. In summary, these three connectivity types are interrelated components in the complex landscape of NTI. Structural connections provide the anatomical substrate, functional connections depict statistical dependencies, and effective connections aspire to model causal relationships within the network.
-
-
-%\redtext{The relationships between SC, FC, and EC in NTI are intricate and multifaceted. Regarding structural and functional connectivity, a nuanced connection exists, albeit not strictly one-to-one. Structural connectivity establishes the anatomical foundation for potential functional interactions, but it doesn't ensure their occurrence. Notably, functional correlations can manifest even in the absence of direct structural connections. Moving to effective connectivity and functional connectivity, the former extends the latter by seeking to model the direction and strength of influence between different elements. While functional connectivity identifies statistical associations, effective connectivity delves deeper, striving to unveil the underlying causal relationships. In summary, these connectivity types are interrelated components in the complex landscape of network topology inference. Structural connections provide the anatomical substrate, functional connections depict statistical dependencies, and effective connections aspire to model causal relationships within the network.} %While these concepts are often explored within the realm of neuroscience, their principles are versatile and applicable to understanding other intricate systems beyond the brain.
-%**Relationships:**
-%- **Structural and Functional Connectivity:** There is a relationship between structural and functional connectivity, but it's not one-to-one. Structural connectivity provides the anatomical substrate for potential functional interactions, but structural connections do not guarantee functional interactions, and functional correlations can occur in the absence of direct structural connections.
-%
-%- **Effective Connectivity and Functional Connectivity:** Effective connectivity builds upon functional connectivity by attempting to model the direction and strength of the influence between different elements. While functional connectivity identifies statistical associations, effective connectivity aims to infer the underlying causal relationships.
-%
-%In summary, structural, functional, and effective connectivity are interrelated aspects of network topology inference, with structural connections providing the anatomical substrate, functional connections representing statistical dependencies, and effective connections aiming to model causal relationships within the network. Techniques from neuroscience are often applied to study these aspects in the context of brain networks, but similar principles can be extended to other complex systems.
-
-\subsection{Inferring the connectivity}
-In NTI the elements $\mathcal{V}$ of a graph $\mathcal{G}$ are known but its connectivity (i.e. how these elements relate to each other) is unknown. Then, the graph topology inference problem consists in finding the edges $\mathcal{E}$ that best explain the relationships among the nodes $\mathcal{V}$ given some prior knowledge, such as  data distribution, the location of the sensors, the physical relationships between the signals, or the data similarity \cite{Dong2019Learninggraphsdata,Stankovic2019Introductiongraphsignal}. 
-
-With \textbf{mutual information} \cite{Villaverde2014MIDERnetworkinference}
-
-With \textbf{GSP} \cite{Dong2019Learninggraphsdata}. We consider a method \cite{Kalofolias2016Howlearngraph} which learns a relational matrix $ \bm{W}_{GSP} $ without prior structural information considering the signals in $\bm{x}(t) $ as graph signals\cite{Dong2019Learninggraphsdata}. $ \bm{W}_{GSP} $ is derived under the assumption that the signals on the graph change smoothly between connected nodes. Likewise, the Graph Signal Processing Toolbox (GSPBOX) from \cite{Perraudin2014GSPBOXtoolboxsignal} was used to compute $ \bm{W}_{GSP} $ using $\alpha = 0.6$, $\beta  = 1$ (parameters that control the edge weight magnitude and the sparsity of $ \bm{W}_{GSP} $, respectively) and normalizing the required pairwise distance matrix $\bm{Z}$ between $[0,1]$.
-
-With \textbf{correlation}. The first technique \cite{Olsson2006unknownsensorsactuators} upgrades standard correlation-based NTI by searching for an inverse covariance matrix with Laplacian (to find valid adjacency matrices $ \bm{W}_{cor} $) and structural constraints (requiring a sparse matrix to reduce the graph edge density). We used the Graph Laplacian Learning (GLL) package \cite{Egilmez2021GraphLaplacianLearning} to calculate $ \bm{W}_{cor} $, with regularization parameter $\gamma = 0.07$ and using a matrix $\bm{W}_0$ as connectivity prior with zero diagonal elements and ones elsewhere (denoting lack of structural knowledge).
-
-
-
-
-
-
-
-
-
-
-\hrule
-
-\subsubsection{Challenges in NTI}
-NTI brings with it challenges such as noisy measurements, lack of ground truth, large parameter spaces, and varying model complexity \cite{Brugere2018Networkstructureinference}. Moreover, inferring graph topology only from data is an ill-posed problem, having statistical models (e.g. correlation, entropy, mutual information) and physically motivated models (e.g. network diffusion) as general approaches \cite{Dong2019Learninggraphsdata}. %Statistics-based models entail methods based on correlation, probabilistic graphical models, as well as methods based on concepts such as entropy, mutual information and transfer entropy. Physically motivated models consider the data to be generated by an underlying physical phenomenon on the graph, such as network diffusion. 
-Finally, the recently introduced paradigm of Graph Signal Processing (GSP) \cite{Stankovic2019Introductiongraphsignal} considers samples from the signals at a given time as \emph{graph signals}, whose properties are a consequence of the underlying graph. %Excellent works that discuss NTI via GSP methods can be found in \cite{Dong2019Learninggraphsdata,Mateos2019ConnectingdotsIdentifying,Stankovic2019Introductiongraphsignal}.
-
-
-\subsection{Detecting linear dependencies with covariance}
-\subsection{Graph signal processing}
-The fairly recent field of Graph Signal Processing (GSP) \cite{Mateos2019ConnectingdotsIdentifying}
-
-\redtext{Under the assumption that the signals are related to the topology of the graph where they are supported, the goal of GSP is to develop algorithms that fruitfully leverage this relational structure and can make inferences about these
-	relationships even when they are only partially observed.}
-
-A network may represent a conceptual model of pairwise relationships
-
-A fundamental question in GSP is how to use the graph signals to infer the underlying structure of the network.
-
-\subsection{Based on statistic measures}
 
 % ===========================================================================================
 %                                           |                                               |
@@ -1069,30 +1431,47 @@ A fundamental question in GSP is how to use the graph signals to infer the under
 %                                           |                                               |
 % ===========================================================================================
 \section{Information theory}
-As discussed in \cite{Cover1999Elementsinformationtheory} information is$\ldots$
-
-\subsection{The meaning information}
+This section is based on chapter 1 of \cite{Cover1999Elementsinformationtheory}.
+% ---
+\begin{figure*}[!h]
+	\centering	
+	\hspace*{\fill}
+	\includegraphics[width=0.5\textwidth]{entropy_and_mutual_information.pdf}
+	\hspace*{\fill}	
+	\caption[] {\label{fig:entropy_and_mutual_information}\textbf{Relation between entropy and mutual information.} \TODO.}
+\end{figure*}
+% ---
 \subsection{Entropy of random variables}
-\subsection{Mutual Information: The correlation of the 21st century }
-\subsection*{Mutual information}
-The mutual information between two random variables is a symmetric measure of information computed as:
-% ---
-\begin{equation}\label{eq:mutual_information}
-	I\left(X;Y\right) =I\left(Y;X\right) = H(X) + H(Y) - H(X,Y)
-\end{equation}
-% ---
-with the Shannon's entropy of a variable $X$ defined by 
+The entropy of a random variable is a function which attempts to characterize
+the average uncertainty or unpredictability of a random variable. It is often used to quantify the amount of information in a random process. Formally, the entropy of a variable $X$ is a function of its probability distribution and is defined as 
 % ---
 \begin{equation}\label{eq:entropy}
-	H(X) = -\sum_{i=1}^{n}p(x_i)\text{log}_2\left(p\left(x_i\right)\right)
+	H(X) = -\sum_{i=1}^{n}p(x_i)\text{log}_2\left(p\left(x_i\right)\right).
 \end{equation}
 % ---
-and the joint entropy between $ X $ and $ Y $ expressed as
+Similarly, the joint entropy between two random variables $ X $ and $ Y $ is dependent on the joint probability of the two variables; i.e,
 % ---
 \begin{equation}\label{eq:joint_entropy}
 	H(X,Y) = -\sum_{i=1}^{n}\sum_{j=1}^{n} p(x_i,y_j)\text{log}_2\big(p\left(x_i,y_j\right)\big).
 \end{equation}
 % ---
+In loose terms, entropy can be associated with the amount of information that a random variable coveys. The less uniform the corresponding probability distribution, the more entropy it has, and hence the more information it provides.
+
+\subsection{Mutual Information: The correlation of the 21st century }
+The mutual information (MI) measures the amount of information that one random variable provides about another random variable. It quantifies the reduction in uncertainty about one variable due to knowledge of the other. The mutual information between two random variables is a symmetric measure of information computed as the relative entropy (also know as Kullback-Leibler divergence) of the joint probability distribution $p\left(x,y\right)$ and the product of the marginal probability distributions $p\left(x\right)$ and $p\left(y\right)$; that is,
+% ---
+\begin{equation}\label{eq:mutual_information}
+	I\left(X;Y\right) = \sum_{x \in \mathcal{X}}\sum_{y \in \mathcal{Y}}p\left(x,y\right) \text{log}\frac{p\left(x,y\right)}{p\left(x\right)p\left(y\right)}.
+\end{equation}
+% ---
+The MI can also be expressed in terms of the entropy and joint entropy as follows
+% ---
+\begin{equation}\label{eq:mutual_information}
+	I\left(X;Y\right) =I\left(Y;X\right) = H(X) + H(Y) - H(X,Y)
+\end{equation}
+% ---
+where it is clear that the MI is symmetric and represents the information shared by the two random variables, see Fig.~\ref{fig:entropy_and_mutual_information}.
+
 
 %As mentioned in the main text, the MI is used to create the relational matrix $\hat{\bm{W}}_{MI}$. In practice, the computation of $(\hat{\bm{W}}_{MI})_{i,j}$ involves selecting a pair $\left({x}_i(t),{x}_j(t)\right)$ of time series from the data matrix $\bm{X}$, centering their samples (to zero mean and unit standard deviation) and using either binning, kernel, or nearest neighbor methods \cite{WaltersWilliams2009Estimationmutualinformation} to compute their mutual information. Yet, such a process can be memory- and computation-demanding when the length $n$ of each of the time series is large or when streaming signals are considered. Therefore, to enable the online computation of the $m\left(m-1\right)/2$ pairwise MI values, every $N_{\mathbfcal{X}}$ points, we extract a mini-batch $\mathbfcal{X}$ from the replay buffer $\mathbfcal{B}$ and compute its corresponding MI matrix $\bm{W}^\mathbfcal{X}_{MI}$. Then, the overall MI matrix estimate $\hat{\bm{W}}_{MI}$ for the time series is the cumulative average over the previously computed matrices $\bm{W}^\mathbfcal{X}_{MI}$. To monitor its convergence, we observe the total information content in the matrix, defined as
 %% ---
@@ -1117,13 +1496,46 @@ Previous works have discussed metrics based on information entropy in the contex
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\section{Differential geometry}
-\subsection{Fundamentals of differential geometry}
-\subsection{Manifolds and the tangent space}
-\subsection{Riemannian geometry and the metric}
-\subsection{Applications in robotics}
+%\section{Differential geometry}
+%
+%
+%\begin{figure*}[!h]
+%	\centering	
+%	\hspace*{\fill}
+%	\includegraphics[width=0.5\textwidth]{manifold_operators.pdf}
+%	\hspace*{\fill}	
+%	\caption[] {\label{fig:manifold_operators}\textbf{Operations on a manifold.} The figure illustrates the curved space of the manifold and its associated tangent space. The logarithmic and exponential maps enable to project a point from the tangent space to the manifold space and vice-versa.}
+%\end{figure*}
+%
+%% SUBSECTION ========================================================================================
+%\subsection{The space of symmetric positive definite matrices}\label{sec:spd_manifold}
+%%A \emph{differentiable manifold} $\mathcal{M}$ is a topological space that is locally similar to Euclidean space and has a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. $\mathcal{T}_{\bm{P}}\mathcal{M}$ is the \emph{tangent space} at a point $\bm{P}\in \mathcal{M}$ and represents the vector space of all the possible tangent vectors to the manifold that pass through $\bm{P}$. The pair $(\mathcal{M},\rho)$ defines a \emph{Riemannian manifold} if $ \mathcal{M} $ is differentiable and is equipped with a positive definite metric tensor $\rho$ at each point \cite{Pennec2006Riemannianframeworktensor}. 
+%A differentiable manifold, denoted as $\mathcal{M}$, is a topological space that exhibits local similarity to Euclidean space and possesses a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. The tangent space at a point $\bm{P}$ in $\mathcal{M}$, denoted as $\mathcal{T}_{\bm{P}}\mathcal{M}$, encompasses the vector space containing all possible tangent vectors to the manifold that pass through $\bm{P}$. A Riemannian manifold is defined by the pair $(\mathcal{M},\rho)$, where $\mathcal{M}$ is a differentiable manifold and each point in $\mathcal{M}$ is equipped with a positive definite metric tensor $\rho$ \cite{Pennec2006Riemannianframeworktensor}.
+%
+%%Denoting $\mathcal{S}^n \triangleq\left\lbrace \bm{S} \in \mathbb{R}^{n \times n} : \bm{S} = \bm{S}^T\right\rbrace$ as the space of real square symmetric matrices of dimension $n \times n$. Then, the space of $n \times n$ SPD matrices $ \mathcal{S}^n_{++}\triangleq \left\lbrace \bm{P}\in \mathcal{S}^n : \bm{P} \succ 0 \right\rbrace $  defines a smooth submanifold $\mathcal{M}$ of $\mathcal{S}^n$. By definition, its tangent space $\mathcal{T}\mathcal{M} \in \mathcal{S}^n$ is equipped with an \emph{affine invariant Riemannian metric} $\rho$ \cite{Lee2018geometricalgorithmrobust}. Consequently, $ \mathcal{S}^n_{++} $ defines a Riemannian manifold. Finally, the product manifold $ \mathcal{M}^N $ of SPD manifolds is the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$. It is the set of matrices  $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}_i\in\mathcal{M}_i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho_{1},\ldots, \rho_{N} \right) $. %Similarly, the generalizations of the operators mentioned above to $\mathcal{M}^N$ are the concatenations of the individual operators for each $\mathcal{M}_i$.
+%
+%Let $\mathcal{S}^n$ be the space of real square symmetric matrices with dimension $n \times n$, denoted as $\mathcal{S}^n \triangleq\left\lbrace \bm{S} \in \mathbb{R}^{n \times n} : \bm{S} = \bm{S}^T\right\rbrace$. The space of $n \times n$ SPD matrices, $\mathcal{S}^n_{++}\triangleq \left\lbrace \bm{P}\in \mathcal{S}^n : \bm{P} \succ 0 \right\rbrace$, defines a smooth submanifold $\mathcal{M}$ within $\mathcal{S}^n$. Its tangent space $\mathcal{T}\mathcal{M} \in \mathcal{S}^n$ is equipped with an \emph{affine invariant Riemannian metric} $\rho$ \cite{Lee2018geometricalgorithmrobust}, thereby making $ \mathcal{S}^n_{++} $ a Riemannian manifold. Finally, the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$ defines the product manifold of SPD manifolds.  It represents the set of matrices $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}_i\in\mathcal{M}_i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho{1},\ldots, \rho{N} \right) $.
+	
+	
+	
+%	The product manifold $ \mathcal{M}^N $ of SPD manifolds is the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$. It represents the set of matrices $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}i\in\mathcal{M}i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho{1},\ldots, \rho{N} \right) $.}
 
-\say{The Symmetric Positive Definite (SPD) manifold is one specific type of Riemannian manifold. It is a smooth manifold where the tangent space is endowed with a Riemannian metric [2]. The Riemannian metric allows us to define various geometric notions such as the geodesic distance.}
+%The physical feasibility constraints of the inertial parameters $\bm{\theta}_i$ of the $i$-th link, summarized in Eq.~\eqref{eq:feasibility_constraints}, are satisfied if the pseudo inertia matrix 
+%%---
+%\begin{equation}\label{eq:pseudo_inertia_matrix}
+%	\bm{P}_i(\bm{\theta}_i)=f(\bm{\theta}_i)=\begin{bmatrix}
+%		\bm{\Sigma}_i && \bm{h} \\ \bm{h}^T && m
+%	\end{bmatrix} \in \mathbb{R}^{4 \times 4},
+%\end{equation}
+%%---
+%defined for each rigid body is symmetric positive-definite \cite{Wensing2017Linearmatrixinequalities}; that is, $\bm{P}_i(\bm{\theta}_i)\in \mathcal{S}_{++}^4$. Here $ \bm{\Sigma}_i = \frac{1}{2}\text{tr}(\bm{I}_i)\mathbb{1} - \bm{I}_i\in \mathcal{S}^3 $ is called the \emph{density weighted covariance matrix}. Conversely,  $ \bm{I}_i = \text{tr}\left(\bm{\Sigma}_i\right)\mathbb{1} - \bm{\Sigma}_i \in \mathcal{S}^3_{++} $, where $\mathbb{1}$ is the $3 \times 3$ identity matrix. The requirement that $\bm{P}_i(\bm{\theta}_i) \succ 0$ implies the fully physically feasible inertial parameters are in the manifold $\mathcal{S}^4_{++}=\left\lbrace \bm{P}_i(\bm{\theta}_i) \in \mathcal{S}^{4}: \bm{P}_i(\bm{\theta}_i) \succ 0 \right\rbrace$. As explained in \cite{Lee2018geometricalgorithmrobust}, for every rigid body $i$ in the kinematic chain, there exist a pseudo inertia matrix \eqref{eq:pseudo_inertia_matrix}. This means that the set of matrices  $\left\lbrace \bm{P}_i\right\rbrace_{i=1}^N$ resides in $\mathcal{M}^N$.
+
+%\subsection{Fundamentals of differential geometry}
+%\subsection{Manifolds and the tangent space}
+%\subsection{Riemannian geometry and the metric}
+%\subsection{Applications in robotics}
+%
+%\say{The Symmetric Positive Definite (SPD) manifold is one specific type of Riemannian manifold. It is a smooth manifold where the tangent space is endowed with a Riemannian metric [2]. The Riemannian metric allows us to define various geometric notions such as the geodesic distance.}
 
 %% ===========================================================================================
 %%                                           |                                               |
