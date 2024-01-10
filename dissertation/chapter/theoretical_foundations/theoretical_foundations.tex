@@ -1,27 +1,33 @@
+\section{Introduction}
+The ability of robots to acquire, refine, and adapt their body models is crucial for enhancing their locomotion, manipulation, and interaction capabilities. Despite its significance, existing learning frameworks in robotics often neglect the robot's physical structure. Cognitive robotics underscores the importance of the body schema. However, some approaches interpret a robot's body schema as learning kinematic structural properties, while others focus on sensorimotor associations between proprioceptive, tactile, and visual modalities. Constructing a robot body schema is inherently linked to model-based robotics, offering methods for identifying physical attributes grounded in known kinematic structures.
 
-As mentioned already, the ability of robots to acquire, refine, and adapt body models of themselves is paramount for enhancing their locomotion, manipulation, and interaction capabilities. Despite this importance, existing learning frameworks in robotics often overlook the robot physical structure. Cognitive robotics emphasizes the significance of the body schema. Yet, approaches interpret a robot body schema as learning kinematic structure properties, while others focus on sensorimotor associations between proprioceptive, tactile, and visual modalities. The process of building a robot body schema is inherently tied to model-based robotics, providing methods for identifying physical attributes grounded in known kinematic structures. However, challenges persist, especially for floating base robots, and existing methods lack integration into incremental learning frameworks. This chapter discusses concepts and methods from different disciplines that are relevant for the definition of what is considered in this work as the robot body schema. Furthermore, the connections between the different methods will be outlined establishing their importance as a fundamental tool for building the robotic body schema. 
+Nevertheless, challenges persist, particularly for floating-base robots, and existing methods need more integration into incremental learning frameworks. This chapter delves into concepts and methods from different disciplines relevant to defining the robot body schema in this work. Additionally, the chapter outlines the connections between these different methods, establishing their importance as a fundamental tool for building the robotic body schema.
+
+This chapter will introduce notions about the various definitions of the body and its physical attributes, encompassing the physical self and concepts like embodiment, body morphology, and the body schema. With these concepts established, the chapter will survey the fundamental bodily features referred to by these definitions. Shifting the discussion to the realm of robotics, these features will be contrasted against those resulting from conventional calibration and identification methods in model-based robotics. Complementary methods supporting the construction of a robot body schema will be presented to complete the picture.
 
 % Self-modeling in robotics is of great importance as it enables robots to anticipate the outcomes of various actions without physically performing them. This capability allows robots to plan and control their actions more effectively, detect and compensate for damage or wear-and-tear, and make better decisions. By creating internal computational models of their physical bodies, robots can become more self-reliant and function better in the world. This self-awareness, achieved through self-modeling, is a fundamental step towards enhancing the autonomy and performance of robotic systems. The ability to simulate their physical selves enables robots to be more adaptive, efficient, and capable of handling real-world challenges.
 
-As an anchoring point the concept of physical self will be briefly introduced and the relevant features that are pertinent for the discussion will be highlighted. 
-
-\redtext{First of all this chapter will offer notions about the different interpretations of body knowledge. These encompass the definitions of the physical self and related concepts like emboidment, body morpholgy and the body schema. With the concepts extablished, a RECOPILACION of the important or fundamental features that are depicted by these definitions will be offered. These features will be contrasted against what is conventionally performed in model-based robotics to asses if methods exist to learn these features. To complete the picture, supporting methods to complement inconplete existing methodologies or to find aspecs of the body structure that have not been fully addressed are provided.}
-
+%As an anchoring point the concept of physical self will be briefly introduced and the relevant features that are pertinent for the discussion will be highlighted. 
 % ===========================================================================================
 %                                           |                                               |
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
 %\part{General body concepts}
-\section{Different views on the body}
+\section{Different views on the body and its features}
 
 % SUBSECTION ================================================================================
 \subsection{The physical self}
-The concept of the physical self is rooted in human psychology and consciousness \cite{Tsakiris2016multisensorybasisself,Overgaard2023selfitsbody}. It typically refers to an individual's perception and evaluation of their own physical body, encompassing appearance, abilities, and overall physicality. It involves the subjective experience of one's body and its relation to the environment, supported by sensory modalities like proprioception, touch, and interoception (sense of internal bodily sensations). This concept is explored in psychology, cognitive science, and related fields to understand how individuals perceive and interact with their bodies[1].
+%The concept of the physical self is rooted in human psychology and consciousness \cite{Tsakiris2016multisensorybasisself,Overgaard2023selfitsbody}. It generally refers to an individual's perception and evaluation of the physical body, encompassing appearance, abilities, and overall physicality. It involves the subjective experience of one's body and its relation to the environment, supported by sensory modalities like proprioception, touch, and interoception (sense of internal bodily sensations). This concept is explored in psychology, cognitive science, and related fields to understand how individuals perceive and interact with their bodies.
+%
+%In the context of robotics, although robots lack subjective experiences, self-awareness, and consciousness, the physical self remains a critical concept. Robots must perceive their bodies and positions in space to operate effectively, particularly in unstructured or dynamic environments. Aspects related to the physical self, such as body morphology, embodiment, and the body schema, are crucial considerations in robotics, see Fig.~\ref{fig:overlapping_concepts}. Body morphology, the physical structure of a robot, significantly influences its design based on intended tasks. For example, a robot designed for exploration might feature legs or wheels, while a robot for assembly line tasks may have a robotic arm \cite{Miller2018EmbodimentSituatednessMorphology}. Embodiment in robotics emphasizes how a robot's physical form and sensory-motor capabilities influence its interaction with the environment, shaping its perception and actions within its surroundings \cite{Wainer2006rolephysicalembodiment}. The concept of the physical self in robotics aligns closely with the body schema, representing an awareness of the robot's body, including the location, orientation, and relative motion of its parts.
+%
+%In robotics, achieving a sense of the physical self is vital, especially for tasks in dynamic environments. Sensors provide information about the robot's orientation, speed, and acceleration, while actuators enable the robot's body to move, allowing it to learn about its physical capabilities through observed effects on the environment. This information contributes to the creation of a model of the robot's body within its internal representation of the world.
+The concept of the physical self is rooted in human psychology and consciousness \cite{Tsakiris2016multisensorybasisself,Overgaard2023selfitsbody}. It typically refers to an individual's perception and evaluation of their own physical body, encompassing appearance, abilities, and overall physicality. It involves the subjective experience through diverse sensory modalities (like proprioception and touch) of the body and its relation to the environment. Aspects related to the physical self, such as body morphology, embodiment, and the body schema, are intertwined concepts, see Fig.~\ref{fig:overlapping_concepts}.
 
-In the context of robotics, although robots lack subjective experiences, self-awareness, and consciousness, the physical self remains a critical concept. Robots must perceive their bodies and positions in space to operate effectively, particularly in unstructured or dynamic environments. Aspects related to the physical self, such as body morphology, embodiment, and the body schema, are crucial considerations in robotics, see Fig.~\ref{fig:overlapping_concepts}. Body morphology, the physical structure of a robot, significantly influences its design based on intended tasks. For example, a robot designed for exploration might feature legs or wheels, while a robot for assembly line tasks may have a robotic arm \cite{Miller2018EmbodimentSituatednessMorphology}. Embodiment in robotics emphasizes how a robot's physical form and sensory-motor capabilities influence its interaction with the environment, shaping its perception and actions within its surroundings \cite{Wainer2006rolephysicalembodiment}. The concept of the physical self in robotics aligns closely with the body schema, representing an awareness of the robot's body, including the location, orientation, and relative motion of its parts.
+In the context of robotics, although robots lack subjective experiences, self-awareness, and consciousness, the physical self remains a critical concept. Robots must perceive their bodies in space to operate effectively in diverse environments. The physical structure of a robot, its body morphology, significantly influences its design based on intended tasks. For example, a robot designed for exploration might feature legs or wheels, while a robot for assembly line tasks may have a robotic arm \cite{Miller2018EmbodimentSituatednessMorphology}. Embodiment in robotics emphasizes how a robot's physical form and sensory-motor capabilities influence its interaction with the environment, shaping its perception and actions within its surroundings \cite{Wainer2006rolephysicalembodiment}. The notion of the physical self in robotics corresponds extensively with the body schema, representing an awareness of the robot's body, including the location, orientation, and relative motion of its parts.
 
-In robotics, achieving a sense of the physical self is vital, especially for tasks in dynamic environments. Sensors provide information about the robot's orientation, speed, and acceleration, while actuators enable the robot's body to move, allowing it to learn about its physical capabilities through observed effects on the environment. This information contributes to the creation of a model of the robot's body within its internal representation of the world.
+In robotics, achieving a sense of the physical self is vital, especially for tasks in dynamic environments. The sensor suite of a robot provides feedback on the position, orientation, velocity, and acceleration of its body parts. The actuation mechanisms drive the complex motions of the structure, giving the robot the opportunity to acquire knowledge about its physical capabilities through the perceived consequences of its actions on the environment. This information contributes to the creation of a model of the robot's body within its internal representation of the world.
 % ---
 \begin{figure}
 	\begin{center}
@@ -134,13 +140,13 @@ Proprioceptive signals inform an agent about the position and movement of limbs 
 
 % SUBSECTION ================================================================================
 \subsection{Robot proprioception}
-\begin{figure}
-	\begin{center}
-		\includegraphics[width=0.99\textwidth]{example-image-a}
-		\caption{\textbf{Examples of proprioceptive sensors.}}
-		\label{fig:example_proprioceptive_sensors}
-	\end{center}
-\end{figure}
+%\begin{figure}
+%	\begin{center}
+%		\includegraphics[width=0.99\textwidth]{example-image-a}
+%		\caption{\textbf{Examples of proprioceptive sensors.}}
+%		\label{fig:example_proprioceptive_sensors}
+%	\end{center}
+%\end{figure}
 Akin to biological agents, robot proprioception refers to a robot's ability to sense and perceive the position, movement, orientation, and effort of its own body parts. Similar to how humans rely on proprioception to be aware of their body's position and movement, robots leverage proprioceptive capabilities to understand their own kinematics and dynamics. This information is crucial for robots to execute precise and coordinated movements, adapt to changes in their environment, and interact effectively. Typically, robotic proprioception is provided by the following sensors\cite{Siegwart2011Introductionautonomousmobile}:
 % ---
 \begin{itemize}
@@ -883,10 +889,30 @@ As outlined by Featherstone \cite{Featherstone2007RigidBodyDynamics}, the connec
 
 Having the topology of the body such relevance, the fact is that a scarce number of works have pondered the problem of how to learn it (see, for example, \cite{Bongard2006Resilientmachinescontinuous}). It seems reasonable to assume that the this stems from the typical premise that this information is known a priori. Yet, a fully independent robotic agent that is to develop an understanding of its body through the development of a body schema needs to obtain this information exclusively by itself. This gains prominence as gradually robots become more adaptable and modular. Therefore, if there is access to the number and modalities of the robot's sensorimotor signals, an indication of the body topology must be extracted from them. But, how?
 
-\subsection{Embodiment and information structure}
-To find an answer to the question of how to learn the body topology, this dissertation shares the well-accepted hypothesis that the interaction of an agent with its environment and its body morphology induce statistical regularities in its sensorimotor signals \cite{Pfeifer2006InformationTheoreticImplications,Pfeifer2007SelfOrganizationEmbodiment,LungarellaEmbodimentInformationCausal,Pfeifer2006Howbodyshapes}. These statistical regularities, connected to the concept of sensorimotor contingencies \cite{Jacquey2019Sensorimotorcontingenciesas}, have been captured using information-theoretic quantities, which measure the information between the different modalities in the robot's sensorimotor system \cite{Schmidt2013Bootstrappingperceptionusing,Lungarella2006Mappinginformationflow,Polani2009Modelsinformationprocessing,Bossomaier2016introductiontransferentropy,Olsson2006unknownsensorsactuators}. Fig.~\ref{fig:emobodiment_and_info_structure} illustrates how information structure in the sensorimotor signals can result from embodiment. It shows a number of bodies equipped with a set of sensors (Fig.~\ref{fig:f1a_embodiment_and_information_structure}). These sensors can be considered information sources that have a relationship tied to information sharing with each other. The strength of these relationships is visually represented by the blue lines (edges) connecting the sensors. Due to the morphology of the robot, stronger connections exist between certain sensors---represented by dark blue edges. These strong connections indicate the body topology of the robot, depicted in Fig.~\ref{fig:f1b_embodiment_and_information_structure}, which is a tree-like structure where the strongest sharing of information  occurs between sensors in adjacent bodies. The main message of this example is that the structure of the robot's body becomes a hypothesis for the strength of information sharing.
-
-%The embodiment of a robot determines its perceptual and behavioral capabilities and influences the emergence of sensorimotor regularities arising from body-environment interaction\cite{Pfeifer2006Howbodyshapes}. Information-theoretic quantities have been used to capture these regularities as information flows between the various modalities in the sensorimotor system\cite{Schmidt2013Bootstrappingperceptionusing,Lungarella2006Mappinginformationflow,Polani2009Modelsinformationprocessing,Bossomaier2016introductiontransferentropy,Olsson2006unknownsensorsactuators}. To illustrate how embodiment influences information structure, consider a hypothetical robot equipped with a set of sensors, depicted on Fig.~\ref{fig:f1a_embodiment_and_information_structure}. From an information-theoretic perspective, these sensors are information sources that share information with each other. The strength of these relations is represented graphically as edges connecting the sensors (light blue edges). As a result of the underlying embodiment of the robot, stronger connections between sensors exist (dark blue edges). These strong connections hint at the robot's body topology (Fig.~\ref{fig:f1b_embodiment_and_information_structure}), a tree-like serial kinematic structure where the stronger exchange of information occurs between sensors of adjacent bodies. Succinctly, body structure becomes the hypothesis behind the strength of information sharing. 
+\subsection{Embodiment and information structure}\label{sec:embodiment_and_information}
+%To find an answer to the question of how to learn the body topology, this dissertation shares the well-accepted hypothesis that the interaction of an agent with its environment and its body morphology induce statistical regularities in its sensorimotor signals \cite{Pfeifer2006InformationTheoreticImplications,Pfeifer2007SelfOrganizationEmbodiment,LungarellaEmbodimentInformationCausal,Pfeifer2006Howbodyshapes}, see Fig.~\ref{fig:implications_of_embodiment}. 
+%% ---
+%\begin{figure}[t!]
+%	\begin{center}
+%		\includegraphics[width=0.7\textwidth]{implications_of_embodiment}
+%		\caption{\textbf{Implications of embodiment.} From Pfeifer et al. \cite{Pfeifer2007SelfOrganizationEmbodiment}. Reprinted with permission from AAAS.}
+%		\label{fig:implications_of_embodiment}
+%	\end{center}
+%\end{figure}
+%% ---
+%
+%These statistical regularities, connected to the concept of sensorimotor contingencies \cite{Jacquey2019Sensorimotorcontingenciesas}, have been captured using information-theoretic quantities, which measure the information between the different modalities in the robot's sensorimotor system \cite{Schmidt2013Bootstrappingperceptionusing,Lungarella2006Mappinginformationflow,Polani2009Modelsinformationprocessing,Bossomaier2016introductiontransferentropy,Olsson2006unknownsensorsactuators}. Fig.~\ref{fig:emobodiment_and_info_structure} illustrates how information structure in the sensorimotor signals can result from embodiment. It shows a number of bodies equipped with a set of sensors (Fig.~\ref{fig:f1a_embodiment_and_information_structure}). These sensors can be considered information sources that have a relationship tied to information sharing with each other. The strength of these relationships is visually represented by the blue lines (edges) connecting the sensors. Due to the morphology of the robot, stronger connections exist between certain sensors---represented by dark blue edges. These strong connections indicate the body topology of the robot, depicted in Fig.~\ref{fig:f1b_embodiment_and_information_structure}, which is a tree-like structure where the strongest sharing of information  occurs between sensors in adjacent bodies. The main message of this example is that the structure of the robot's body becomes a hypothesis for the strength of information sharing.
+%\hrule
+% ---
+\begin{figure}[t!]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{implications_of_embodiment}
+		\caption{\textbf{Implications of embodiment.} From Pfeifer et al. \cite{Pfeifer2007SelfOrganizationEmbodiment}. Reprinted with permission from AAAS.}
+		\label{fig:implications_of_embodiment}
+	\end{center}
+\end{figure}
+% ---
+To address the question of how the body's topology can be learned, this dissertation relies on the widely accepted hypothesis that an agent's interaction with its environment and its body morphology gives rise to statistical regularities in its sensorimotor signals \cite{Pfeifer2006InformationTheoreticImplications,Pfeifer2007SelfOrganizationEmbodiment,LungarellaEmbodimentInformationCausal,Pfeifer2006Howbodyshapes} (see Fig.~\ref{fig:implications_of_embodiment}). These statistical regularities, intertwined with the concept of sensorimotor contingencies \cite{Jacquey2019Sensorimotorcontingenciesas}, have been quantified using information-theoretic measures, which assess the information sharing among different modalities in the robot's sensorimotor system \cite{Schmidt2013Bootstrappingperceptionusing,Lungarella2006Mappinginformationflow,Polani2009Modelsinformationprocessing,Bossomaier2016introductiontransferentropy,Olsson2006unknownsensorsactuators}. 
 % ---
 \begin{figure*}[!t]
 	\centering	
@@ -907,7 +933,17 @@ To find an answer to the question of how to learn the body topology, this disser
 \end{figure*}
 % ---
 
-\subsection{Definition of a graph}
+Fig.~\ref{fig:emobodiment_and_info_structure} illustrates how information structure in sensorimotor signals can emerge from embodiment. It depicts various bodies equipped with sensors (Fig.~\ref{fig:f1a_embodiment_and_information_structure}), with these sensors acting as information sources having relationships that involve sharing information. The strength of these relationships is visually denoted by the blue lines (edges) connecting the sensors. Owing to the robot's morphology, stronger connections exist between specific sensors, as indicated by dark blue edges. These robust connections signify the body topology of the robot, illustrated in Fig.~\ref{fig:f1b_embodiment_and_information_structure}, portraying a tree-like structure where the most substantial information sharing occurs between sensors in adjacent bodies. The key takeaway from this example is that the structure of the robot's body serves as a hypothesis for the strength of information sharing.
+
+
+
+%The embodiment of a robot determines its perceptual and behavioral capabilities and influences the emergence of sensorimotor regularities arising from body-environment interaction\cite{Pfeifer2006Howbodyshapes}. Information-theoretic quantities have been used to capture these regularities as information flows between the various modalities in the sensorimotor system\cite{Schmidt2013Bootstrappingperceptionusing,Lungarella2006Mappinginformationflow,Polani2009Modelsinformationprocessing,Bossomaier2016introductiontransferentropy,Olsson2006unknownsensorsactuators}. To illustrate how embodiment influences information structure, consider a hypothetical robot equipped with a set of sensors, depicted on Fig.~\ref{fig:f1a_embodiment_and_information_structure}. From an information-theoretic perspective, these sensors are information sources that share information with each other. The strength of these relations is represented graphically as edges connecting the sensors (light blue edges). As a result of the underlying embodiment of the robot, stronger connections between sensors exist (dark blue edges). These strong connections hint at the robot's body topology (Fig.~\ref{fig:f1b_embodiment_and_information_structure}), a tree-like serial kinematic structure where the stronger exchange of information occurs between sensors of adjacent bodies. Succinctly, body structure becomes the hypothesis behind the strength of information sharing. 
+
+
+\subsection{Fundamentals of graph theory}
+The sensorimotor relationships shown in Fig.~\ref{fig:emobodiment_and_info_structure} are an example of mathematical object known as a graph \cite{West2001Introductiongraphtheory}. The mechanical topology of a robot can also be represented as a graph, whose connectivity represents the topology \cite{Featherstone2007RigidBodyDynamics}. Therefore, it is important to introduce some fundamental concepts related to graph theory before proceeding with the discussion. 
+
+\subsubsection{Definition of a graph}
 A graph $\mathcal{G} = \left(\mathcal{V}, \mathcal{E}\right)$ is a mathematical construct the represents the interconnections between the elements of a system \cite{West2001Introductiongraphtheory}. These elements are represented as a set $ \mathcal{V}=\left\lbrace v_i\right\rbrace^n_{i=1}$ of $n$ \emph{nodes} (also called \emph{vertices}) and their connections are depicted as a set of \emph{edges} $ \mathcal{E}= \left\lbrace e_i\right\rbrace^m_{i=1} \subseteq \mathcal{V} \times \mathcal{V} $. Note that it is possible that an edge connects a node to itself, in which case the edge defines a self loop.
 % ---
 %\begin{figure}[th!]
@@ -985,7 +1021,7 @@ An \emph{undirected} graph lacks any specified direction assigned to its edges, 
 A \emph{weighted} graph $ \mathcal{G}\big(\mathcal{V},\mathcal{E},\bm{W}\big) $ associates numerical value, a weight, to each edge. The weights with weights $ \bm{W}: \mathcal{V} \times \mathcal{V}\to \mathbb{R}_+$ express some quantitative measure such as distance, cost, time, or any other relevant metric depending on the context of the graph. Unlike an unweighted graph, where edges simply represent connections between nodes, a weighted graph provides additional information about the relationships between nodes. For a weighted graph, the \emph{strength} of a vertex corresponds to the sum of the edge weights associated with it.
 
 
-\subsection{Algebraic representation of a graph}
+\subsubsection{Algebraic representation of a graph}
 A graph with $n$ vertices can be represented as a square $n\times n$ matrix $\bm{A}$. This algebraic representation is called the \emph{adjacency matrix} and depicts the graph's connectivity pattern; that is, the elements of the matrix indicate whether pairs of vertices $\left(i,j\right)$ are adjacent or not in the graph. Formally,
 the elements of a \emph{binary} adjacency matrix $\bm{A}$ are determined as follows
 % ---
@@ -1034,7 +1070,7 @@ Similarly, for the digraph in Fig.~\ref{fig:example_digraph}, the adjacency matr
 % ---
 Notice that unless there are self loops in the graph, the main diagonal of an adjacency matrix contains only zero entries. Two other important matrices related to a graph $ \mathcal{G} $ are the degree matrix $ \bm{D}: (\bm{D}_{ii})=\sum_{j=1}^{m} w_{ij} $, a diagonal matrix whose entries are the sum of the rows of $ \bm{W} $, and the combinatorial graph Laplacian (CGL), defined as $ \bm{L}_\text{CGL} = \bm{D} - \bm{W} $ \cite{Mateos2019ConnectingdotsIdentifying}.
 
-\subsubsection{The normalized adjacency matrix} 
+\paragraph*{The normalized adjacency matrix} 
 The normalized adjacency matrix, defined as
 % ---
 \begin{equation}
@@ -1043,10 +1079,10 @@ The normalized adjacency matrix, defined as
 % --- 
 is particularly employed in spectral graph theory \cite{Spielman2012Spectralgraphtheory} and related analyses. Normalization helps account for variations in node degrees and provides a more balanced representation of the graph structure. One common application is in spectral clustering algorithms \cite{VonLuxburg2007tutorialspectralclusteringa}, where the normalized adjacency matrix is used to compute eigenvectors and eigenvalues, aiding in the identification of clusters or communities within a graph. %It also finds applications in various graph-based machine learning and data mining tasks.
 
-\subsection{Subgraphs and spanning trees}
+\subsubsection{Subgraphs and spanning trees}
 A \emph{subgraph} $\mathcal{G}_1$ is obtained by selecting a subset of the nodes of another graph $\mathcal{G}$ and a corresponding subset of the edges connecting those nodes. Formally, a graph $\mathcal{G}_1\left(\mathcal{V}_1, \mathcal{E}_1\right)$ is a subgraph of $\mathcal{G}$ if and only if $\mathcal{V}_1 \subseteq  \mathcal{V}$ and $\mathcal{E}_1 \subseteq \mathcal{E}$. This is written $\mathcal{G}_1 \subseteq \mathcal{G}$. One particular subgraph of interest in this work are spanning trees. First, a \emph{tree graph} is a graph that does not contain cycles. Such structure usually depicts a hierarchical arrangement. Consequently, a \emph{spanning tree} $\mathcal{G}_1$ of a graph $\mathcal{G}$ is a subgraph containing all the nodes in $\mathcal{G}$ and whose edges form a tree that defines paths that ensure that all the nodes remain connected. The edges of $\mathcal{G}_1$ are denoted as the branches of the tree. In general, a graph $\mathcal{G}_1$ is said to be a spanning subgraph of $\mathcal{G}$ if and only if $\mathcal{V}_1 = \mathcal{V}$ and $\mathcal{E}_1 \subseteq \mathcal{E}$. It is worth noting that every connected graph has a spanning tree and that there are $n^{n-2}$ distinct spanning trees with $n - 1$ edges on a connected graph with $n$ vertices \cite{West2001Introductiongraphtheory}. Examples of spanning trees are shown in Fig.~\ref{fig:tree_examples}.
 
-\subsubsection{Minimum spanning tree and Kruskal's algorithm}
+\paragraph*{Minimum spanning tree and Kruskal's algorithm}
 The minimum spanning tree of an undirected, connected, and weighted graph is the spanning tree whose edge weight sum is less than or equal to that of all other spanning trees \cite{Sefidgarminimumspanningtree}. Kruskal's algorithm \cite{Kershenbaum1972Computingminimumspanning} is the standard method to find th minimum spanning tree of a graph. In this work we use an equivalent concept, the \emph{maximum spanning tree} (MST), which corresponds to the spanning tree with maximum edge weight sum.
 % ---
 \begin{figure*}[!t]
@@ -1074,7 +1110,7 @@ The minimum spanning tree of an undirected, connected, and weighted graph is the
 \end{figure*}
 
 % SUBSECTION ================================================================================
-\subsection{Metrics for graph comparison}
+\subsubsection{Metrics for graph comparison}
 Several works cover a number of metrics and measures to asses the similarity of any two given graphs. Commonly used metrics include eigenvalue distribution analysis \cite{Crawford2017GraphStructureSimilarity,Gera2018Identifyingnetworkstructure}, and the graph adjacency spectral and matrix distances \cite{Wills2020Metricsgraphcomparison}. This dissertation will use the latter two measures as they allow the local and global comparison of the graph structure.
 
 \paragraph*{Spectral distance.} The spectrum of a graph $\mathcal{G}$ is the vector $ \bm{s}^{\bm{W}}$ containing the eigenvalues $s_k$ of its weighted adjacency matrix $\bm{W}$ sorted in descending order; that is
@@ -1102,10 +1138,10 @@ The spectral distance between two graphs $\bm{W}_1$ and $\bm{W}_2$ is simply the
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\section{Network topology inference}
-The process of identifying and visually representing relationships among various elements within a system, based on the available measurements, is termed \emph{network topology inference} (NTI) \cite{Dong2019Learninggraphsdata}. Unveiling the structure of a network or graph through topology learning facilitates the analysis of interactions among entities. 
+\subsection{Network topology inference}\label{sec:network_topology_inference}
+As mentioned before, the mechanical topology of a robot can be represented as a graph. The nodes in said graph correspond to the links and the edges indicate the joints connecting those bodies. how to obtain this graph remains unanswered. The relation between the robot morphology and information structure provides a starting point to search for the robot topology in the relationships among the sensorimotor signals. In general, the process of identifying and visually representing relationships among various elements within a system, based on the available measurements, is termed \emph{network topology inference} (NTI) \cite{Dong2019Learninggraphsdata}. Unveiling the structure of a network or graph through topology learning facilitates the analysis of interactions among entities. 
 
-\subsection{Types connectivity}
+\subsubsection{Types of connectivity}
 %Finding and graphically representing the relationships among the different constituent elements of a system given the available measurements is known as \emph{network topology inference} (NTI) \cite{Dong2019Learninggraphsdata}. By learning the topology of a network/graph, it is possible to reveal a structure that aids in the analysis of the interaction among the entities. As discussed in \cite{Friston2011Functionaleffectiveconnectivity}, one method to represent interaction is via \emph{functional connectivity} (FC), which is an information-theoretic
 %measure that characterizes dependencies based on the probability distributions of the observed signals (examples include correlations and mutual information). FC can be further subdivided into non-directed and directed, with the latter being related to statistical causation from the data \cite{Bastos2016tutorialreviewfunctional}. In contrast, \emph{effective connectivity} refers explicitly to the dynamic (state-dependent) influence that one element on the network has on another under a particular network model of causal dynamics; i.e, it refers to coupling or directed causal influence \cite{Park2013Structuralfunctionalbrain}. Exemplary works that use the concepts above can be found in biology\cite{Zhang2017Networkbasedmachine} and neuroscience \cite{Karwowski2019Applicationgraphtheory,Sporns2018Graphtheorymethods}.
 
@@ -1119,11 +1155,11 @@ The process of identifying and visually representing relationships among various
 
 Often used in the field of neuroscience \cite{Karwowski2019Applicationgraphtheory}, three different types of connectivity are distinguished\cite{Park2013Structuralfunctionalbrain,FaskowitzEdgesbrainnetworks}:
 
-\paragraph*{Structural Connectivity (SC).} Refers to the physical connections between different elements in a network. In the context of neuroscience, it typically involves the anatomical connections between brain regions. It is measured with techniques such as diffusion-weighted imaging (DWI) or diffusion tensor imaging (DTI) are commonly used to infer structural connectivity in the brain.
+\paragraph*{Structural Connectivity (SC)} Refers to the physical connections between different elements in a network. In the context of neuroscience, it typically involves the anatomical connections between brain regions. It is measured with techniques such as diffusion-weighted imaging (DWI) or diffusion tensor imaging (DTI) are commonly used to infer structural connectivity in the brain.
 
-\paragraph*{Functional Connectivity (FC).} Refers to the statistical dependencies or temporal correlations between the activity of different elements in a network. As explained in \cite{Friston2011Functionaleffectiveconnectivity}, FC is an information-theoretic metric that characterizes dependencies using probability distributions of observed signals. It can be categorized into non-directed and directed forms, with the latter being associated with statistical causation derived from the data \cite{Bastos2016tutorialreviewfunctional}. %FC is often assessed through statistical methods applied to time-series data to identify patterns of correlated activity between different brain regions.
+\paragraph*{Functional Connectivity (FC)} Refers to the statistical dependencies or temporal correlations between the activity of different elements in a network. As explained in \cite{Friston2011Functionaleffectiveconnectivity}, FC is an information-theoretic metric that characterizes dependencies using probability distributions of observed signals. It can be categorized into non-directed and directed forms, with the latter being associated with statistical causation derived from the data \cite{Bastos2016tutorialreviewfunctional}. %FC is often assessed through statistical methods applied to time-series data to identify patterns of correlated activity between different brain regions.
 
-\paragraph*{Effective Connectivity (EC).} Specifically addresses the dynamic, state-dependent influence that one network element has on another within a particular causal dynamics model. Essentially, effective connectivity denotes coupling or directed causal influence \cite{Park2013Structuralfunctionalbrain}. Exemplary applications of these concepts can be observed in the fields of biology \cite{Zhang2017Networkbasedmachine} and neuroscience \cite{Karwowski2019Applicationgraphtheory,Sporns2018Graphtheorymethods}.
+\paragraph*{Effective Connectivity (EC)} Specifically addresses the dynamic, state-dependent influence that one network element has on another within a particular causal dynamics model. Essentially, effective connectivity denotes coupling or directed causal influence \cite{Park2013Structuralfunctionalbrain}. Exemplary applications of these concepts can be observed in the fields of biology \cite{Zhang2017Networkbasedmachine} and neuroscience \cite{Karwowski2019Applicationgraphtheory,Sporns2018Graphtheorymethods}.
 
 A representation of the intricate relationships among the three types of connectivity is given in Fig.~\ref{fig:types_of_connectivity}. It depicts a simple robot arm as an example. The nodes represent the three links that compose the robot. Regarding SC and FC, a nuanced connection exists, albeit not strictly one-to-one. For example, the SC reflect the actual physical composition of the body, three bodies connected by two joints (the edges in the SC graph). Sensory signals coming from these bodies might lead to potential functional interactions of varied degree (the edges in the FC graph) that have a foundation on the bodily structure of the robot; yet, it does not ensure their occurrence. Actually, functional relationships can appear even in the absence of direct structural connections, not the light edge between nodes $A$ and $C$ in the FC graph. Moving to EC and FC, the former extends the latter by seeking to model the direction and strength of influence between different elements. While FC identifies statistical associations, EC strives to unveil the underlying causal relationships, the directed edges in the EC graph. In summary, these three connectivity types are interrelated components in the complex landscape of NTI. Structural connections provide the anatomical substrate, functional connections depict statistical dependencies, and effective connections aspire to model causal relationships within the network.
 
@@ -1136,99 +1172,246 @@ A representation of the intricate relationships among the three types of connect
 %
 %In summary, structural, functional, and effective connectivity are interrelated aspects of network topology inference, with structural connections providing the anatomical substrate, functional connections representing statistical dependencies, and effective connections aiming to model causal relationships within the network. Techniques from neuroscience are often applied to study these aspects in the context of brain networks, but similar principles can be extended to other complex systems.
 
-\subsection{Inferring the connectivity}
-\TODO
-In NTI the elements $\mathcal{V}$ of a graph $\mathcal{G}$ are known but its connectivity (i.e. how these elements relate to each other) is unknown. Then, the graph topology inference problem consists in finding the edges $\mathcal{E}$ that best explain the relationships among the nodes $\mathcal{V}$ given some prior knowledge, such as  data distribution, the location of the sensors, the physical relationships between the signals, or the data similarity \cite{Dong2019Learninggraphsdata,Stankovic2019Introductiongraphsignal}. Commonly, NTI methods are subdivided in statistical models, psychically motivated models, and more recently, in methods from graph signal processing.  
-\begin{itemize}
-	\item Statistical methods. section, networks typically encode simi-
-	larities between signal elements. Thus, a natural starting point
-	toward constructing a graph representation of the data is to
-	associate edge weights with nontrivial correlations or coher-
-	ence measures between signal profiles at incident nodes. 
-	\item Graph from smooth signals.
-	\item Network diffusion processes.
-\end{itemize}
+\subsubsection{Inferring the connectivity}
+In NTI the elements $\mathcal{V}$ of a graph $\mathcal{G}$ are known but its connectivity (i.e. how these elements relate to each other) is unknown. %Then, the graph topology inference problem consists in finding the edges $\mathcal{E}$ that best explain the relationships among the nodes $\mathcal{V}$ given some prior knowledge, such as  data distribution, the location of the sensors, the physical relationships between the signals, or the data similarity \cite{Dong2019Learninggraphsdata,Stankovic2019Introductiongraphsignal}. 
+The problem of learning the edges $\mathcal{E}$ that best explain the relationships among the $N_\mathcal{V}$ elements in $\mathcal{V}$ leads to define a graph a graph $\mathcal{G}\left(\mathcal{V},\mathcal{E},\bm{W}\right)$ with an strictly positive weighted adjacency matrix $\bm{W}$. To find this matrix, a number of sample points $m$ from the signals at the nodes $\bm{x} = [x1,x2,\ldots, x_{N_\mathcal{V}}]^\intercal \in \mathbb{R}^{N_\mathcal{V}}$ are collected into a data matrix $\bm{X} \in \mathbb{R}^{N_\mathcal{V} \times m}$. Using $\bm{X}$ together with some prior knowledge, such as  data distribution, the location of the sensors, the physical relationships between the signals, or the data similarity candidate graphs $\mathcal{G}$ can be defined \cite{Dong2019Learninggraphsdata,Stankovic2019Introductiongraphsignal}. Commonly, NTI methods are subdivided in statistical models, physically motivated models, and more recently, in methods from graph signal processing (GSP), see Fig.~. 
+% ---
+\begin{figure*}[!t]
+	\centering	
+	\hspace*{\fill}
+	\includegraphics[width=0.5\textwidth]{graph_learning.png}
+	\hspace*{\fill}	
+	\caption[] {\label{fig:graph_learning}\textbf{Different methods for NTI.} Image taken from \cite{Dong2019Learninggraphsdata}.}
+\end{figure*}
+% ---
+\paragraph*{Statistical models} These NTI methods aim to capture signal similarities, utilizing measures such as the Pearson correlation, Jaccard coefficient, Gaussian radial basis functions, and mutual information. The predominant approach involves expressing these similarities by computing the correlation of the data matrix $\bm{X}$ and assuming joint Gaussianity of the variables. The primary objective is usually to estimate the graph structure embedded in the precision matrix (defined as the inverse of the covariance matrix). However, as the precision matrix is not a proper adjacency matrix, methods have been developed to ensure Laplacian constraints (to find a valid graph) and structural constraints (to promote sparsity). Notable examples include the graphical LASSO \cite{Mazumder2011GraphicalLassoNew} and the work in \cite{Olsson2006unknownsensorsactuators,Egilmez2021GraphLaplacianLearning}. Information theory is pivotal in NTI, providing a robust framework for deducing network structures through fundamental concepts like mutual information. Numerous methodologies rooted in information theory have been proposed for network inference \cite{Lungarella2006Mappinginformationflow,Villaverde2014MIDERnetworkinference,Ursino2020TransferEntropyas,Novelli2020Inferringnetworkproperties}.%, with a particular emphasis on domains such as systems biology, bioinformatics, and various scientific disciplines.
+
+%\paragraph*{Learning graphs from smooth signals}
+
+\paragraph*{Psychically motivated models} Here the structure of $\mathcal{G}$ is assumed to be tied to an underlying physical phenomenon or process on the graph; for example, network diffusion processes or information propagation models.
+
+\paragraph*{Graph signal processing} In GSP the the vector of node signals $\bm{x}$ af any given time is deemed a graph signal and is hypothesized to be a function of some process that depends on the graph; i.e., $\bm{X} = f(\mathcal{G})$. In GSP, each of the vectors $\bm{x}$ is considered a signal defined on the nodes of the weighted graph $\mathcal{G}$. Learning this graph implies determining an adjacency $\bm{W}$ such that $f(\mathcal{G})$ reflects some features in the data matrix $\bm{X}$. Examples involve learning graphs from observations of smooth signals and identifying the structure of network diffusion processes.
+
+Of particular interest to this dissertation are the statistical methods based on information theoretic measures to determine the functional connectivity among the robot sensorimotor signals. The belief is that the FC found through these methods should be in agreement with the embodiment and information structure hypothesis and, thus, should lead to the discovery of the robot mechanical topology (which is analogous to the structural connectivity).
 
 
-As a result, each column of the data matrix X becomes a
-graph signal defined on the node set of the estimated graph,
-and the observations can be represented as X =F G ( ),
-where F represents a certain generative process or func
-tion on the graph
-
-Generally speaking, inferring graph topologies from observations is an ill-posed problem, and there are many ways
-of associating a topology with the observed data samples
-
-Therefore, a main challenge with NTi is to define such a model for the generative process or
-function F, so that it captures the relationship between the
-observed data X and the learned graph topology, G. Typically, such models often correspond to specific criteria to
-describe or estimate structures between the data samples, e.g.,
-models that put a smoothness assumption on the data, or that
-represent an information diffusion process on the graph
-
-
-Historically, there have been two
-general approaches for learning graphs
-from data: one based on statistical
-models and one based on physically
-motivated models. From the statistical perspective, F G ( ) is modeled as a
-function that draws realizations from a
-probability distribution over the variables, which is determined by the structure of G. 
-
-For physically motivated models, F G ( ) is defined based
-on the assumption of an underlying physical phenomenon
-or process on the graph. , the problem
-is equivalent to learning a graph structure on which the generative process of the observed signals may be explained
-
-The fast-growing field of GSP [3], [12] offers a new perspective on the problem of graph learning. In this setting, the
-columns of the observation matrix X are
-explicitly considered as signals that are
-defined on the vertex set of a weighted
-graph, G. The learning problem can then
-be cast as one of learning a graph G, such
-that F G ( ) permits certain properties or
-characteristics of the observations X to be
-explicit, e.g., smoothness with respect to
-G or sparsity in a basis related to G. 
-
-
-NTI purely from data is ill-posed, some constratints are needed, 
-
-With \textbf{mutual information} \cite{Villaverde2014MIDERnetworkinference}
-
-With \textbf{GSP} \cite{Dong2019Learninggraphsdata}. We consider a method \cite{Kalofolias2016Howlearngraph} which learns a relational matrix $ \bm{W}_{GSP} $ without prior structural information considering the signals in $\bm{x}(t) $ as graph signals\cite{Dong2019Learninggraphsdata}. $ \bm{W}_{GSP} $ is derived under the assumption that the signals on the graph change smoothly between connected nodes. Likewise, the Graph Signal Processing Toolbox (GSPBOX) from \cite{Perraudin2014GSPBOXtoolboxsignal} was used to compute $ \bm{W}_{GSP} $ using $\alpha = 0.6$, $\beta  = 1$ (parameters that control the edge weight magnitude and the sparsity of $ \bm{W}_{GSP} $, respectively) and normalizing the required pairwise distance matrix $\bm{Z}$ between $[0,1]$.
-
-With \textbf{correlation}. The first technique \cite{Olsson2006unknownsensorsactuators} upgrades standard correlation-based NTI by searching for an inverse covariance matrix with Laplacian (to find valid adjacency matrices $ \bm{W}_{cor} $) and structural constraints (requiring a sparse matrix to reduce the graph edge density). We used the Graph Laplacian Learning (GLL) package \cite{Egilmez2021GraphLaplacianLearning} to calculate $ \bm{W}_{cor} $, with regularization parameter $\gamma = 0.07$ and using a matrix $\bm{W}_0$ as connectivity prior with zero diagonal elements and ones elsewhere (denoting lack of structural knowledge).
+%With \textbf{GSP} \cite{Dong2019Learninggraphsdata}. We consider a method \cite{Kalofolias2016Howlearngraph} which learns a relational matrix $ \bm{W}_{GSP} $ without prior structural information considering the signals in $\bm{x}(t) $ as graph signals\cite{Dong2019Learninggraphsdata}. $ \bm{W}_{GSP} $ is derived under the assumption that the signals on the graph change smoothly between connected nodes. Likewise, the Graph Signal Processing Toolbox (GSPBOX) from \cite{Perraudin2014GSPBOXtoolboxsignal} was used to compute $ \bm{W}_{GSP} $ using $\alpha = 0.6$, $\beta  = 1$ (parameters that control the edge weight magnitude and the sparsity of $ \bm{W}_{GSP} $, respectively) and normalizing the required pairwise distance matrix $\bm{Z}$ between $[0,1]$.
+%
+%With \textbf{correlation}. The first technique \cite{Olsson2006unknownsensorsactuators} upgrades standard correlation-based NTI by searching for an inverse covariance matrix with Laplacian (to find valid adjacency matrices $ \bm{W}_{cor} $) and structural constraints (requiring a sparse matrix to reduce the graph edge density). We used the Graph Laplacian Learning (GLL) package \cite{Egilmez2021GraphLaplacianLearning} to calculate $ \bm{W}_{cor} $, with regularization parameter $\gamma = 0.07$ and using a matrix $\bm{W}_0$ as connectivity prior with zero diagonal elements and ones elsewhere (denoting lack of structural knowledge).
 
 
 
 
 
+ % ===========================================================================================
+%                                           |                                               |
+% -------------------------------------- SECTION -------------------------------------------|
+%                                           |                                               |
+% ===========================================================================================
+\subsection{Basics of information theory}
+%To recapitulate, in building a body schema, an understanding of the body topology is necessary. According to the types of connectivity described in Sec.~\ref{sec:network_topology_inference}, a graph expressing the arrangement of the robot's joints and links would be equivalent to a description of its structural connectivity. But since only knowledge of the number and modalities of the sensorimotor signals is available, this SC must be extracted from the potential relationships between these signals.
+%In Sec.~\ref{sec:embodiment_and_information} it was mentioned that the robot morphology influences the information structure of the sensorimotor signals. As such, expressing this structure as a graph corresponds to the inference of the functional connectivity among the robot signals. In particular, the FC among the sensorimotor signals can be captured by measures from information theory\cite{Cover1999Elementsinformationtheory}, as they are general, in the sense that they are not tied to a particular model, and expressive, as they can capture statistical relationships of linear and nonlinear nature. 
+Recapitulating, the construction of a body schema necessitates an understanding of the body's topology. As discussed in Section~\ref{sec:network_topology_inference}, a graph that represents the organization of the robot's joints and links functions as a depiction of its structural connectivity. However, given the available information, restricted to the number and modalities of the sensorimotor signals, the deduction of this structural connectivity must occur from the potential relationships among these signals.
+
+In Section~\ref{sec:embodiment_and_information}, the emphasis was on the fact that the robot's morphology shapes the information structure of sensorimotor signals. Consequently, representing this structure as a graph corresponds to the inference of the functional connectivity among the robot signals. Specifically, FC among sensorimotor signals can be captured using measures from information theory\cite{Cover1999Elementsinformationtheory}. These measures are general, as they are not tied to a specific model, and expressive, enabling the capture of statistical relationships of both linear and nonlinear nature.
+
+\subsubsection{Entropy of random variables}
+
+The entropy of a random variable is a function which attempts to characterize
+the average uncertainty or unpredictability of a random variable. It is often used to quantify the amount of information in a random process. Formally, the entropy of a variable $X$ is a function of its probability distribution and is defined as 
+% ---
+\begin{equation}\label{eq:entropy}
+	H(X) = -\sum_{i=1}^{n}p(x_i)\text{log}_2\left(p\left(x_i\right)\right).
+\end{equation}
+% ---
+Similarly, the joint entropy between two random variables $ X $ and $ Y $ is dependent on the joint probability of the two variables; i.e,
+% ---
+\begin{equation}\label{eq:joint_entropy}
+	H(X,Y) = -\sum_{i=1}^{n}\sum_{j=1}^{n} p(x_i,y_j)\text{log}_2\big(p\left(x_i,y_j\right)\big).
+\end{equation}
+% ---
+In loose terms, entropy can be associated with the amount of information that a random variable coveys. This is exemplified in Fig.~\ref{fig:entropy_of_distributions}, where three probability distributions are displayed. Essentially. the less uniform the corresponding probability distribution, the less entropy it has, and hence the more information it provides; i.e. larger entropy value. 
+% ---
+\begin{figure*}[!t]
+	\centering	
+	\hspace*{\fill}
+	\includegraphics[width=0.9\textwidth]{entropy_of_distributions.jpg}
+	\hspace*{\fill}	
+	\caption[] {\label{fig:entropy_of_distributions}\textbf{Entropy of three example distributions.} The closer the distributions resemble a uniform distribution, the more information they contain. Image taken from \cite{Timme2018tutorialinformationtheory}.}
+\end{figure*}
+% ---
+
+\subsubsection{Mutual Information}
+The mutual information (MI) measures the amount of information that one random variable provides about another random variable. Conversely, it quantifies the reduction in uncertainty about one variable due to knowledge of the other. The MI between two random variables is a symmetric measure of information computed as the relative entropy (also known as Kullback-Leibler divergence) of the joint probability distribution $p\left(x,y\right)$ and the product of the marginal probability distributions $p\left(x\right)$ and $p\left(y\right)$; that is,
+% ---
+\begin{equation}\label{eq:mutual_information}
+	I\left(X;Y\right) = \sum_{x \in \mathcal{X}}\sum_{y \in \mathcal{Y}}p\left(x,y\right) \text{log}_2\frac{p\left(x,y\right)}{p\left(x\right)p\left(y\right)}.
+\end{equation}
+% ---
+Basically, this expression is comparing how similar is the joint distribution to the product of the marginals. If they are the same, $X$ and $Y$ are independent and there is no information that one can tell about the other; in other words, the MI between them is zero. Alternatively, the MI can be expressed in terms of the entropy and joint entropy as follows
+% ---
+\begin{equation}\label{eq:mutual_information}
+	I\left(X;Y\right) =I\left(Y;X\right) = H(X) + H(Y) - H(X,Y),
+\end{equation}
+% ---
+where it is clear why the MI is symmetric; it represents the information shared by the two random variables, see Fig.~\ref{fig:entropy_and_mutual_information}.
+% ---
+\begin{figure*}[!t]
+	\centering	
+	\hspace*{\fill}
+	\includegraphics[width=0.5\textwidth]{entropy_and_mutual_information.pdf}
+	\hspace*{\fill}	
+	\caption[] {\label{fig:entropy_and_mutual_information}\textbf{Relation between entropy and mutual information.} The mutual information between two variables expresses the amount of information that one variable contains about the to other.}
+\end{figure*}
+% ---
+\paragraph*{Connection to correlation} It is worth dedicating some time to discuss using mutual information against the well-known correlation. Both have the common objective of evaluating the interdependence between random variables. Correlation measures the intensity and directionality of a linear association between two variables, whereas MI can identify any statistical dependency---including non-linear associations. Therefore, MI represents a more comprehensive measure of the connection between variables compared to correlation, rendering it a valuable instrument to express the relations between sensorimotor variables.
+
+\subsection{Summary}
+The mechanical arrangement of the robot's joints and links referred to as topology, constitutes a crucial element of the robot body schema, playing a fundamental role in fully characterizing its kinematic and dynamic properties. As illustrated in Fig.~\ref{fig:topology_inference_process}, a robotic agent's autonomous acquisition of body topology necessitates reliance on the information structure embedded in its sensorimotor signals. The unveiling of this structure entails thoroughly examining the relationships among the sensorimotor signals using information theory measures. Once these measures are established, they can be utilized to infer the functional connectivity among the signals. In the subsequent chapter, we delve into the final step, wherein graph theory tools and first-order kinematic principles are employed to ascertain the mechanical structural connectivity based on sensorimotor functional connectivity.
 
 
+% ---
+\begin{figure*}[!t]
+	\centering	
+	\hspace*{\fill}
+	\includegraphics[width=0.9\textwidth]{topology_inference_process.pdf}
+	\hspace*{\fill}	
+	\caption[] {\label{fig:topology_inference_process}\textbf{Topology inference process.} Extracting the robot's mechanical topology from the relationships among the sensorimotor signals involves combining tools from information and graph theory to determine the functional connectivity between signals and using it to infer the mechanical structural connectivity.}
+\end{figure*}
+% ---
 
 
+%% ---
+%\begin{figure*}[t!]
+%	\begin{center}
+%		\includegraphics[width=0.9\textwidth]{mutinf_of_distributions.jpg}
+%	\end{center}
+%	\caption{\textbf{Mutual information of various joint distributions.} .Image taken from \cite{Timme2018tutorialinformationtheory}}
+%\end{figure*}
+%% ---
+%As mentioned in the main text, the MI is used to create the relational matrix $\hat{\bm{W}}_{MI}$. In practice, the computation of $(\hat{\bm{W}}_{MI})_{i,j}$ involves selecting a pair $\left({x}_i(t),{x}_j(t)\right)$ of time series from the data matrix $\bm{X}$, centering their samples (to zero mean and unit standard deviation) and using either binning, kernel, or nearest neighbor methods \cite{WaltersWilliams2009Estimationmutualinformation} to compute their mutual information. Yet, such a process can be memory- and computation-demanding when the length $n$ of each of the time series is large or when streaming signals are considered. Therefore, to enable the online computation of the $m\left(m-1\right)/2$ pairwise MI values, every $N_{\mathbfcal{X}}$ points, we extract a mini-batch $\mathbfcal{X}$ from the replay buffer $\mathbfcal{B}$ and compute its corresponding MI matrix $\bm{W}^\mathbfcal{X}_{MI}$. Then, the overall MI matrix estimate $\hat{\bm{W}}_{MI}$ for the time series is the cumulative average over the previously computed matrices $\bm{W}^\mathbfcal{X}_{MI}$. To monitor its convergence, we observe the total information content in the matrix, defined as
+%% ---
+%\begin{equation}\label{eq:total_information}
+%	T_{MI} =  \frac{1}{2}\text{tr}\left(\hat{\bm{D}}_{MI}\right),
+%\end{equation}
+%% ---	
+%where $\hat{\bm{D}}_{MI}$ is the associated degree matrix. After the change in $T_{MI}$ falls below a threshold value $\epsilon$, namely 
+%$\Delta T_{MI}<\epsilon$, $\hat{\bm{W}}_{MI}$ exhibits minimal changes in its structure. In Sec.~\nameref{sec:topology_convergence}, we provide examples of the convergence of this term for the robot manipulator, hexapod, and humanoid cases.
+%
+%In this work, for the computation of $\hat{\bm{W}}_{MI}  $ either offline from $\bm{X}$ or incrementally from the mini-batch matrices $\bm{W}^\mathcal{X}_{MI}$, we use the Java Information Dynamics Toolbox (JIDT) \cite{Lizier2014JIDTinformationtheoretic} and choose a kernel method to compute the MI from the signals $ \bm{x}(t) $ with a kernel width of $k = 0.8$. We alternatively used the Python machine learning library scikit-learn\cite{Pedregosa2011ScikitlearnMachine} and the open-source MATLAB package Mutual Information Computation \cite{PengMutualInformationcomputation} for comparison.
 
-\hrule
+%\subsubsection{Unexplored alternatives}
+%The transfer entropy \cite{Bossomaier2016introductiontransferentropy} is
+%
+%
+%\subsection{Applications}
 
-%\subsubsection{Challenges in NTI}
-%NTI brings with it challenges such as noisy measurements, lack of ground truth, large parameter spaces, and varying model complexity \cite{Brugere2018Networkstructureinference}. Moreover, inferring graph topology only from data is an ill-posed problem, having statistical models (e.g. correlation, entropy, mutual information) and physically motivated models (e.g. network diffusion) as general approaches \cite{Dong2019Learninggraphsdata}. %Statistics-based models entail methods based on correlation, probabilistic graphical models, as well as methods based on concepts such as entropy, mutual information and transfer entropy. Physically motivated models consider the data to be generated by an underlying physical phenomenon on the graph, such as network diffusion. 
-%Finally, the recently introduced paradigm of Graph Signal Processing (GSP) \cite{Stankovic2019Introductiongraphsignal} considers samples from the signals at a given time as \emph{graph signals}, whose properties are a consequence of the underlying graph. %Excellent works that discuss NTI via GSP methods can be found in \cite{Dong2019Learninggraphsdata,Mateos2019ConnectingdotsIdentifying,Stankovic2019Introductiongraphsignal}.
+%Previous works have discussed metrics based on information entropy in the context of sensorimotor coordination \cite{Bonsignorio2020EntropyBasedMetrics}
+% ===========================================================================================
+%                                           |                                               |
+% -------------------------------------- SECTION -------------------------------------------|
+%                                           |                                               |
+% ===========================================================================================
+%\section{Differential geometry}
+%
+%
+%\begin{figure*}[!h]
+%	\centering	
+%	\hspace*{\fill}
+%	\includegraphics[width=0.5\textwidth]{manifold_operators.pdf}
+%	\hspace*{\fill}	
+%	\caption[] {\label{fig:manifold_operators}\textbf{Operations on a manifold.} The figure illustrates the curved space of the manifold and its associated tangent space. The logarithmic and exponential maps enable to project a point from the tangent space to the manifold space and vice-versa.}
+%\end{figure*}
+%
+%% SUBSECTION ========================================================================================
+%\subsection{The space of symmetric positive definite matrices}\label{sec:spd_manifold}
+%%A \emph{differentiable manifold} $\mathcal{M}$ is a topological space that is locally similar to Euclidean space and has a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. $\mathcal{T}_{\bm{P}}\mathcal{M}$ is the \emph{tangent space} at a point $\bm{P}\in \mathcal{M}$ and represents the vector space of all the possible tangent vectors to the manifold that pass through $\bm{P}$. The pair $(\mathcal{M},\rho)$ defines a \emph{Riemannian manifold} if $ \mathcal{M} $ is differentiable and is equipped with a positive definite metric tensor $\rho$ at each point \cite{Pennec2006Riemannianframeworktensor}. 
+%A differentiable manifold, denoted as $\mathcal{M}$, is a topological space that exhibits local similarity to Euclidean space and possesses a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. The tangent space at a point $\bm{P}$ in $\mathcal{M}$, denoted as $\mathcal{T}_{\bm{P}}\mathcal{M}$, encompasses the vector space containing all possible tangent vectors to the manifold that pass through $\bm{P}$. A Riemannian manifold is defined by the pair $(\mathcal{M},\rho)$, where $\mathcal{M}$ is a differentiable manifold and each point in $\mathcal{M}$ is equipped with a positive definite metric tensor $\rho$ \cite{Pennec2006Riemannianframeworktensor}.
+%
+%%Denoting $\mathcal{S}^n \triangleq\left\lbrace \bm{S} \in \mathbb{R}^{n \times n} : \bm{S} = \bm{S}^T\right\rbrace$ as the space of real square symmetric matrices of dimension $n \times n$. Then, the space of $n \times n$ SPD matrices $ \mathcal{S}^n_{++}\triangleq \left\lbrace \bm{P}\in \mathcal{S}^n : \bm{P} \succ 0 \right\rbrace $  defines a smooth submanifold $\mathcal{M}$ of $\mathcal{S}^n$. By definition, its tangent space $\mathcal{T}\mathcal{M} \in \mathcal{S}^n$ is equipped with an \emph{affine invariant Riemannian metric} $\rho$ \cite{Lee2018geometricalgorithmrobust}. Consequently, $ \mathcal{S}^n_{++} $ defines a Riemannian manifold. Finally, the product manifold $ \mathcal{M}^N $ of SPD manifolds is the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$. It is the set of matrices  $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}_i\in\mathcal{M}_i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho_{1},\ldots, \rho_{N} \right) $. %Similarly, the generalizations of the operators mentioned above to $\mathcal{M}^N$ are the concatenations of the individual operators for each $\mathcal{M}_i$.
+%
+%Let $\mathcal{S}^n$ be the space of real square symmetric matrices with dimension $n \times n$, denoted as $\mathcal{S}^n \triangleq\left\lbrace \bm{S} \in \mathbb{R}^{n \times n} : \bm{S} = \bm{S}^T\right\rbrace$. The space of $n \times n$ SPD matrices, $\mathcal{S}^n_{++}\triangleq \left\lbrace \bm{P}\in \mathcal{S}^n : \bm{P} \succ 0 \right\rbrace$, defines a smooth submanifold $\mathcal{M}$ within $\mathcal{S}^n$. Its tangent space $\mathcal{T}\mathcal{M} \in \mathcal{S}^n$ is equipped with an \emph{affine invariant Riemannian metric} $\rho$ \cite{Lee2018geometricalgorithmrobust}, thereby making $ \mathcal{S}^n_{++} $ a Riemannian manifold. Finally, the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$ defines the product manifold of SPD manifolds.  It represents the set of matrices $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}_i\in\mathcal{M}_i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho{1},\ldots, \rho{N} \right) $.
+	
+	
+	
+%	The product manifold $ \mathcal{M}^N $ of SPD manifolds is the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$. It represents the set of matrices $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}i\in\mathcal{M}i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho{1},\ldots, \rho{N} \right) $.}
 
+%The physical feasibility constraints of the inertial parameters $\bm{\theta}_i$ of the $i$-th link, summarized in Eq.~\eqref{eq:feasibility_constraints}, are satisfied if the pseudo inertia matrix 
+%%---
+%\begin{equation}\label{eq:pseudo_inertia_matrix}
+%	\bm{P}_i(\bm{\theta}_i)=f(\bm{\theta}_i)=\begin{bmatrix}
+%		\bm{\Sigma}_i && \bm{h} \\ \bm{h}^T && m
+%	\end{bmatrix} \in \mathbb{R}^{4 \times 4},
+%\end{equation}
+%%---
+%defined for each rigid body is symmetric positive-definite \cite{Wensing2017Linearmatrixinequalities}; that is, $\bm{P}_i(\bm{\theta}_i)\in \mathcal{S}_{++}^4$. Here $ \bm{\Sigma}_i = \frac{1}{2}\text{tr}(\bm{I}_i)\mathbb{1} - \bm{I}_i\in \mathcal{S}^3 $ is called the \emph{density weighted covariance matrix}. Conversely,  $ \bm{I}_i = \text{tr}\left(\bm{\Sigma}_i\right)\mathbb{1} - \bm{\Sigma}_i \in \mathcal{S}^3_{++} $, where $\mathbb{1}$ is the $3 \times 3$ identity matrix. The requirement that $\bm{P}_i(\bm{\theta}_i) \succ 0$ implies the fully physically feasible inertial parameters are in the manifold $\mathcal{S}^4_{++}=\left\lbrace \bm{P}_i(\bm{\theta}_i) \in \mathcal{S}^{4}: \bm{P}_i(\bm{\theta}_i) \succ 0 \right\rbrace$. As explained in \cite{Lee2018geometricalgorithmrobust}, for every rigid body $i$ in the kinematic chain, there exist a pseudo inertia matrix \eqref{eq:pseudo_inertia_matrix}. This means that the set of matrices  $\left\lbrace \bm{P}_i\right\rbrace_{i=1}^N$ resides in $\mathcal{M}^N$.
 
-\subsection{Detecting linear dependencies with covariance}
-\subsection{Graph signal processing}
-The fairly recent field of Graph Signal Processing (GSP) \cite{Mateos2019ConnectingdotsIdentifying}
+%\subsection{Fundamentals of differential geometry}
+%\subsection{Manifolds and the tangent space}
+%\subsection{Riemannian geometry and the metric}
+%\subsection{Applications in robotics}
+%
+%\say{The Symmetric Positive Definite (SPD) manifold is one specific type of Riemannian manifold. It is a smooth manifold where the tangent space is endowed with a Riemannian metric [2]. The Riemannian metric allows us to define various geometric notions such as the geodesic distance.}
 
-\redtext{Under the assumption that the signals are related to the topology of the graph where they are supported, the goal of GSP is to develop algorithms that fruitfully leverage this relational structure and can make inferences about these
-	relationships even when they are only partially observed.}
-
-A network may represent a conceptual model of pairwise relationships
-
-A fundamental question in GSP is how to use the graph signals to infer the underlying structure of the network.
-
-\subsection{Based on statistic measures}
-
+%% ===========================================================================================
+%%                                           |                                               |
+%% -------------------------------------- SECTION -------------------------------------------|
+%%                                           |                                               |
+%% ===========================================================================================
+%\section{Model learning in robotics}
+%Existing learning frameworks often focus on developing forward and inverse models using either a global or local approach to capture input-output relationships \cite{NguyenTuong2011Modellearningrobot}.
+%
+%Global methods risk overfitting and computational overload, while local methods suffer from limited generalization and hyperparameter sensitivity \cite{Thrun2002Probabilisticrobotics,Goodfellow2016DeepLearning}. Despite advancements in computational power and data availability, deep learning faces challenges due to the neglect of prior principled knowledge, making it difficult to determine dedicated neural network architectures \cite{Baker2017Designingneuralnetwork,Elsken2019Neuralarchitecturesearch}. 
+%
+%\subsection{End-to-end learning}
+%
+%\subsubsection{Classical neural networks model learning}
+%Model-learning problems using neural networks (NN) mainly involves:
+%\begin{enumerate}
+%	\item Input/output data collection: assumed to be available
+%	\item Architecture design: usually found by trial and error
+%	\item Parameter optimization/learning: via well understood schemes, e.g., backpropagation and variants
+%\end{enumerate}
+%Designing NN for a particular problem requires experts to determine the best topology, i.e. the number of nodes and layers, connectivity, and activation functions \cite{Matteucci2006ELeaRNTEvolutionarylearning}. Furthermore, generalization is difficult as the architecture needs to balance achieving accuracy while avoiding overfitting \cite{Rocha2005Simultaneousevolutionneural,He2015Topologicaloptimisationartificial,Matteucci2006ELeaRNTEvolutionarylearning,Kwok1995Constructivefeedforwardneural,Lawrence1998Whatsizeneural,Talebi2010NeuralNetworkBased}. Therefore, if a NN is used without any model information, large amounts of training data are required to generalize to unknown data \cite{Urolagin2012Generalizationcapabilityartificial}.
+%
+%\subsubsection{Topology learning related works}
+%Finding NN topologies is an important and challenging step \cite{Tirumala2016Evolvingdeepneural,Rocha2005Simultaneousevolutionneural,Baker2017Designingneuralnetwork}. Normally, function approximation via NN uses empirical topologies that rely on numerous parameters and do not lend themselves to interpretation. Such models provide no insight into the actual relation between the system variables. Recent works have aimed to find optimal topologies automatically. For example, evolutionary methods have been utilized to optimize the topology of Feed Forward NN (FFNN) \cite{Rocha2005Simultaneousevolutionneural,Matteucci2006ELeaRNTEvolutionarylearning} as well as  deep NN \cite{Tirumala2016Evolvingdeepneural}, by adding/deleting connections and weights. Constructive methods \cite{Kwok1995Constructivefeedforwardneural} and pruning methods \cite{Srinivas2016LearningNeuralNetwork} have also been applied to FFNN. Another method used for FFNN represents the network as a graph and reduces its degrees-of-freedom (DoF) \cite{He2015Topologicaloptimisationartificial}. Furthermore, reinforcement learning (through Q-learning) and topology learning (using variance analysis) have also been implemented to generate architectures \cite{Baker2017Designingneuralnetwork,Castillo2007Functionalnetworktopology}. Noticeably, for learning complex dynamical systems, such as articulated robot structures, results have been limited in accuracy and generalization capabilities \cite{NguyenTuong2011Modellearningrobot,NguyenTuong2008Learninginversedynamics,NguyenTuong2010Usingmodelknowledge}. 
+%
+%\subsubsection{Robot inverse dynamics estimation via classical NN}\label{sec:classic_inv_dyn}
+%NN have been applied in numerous variants to model robot inverse dynamics. In \cite{Atencia2015Hopfieldnetworksoptimization}, Hopfield NN were applied to identify the inertial parameters. Likewise, in \cite{Zhu2014Inertiaparameteridentification} a FFNN that used the regressor matrix as training samples was applied. Extreme Learning Machines were utilized in \cite{Bargsten2016ExperimentalRobotInverse} with the same purpose. More recently a two-hidden-layers network with rectified linear activation units (ReLU) was used in \cite{Christiano2016TransferSimulationReal}. Similarly, recurrent NN have been used to account for the sequential nature of the data. In \cite{Yan1997Robotlearningcontrol}, a recurrent NN in the hidden layer of an otherwise conventional three-layer FFNN was proposed. Additionally, self-organizing-networks, in conjunction with echo state networks, were used in \cite{Polydoros2015Realtimedeep} via a real-time deep learning algorithm.
+%% ===========================================================================================
+%%                                           |                                               |
+%% -------------------------------------- SECTION -------------------------------------------|
+%%                                           |                                               |
+%% ===========================================================================================
+%\section{Data-driven learning with structure information}
+%In lieu of the challenges faced by deep learning to capture the intricacies of complex systems from scratch,  
+%Issues such as low sample efficiency, extended training times, and limited generalization highlight the necessity of balancing data-driven and principle-driven approaches \cite{Pierson2017Deeplearningrobotics,Suenderhauf2018limitspotentialsdeep}. Recently, there has been a growing acknowledgment of the importance of integrating structure into the learning of physical systems \cite{Geist2021Structuredlearningrigid,Lutter2023Combiningphysicsdeep}.
+%
+%% ===========================================================================================
+%%                                           |                                               |
+%% -------------------------------------- SECTION -------------------------------------------|
+%%                                           |                                               |
+%% ===========================================================================================
+%\section{Model learning and the body schema}
+%
+%
+%
+%
+%Building on the significance of structure in model learning for robotics, this dissertation addresses the inference of essential morphological properties in tree-like floating base structures, mimicking the development of a body schema. Efforts in cognitive robotics stress the pivotal role of internal body models in enhancing spatial awareness, motor control, and adaptability \cite{Nguyen2021Sensorimotorrepresentationlearning,Hoffmann2010Bodyschemarobotics}. However, consensus is lacking on what constitutes a robot's body schema. Some approaches focus solely on learning the kinematic structure, relying predominantly on off-body vision \cite{Hersch2008Onlinelearningbody,MartinezCantin2010Bodyschemaacquisition,Hart2011roboticmodelecological,Lipson2019Taskagnosticself,Chen2022Fullybodyvisual,Sturm2009Bodyschemalearning}. Others explore sensorimotor associations between proprioceptive, tactile, and visual modalities \cite{Fuke2007BodyImageConstructed,Malinovska2022connectionistmodelassociating,Nguyen2019Reachingdevelopmentvisuo,Pugach2019BrainInspiredCoding,Lanillos2016Yieldingselfperception}, but they provide limited insights into the robot's physical structure.
+%
+%Model-based robotics offers reliable methods for identifying physical attributes of robots based on known mechanical topologies. Conventional calibration routines \cite{Hollerbach1996CalibrationIndexTaxonomy} and offline system identification methods \cite{Swevers2007Dynamicmodelidentification,LeboutetInertialParameterIdentification} are effective for known kinematic structures in controlled environments. However, these methods face challenges when applied to floating base robots without standardized identification procedures \cite{Ayusawa2014Identifiabilityidentificationinertial,Lee2022OptimizedSystemIdentification}. Importantly, these conventional methods were not initially designed for integration into online learning frameworks. While model-based robotics addresses kinematic calibration and forward/inverse kinematics, it provides limited insights into the comprehensive understanding of joint and link arrangement, known as mechanical topology. In cognitive robotics, only a few studies have approached this problem for self-modeling and monitoring, relying on exteroceptive vision \cite{Bongard2006Automatedsynthesisbody,Bongard2006Resilientmachinescontinuous}. Regardless of the approach taken---black-box machine learning, cognitive methods, or model-based robotics---reliance on external measurement devices persists, overlooking embodied sensing modalities.
+%
+%In summary, current robotics research reveals gaps in understanding and methods for refining body models. A comprehensive interpretation of the robot body schema and the determination of essential features are crucial. Identifying the fundamental set of necessary signals, both proprioceptive and embodied exteroceptive, is paramount. Integrating advanced machine learning with prior information and first-order principles shows promise for enhanced body models, addressing data requirements and generalization issues. However, the lack of synergy between modeling and learning approaches, along with the absence of a unified scheme for relevant learning stages, represents notable gaps requiring attention to advance robotics into more sophisticated and adaptable embodied systems.
+%
+%\section{Model learning in robotics}
+%\subsection{Classical and recent works in system identification}
+%\subsection{Local and global models linear models}
+%\subsection{End-to-end learning (black box models)}
+%\section{Data-driven learning with structure information}
+%\section{Model learning and the body schema}
+%\subsection{Internal representations}
+%\subsection{Sensorimotor maps}
 
 % ===========================================================================================
 %                                           |                                               |
@@ -1236,20 +1419,14 @@ A fundamental question in GSP is how to use the graph signals to infer the under
 %                                           |                                               |
 % ===========================================================================================
 \section{Driving learning and adaption: Advanced gradient descent}
-% ---
-\begin{figure}[t!]
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{gradient_descent_concept.pdf}
-	\end{center}
-	\caption{\textbf{Concept art gradient descent.} Image credits: \url{https://www.cs.umd.edu/~tomg/projects/landscapes/}}
-\end{figure}
-% ---
+
 \subsection{Offline and online learning}
 In the realm of machine learning, online learning and offline learning represent distinct approaches to model training. Online learning, or incremental learning, involves learning the model as new data becomes available, typically processing one observation at a time. In this scenario, the learning algorithm's parameters are updated after each individual training instance, making it particularly advantageous for systems dealing with a continuous flow of data that must rapidly adapt to changing conditions. On the other hand, offline learning, also known as batch learning, entails training the model over all observations in a dataset $\mathcal{D}$ simultaneously. The model is trained with a static dataset, and the parameters are updated once the learning process is complete for the entire dataset. %Offline learning is more prevalent in industry due to its various advantages, such as simplicity and ease of implementation. In essence, online learning is a dynamic approach where the model adapts to new data in real-time, while offline learning is a more static method where the model is trained on a fixed dataset.
 
 %In contrast, online learning excels in real-time adaptation and efficient resource utilization, making it more appropriate for scenarios with continuously changing data patterns[4][12]. 
 
 \subsection{Fundamentals of gradient descent}
+
 Gradient descent (GD) is in essence an optimization algorithm to sequentially minimize a \emph{cost function} $J(\bm{x})$ with respect to a given set of parameters $\bm{x} \in \mathbb{R}^d$ moving in the direction opposite to its gradient $\nabla_{\bm{x}}J(\bm{x})$ at the current point $\bm{x}_k$. GD is considered a local optimizer as it primarily finds a local minimum of $J$. The algorithm can be summarized in a iterative process expressed in the simple equation
 % ---
 \begin{equation}\label{eq:gradient_descent}
@@ -1257,7 +1434,14 @@ Gradient descent (GD) is in essence an optimization algorithm to sequentially mi
 \end{equation}  
 % ---
 which gives the update $\bm{x}_{k+1}$ to the optimization variables using a \emph{learning rate} $\eta$ that controls the size of the step given in the negative direction of the gradient. If this hyperparameter is too small, the updates $\bm{x}_{k+1}$ will differ slightly from $\bm{x}_k$ and convergence will take a long time. On the contrary, if $\eta$ is too large, the parameter updates may oscillate around a local optima and even diverge. 
-
+% ---
+\begin{figure*}[t!]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{gradient_descent_concept.pdf}
+	\end{center}
+	\caption{\textbf{Concept art gradient descent.} Image credits: \url{https://www.cs.umd.edu/~tomg/projects/landscapes/}}
+\end{figure*}
+% ---
 From the number of data points from an already-collected dataset $\mathcal{D}$ that are used to represent the optimization cost function $J$, three variants of GD are typical: batch, stochastic, and mini-batch GD. If all data in $\mathcal{D}$ is used to compute the gradient, it is called batch GD. It relies on a static dataset and substantial computational resources (CPU, memory, and storage) for training and thus lacks the flexibility to adapt incrementally to new data. This inability to incorporate new observations in real-time hinders its applicability for online learning in dynamic environments with constantly evolving data streams. 
 %The time-intensive nature of batch GD exacerbates its limitations, as updating the model with new data requires the retraining of the entire dataset, proving computationally expensive. Additionally, batch GD is less flexible in handling changing or large datasets, making it more suitable for stable scenarios with ample resources. Finally, batch learning systems lack the ability to learn incrementally, a significant drawback when dealing with streaming data or scenarios where the data distribution frequently changes.
 
@@ -1283,28 +1467,28 @@ However, a notable drawback of learning rate adaption is the its potential reduc
 %
 %\begin{center}
 %	\begin{tabular}{ |c|c|c| } 
-%		\hline
-%		\textbf{Algorithm} & \textbf{Update} & \textbf{Details} \\ 
-%		\hline
-%		Momentum & cell5 & cell6 \\ 
-%		\hline
-%		NAG & cell8 & cell9 \\ 
-%		\hline
-%		Adagrad & cell8 & cell9 \\ 
-%		\hline		
-%		Adadelta & cell8 & cell9 \\ 
-%		\hline
-%		RMSProp & cell8 & cell9 \\ 
-%		\hline
-%		ADAM & cell8 & cell9 \\ 
-%		\hline
-%		AdaMax & cell8 & cell9 \\ 
-%		\hline
-%		NADAM & cell8 & cell9 \\ 
-%		\hline
-%		NADAM & cell8 & cell9 \\ 
-%\hline		
-%	\end{tabular}
+	%		\hline
+	%		\textbf{Algorithm} & \textbf{Update} & \textbf{Details} \\ 
+	%		\hline
+	%		Momentum & cell5 & cell6 \\ 
+	%		\hline
+	%		NAG & cell8 & cell9 \\ 
+	%		\hline
+	%		Adagrad & cell8 & cell9 \\ 
+	%		\hline		
+	%		Adadelta & cell8 & cell9 \\ 
+	%		\hline
+	%		RMSProp & cell8 & cell9 \\ 
+	%		\hline
+	%		ADAM & cell8 & cell9 \\ 
+	%		\hline
+	%		AdaMax & cell8 & cell9 \\ 
+	%		\hline
+	%		NADAM & cell8 & cell9 \\ 
+	%		\hline
+	%		NADAM & cell8 & cell9 \\ 
+	%\hline		
+	%	\end{tabular}
 %\end{center}
 
 
@@ -1422,197 +1606,32 @@ Inspired by the stability and convergence speed of AMSGrad, this thesis utilizes
 %Here the term $\text{grad}_{\bm{P}_i}J_i$ represents the Riemannian gradient of the partial map $
 %J_i:\bm{Q}\in \mathcal{M}_i \mapsto f\left(\bm{P}_1,\ldots,\bm{P}_{i-1},\bm{Q},\bm{P}_{i+1},\ldots,\bm{P}_N\right)$. 
 
+% ===========================================================================================
+%                                           |                                               |
+% -------------------------------------- SECTION -------------------------------------------|
+%                                           |                                               |
+% ===========================================================================================
+\section{Chapter summary}
+%This chapter presented an overview of the different concepts that relate to the understanding of the physical structure of the robot. The physical self, and its relation to embodiment, body morphology, and body schema were discussed. Particular emphasis was given to the body schema as it functions as a model representation of the physical structure of the robot. Its most important features were discussed and connections to model-based robotics were established to present the definition of the robot body schema that is used in this dissertation. The bodily features needed to construct the robot body schema were outlined and methods to learn its kinematics and dynamics, that is the description of body size and inertial properties, were discussed. Special attention was dedicated to body shape, understood as the mechanical arrangement of the joints and links, that is, the body topology. This body aspect is essential to characterize the kinematic and dynamic features. Relevant concepts from the fields of information and graph theory were provided to illustrate how performing network topology inference on the sensorimotor signals of a robot can lead to the inference of the mechanical structural connectivity. Lastly, modern implementations of gradient descent were revisited as they are relevant in the implementation of online learning schemes to extract the features of the robot body schema.
 
-
+This chapter offers an overview of various concepts related to comprehending the physical structure of the robot. It delves into the physical self and its connections to embodiment, body morphology, and body schema. Special focus is given to the body schema, serving as a model representation of the robot's physical structure. The chapter discusses its key features and establishes connections to model-based robotics, presenting the definition of the robot body schema utilized in this dissertation. Essential bodily features required for constructing the robot body schema are outlined, and methods for learning its kinematics and dynamics, encompassing the description of body size and inertial properties, are examined. Emphasis is placed on body shape, defined as the mechanical arrangement of joints and links, i.e., the body topology, crucial for characterizing kinematic and dynamic features. Concepts from information and graph theory are introduced to illustrate how performing network topology inference on the robot's sensorimotor signals can infer mechanical structural connectivity. Lastly, the chapter revisits modern implementations of gradient descent, particularly relevant in implementing online learning schemes to extract features of the robot body schema.
 
 % ===========================================================================================
 %                                           |                                               |
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\section{Information theory}
-This section is based on chapter 1 of \cite{Cover1999Elementsinformationtheory}.
-% ---
-\begin{figure*}[!h]
-	\centering	
-	\hspace*{\fill}
-	\includegraphics[width=0.5\textwidth]{entropy_and_mutual_information.pdf}
-	\hspace*{\fill}	
-	\caption[] {\label{fig:entropy_and_mutual_information}\textbf{Relation between entropy and mutual information.} \TODO.}
-\end{figure*}
-% ---
-\subsection{Entropy of random variables}
-The entropy of a random variable is a function which attempts to characterize
-the average uncertainty or unpredictability of a random variable. It is often used to quantify the amount of information in a random process. Formally, the entropy of a variable $X$ is a function of its probability distribution and is defined as 
-% ---
-\begin{equation}\label{eq:entropy}
-	H(X) = -\sum_{i=1}^{n}p(x_i)\text{log}_2\left(p\left(x_i\right)\right).
-\end{equation}
-% ---
-Similarly, the joint entropy between two random variables $ X $ and $ Y $ is dependent on the joint probability of the two variables; i.e,
-% ---
-\begin{equation}\label{eq:joint_entropy}
-	H(X,Y) = -\sum_{i=1}^{n}\sum_{j=1}^{n} p(x_i,y_j)\text{log}_2\big(p\left(x_i,y_j\right)\big).
-\end{equation}
-% ---
-In loose terms, entropy can be associated with the amount of information that a random variable coveys. The less uniform the corresponding probability distribution, the more entropy it has, and hence the more information it provides.
-
-\subsection{Mutual Information: The correlation of the 21st century }
-The mutual information (MI) measures the amount of information that one random variable provides about another random variable. It quantifies the reduction in uncertainty about one variable due to knowledge of the other. The mutual information between two random variables is a symmetric measure of information computed as the relative entropy (also know as Kullback-Leibler divergence) of the joint probability distribution $p\left(x,y\right)$ and the product of the marginal probability distributions $p\left(x\right)$ and $p\left(y\right)$; that is,
-% ---
-\begin{equation}\label{eq:mutual_information}
-	I\left(X;Y\right) = \sum_{x \in \mathcal{X}}\sum_{y \in \mathcal{Y}}p\left(x,y\right) \text{log}\frac{p\left(x,y\right)}{p\left(x\right)p\left(y\right)}.
-\end{equation}
-% ---
-The MI can also be expressed in terms of the entropy and joint entropy as follows
-% ---
-\begin{equation}\label{eq:mutual_information}
-	I\left(X;Y\right) =I\left(Y;X\right) = H(X) + H(Y) - H(X,Y)
-\end{equation}
-% ---
-where it is clear that the MI is symmetric and represents the information shared by the two random variables, see Fig.~\ref{fig:entropy_and_mutual_information}.
-
-
-%As mentioned in the main text, the MI is used to create the relational matrix $\hat{\bm{W}}_{MI}$. In practice, the computation of $(\hat{\bm{W}}_{MI})_{i,j}$ involves selecting a pair $\left({x}_i(t),{x}_j(t)\right)$ of time series from the data matrix $\bm{X}$, centering their samples (to zero mean and unit standard deviation) and using either binning, kernel, or nearest neighbor methods \cite{WaltersWilliams2009Estimationmutualinformation} to compute their mutual information. Yet, such a process can be memory- and computation-demanding when the length $n$ of each of the time series is large or when streaming signals are considered. Therefore, to enable the online computation of the $m\left(m-1\right)/2$ pairwise MI values, every $N_{\mathbfcal{X}}$ points, we extract a mini-batch $\mathbfcal{X}$ from the replay buffer $\mathbfcal{B}$ and compute its corresponding MI matrix $\bm{W}^\mathbfcal{X}_{MI}$. Then, the overall MI matrix estimate $\hat{\bm{W}}_{MI}$ for the time series is the cumulative average over the previously computed matrices $\bm{W}^\mathbfcal{X}_{MI}$. To monitor its convergence, we observe the total information content in the matrix, defined as
-%% ---
-%\begin{equation}\label{eq:total_information}
-%	T_{MI} =  \frac{1}{2}\text{tr}\left(\hat{\bm{D}}_{MI}\right),
-%\end{equation}
-%% ---	
-%where $\hat{\bm{D}}_{MI}$ is the associated degree matrix. After the change in $T_{MI}$ falls below a threshold value $\epsilon$, namely 
-%$\Delta T_{MI}<\epsilon$, $\hat{\bm{W}}_{MI}$ exhibits minimal changes in its structure. In Sec.~\nameref{sec:topology_convergence}, we provide examples of the convergence of this term for the robot manipulator, hexapod, and humanoid cases.
+%\section{Body modeling in congenitally blind individuals}
+%(1) The article "Influence of the Body Schema on Multisensory Integration: Evidence from the Mirror Box Illusion" in Scientific Reports - Nature discusses the influence of the body schema on multisensory integration, which is a fundamental aspect of robotic model learning.
 %
-%In this work, for the computation of $\hat{\bm{W}}_{MI}  $ either offline from $\bm{X}$ or incrementally from the mini-batch matrices $\bm{W}^\mathcal{X}_{MI}$, we use the Java Information Dynamics Toolbox (JIDT) \cite{Lizier2014JIDTinformationtheoretic} and choose a kernel method to compute the MI from the signals $ \bm{x}(t) $ with a kernel width of $k = 0.8$. We alternatively used the Python machine learning library scikit-learn\cite{Pedregosa2011ScikitlearnMachine} and the open-source MATLAB package Mutual Information Computation \cite{PengMutualInformationcomputation} for comparison.
-
-\subsubsection{Unexplored alternatives}
-The transfer entropy \cite{Bossomaier2016introductiontransferentropy} is
-
-
-\subsection{Applications}
-
-Previous works have discussed metrics based on information entropy in the context of sensorimotor coordination \cite{Bonsignorio2020EntropyBasedMetrics}
-% ===========================================================================================
-%                                           |                                               |
-% -------------------------------------- SECTION -------------------------------------------|
-%                                           |                                               |
-% ===========================================================================================
-%\section{Differential geometry}
+%(2) The paper "Neuroplasticity in the blind and sensory substitution for vision" on ResearchGate explores neuroplasticity in the blind, which is relevant to understanding how the body schema is developed and adapted in the absence of vision, a concept that can be applied to robotics.
 %
+%(3) The article "Does visual experience influence arm proprioception and its lateralization? Evidence from passive matching performance in congenitally-blind and sighted adults" in ScienceDirect provides insights into the relationship between visual experience and proprioception, which is foundational to the development of the body schema and has implications for robotics.
 %
-%\begin{figure*}[!h]
-%	\centering	
-%	\hspace*{\fill}
-%	\includegraphics[width=0.5\textwidth]{manifold_operators.pdf}
-%	\hspace*{\fill}	
-%	\caption[] {\label{fig:manifold_operators}\textbf{Operations on a manifold.} The figure illustrates the curved space of the manifold and its associated tangent space. The logarithmic and exponential maps enable to project a point from the tangent space to the manifold space and vice-versa.}
-%\end{figure*}
+%(4) The study "Degraded vision affects mental representations of the body" published on Taylor \& Francis Online discusses the impact of degraded vision on mental representations of the body, including the shift from a pictorial representation of the body to a somatosensory one, which is relevant to understanding the body schema in the context of robotic model learning.
 %
-%% SUBSECTION ========================================================================================
-%\subsection{The space of symmetric positive definite matrices}\label{sec:spd_manifold}
-%%A \emph{differentiable manifold} $\mathcal{M}$ is a topological space that is locally similar to Euclidean space and has a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. $\mathcal{T}_{\bm{P}}\mathcal{M}$ is the \emph{tangent space} at a point $\bm{P}\in \mathcal{M}$ and represents the vector space of all the possible tangent vectors to the manifold that pass through $\bm{P}$. The pair $(\mathcal{M},\rho)$ defines a \emph{Riemannian manifold} if $ \mathcal{M} $ is differentiable and is equipped with a positive definite metric tensor $\rho$ at each point \cite{Pennec2006Riemannianframeworktensor}. 
-%A differentiable manifold, denoted as $\mathcal{M}$, is a topological space that exhibits local similarity to Euclidean space and possesses a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. The tangent space at a point $\bm{P}$ in $\mathcal{M}$, denoted as $\mathcal{T}_{\bm{P}}\mathcal{M}$, encompasses the vector space containing all possible tangent vectors to the manifold that pass through $\bm{P}$. A Riemannian manifold is defined by the pair $(\mathcal{M},\rho)$, where $\mathcal{M}$ is a differentiable manifold and each point in $\mathcal{M}$ is equipped with a positive definite metric tensor $\rho$ \cite{Pennec2006Riemannianframeworktensor}.
+%While these sources do not directly address the application of body schema to model learning in robotics, they provide valuable insights into the development and influence of the body schema, which can be extrapolated to understand its potential relevance to model learning in robotics.
 %
-%%Denoting $\mathcal{S}^n \triangleq\left\lbrace \bm{S} \in \mathbb{R}^{n \times n} : \bm{S} = \bm{S}^T\right\rbrace$ as the space of real square symmetric matrices of dimension $n \times n$. Then, the space of $n \times n$ SPD matrices $ \mathcal{S}^n_{++}\triangleq \left\lbrace \bm{P}\in \mathcal{S}^n : \bm{P} \succ 0 \right\rbrace $  defines a smooth submanifold $\mathcal{M}$ of $\mathcal{S}^n$. By definition, its tangent space $\mathcal{T}\mathcal{M} \in \mathcal{S}^n$ is equipped with an \emph{affine invariant Riemannian metric} $\rho$ \cite{Lee2018geometricalgorithmrobust}. Consequently, $ \mathcal{S}^n_{++} $ defines a Riemannian manifold. Finally, the product manifold $ \mathcal{M}^N $ of SPD manifolds is the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$. It is the set of matrices  $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}_i\in\mathcal{M}_i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho_{1},\ldots, \rho_{N} \right) $. %Similarly, the generalizations of the operators mentioned above to $\mathcal{M}^N$ are the concatenations of the individual operators for each $\mathcal{M}_i$.
-%
-%Let $\mathcal{S}^n$ be the space of real square symmetric matrices with dimension $n \times n$, denoted as $\mathcal{S}^n \triangleq\left\lbrace \bm{S} \in \mathbb{R}^{n \times n} : \bm{S} = \bm{S}^T\right\rbrace$. The space of $n \times n$ SPD matrices, $\mathcal{S}^n_{++}\triangleq \left\lbrace \bm{P}\in \mathcal{S}^n : \bm{P} \succ 0 \right\rbrace$, defines a smooth submanifold $\mathcal{M}$ within $\mathcal{S}^n$. Its tangent space $\mathcal{T}\mathcal{M} \in \mathcal{S}^n$ is equipped with an \emph{affine invariant Riemannian metric} $\rho$ \cite{Lee2018geometricalgorithmrobust}, thereby making $ \mathcal{S}^n_{++} $ a Riemannian manifold. Finally, the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$ defines the product manifold of SPD manifolds.  It represents the set of matrices $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}_i\in\mathcal{M}_i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho{1},\ldots, \rho{N} \right) $.
-	
-	
-	
-%	The product manifold $ \mathcal{M}^N $ of SPD manifolds is the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$. It represents the set of matrices $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}i\in\mathcal{M}i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho{1},\ldots, \rho{N} \right) $.}
-
-%The physical feasibility constraints of the inertial parameters $\bm{\theta}_i$ of the $i$-th link, summarized in Eq.~\eqref{eq:feasibility_constraints}, are satisfied if the pseudo inertia matrix 
-%%---
-%\begin{equation}\label{eq:pseudo_inertia_matrix}
-%	\bm{P}_i(\bm{\theta}_i)=f(\bm{\theta}_i)=\begin{bmatrix}
-%		\bm{\Sigma}_i && \bm{h} \\ \bm{h}^T && m
-%	\end{bmatrix} \in \mathbb{R}^{4 \times 4},
-%\end{equation}
-%%---
-%defined for each rigid body is symmetric positive-definite \cite{Wensing2017Linearmatrixinequalities}; that is, $\bm{P}_i(\bm{\theta}_i)\in \mathcal{S}_{++}^4$. Here $ \bm{\Sigma}_i = \frac{1}{2}\text{tr}(\bm{I}_i)\mathbb{1} - \bm{I}_i\in \mathcal{S}^3 $ is called the \emph{density weighted covariance matrix}. Conversely,  $ \bm{I}_i = \text{tr}\left(\bm{\Sigma}_i\right)\mathbb{1} - \bm{\Sigma}_i \in \mathcal{S}^3_{++} $, where $\mathbb{1}$ is the $3 \times 3$ identity matrix. The requirement that $\bm{P}_i(\bm{\theta}_i) \succ 0$ implies the fully physically feasible inertial parameters are in the manifold $\mathcal{S}^4_{++}=\left\lbrace \bm{P}_i(\bm{\theta}_i) \in \mathcal{S}^{4}: \bm{P}_i(\bm{\theta}_i) \succ 0 \right\rbrace$. As explained in \cite{Lee2018geometricalgorithmrobust}, for every rigid body $i$ in the kinematic chain, there exist a pseudo inertia matrix \eqref{eq:pseudo_inertia_matrix}. This means that the set of matrices  $\left\lbrace \bm{P}_i\right\rbrace_{i=1}^N$ resides in $\mathcal{M}^N$.
-
-%\subsection{Fundamentals of differential geometry}
-%\subsection{Manifolds and the tangent space}
-%\subsection{Riemannian geometry and the metric}
-%\subsection{Applications in robotics}
-%
-%\say{The Symmetric Positive Definite (SPD) manifold is one specific type of Riemannian manifold. It is a smooth manifold where the tangent space is endowed with a Riemannian metric [2]. The Riemannian metric allows us to define various geometric notions such as the geodesic distance.}
-
-%% ===========================================================================================
-%%                                           |                                               |
-%% -------------------------------------- SECTION -------------------------------------------|
-%%                                           |                                               |
-%% ===========================================================================================
-%\section{Model learning in robotics}
-%Existing learning frameworks often focus on developing forward and inverse models using either a global or local approach to capture input-output relationships \cite{NguyenTuong2011Modellearningrobot}.
-%
-%Global methods risk overfitting and computational overload, while local methods suffer from limited generalization and hyperparameter sensitivity \cite{Thrun2002Probabilisticrobotics,Goodfellow2016DeepLearning}. Despite advancements in computational power and data availability, deep learning faces challenges due to the neglect of prior principled knowledge, making it difficult to determine dedicated neural network architectures \cite{Baker2017Designingneuralnetwork,Elsken2019Neuralarchitecturesearch}. 
-%
-%\subsection{End-to-end learning}
-%
-%\subsubsection{Classical neural networks model learning}
-%Model-learning problems using neural networks (NN) mainly involves:
-%\begin{enumerate}
-%	\item Input/output data collection: assumed to be available
-%	\item Architecture design: usually found by trial and error
-%	\item Parameter optimization/learning: via well understood schemes, e.g., backpropagation and variants
-%\end{enumerate}
-%Designing NN for a particular problem requires experts to determine the best topology, i.e. the number of nodes and layers, connectivity, and activation functions \cite{Matteucci2006ELeaRNTEvolutionarylearning}. Furthermore, generalization is difficult as the architecture needs to balance achieving accuracy while avoiding overfitting \cite{Rocha2005Simultaneousevolutionneural,He2015Topologicaloptimisationartificial,Matteucci2006ELeaRNTEvolutionarylearning,Kwok1995Constructivefeedforwardneural,Lawrence1998Whatsizeneural,Talebi2010NeuralNetworkBased}. Therefore, if a NN is used without any model information, large amounts of training data are required to generalize to unknown data \cite{Urolagin2012Generalizationcapabilityartificial}.
-%
-%\subsubsection{Topology learning related works}
-%Finding NN topologies is an important and challenging step \cite{Tirumala2016Evolvingdeepneural,Rocha2005Simultaneousevolutionneural,Baker2017Designingneuralnetwork}. Normally, function approximation via NN uses empirical topologies that rely on numerous parameters and do not lend themselves to interpretation. Such models provide no insight into the actual relation between the system variables. Recent works have aimed to find optimal topologies automatically. For example, evolutionary methods have been utilized to optimize the topology of Feed Forward NN (FFNN) \cite{Rocha2005Simultaneousevolutionneural,Matteucci2006ELeaRNTEvolutionarylearning} as well as  deep NN \cite{Tirumala2016Evolvingdeepneural}, by adding/deleting connections and weights. Constructive methods \cite{Kwok1995Constructivefeedforwardneural} and pruning methods \cite{Srinivas2016LearningNeuralNetwork} have also been applied to FFNN. Another method used for FFNN represents the network as a graph and reduces its degrees-of-freedom (DoF) \cite{He2015Topologicaloptimisationartificial}. Furthermore, reinforcement learning (through Q-learning) and topology learning (using variance analysis) have also been implemented to generate architectures \cite{Baker2017Designingneuralnetwork,Castillo2007Functionalnetworktopology}. Noticeably, for learning complex dynamical systems, such as articulated robot structures, results have been limited in accuracy and generalization capabilities \cite{NguyenTuong2011Modellearningrobot,NguyenTuong2008Learninginversedynamics,NguyenTuong2010Usingmodelknowledge}. 
-%
-%\subsubsection{Robot inverse dynamics estimation via classical NN}\label{sec:classic_inv_dyn}
-%NN have been applied in numerous variants to model robot inverse dynamics. In \cite{Atencia2015Hopfieldnetworksoptimization}, Hopfield NN were applied to identify the inertial parameters. Likewise, in \cite{Zhu2014Inertiaparameteridentification} a FFNN that used the regressor matrix as training samples was applied. Extreme Learning Machines were utilized in \cite{Bargsten2016ExperimentalRobotInverse} with the same purpose. More recently a two-hidden-layers network with rectified linear activation units (ReLU) was used in \cite{Christiano2016TransferSimulationReal}. Similarly, recurrent NN have been used to account for the sequential nature of the data. In \cite{Yan1997Robotlearningcontrol}, a recurrent NN in the hidden layer of an otherwise conventional three-layer FFNN was proposed. Additionally, self-organizing-networks, in conjunction with echo state networks, were used in \cite{Polydoros2015Realtimedeep} via a real-time deep learning algorithm.
-%% ===========================================================================================
-%%                                           |                                               |
-%% -------------------------------------- SECTION -------------------------------------------|
-%%                                           |                                               |
-%% ===========================================================================================
-%\section{Data-driven learning with structure information}
-%In lieu of the challenges faced by deep learning to capture the intricacies of complex systems from scratch,  
-%Issues such as low sample efficiency, extended training times, and limited generalization highlight the necessity of balancing data-driven and principle-driven approaches \cite{Pierson2017Deeplearningrobotics,Suenderhauf2018limitspotentialsdeep}. Recently, there has been a growing acknowledgment of the importance of integrating structure into the learning of physical systems \cite{Geist2021Structuredlearningrigid,Lutter2023Combiningphysicsdeep}.
-%
-%% ===========================================================================================
-%%                                           |                                               |
-%% -------------------------------------- SECTION -------------------------------------------|
-%%                                           |                                               |
-%% ===========================================================================================
-%\section{Model learning and the body schema}
-%
-%
-%
-%
-%Building on the significance of structure in model learning for robotics, this dissertation addresses the inference of essential morphological properties in tree-like floating base structures, mimicking the development of a body schema. Efforts in cognitive robotics stress the pivotal role of internal body models in enhancing spatial awareness, motor control, and adaptability \cite{Nguyen2021Sensorimotorrepresentationlearning,Hoffmann2010Bodyschemarobotics}. However, consensus is lacking on what constitutes a robot's body schema. Some approaches focus solely on learning the kinematic structure, relying predominantly on off-body vision \cite{Hersch2008Onlinelearningbody,MartinezCantin2010Bodyschemaacquisition,Hart2011roboticmodelecological,Lipson2019Taskagnosticself,Chen2022Fullybodyvisual,Sturm2009Bodyschemalearning}. Others explore sensorimotor associations between proprioceptive, tactile, and visual modalities \cite{Fuke2007BodyImageConstructed,Malinovska2022connectionistmodelassociating,Nguyen2019Reachingdevelopmentvisuo,Pugach2019BrainInspiredCoding,Lanillos2016Yieldingselfperception}, but they provide limited insights into the robot's physical structure.
-%
-%Model-based robotics offers reliable methods for identifying physical attributes of robots based on known mechanical topologies. Conventional calibration routines \cite{Hollerbach1996CalibrationIndexTaxonomy} and offline system identification methods \cite{Swevers2007Dynamicmodelidentification,LeboutetInertialParameterIdentification} are effective for known kinematic structures in controlled environments. However, these methods face challenges when applied to floating base robots without standardized identification procedures \cite{Ayusawa2014Identifiabilityidentificationinertial,Lee2022OptimizedSystemIdentification}. Importantly, these conventional methods were not initially designed for integration into online learning frameworks. While model-based robotics addresses kinematic calibration and forward/inverse kinematics, it provides limited insights into the comprehensive understanding of joint and link arrangement, known as mechanical topology. In cognitive robotics, only a few studies have approached this problem for self-modeling and monitoring, relying on exteroceptive vision \cite{Bongard2006Automatedsynthesisbody,Bongard2006Resilientmachinescontinuous}. Regardless of the approach taken---black-box machine learning, cognitive methods, or model-based robotics---reliance on external measurement devices persists, overlooking embodied sensing modalities.
-%
-%In summary, current robotics research reveals gaps in understanding and methods for refining body models. A comprehensive interpretation of the robot body schema and the determination of essential features are crucial. Identifying the fundamental set of necessary signals, both proprioceptive and embodied exteroceptive, is paramount. Integrating advanced machine learning with prior information and first-order principles shows promise for enhanced body models, addressing data requirements and generalization issues. However, the lack of synergy between modeling and learning approaches, along with the absence of a unified scheme for relevant learning stages, represents notable gaps requiring attention to advance robotics into more sophisticated and adaptable embodied systems.
-%
-%\section{Model learning in robotics}
-%\subsection{Classical and recent works in system identification}
-%\subsection{Local and global models linear models}
-%\subsection{End-to-end learning (black box models)}
-%\section{Data-driven learning with structure information}
-%\section{Model learning and the body schema}
-%\subsection{Internal representations}
-%\subsection{Sensorimotor maps}
-
-% ===========================================================================================
-%                                           |                                               |
-% -------------------------------------- SECTION -------------------------------------------|
-%                                           |                                               |
-% ===========================================================================================
-\section{Body modeling in congenitally blind individuals}
-(1) The article "Influence of the Body Schema on Multisensory Integration: Evidence from the Mirror Box Illusion" in Scientific Reports - Nature discusses the influence of the body schema on multisensory integration, which is a fundamental aspect of robotic model learning.
-
-(2) The paper "Neuroplasticity in the blind and sensory substitution for vision" on ResearchGate explores neuroplasticity in the blind, which is relevant to understanding how the body schema is developed and adapted in the absence of vision, a concept that can be applied to robotics.
-
-(3) The article "Does visual experience influence arm proprioception and its lateralization? Evidence from passive matching performance in congenitally-blind and sighted adults" in ScienceDirect provides insights into the relationship between visual experience and proprioception, which is foundational to the development of the body schema and has implications for robotics.
-
-(4) The study "Degraded vision affects mental representations of the body" published on Taylor \& Francis Online discusses the impact of degraded vision on mental representations of the body, including the shift from a pictorial representation of the body to a somatosensory one, which is relevant to understanding the body schema in the context of robotic model learning.
-
-While these sources do not directly address the application of body schema to model learning in robotics, they provide valuable insights into the development and influence of the body schema, which can be extrapolated to understand its potential relevance to model learning in robotics.
-
 %Citations:
 %[1] https://www.nature.com/articles/s41598-017-04797-0
 %[2] https://www.researchgate.net/publication/262840022_Neuroplasticity_in_the_blind_and_sensory_substitution_for_vision
