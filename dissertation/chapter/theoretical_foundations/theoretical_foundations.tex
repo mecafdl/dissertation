@@ -1,9 +1,18 @@
 \section{Introduction}
-The ability of robots to acquire, refine, and adapt their body models is crucial for enhancing their locomotion, manipulation, and interaction capabilities. Despite its significance, existing learning frameworks in robotics often neglect the robot's physical structure. Cognitive robotics underscores the importance of the body schema. However, some approaches interpret a robot's body schema as learning kinematic structural properties, while others focus on sensorimotor associations between proprioceptive, tactile, and visual modalities. Constructing a robot body schema is inherently linked to model-based robotics, offering methods for identifying physical attributes grounded in known kinematic structures.
 
-Nevertheless, challenges persist, particularly for floating-base robots, and existing methods need more integration into incremental learning frameworks. This chapter delves into concepts and methods from different disciplines relevant to defining the robot body schema in this work. Additionally, the chapter outlines the connections between these different methods, establishing their importance as a fundamental tool for building the robotic body schema.
+The crucial ability of robots to acquire, refine, and adapt their body models significantly enhances their locomotion, manipulation, and interaction capabilities. However, existing robotics learning frameworks often overlook the robot's physical structure, referred to as its morphology. The concept of the body schema, originating from psychology and neuroscience, is adopted in robotics to represent a model of the robot's morphology. However, current works typically focus on learning kinematic structural properties or exclusively representing sensorimotor associations between proprioceptive, tactile, and visual modalities.
 
-This chapter will introduce notions about the various definitions of the body and its physical attributes, encompassing the physical self and concepts like embodiment, body morphology, and the body schema. With these concepts established, the chapter will survey the fundamental bodily features referred to by these definitions. Shifting the discussion to the realm of robotics, these features will be contrasted against those resulting from conventional calibration and identification methods in model-based robotics. Complementary methods supporting the construction of a robot body schema will be presented to complete the picture.
+This chapter aims to demonstrate the inherent link between constructing a robot body schema and model-based robotics. Model-based robotics provides established methods for calibrating and identifying physical attributes, albeit under the assumption of a known kinematic structure. In contrast to the online construction and maintenance of the body schema relying on proprioception, these methods were designed for controlled environments, using external devices and offline optimization frameworks.
+
+The chapter commences by introducing the notion of the physical self and related concepts such as embodiment, body morphology, and the body schema. Once these concepts are established, the discussion surveys fundamental bodily features associated with these definitions. Shifting to the realm of robotics, the chapter revisits methods from model-based robotics that offer relevant features for the robotic body schema. It further explores concepts and methods from complementary disciplines, providing tools to construct a robotic body schema that encompasses a more comprehensive description of the body morphology.
+%The ability of robots to acquire, refine, and adapt their body models is crucial for enhancing their locomotion, manipulation, and interaction capabilities. Despite its significance, existing learning frameworks in robotics often neglect the robot's physical structure; i.e., its morphology. The body schema, a concept stemming from the fields of psychology and neuroscience, has been adopted in the robotics literature to refer to a model representation of the robot morphology. Yet, most works either interpret learning a robot's body schema as learning kinematic structural properties, or focus solely on representing the sensorimotor associations between proprioceptive, tactile, and visual modalities. 
+%
+%The discussion in this chapter aims to show that constructing a robot body schema is inherently linked to model-based robotics, which offers well-established methods for calibrating and identifying physical attributes of robots, although always under the presumption of a known kinematic structure. Unlike the body schema, which relies mostly on proprioception and is build and maintained online, these methods were conceived to be executed in controlled environments, and rely on external devices and offline optimization frameworks. 
+%
+%This chapter begins by introducing the notion of physical self and the various related concepts pertaining to the body and its physical attributes: embodiment, body morphology, and the body schema. With these concepts established, the chapter will survey the fundamental bodily features referred to by these definitions. Shifting the discussion to the realm of robotics, the chapter revisits the methods from model-based robotics that provide relevant features of the robotic body schema. It then delves into concepts and methods from complementary disciplines that provide tools to learn a more complete description of the body morphology.
+
+
+%Additionally, the chapter outlines the connections between these different methods, establishing their importance as a fundamental tool for building the robotic body schema.
 
 % Self-modeling in robotics is of great importance as it enables robots to anticipate the outcomes of various actions without physically performing them. This capability allows robots to plan and control their actions more effectively, detect and compensate for damage or wear-and-tear, and make better decisions. By creating internal computational models of their physical bodies, robots can become more self-reliant and function better in the world. This self-awareness, achieved through self-modeling, is a fundamental step towards enhancing the autonomy and performance of robotic systems. The ability to simulate their physical selves enables robots to be more adaptive, efficient, and capable of handling real-world challenges.
 
@@ -23,11 +32,15 @@ This chapter will introduce notions about the various definitions of the body an
 %In the context of robotics, although robots lack subjective experiences, self-awareness, and consciousness, the physical self remains a critical concept. Robots must perceive their bodies and positions in space to operate effectively, particularly in unstructured or dynamic environments. Aspects related to the physical self, such as body morphology, embodiment, and the body schema, are crucial considerations in robotics, see Fig.~\ref{fig:overlapping_concepts}. Body morphology, the physical structure of a robot, significantly influences its design based on intended tasks. For example, a robot designed for exploration might feature legs or wheels, while a robot for assembly line tasks may have a robotic arm \cite{Miller2018EmbodimentSituatednessMorphology}. Embodiment in robotics emphasizes how a robot's physical form and sensory-motor capabilities influence its interaction with the environment, shaping its perception and actions within its surroundings \cite{Wainer2006rolephysicalembodiment}. The concept of the physical self in robotics aligns closely with the body schema, representing an awareness of the robot's body, including the location, orientation, and relative motion of its parts.
 %
 %In robotics, achieving a sense of the physical self is vital, especially for tasks in dynamic environments. Sensors provide information about the robot's orientation, speed, and acceleration, while actuators enable the robot's body to move, allowing it to learn about its physical capabilities through observed effects on the environment. This information contributes to the creation of a model of the robot's body within its internal representation of the world.
-The concept of the physical self is rooted in human psychology and consciousness \cite{Tsakiris2016multisensorybasisself,Overgaard2023selfitsbody}. It typically refers to an individual's perception and evaluation of their own physical body, encompassing appearance, abilities, and overall physicality. It involves the subjective experience through diverse sensory modalities (like proprioception and touch) of the body and its relation to the environment. Aspects related to the physical self, such as body morphology, embodiment, and the body schema, are intertwined concepts, see Fig.~\ref{fig:overlapping_concepts}.
+The concept of the physical self is rooted in human psychology and consciousness \cite{Tsakiris2016multisensorybasisself,Overgaard2023selfitsbody}. It typically refers to an individual's perception and evaluation of the physical body, encompassing appearance, abilities, and overall physicality. It involves the subjective experience through diverse sensory modalities (like proprioception and touch) of the body and its relation to the environment. The physical self is directly related to three strongly intertwined concepts: body morphology, embodiment, and body schema---see Fig.~\ref{fig:overlapping_concepts}.
 
-In the context of robotics, although robots lack subjective experiences, self-awareness, and consciousness, the physical self remains a critical concept. Robots must perceive their bodies in space to operate effectively in diverse environments. The physical structure of a robot, its body morphology, significantly influences its design based on intended tasks. For example, a robot designed for exploration might feature legs or wheels, while a robot for assembly line tasks may have a robotic arm \cite{Miller2018EmbodimentSituatednessMorphology}. Embodiment in robotics emphasizes how a robot's physical form and sensory-motor capabilities influence its interaction with the environment, shaping its perception and actions within its surroundings \cite{Wainer2006rolephysicalembodiment}. The notion of the physical self in robotics corresponds extensively with the body schema, representing an awareness of the robot's body, including the location, orientation, and relative motion of its parts.
+In the context of robotics, although robots lack subjective experiences, self-awareness, and consciousness, the physical self remains a critical concept. Robots must perceive their bodies in space to operate effectively in diverse environments. %The physical structure of a robot, its body morphology, is intrinsically related toinfluences how it executes tasks and interacts with the environment. %For example, a robot designed for exploration might feature legs or wheels, while a robot for assembly line tasks may have a robotic arm \cite{Miller2018EmbodimentSituatednessMorphology}. 
+Embodiment in robotics emphasizes how a robot's physical form and sensory-motor capabilities influence its interaction with the environment, shaping its perception and actions within its surroundings \cite{Wainer2006rolephysicalembodiment}. This concept is intrinsically related to the robot morphology, which refers to the physical structure of a robot including its sensors and actuators. In turn, the latter two connect to the notion of body schema, as it represents a model that equips the robot with spatial and inertial awareness of its body.
 
-In robotics, achieving a sense of the physical self is vital, especially for tasks in dynamic environments. The sensor suite of a robot provides feedback on the position, orientation, velocity, and acceleration of its body parts. The actuation mechanisms drive the complex motions of the structure, giving the robot the opportunity to acquire knowledge about its physical capabilities through the perceived consequences of its actions on the environment. This information contributes to the creation of a model of the robot's body within its internal representation of the world.
+For a robot, achieving a sense of the physical self requires to leverage its perception and actuation capabilities to acquire knowledge about its bodily attributes through the perceived consequences of its interactions with itself and the environment. This knowledge is encoded in the internal representation of the robot's body.
+
+
+% influences positively a wide spectrum of tasks especially for tasks in dynamic environments. The sensor suite of a robot provides feedback on the position, orientation, velocity, and acceleration of its body parts. The actuation mechanisms drive the complex motions of the structure, giving the robot the opportunity to acquire knowledge about its physical capabilities through the perceived consequences of its actions on the environment. This information contributes to the creation of a model of the robot's body within its internal representation of the world.
 % ---
 \begin{figure}
 	\begin{center}
@@ -38,30 +51,44 @@ In robotics, achieving a sense of the physical self is vital, especially for tas
 \end{figure}
 % ---
 
+\subsubsection{Embodiment}
+Embodiment, rooted in the hypothesis that intelligence necessitates a body \cite{Pfeifer2006Howbodyshapes,Der2014RoleEmbodimentSelf}, refers to the understanding that a robot's physical body and sensorimotor capabilities shape its interactions within its environment, influencing perception and actions \cite{Duffy2000Intelligentrobotsquestion,Lara2018EmbodiedCognitiveRobotics}. This involves considerations of the robot's physical structure, situatedness, and morphology, extending beyond functionality to impact interactions with the external world \cite{Miller2018EmbodimentSituatednessMorphology}. At the core of embodiment is the body morphology, which significantly influences movement, interaction capabilities, and overall functionality \cite{Pfeifer2006MorphologicalComputationConnecting}. Embodiment also implies situatedness; that is, robots directly interact with their environment, finding statistical regularities in the sensorimotor experiences \cite{Pezzulo2013ComputationalGroundedCognition} and enhancing autonomy and adaptability \cite{Brooks1991NewApproachesRobotics}. 
+
+%Embodying robots goes beyond external structure, emphasizing that artificial agents have physical bodies interacting with the environment through seamless sensorimotor integration \cite{Lara2018EmbodiedCognitiveRobotics}. Sensors act as receptors conveying information, and actuators enable the robot to act upon sensory input, resulting in adaptive behavior \cite{Pfeifer2007SelfOrganizationEmbodiment,Der2014RoleEmbodimentSelf}. This sensorimotor integration distinguishes embodied robotics from abstract computational systems.
+
+%Embodiment also involves situatedness, where robots directly interact with their environment, enhancing autonomy and adaptability \cite{Brooks1991NewApproachesRobotics}. Incorporating action and sensory-motor experiences as sources of statistical regularities is crucial for cognitive robots \cite{Pezzulo2013ComputationalGroundedCognition}.
+
+%The concept of body schema, closely linked to embodiment, represents an internal model encompassing a robot's body arrangement, geometry, and movements. It serves as a dynamic tool for spatial awareness. Adaptability is a hallmark of embodied robots, stemming from the close coupling of their physical bodies and control systems, enabling dynamic responses to environmental changes.
+%
+%In essence, embodiment in robotics transcends traditional boundaries, transforming robots into physically present, interactive agents. The intricate dance between physical form, sensorimotor integration, body schema, and adaptability enriches robotics, fostering the development of sophisticated, versatile, and context-aware systems.
+
+
 % SUBSECTION ================================================================================
-\subsection{The body morphology}
+\subsubsection{The body morphology}
 The robot body morphology encompasses its physical structure, including the configuration of joints, limbs, sensors, and actuators \cite{Pfeifer2007SelfOrganizationEmbodiment}, playing a pivotal role in determining its capabilities and performance. The joints, serving as points of articulation, allow varied motion, with types like revolute, prismatic, and universal joints offering different degrees of flexibility. Limbs, the appendages extending from the body, consist of links and joints, defining the robot's range of motion and dexterity. Sensors provide information about the environment and internal state, influencing perception and decision-making. Actuators converting energy into mechanical motion and drive joint and limb movement, determining strength and endurance.
 
-Design considerations for robot morphology involve stability, ensuring the robot withstands external forces and maintains balance. Dexterity is crucial for precise movements, achieved through joint, limb, and gripper design. Efficiency minimizes energy consumption for optimal performance, which is vital for autonomous or remote operation. Adaptability allows the robot to meet diverse task requirements or environmental conditions through modular designs or reconfigurable structures. Safety considerations prioritize minimizing risks to the robot and humans around it, incorporating protective tactile elements and elastic joints. Overall, a well-designed robot morphology integrates these key aspects and considerations to enhance its functionality and applicability.
+%Design considerations for robot morphology involve stability, ensuring the robot withstands external forces and maintains balance. Dexterity is crucial for precise movements, achieved through joint, limb, and gripper design. Efficiency minimizes energy consumption for optimal performance, which is vital for autonomous or remote operation. Adaptability allows the robot to meet diverse task requirements or environmental conditions through modular designs or reconfigurable structures. Safety considerations prioritize minimizing risks to the robot and humans around it, incorporating protective tactile elements and elastic joints. Overall, a well-designed robot morphology integrates these key aspects and considerations to enhance its functionality and applicability.
+%
+%The body morphology of a robot significantly influences its functionality and adaptability. Research in the field of robotics has emphasized the importance of the robot's body in achieving stable locomotion, efficient control, and adaptation to environmental challenges. For instance, the design and control of soft robots have focused on exploiting dynamics and morphology, such as the shape and length of the body and feet, to achieve stable walking \cite{Pfeifer2007SelfOrganizationEmbodiment}. Additionally, studies have shown that morphological variations can be a powerful technique for achieving resilient robots \cite{Pagliuca2020dynamicbodybrain}. Furthermore, it has been hypothesized that the morphological complexity of a robot should scale in relation to the complexity of its task environment \cite{Auerbach2012RelationshipEnvironmentalMechanical}.
 
-The body morphology of a robot significantly influences its functionality and adaptability. Research in the field of robotics has emphasized the importance of the robot's body in achieving stable locomotion, efficient control, and adaptation to environmental challenges. For instance, the design and control of soft robots have focused on exploiting dynamics and morphology, such as the shape and length of the body and feet, to achieve stable walking \cite{Pfeifer2007SelfOrganizationEmbodiment}. Additionally, studies have shown that morphological variations can be a powerful technique for achieving resilient robots \cite{Pagliuca2020dynamicbodybrain}. Furthermore, it has been hypothesized that the morphological complexity of a robot should scale in relation to the complexity of its task environment \cite{Auerbach2012RelationshipEnvironmentalMechanical}.
-
-In summary, the body morphology of a robot plays a crucial role in its locomotion, adaptability, and task-specific functionality. The research in this field underscores the importance of considering the dynamic interaction between a robot's body and its environment and the potential for co-optimizing morphology and control to enhance the robot's overall performance.
+%In summary, the body morphology of a robot plays a crucial role in its locomotion, adaptability, and task-specific functionality. The research in this field underscores the importance of considering the dynamic interaction between a robot's body and its environment and the potential for co-optimizing morphology and control to enhance the robot's overall performance.
 
 % SUBSECTION ================================================================================
-\subsection{The body schema}
-
-\subsubsection{General intuition}
-The human body relies on a sophisticated neural representation known as the \textit{body schema} to navigate and interact with the surrounding environment, playing a foundational role in shaping the human experience of the physical self and the external world. This dynamic internal map within the brain encodes a multitude of attributes, ensuring the ability to perceive, move, and coordinate the body effectively.
-
-The concept of the body schema has been defined in various ways in the scientific literature. One common definition is that it consists of sensorimotor representations guiding actions \cite{Maravita2003MultisensoryIntegrationBody}. Alternatively, it is seen as an internal representations of the body's current posture and spatial extension \cite{Vignemont2010Bodyschemabody}. Fundamental to the body schema is the representation of the size and shape of different body parts, allowing for precise and coordinated movements. The brain's ability to accurately map the dimensions of the body contributes to the fluidity of human motion. Additionally, the body schema has been described as a means of obtaining information regarding body position in space from tactile, proprioceptive, visual, and other sensory modalities \cite{Medina2010mapsformspace}. These definitions illustrate the multifaceted nature of the body schema, encompassing sensorimotor guidance, spatial representation, and the integration of multisensory information.
-
-The body schema, a complex and dynamic representation, plays a fundamental role in facilitating our effective interaction with the world. This intricate construct incorporates various properties crucial for our sensory and motor experiences. Spatial properties, encompassing the position, posture, overall shape, and size of individual body parts, as well as the body's relationship to gravity and the environment, form the foundation of the body schema. Kinesthetic properties involve the sensations of movement, touch, generated muscle force, and the resistance encountered during interactions. Vestibular properties contribute to our sense of balance, orientation in space, and awareness of the body's movement through space. Somatosensory properties, including the perception of temperature, pain, and pressure, as well as awareness of the body's surface and internal organs, further enrich the body schema. \redtext{Additionally, the representation of mass, inertia, muscle forces, object properties, environmental properties, body ownership, and body boundaries collectively shape this intricate representation REF}. Adaptability and plasticity enable adjustments through experience and learning. By integrating these diverse elements, the body schema enables humans to navigate their surroundings, interact with objects, and maintain a coherent sense of self in dynamic environments \cite{Vignemont20213C1Whatisbody,Morasso2015Revisitingbodyschema,Asada2018168Proprioceptionbodyschema}.
+\subsubsection{The body schema}
+Humans rely on a sophisticated internal representation of the body, known as the body schema, to control the body, and interact with the environment. The body schema has been described as consisting of sensorimotor representations guiding actions \cite{Maravita2003MultisensoryIntegrationBody,Asada2018168Proprioceptionbodyschema}. Alternatively, it is seen as an internal representations of the body's current posture and spatial extension \cite{Vignemont2010Bodyschemabody} (including a description of size and shape of different body parts), obtained from tactile, proprioceptive, visual, and other sensory modalities \cite{Medina2010mapsformspace}. In essence, the body schema is dynamic representation that encodes several attributes of the body\cite{Vignemont20213C1Whatisbody,Morasso2015Revisitingbodyschema,Asada2018168Proprioceptionbodyschema}. It is emergent from sensorimotor interactions and yields an enhanced bodily awareness that allows precise and coordinated movements. The body schema plays an important role in shaping the experience of the physical self, as it is directly involved in the ability to perceive, move, and coordinate the body effectively.
 
 
-\subsubsection{The robot body schema}
-Generally, the notion of body schema comprises sensorimotor representations of the body used to guide movement and action \cite{Asada2018168Proprioceptionbodyschema}. For robotics this is, however, a far too general definition and incites the question: \textit{what concretely is the body schema in robotics?} From the various takes on this topic, efforts to consolidate an answer to this baffling question were provided in the comprehensive work by Hoffmann et al. \cite{Hoffmann2010Bodyschemarobotics}. Relevant to this dissertation is the discussion that the authors provide on explicit, articulated, and implicit models of the body schema. The first two categories correspond to models where there is a direct correspondence between the body parts of
-the robot and their representation in the model, given measured variables that can be associated to properties of the physical body. The main difference being that articulated models \cite{Grush2004emulationtheoryrepresentation} emphasize that the signals ought to come from embodied sensors. This latter property has been referred as subjective or situated body schema \cite{Hersch2008Onlinelearningbody}. The third category, implicit body schema, is more inline with traditional model learning methods in robotics and is aimed at constructing sensorimotor mappings.
+%There is a consensus that the body schema is plastic representation of several body properties \cite{Vignemont20213C1Whatisbody,Morasso2015Revisitingbodyschema,Asada2018168Proprioceptionbodyschema}.
+%It incorporates spatial properties, encompassing the position, pose, overall shape, and size of individual body parts. It also includes the sensations of movement, touch, generated muscle force, and the resistance encountered during interactions. Vestibular properties are part too of the body schema and contribute to the sense of balance and orientation in space. Other sensory modalities, like temperature, pain, and pressure, as well as awareness of the body's surface enrich the body schema. Two properties fundamental for the body schema are its adaptability and plasticity, they enable adjustments through experience and learning. By integrating these diverse elements, the body schema enables a physical agent to navigate its surroundings, interact with objects, and maintain a coherent sense of self in dynamic environments.
+
+%\redtext{Additionally, the representation of the inertial properties of the body and their relation to muscle forces are part of this intricate representation REF}. Lastly,  
+
+
+%\subsubsection{The robot body schema}
+%Generally, the notion of body schema comprises sensorimotor representations of the body used to guide movement and action \cite{Asada2018168Proprioceptionbodyschema}. 
+
+The above description incites the question: \textit{what concretely is the body schema in robotics?} From the various takes on this topic, efforts to consolidate an answer to this question were provided in the comprehensive work by Hoffmann et al. \cite{Hoffmann2010Bodyschemarobotics}. Relevant to this dissertation is the discussion in \cite{Hoffmann2010Bodyschemarobotics} about explicit, articulated, and implicit models of the body schema. The first two categories correspond to models where there is a direct correspondence between the body parts of
+the robot and their representation in the model, given measurements from variables that can be associated to properties of the physical body. The main difference being that articulated models \cite{Grush2004emulationtheoryrepresentation} emphasize that the signals ought to come from embodied sensors. This latter property has been referred as subjective or situated body schema \cite{Hersch2008Onlinelearningbody}. The third category, implicit body schema, is more inline with traditional model learning methods in robotics and is aimed at constructing sensorimotor mappings.
 
 %As accentuated by the rich literature in model-based robotics, models of robots are required to achieve fine control and perform complex tasks. These models should include as much information as possible, explicit or implicit, of their body morphology (its embodiment). Most of the efforts associated with learning the body schema agree on the argument that an embodied robotic agent must autonomously learn and refine its body schema relying mainly proprioceptive information \cite{Morasso2015Revisitingbodyschema, Hoffmann2010Bodyschemarobotics}. Yet, in spite of the many bodily features encoded in the body schema, the majority of research focus on calibration of a known kinematic structure \redtext{REF} and only a few works address the discovery of the body topology \redtext{REF}. \redtext{It is worth mentioning that there is no solid consensus in the literature about whether the body schema includes the inertial description of the parts composing the body. Yet, given that the body schema is used for planning and executing movements and that the sensation of effort (force and torque) is part of proprioception, it seems reasonable to assume the body schema must incorporates such a representation.} ultimately, the question remains of what constitutes a body schema in robotics. 
 %
@@ -74,43 +101,56 @@ the robot and their representation in the model, given measured variables that c
 %% ---
 
 % SUBSECTION ================================================================================
-\subsection{Embodiment}
-Embodiment, rooted in the notion that intelligence necessitates a body \cite{Pfeifer2006Howbodyshapes}, is a key concept in robotics. In this context, it refers to how a robot's physical form and sensory-motor capabilities shape its interactions within its environment, influencing perception and actions \cite{Duffy2000Intelligentrobotsquestion}. This involves considerations of the robot's physical structure, situatedness, and morphology, extending beyond functionality to impact interactions with the external world \cite{Miller2018EmbodimentSituatednessMorphology}.
-
-At the core of embodiment is the physical form and morphology of a robot, including joints, limbs, sensors, and actuators. Beyond aesthetics, the design of a robot's physical form significantly influences movement, interaction capabilities, and overall functionality \cite{Pfeifer2006MorphologicalComputationConnecting}. Engineers delve into nuances of body morphology to tailor robots for specific tasks, whether exploration or assembly line operations.
-
-Embodying robots goes beyond external structure, emphasizing that artificial agents have physical bodies interacting with the environment through seamless sensorimotor integration \cite{Lara2018EmbodiedCognitiveRobotics}. Sensors act as receptors conveying information, and actuators enable the robot to act upon sensory input, resulting in adaptive behavior \cite{Pfeifer2007SelfOrganizationEmbodiment,Der2014RoleEmbodimentSelf}. This sensorimotor integration distinguishes embodied robotics from abstract computational systems.
-
-Embodiment also involves situatedness, where robots directly interact with their environment, enhancing autonomy and adaptability \cite{Brooks1991NewApproachesRobotics}. Incorporating action and sensory-motor experiences as sources of statistical regularities is crucial for cognitive robots \cite{Pezzulo2013ComputationalGroundedCognition}.
-
-The concept of body schema, closely linked to embodiment, represents an internal model encompassing a robot's body arrangement, geometry, and movements. It serves as a dynamic tool for spatial awareness. Adaptability is a hallmark of embodied robots, stemming from the close coupling of their physical bodies and control systems, enabling dynamic responses to environmental changes.
-
-In essence, embodiment in robotics transcends traditional boundaries, transforming robots into physically present, interactive agents. The intricate dance between physical form, sensorimotor integration, body schema, and adaptability enriches robotics, fostering the development of sophisticated, versatile, and context-aware systems.
 
 % SUBSECTION ================================================================================
 \subsection{Summary of the body concepts}
-The physical self, embodiment, body schema, and body morphology are interconnected concepts crucial for understanding human self-awareness and interaction with the world. The physical self involves our awareness of our body and its movements, incorporating proprioception and interoception. Embodiment posits that our thoughts and experiences are shaped by our physical bodies, influencing our mental representations of the world. The body schema, a dynamic internal model, reflects our body's structure and spatial position based on sensory feedback. Body morphology, encompassing size and shape, affects movement and interactions. These concepts are interrelated, with the physical self serving as the foundation for embodiment, the body schema manifesting embodiment, body morphology influencing embodiment, and embodiment shaping the physical self. In the realm of robotics, these concepts are pertinent for robots to effectively interact with the world, requiring a sense of their physical selves and an understanding of embodiment to develop grounded behaviors. Table~\ref{tab:body_concepts} condenses the meaning and relationships of these body concepts.
 % ---
-\begin{table}
-\begin{center}
-	\begin{tabular}{ |m{0.3\textwidth}|m{0.34\textwidth}|m{0.34\textwidth}| } 
-		\hline
-		\textbf{Concept} & \textbf{Definition} & \textbf{Relationship} \\ 
-		\hline
-		Physical self & Our awareness of our own body and its interactions with the environment & Foundation of embodiment \\ 
-		\hline
-		Embodiment & The idea that our thoughts, feelings, and experiences are shaped by our physical bodies & Dynamic representation of body's physical structure and position in space \\ 
-		\hline
-		Body schema	 & Our internal model of our body's physical structure and its position in space & Manifestation of embodiment \\ 
-		\hline		
-		Body morphology & The physical structure of our body, including its size, shape, and proportions & Influences embodiment and the physical self\\
-		\hline
-	\end{tabular}
-\end{center}
-\caption{\textbf{Relationships between the body concepts}}
-\label{tab:body_concepts}
+\begin{table}[t!]
+	\begin{center}
+		\begin{tabular}{ |m{0.3\textwidth}|m{0.34\textwidth}|m{0.34\textwidth}| } 
+			\hline
+			\textbf{Concept} & \textbf{Essence} & \textbf{Relationship} \\ 
+			\hline
+			Physical self & Awareness of the body and its interactions with the environment & Overarching concept \\ 
+			\hline
+			Embodiment & The idea that experiences are shaped by the physical body & Foundation for the physical self \\ 
+			\hline
+			Body morphology & The physical structure of the body, including sensorimotor capabilities & Manifestation of embodiment\\
+			\hline		
+			Body schema	 & Internal model of the body's physical structure and properties & Dynamic representation of the morphology \\ 
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{\textbf{Relationships between the body concepts}}
+	\label{tab:body_concepts}
 \end{table}
 % ---	
+The physical self, embodiment, body morphology, and body schema are interconnected concepts crucial for understanding bodily awareness. The physical self is an overarching concept that involves awareness and perception of the body and its movements. Embodiment posits that experiences are shaped by the physical body, influencing the self-constructed representations of the body and environment. Body morphology, is the specific instantiation of embodiment encompassing body structural description and sensorimotor properties. The body schema is the adaptable representation of the morphology based on sensorimotor interaction. % These concepts are interrelated, with the physical self serving as the foundation for embodiment, the body schema manifesting embodiment, body morphology influencing embodiment, and embodiment shaping the physical self. 
+%In robotics, these concepts are pertinent for robots to effectively interact with the world, requiring a sense of their physical selves and an understanding of embodiment to develop grounded behaviors. 
+Table~\ref{tab:body_concepts} condenses the essence and relationships of these body concepts. As will be shown in the subsequent discussion, the body schema in robotics is the entry points for robots to acquire an understanding of their physical self.
+
+
+%% ---
+%\begin{table}
+%\begin{center}
+%	\begin{tabular}{ |m{0.3\textwidth}|m{0.34\textwidth}|m{0.34\textwidth}| } 
+%		\hline
+%		\textbf{Concept} & \textbf{Definition} & \textbf{Relationship} \\ 
+%		\hline
+%		Physical self & Our awareness of our own body and its interactions with the environment & Foundation of embodiment \\ 
+%		\hline
+%		Embodiment & The idea that our thoughts, feelings, and experiences are shaped by our physical bodies & Dynamic representation of body's physical structure and position in space \\ 
+%		\hline
+%		Body schema	 & Our internal model of our body's physical structure and its position in space & Manifestation of embodiment \\ 
+%		\hline		
+%		Body morphology & The physical structure of our body, including its size, shape, and proportions & Influences embodiment and the physical self\\
+%		\hline
+%	\end{tabular}
+%\end{center}
+%\caption{\textbf{Relationships between the body concepts}}
+%\label{tab:body_concepts}
+%\end{table}
+%% ---	
 
 
 
@@ -119,8 +159,8 @@ The physical self, embodiment, body schema, and body morphology are interconnect
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\section{Robot body representation}
-In the subsequent discussion, embodiment and robot morphology will be considered as almost equivalent concepts that relate to the actual physical attributes of the robot body. As accentuated by the rich literature in model-based robotics, models of robots that capture these attributes are required to achieve fine control and perform complex tasks. These models should include as much information as possible, explicit or implicit, of their body morphology (or embodiment). Most of the efforts associated with learning the body schema agree on the argument that an embodied robotic agent must autonomously learn and refine its body schema relying mainly proprioceptive information \cite{Morasso2015Revisitingbodyschema, Hoffmann2010Bodyschemarobotics}. Yet, in spite of the many bodily features encoded in the body schema, the majority of research focus on calibration of a known kinematic structure \redtext{REF} and only a few works address the discovery of the body topology \redtext{REF}. \redtext{It is worth mentioning that there is no solid consensus in the literature about whether the body schema includes the inertial description of the parts composing the body. Yet, given that the body schema is used for planning and executing movements and that the sensation of effort (force and torque) is part of proprioception, it seems reasonable to assume the body schema must incorporates such a representation.} ultimately, the question remains of what constitutes a body schema in robotics. 
+\section{The robot body schema}
+Embodiment and robot morphology are almost equivalent concepts that relate to the actual physical attributes of the robot body. As accentuated by the rich literature in model-based robotics, models of robots that capture these attributes are required to achieve fine control and perform complex tasks. These models should include as much information as possible, explicit or implicit, of their embodiment. A body schema is a model that serves this purpose. Most of the efforts associated with learning the body schema agree on the argument that an embodied robotic agent must autonomously learn and refine its body schema relying mainly proprioceptive information \cite{Morasso2015Revisitingbodyschema, Hoffmann2010Bodyschemarobotics}. Yet, in spite of the many bodily features encoded in the body schema, the majority of research focus on calibration of a known kinematic structure \cite{Hart2010Roboticselfmodels,Sturm2012Bodyschemalearning,Hersch2008Onlinelearningbody} and only a few works address the discovery of the body topology \cite{Bongard2006Resilientmachinescontinuous}. Additionally, \redtext{it is worth mentioning that there is no solid consensus in the literature about whether the body schema includes the inertial description of the parts composing the body. Yet, given that the body schema is used for planning and executing movements and that the sensation of effort (force and torque) is part of proprioception, it seems reasonable to assume the body schema could incorporate such a representation.} Ultimately, the question remains of what constitutes a body schema in robotics. 
 
 To continue the discussion in this work the following conceptual definition of the robot body schema will be used:
 % ---
@@ -132,45 +172,11 @@ To continue the discussion in this work the following conceptual definition of t
 \end{shaded}
 % ---
 
-% SUBSECTION ================================================================================
-\subsection{Proprioception}
-Proprioception, crucial for executing coordinated movements, refers to the sense of the position and movement of the body or its segments \cite{Kenzie2017compositeroboticbased}. The signals emanate from mechanoreceptors (proprioceptors) like muscle spindles or Golgi tendon organs, embedded in joints, muscles, and tendons \cite{Proske2012proprioceptivesensestheir}. These receptors detect distinct features, such as joint position, movement, and effort. Proprioceptive signals are transmitted to the central nervous system, where they are integrated with information from other sensory systems, such as the visual and vestibular systems, to create an overall representation of the body's motion and orientation. This representation is essential for motor coordination and recovery. Proprioception is generally categorized into two submodalities: kinaesthesia, the sense of limb movement, and joint position sense, the sense of limb position \cite{DAntonio2021RoboticAssessmentWrist,Hillier2015AssessingProprioceptionSystematic}.
-
-Proprioceptive signals inform an agent about the position and movement of limbs and trunk, enabling it to maneuver the body around obstacles even in poor visibility conditions. Similarly, proprioception---in combination with the body schema---allows the manipulation of objects outside the field of vision. Traditionally confined to conscious sensations, proprioceptors include receptors for kinesthetic sensations (position, movement, balance), and those related to effort (tension, force, heaviness). The latter being directly in association  with motor commands. Indeed, various proprioceptive sensations can be attributed to a centrally originated sense of effort \cite{Proske2012proprioceptivesensestheir}. Lastly, a fundamental role of proprioception is to ensure the plasticity of the body schema \cite{Cardinali2016Proprioceptionisnecessary}.
-
-% SUBSECTION ================================================================================
-\subsection{Robot proprioception}
-%\begin{figure}
-%	\begin{center}
-%		\includegraphics[width=0.99\textwidth]{example-image-a}
-%		\caption{\textbf{Examples of proprioceptive sensors.}}
-%		\label{fig:example_proprioceptive_sensors}
-%	\end{center}
-%\end{figure}
-Akin to biological agents, robot proprioception refers to a robot's ability to sense and perceive the position, movement, orientation, and effort of its own body parts. Similar to how humans rely on proprioception to be aware of their body's position and movement, robots leverage proprioceptive capabilities to understand their own kinematics and dynamics. This information is crucial for robots to execute precise and coordinated movements, adapt to changes in their environment, and interact effectively. Typically, robotic proprioception is provided by the following sensors\cite{Siegwart2011Introductionautonomousmobile}:
-% ---
-\begin{itemize}
-	\item \textbf{Joint Encoders:} Sensors that measure the angular position of each joint in a robot. They provide feedback on the angular displacement of the joints, allowing the robot to determine its joint angles accurately. Conventionally, numerical differentiation of these signals are used to convey joint velocity.
-	
-	\item \textbf{Gyroscopes:} They measure the rate body angular velocity of a body. They help in determining the robot's orientation and changes in orientation over time. Gyroscopic sensors contribute to maintaining stability and control in dynamic motions.
-	
-	\item \textbf{Accelerometers:} Accelerometers measure the linear acceleration of a body in various directions. By integrating acceleration data over time, robots can derive information about velocity and its changes. Accelerometers are vital for tasks requiring dynamic motion analysis.
-	
-%	\item \textbf{Inertial Measurement Units (IMUs):} IMUs combine data from accelerometers and gyroscopes to provide comprehensive information about a robot's linear acceleration and angular velocity. IMUs are often used for estimating the robot's pose (position and orientation) in three-dimensional space.
-
-	\item \textbf{Force/Torque Sensors:} Force and torque sensors measure the wrench applied to a robot's end-effector or joints. These sensors provide feedback on external forces acting on the robot, enabling it to respond and adapt to interactions with objects or the environment.
-	
-	\item \textbf{Vibration sensors:} Vibration sensors measure the vibration of a robot's body. They can be used to detect collisions with objects and to maintain stability in uneven terrain.
-	
-	\item \textbf{Strain Gauges:} Strain gauges are used to measure deformation or strain in robot components, providing information about the stress and load on specific parts. This is useful for monitoring structural integrity and preventing mechanical failures.
-	
-\end{itemize}
-% ---
 
 %Apart from the typical measurements of the robot's joint position $ q $, velocity $ \dot{q}$, and joint torque $ \tau $, the use of inertial measurement units (IMU) to measure the acceleration $ \dot{\bm{v}} $ and angular velocity $\bm{\omega}$ of the robot's bodies has had applications in state \cite{DeLuca2007accelerationbasedstate} and joint velocity and acceleration estimation \cite{Birjandi2019Jointvelocityacceleration, Rotella2016Inertialsensorbased}, the control of mobile robots \cite{Dutta2019StabilityAnalysisHumanoid}, and in safe human-robot interaction\cite{Hamad2023ModularizeConquerGeneralized}.
 
-In addition to the standard measurements of joint position $q$, velocity $\dot{q}$, and joint torque $\tau$, using inertial measurement units (IMU) to measure the acceleration $\dot{\bm{v}}$
-and angular velocity $\bm{\omega}$ of the robot bodies has been used in state estimation \cite{DeLuca2007accelerationbasedstate}, kinematic estimation from incomplete sensor readings \cite{Rollinson2013RobustStateEstimation}, joint velocity and acceleration estimation \cite{Birjandi2019Jointvelocityacceleration, Rotella2016Inertialsensorbased}, mobile robot control \cite{Dutta2019StabilityAnalysisHumanoid}, and safe human-robot interaction \cite{Hamad2023ModularizeConquerGeneralized}.
+%In addition to the standard measurements of joint position $q$, velocity $\dot{q}$, and joint torque $\tau$, using inertial measurement units (IMU) to measure the acceleration $\dot{\bm{v}}$
+%and angular velocity $\bm{\omega}$ of the robot bodies has been used in state estimation \cite{DeLuca2007accelerationbasedstate}, kinematic estimation from incomplete sensor readings \cite{Rollinson2013RobustStateEstimation}, joint velocity and acceleration estimation \cite{Birjandi2019Jointvelocityacceleration, Rotella2016Inertialsensorbased}, mobile robot control \cite{Dutta2019StabilityAnalysisHumanoid}, and safe human-robot interaction \cite{Hamad2023ModularizeConquerGeneralized}.
 
 %\redtext{Vestibular properties are associated with the body schema, as evidenced by research indicating that vestibular signals play a role in modifying the body schema. Vestibular stimulation has been shown to influence the body schema, impacting the relative metric properties of body parts and contributing to more abstract cognitive representations of the body. Additionally, there is increasing evidence that vestibular signals and the vestibular cortex are involved in not only oculomotor and postural control, but also in the sense of body, self, and others. While vestibular signals may not serve to scale the internal representation of large parts of the body's metric properties, they do contribute to the body schema and its cognitive representations. Therefore, the vestibular system and its signals are integral to the body schema, impacting various aspects of bodily awareness and cognitive representations of the body.}
 %
@@ -184,7 +190,7 @@ and angular velocity $\bm{\omega}$ of the robot bodies has been used in state es
 %Robot proprioception, enabled by these diverse sensors, allows robots to operate autonomously, adapt to dynamic environments, and execute tasks with precision and efficiency.
 
 % SUBSECTION ================================================================================
-\subsection{Body features in the body schema}
+\subsection{Properties of the body schema}\label{sec:properties_of_the_body_schema}
 %The body schema serves as a link structure that outlines connections among components in the robot arm. This explicit model relies on predefined parameters, with joint angles, typically measured using encoders, tracking the trajectory based on proprioception. In contrast, implicit models are applied in uncalibrated systems, where interaction with the environment estimates desired parameters. This mechanistic approach differs from the biological case, where the inherently flexible link structure adapts to changes in the environment and the self-body. Unlike in robotics, where knowledge is externally provided at a high cost for parameter estimation, biological systems are inherently self-learning, aligning with implicit model principles. Additionally, robotics lacks cross-modal association, whereas the integration of multi-modal sensory information is fundamental in the biological case, emphasizing sophisticated adaptability and sensory integration \cite{Asada2018168Proprioceptionbodyschema}.
 
 
@@ -220,75 +226,97 @@ and angular velocity $\bm{\omega}$ of the robot bodies has been used in state es
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.99\textwidth]{body_schema_properties.pdf}
-		\caption{\textbf{Properties of the body schema.} The body schema subsumes several properties of the body morphology and results in cognitive properties resulting from the robot embodiment.}
+		\caption{\textbf{Properties of the body schema.} The body schema subsumes several properties of the body morphology.}
 		\label{fig:body_schema_properties}
 	\end{center}
 \end{figure}
 % ---
 
-The body schema representation encodes various attributes of the body morphology (see Fig.~\ref{fig:body_schema_properties}). %These attributes include:
+This section provides an overview of some of the most relevant attributes from the body morphology encoded by the body schema (see Fig.~\ref{fig:body_schema_properties}).
 
-\paragraph*{Spatial properties} The brain has a representation of the size and shape of different body parts. This allows for accurate and coordinated movements and interactions. Additionally, the body schema includes information about the spatial orientation and position of body parts in relation to each other. This is essential for coordinating movements and maintaining balance.
+\paragraph*{Spatial properties} The body schema includes a representation of the size and shape of different body parts. Additionally, information about their spatial orientation and position in relation to each other is part of the schema. This is essential for accurate and coordinated movements and interactions.
 
-\paragraph*{Somatosensory properties} Proprioception is the sense of the relative position of one's own body parts and the effort being employed in movement. Proprioceptive information helps in knowing the positions of limbs without having to visually observe them. The body schema encodes information about the angles and movements of joints, allowing for smooth and coordinated motor control. Sensations related to touch, pressure, temperature, and pain are integrated into the body schema. This information helps in perceiving and responding to stimuli from the external environment.
+\paragraph*{Somatosensory properties} The two main sensory modalities in somatosensation are proprioception and touch \cite{Warren2018SomatosensorySystemI}. The former is the sense of position, movement, and effort of the body parts. %Proprioceptive information helps in knowing the positions of limbs without having to visually observe them. The body schema encodes information about the angles and movements of joints, allowing for smooth and coordinated motor control. Sensations related to touch, pressure, temperature, and pain are integrated into the body schema. This information helps in perceiving and responding to stimuli from the external environment.
+The latter, conveys information about pressure and temperature that complement the body description and can be used to form a three-dimensional interpretation of the body.
 
-\paragraph*{Vestibular properties} Vestibular signals play a critical role in maintaining balance, spatial awareness, and facilitating coordinated movements. These signals offer vital information about the body's orientation in space, encompassing both linear and angular motion states. Whether engaged in locomotion, manipulation, or adjusting posture, vestibular signals seamlessly collaborate with proprioception. From everyday activities like walking to more intricate movements such as reaching, these signals intricately shape the body schema.
+\paragraph*{Vestibular properties} Vestibular signals play a critical role in maintaining balance. % spatial awareness, and facilitating coordinated movements. 
+These signals offer vital information about the body's orientation in space, encompassing both linear and angular motion states. Whether engaged in locomotion, manipulation, or adjusting posture, vestibular signals seamlessly collaborate with proprioception to shape the body schema.
 
 \paragraph*{Inertial properties} 
-The inertial properties within the body schema encompass characteristics associated with the mass distribution and moments of inertia of the body. This knowledge holds crucial significance for both forward and inverse models in motor control. In the process of planning a movement, the inertial properties of the body schema come into play as they are utilized to estimate the forces and torques necessary for moving various body parts. Subsequently, this information is employed to generate motor commands. These properties, working in conjunction with vestibular information, play a pivotal role in maintaining balance.
+The inertial description of the body encompass characteristics associated with the mass distribution of the body parts. This knowledge holds crucial significance for both forward and inverse models in motor control. In the process of planning a movement, the inertial properties of the body schema come into play as they are utilized to estimate the forces and torques necessary for moving various body parts. Subsequently, this information is employed to generate motor commands. %These properties, working in conjunction with vestibular information, play a pivotal role in maintaining balance.
 %The inertial properties of the body schema refer to the characteristics related to the body's mass distribution and moments of inertia. This knowledge is essential for forward and inverse models for motor control. When planning a movement, inertial properties of the the body schema are used to estimate the forces and torques required to move different parts of the body. This information is then used to generate motor commands that accurately control the movements of our muscles. These properties play an important role together with vestibular information in maintaining balance.
 %The body schema continuously updates its representation of the body's position, orientation, and mass distribution to maintain balance. 
 
-\paragraph*{Cognitive properties} The body schema enables the representation of body parts' position and orientation in space, facilitating tasks like reaching, grasping, and navigating. It also helps perceive the affordances of objects, indicating how they can be used. Enables meaningful interaction with objects based on their properties. Learning and Adaptation: The body schema's plasticity allows constant updates, incorporating new movements, environmental interactions, and changes in the body for improved motor performance and adaptation. Lastly, the body schema integrates information from various sensory modalities—sight, touch, proprioception, and vestibular input.
+\paragraph*{Cognitive properties} The body schema enables the understanding of the morphological properties of the body and improves the formation of regularities between perception and action by integrating multimodal sensory inputs. It also helps perceive the affordances of objects and of the body itself. Furthermore, the body schema's plasticity allows constant updates, incorporating information from novel movements, environmental interactions, and changes in the body for improved motor performance and adaptation. %Lastly, the body schema integrates information from various sensory modalities—sight, touch, proprioception, and vestibular input.
 
-\paragraph*{Motor Properties} The body schema is closely tied to motor control and the execution of movement. It helps in generating and executing motor programs for voluntary actions.
+\paragraph*{Motor Properties} The body schema is closely tied to motor control and the execution of movement. As mentioned before, it is an essential component of forward and inverse models used to generate and predict the consequences of motor commands.
+
+
 
 % SUBSECTION ================================================================================
-\subsection{Learning the body schema}
-Model-based robotics is inherently linked to the concept of the body schema, as defined in Def.~\ref{def:robot_body_schema}. It encompasses a theoretical foundation and methods that consider the physical properties of robots and integrate them into their representations. However, these methods often treat body properties as immutable, relying on a single identification or calibration procedure. Some studies have compared the conventional characteristics of model-based robotics, such as being amodal, fixed, explicit, centralized, and modular, with the properties of a biological body schema \cite{Hoffmann2021Bodymodelshumans}. Unlike robotic body models, the body schema is dynamic, capable of modification based on experiences, learning, and changes in the body itself. Additionally, biological systems are inherently self-learning and rely on the integration of multi-modal sensory information \cite{Asada2018168Proprioceptionbodyschema}.
-
-The integration of learning techniques with model-based robotics allows conventional fixed descriptions to adapt. Frameworks that exploit and extend this combination bring traditional model-based body models closer to a body schema, enabling robots to construct, monitor, and adjust their understanding of their bodies by integrating information from multiple sensory modalities. Consequently, this integration aligns more closely with the concept of the robot body schema. This dissertation focuses on a subset of the body schema properties highlighted in Fig.~\ref{fig:body_schema_properties}, marked with triangles in the figure. The subsequent discussion will survey frameworks and methods that have been employed or could be utilized to infer quantities directly connected to the highlighted properties of the robot body schema.
-
-%First, we define the self as a set
-%S = {N, A, λ, θ},
-%(1)
-%whose elements are the number of degrees of freedom (i.e.
-%links) N , the adjacency matrix A of the robot defining
-%the connectivity of the kinematic tree, the morphological
-%description of every link in the robot λ, and the inertial
-%parameters of the links θ.
-%Figure 1 shows how elements of S are found in three dif-
-%ferent inverse dynamics identification/learning frameworks.
-%Fig. 1a shows that classical system identification assumes
-%a known calibrated kinematic model (i.e., N , A, λ) and
-%mostly focuses on learning θ
-
-%\redtext{The body schema outlines connections among components in the robot morphology. Explicit models rely on predefined parameters, typically identified measured using encoders, tracking the trajectory based on proprioception. In contrast, implicit models are applied in uncalibrated systems, where interaction with the environment estimates desired parameters. This mechanistic approach differs from the biological case, where the inherently flexible link structure adapts to changes in the environment and the self-body. Unlike in robotics, where knowledge is externally provided at a high cost for parameter estimation, biological systems are inherently self-learning, aligning with implicit model principles. Additionally, robotics lacks cross-modal association, whereas the integration of multi-modal sensory information is fundamental in the biological case, emphasizing sophisticated adaptability and sensory integration \cite{Asada2018168Proprioceptionbodyschema}.}
-
-
-%Model-based robotics is naturally connected to the concept of body schema as per Def.~\ref{def:robot_body_schema}, it includes a theoretical groundwork and methods that take into account physical properties of robots and include them in their representations. Yet, the body properties within the scope of these methods are typically considered immutable and are inferred from a single identification or calibration procedure. Some works have contrasted the conventional amodal, fixed, explicit, centralized, and modular representations provided by model-based robotics against the properties of a biological body schema \cite{Hoffmann2021Bodymodelshumans}. Indeed, unlike body models in robotics, the body schema is not fixed but can be modified based on experiences, learning, and changes in the body itself. Moreover, biological systems are inherently self-learning and depend on the integration of multi-modal sensory information \cite{Asada2018168Proprioceptionbodyschema}.
-%
-%Combining model-based robotics with learning techniques makes conventional fixed descriptions capable of adaptation. Frameworks that leverage and expand this combination make conventional model-based body models closer to a body schema allowing robots to build, monitor, and adapt the understanding of their bodies integrating information from multiple sensory modalities. Therefore, from this combination it is possible to be more in line with the concept of the robot body schema. In this dissertation attention is given to a subset of the body schema properties in Fig.~\ref{fig:body_schema_properties}, identified with triangles in the figure. In the following discussion frameworks and methods that have been used or could be used to infer quantities that have a direct connection with the highlighted properties of the robot body schema will be surveyed.
-
-
-%\say{The concept of body schema is related to model learning in robotics as it provides a framework for robots to understand and represent their own bodies and the surrounding environment. Research in this area aims to enable robots to improve their capabilities by automatically synthesizing, extending, or adapting a model of their body, similar to how the human body schema allows for adaptive and coordinated movement. This involves integrating information from multiple sensory modalities and controlling complex bodies, which are desirable capabilities for robots. By studying the body representations in biology from a functional or computational perspective, researchers seek to develop robotic systems that can effectively model their own bodies and interact with the environment in a more human-like manner. Therefore, the concept of body schema plays a crucial role in the development of robotic systems that can learn and adapt to their own physical characteristics and the surrounding world.}
 
 % ===========================================================================================
 %                                           |                                               |
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\section{Representing properties of the robot body schema}
+\section{Robotics and the properties of the body schema}
+In the coming discussion an overview of the tools and methods from robotics and other disciplines that either are or can be used to represent some of the properties of the body schema presented in Sec.~\ref{sec:properties_of_the_body_schema} is provided. %In particular focus is given to a subset of the body schema properties, identified with a square  in Fig.~\ref{fig:body_schema_properties}, marked with triangles in the figure. The subsequent discussion will survey frameworks and methods that have been employed or could be utilized to infer quantities directly connected to the highlighted properties of the robot body schema.
+
+\subsection{Perceiving the body: Robot proprioception}
+%Proprioception refers to the sense of the position, movement, and effort of the body and its parts\cite{Kenzie2017compositeroboticbased,Proske2012proprioceptivesensestheir}. It is crucial for executing coordinated movements. In humans, proprioception is provided by mechanoreceptors like muscle spindles or Golgi tendon organs, embedded in joints, muscles, and tendons \cite{Proske2012proprioceptivesensestheir}. These receptors detect distinct features, such as joint position, movement, and effort. Proprioceptive signals are transmitted to the central nervous system, where they are integrated with information from other sensory systems, such as the visual and vestibular systems, to create an overall representation of the body's state. Proprioception is generally categorized into two sub-modalities: kinaesthesia, the sense of limb movement, and joint position sense, the sense of limb position \cite{DAntonio2021RoboticAssessmentWrist,Hillier2015AssessingProprioceptionSystematic}. A third, sometimes times separate, sub-modality is effort, which deals with the perception of the tension, force, and heaviness associated with motor commands \cite{Proske2012proprioceptivesensestheir}. Proprioception ensures the plasticity of the body schema \cite{Cardinali2016Proprioceptionisnecessary} and contributes to the a bodily awareness that, for example, enables an agent to maneuver the body around obstacles even in poor visibility conditions or to manipulate of objects outside the field of vision. 
+
+
+Proprioception, encompassing the awareness of body position, movement, and effort, plays a crucial role in executing coordinated movements \cite{Kenzie2017compositeroboticbased,Proske2012proprioceptivesensestheir}. In humans, mechanoreceptors such as muscle spindles and Golgi tendon organs, embedded in joints, muscles, and tendons, provide proprioceptive information, detecting features like joint position, movement, and effort \cite{Proske2012proprioceptivesensestheir}. These signals are transmitted to the central nervous system, where they integrate with information from other sensory systems, including visual and vestibular, to form an overall representation of the body's state. Proprioception is commonly divided into two sub-modalities: kinaesthesia, associated with the sense of limb movement, and joint position sense, linked to the sense of limb position \cite{DAntonio2021RoboticAssessmentWrist,Hillier2015AssessingProprioceptionSystematic}. Additionally, a third sub-modality, sometimes considered separately, is effort, which involves the perception of tension, force, and heaviness related to motor commands \cite{Proske2012proprioceptivesensestheir}. Proprioception is fundamental to the body schema, as it contributes to its formation and ensures its adaptability \cite{Cardinali2016Proprioceptionisnecessary}.
+
+
+%Traditionally confined to conscious sensations, proprioceptors include receptors for kinesthetic sensations (position, movement, balance), and those related to effort (tension, force, heaviness). The latter being directly in association  with motor commands. Indeed, various proprioceptive sensations can be attributed to a centrally originated sense of effort \cite{Proske2012proprioceptivesensestheir}. Lastly, a fundamental role of proprioception is to ensure the plasticity of the body schema \cite{Cardinali2016Proprioceptionisnecessary}.
+
+%Proprioceptive signals inform an agent about the position and movement of limbs and trunk, enabling it to maneuver the body around obstacles even in poor visibility conditions. Similarly, proprioception---in combination with the body schema---allows the manipulation of objects outside the field of vision. Traditionally confined to conscious sensations, proprioceptors include receptors for kinesthetic sensations (position, movement, balance), and those related to effort (tension, force, heaviness). The latter being directly in association  with motor commands. Indeed, various proprioceptive sensations can be attributed to a centrally originated sense of effort \cite{Proske2012proprioceptivesensestheir}. Lastly, a fundamental role of proprioception is to ensure the plasticity of the body schema \cite{Cardinali2016Proprioceptionisnecessary}.
 
 % SUBSECTION ================================================================================
-\subsection{Kinematics: Body size, position, and posture}
-The focus in this work is on serial kinematic chains with either fixed or floating bases and revolute joints. This sections revisits the kinematic modeling essentials of such structures.
+%\subsubsection{Robot proprioception}
+%\begin{figure}
+%	\begin{center}
+	%		\includegraphics[width=0.99\textwidth]{example-image-a}
+	%		\caption{\textbf{Examples of proprioceptive sensors.}}
+	%		\label{fig:example_proprioceptive_sensors}
+	%	\end{center}
+%\end{figure}
+%Akin to biological agents, robot proprioception refers to a robot's ability to sense and perceive the position, movement, orientation, and effort of its own body parts. 
+Similar to how humans rely on proprioception to be aware of their body's position and movement, robots leverage proprioceptive capabilities to understand their own kinematics and dynamics. This information is crucial for robots to execute precise and coordinated movements, adapt to changes in their environment, and interact effectively. Some relevant proprioceptive sensors in robotics include \cite{Siegwart2011Introductionautonomousmobile}:
+% ---
+\begin{itemize}
+	\item \textbf{Joint encoders:} %Sensors that measure the angular position of each joint in a robot. 
+	Provide feedback on the angular displacement of the joints, allowing the robot to determine its joint angles accurately. Conventionally, numerical differentiation of these signals are used to convey joint velocity.
+	
+	\item \textbf{Gyroscopes:} Measure the angular velocity of a body. They help in determining the orientation and changes in orientation over time of the robot body parts. Gyroscopic sensors contribute to maintaining stability and control in dynamic motions.
+	
+	\item \textbf{Accelerometers:} Monitor the linear acceleration of a body in various directions. Accelerometers are vital for tasks requiring dynamic motion analysis.
+	
+	%	\item \textbf{Inertial Measurement Units (IMUs):} IMUs combine data from accelerometers and gyroscopes to provide comprehensive information about a robot's linear acceleration and angular velocity. IMUs are often used for estimating the robot's pose (position and orientation) in three-dimensional space.
+	
+	\item \textbf{Strain gauges:} Strain gauges are used mostly in robot joints to provide feedback on the torque. They are used for torque controlled robots and are fundamental in collision detection frameworks.
+	
+	\item \textbf{Force/Torque sensors:} Measure the wrench applied to a robot's end-effector or joints. The feedback provided by these sensors enable it to perceive its own body, and to respond and adapt to interactions with objects or the environment.
+	
+	%	\item \textbf{Vibration sensors:} These units measure the vibration of a robot's body. They can be used to detect collisions with objects and to maintain stability in uneven terrain.
+	
+	
+	
+\end{itemize}
+% ---
+% SUBSECTION ================================================================================
+\subsection{Modeling body size, position, and posture: Robot kinematics}
+A serial kinematic chain is a sequence of rigid bodies called links connected by joints. In a serial kinematic chain the output of one joint becomes the input for the next and there are no loops. Robots, such as manipulators, legged robots, and humanoids, are instances of serial kinematic chains. The motion of the robot is achieved by the controlled rotation or translation of each joint.  A robot is said to be of fixed base if the first link in the chain (base link) is rigidly connected to the world. The best example being robot manipulators. On the contrary, in floating base robots, the base and all other links can freely rotate and translate in space. Humanoid robots are a good example of this type. The focus in this work is on serial kinematic chains with either fixed or floating bases and revolute joints. %This sections revisits the kinematic modeling essentials of such structures.
 
-A serial kinematic chain is a sequence of rigid bodies called links connected by joints. In a serial kinematic chain the output of one joint becomes the input for the next and there are no loops. Robots, such as manipulators, legged robots, and humanoids, are instances of serial kinematic chains. The motion of the robot is achieved by the controlled rotation or translation of each joint.  A robot is said to be of fixed base if the first link in the chain (base link) is rigidly connected to the world. The best example being robot manipulators. On the contrary, in floating base robots, the base and all other links can freely rotate and translate in space. Humanoid robots are a good example of this type.
+Robot joints can be classified into various types. One degree of freedom (DOF) joints include revolute joins (rotational motion about the joint axis), prismatic joints (translational motion along the direction of the joint axis), and  helical joints (simultaneous rotation and translation about a screw axis) \cite{Lynch2017Modernrobotics}. Joints can also have multiple degrees of freedom allowing independent translations and rotations about multiple axes. The configuration and number of joints in the chain determine the robot's total DOF. Typically a joint variable $q$ is used to express the translational or angular displacement between the links connected by a one-DOF joint. % \cite{Xie2003FundamentalsRoboticsLinking}. 
+For a robot with $n$ joints, the configuration is described by the vector 
+\begin{equation}
+	\bm{q} = [q_1,\ldots,q_i,\ldots,q_n]^\intercal \in \mathbb{R}^n.
+\end{equation}
 
-Robot joints can be classified into various types. One degree of freedom (DOF) joints include revolute joins (rotational motion about the joint axis), prismatic joints (translational motion along the direction of the joint axis), and  helical joints (simultaneous rotation and translation about a screw axis) \cite{Lynch2017Modernrobotics}. Joints can also have multiple degrees of freedom allowing independent translations and rotations about multiple axes. The configuration and number of joints in the chain determine the robot's total DOF. Typically a joint variable $q$ is used to express the translational or angular displacement between the links connected by a one-DOF joint \cite{Xie2003FundamentalsRoboticsLinking}. For a robot with $n$ joints, the configuration is described by the vector $\bm{q} = [q_1,\ldots,q_i,\ldots,q_n]^\intercal$.
-
-Joint axes are modeled as lines in space, represented as a vector, that indicate the direction about which a joint rotates or translates. In general, the range of mobility $\left[a,b\right] $ of a joint is mechanically constrained by upper $a$ and lower $b$ limits. The Cartesian product of all joint ranges is the configuration space of the robot.
+Joint axes are modeled as lines in space, represented as a vector, that indicate the direction about which a joint rotates or translates. In general, the range of mobility $\left[a,b\right] $ of a joint is mechanically constrained by upper $a$ and lower $b$ limits. The Cartesian product of all joint ranges is the configuration space of the robot \cite{Lynch2017Modernrobotics}.
 %% ---
 %\begin{figure}
 %	\begin{center}
@@ -299,7 +327,18 @@ Joint axes are modeled as lines in space, represented as a vector, that indicate
 %\end{figure}
 %% ---
 
+The pose of a rigid body in the kinematic chain represents the position and orientation of a coordinate frame rigidly attached to it with respect to a reference frame \cite{Siciliano2008RoboticsModellingPlanning}. A minimum of six parameters is needed to completely instantiate pose of a rigid body in Euclidean space \cite{Lynch2017Modernrobotics}. The pose of a given body is dependent on all the joint variables from the base to the current joint as well as on the geometry of the links. Considering the simplified humanoid robot shown in Fig.~\ref{fig:example_serial_kinematic_chain} as an example, the link corresponding to the left hand has the frame $\cframe{E}$ rigidly attached to it. Its pose can be expressed relative to the coordinate frame $\left\lbrace 0 \right\rbrace$ located at the humanoid's base link via the homogeneous transformation matrix% $^{\{0\}}\bm{T}_{\{E\}}  \in \mathbb{R}^{4\times 4}$ defined as
 % ---
+\begin{equation}
+	^{\{0\}}\bm{T}_{\{E\}} = \begin{bmatrix}
+		^{\{0\}}\bm{R}_{\{E\}}(\bm{q}) & ^{\{0\}}\bm{r}_{0E}(\bm{q}) \\
+		\bm{0}_{1\times3} & 1
+	\end{bmatrix} \in \mathbb{R}^{4\times 4}.
+\end{equation}
+% ---
+The vector $^{\{0\}}\bm{r}_{0E}(\bm{q}) \in \mathbb{R}^3$ denotes the location of the origin of the coordinate frame $\cframe{E}$ relative to and expressed in frame $\cframe{0}$. Similarly, the rotation matrix $^{\{0\}}\bm{R}_{\{E\}}(\bm{q})  \in \mathbb{R}^{3\times 3}$ expresses the orientation of frame $\cframe{E}$ in frame $\cframe{0}$. Both terms are function of the robot configuration vector $\bm{q}$.
+% ---
+
 \begin{figure*}[!t]
 	\centering	
 	\hspace*{\fill}
@@ -319,17 +358,6 @@ Joint axes are modeled as lines in space, represented as a vector, that indicate
 \end{figure*}
 % ---
 
-The pose of a rigid body in the kinematic chain represents the position and orientation of a coordinate frame rigidly attached to it with respect to a reference frame \cite{Siciliano2008RoboticsModellingPlanning}. A minimum of six parameters is needed to completely instantiate pose of a rigid body in Euclidean space \cite{Lynch2017Modernrobotics}. The pose of a given body is dependent on all the joint variables from the base to the current joint as well as on the geometry of the links. Considering the simplified humanoid robot shown in Fig.~\ref{fig:example_serial_kinematic_chain} as an example, the link corresponding to the left hand has the frame $\cframe{E}$ rigidly attached to it. Its pose can be expressed relative to the coordinate frame $\left\lbrace 0 \right\rbrace$ located at the humanoid's base link via the homogeneous transformation matrix $^{\{0\}}\bm{T}_{\{E\}}  \in \mathbb{R}^{4\times 4}$ defined as
-% ---
-\begin{equation}
-	^{\{0\}}\bm{T}_{\{E\}} = \begin{bmatrix}
-		^{\{0\}}\bm{R}_{\{E\}}(\bm{q}) & ^{\{0\}}\bm{r}_{0E}(\bm{q}) \\
-		\bm{0}_{1\times3} & 1
-	\end{bmatrix}.
-\end{equation}
-% ---
-The vector $^{\{0\}}\bm{r}_{0E}(\bm{q}) \in \mathbb{R}^3$ denotes the location of the origin of the coordinate frame $\cframe{E}$ relative to and expressed in frame $\cframe{0}$. Similarly, the rotation matrix $^{\{0\}}\bm{R}_{\{E\}}(\bm{q})  \in \mathbb{R}^{3\times 3}$ expresses the orientation of frame $\cframe{E}$ in frame $\cframe{0}$. Both terms are function of the robot configuration vector $\bm{q}$.
-
 A rotation matrix is orthogonal, that is $ \bm{R}^{-1} = \bm{R}^\intercal$, and has unit determinant. Any rotation matrix belongs to the set of all rotation matrices, which is a group known as the rotation group or the special orthogonal group SO(3) \cite{Lynch2017Modernrobotics}. A composition of rotations is achieved by the matrix product of two or more rotation matrices. Similarly, the set of all transformation matrices defines the special Euclidean group SE(3), which represents the group of rigid body motions in 3D space. Just like rotation matrices, all the elements of SE(3) are orthogonal and have determinant equal to 1. Referring back to Fig.~\ref{fig:example_serial_kinematic_chain}, the composition of transformation matrices from the left hand of the humanoid to its base yields the following expression
 \begin{equation}
 	^\cframe{0}\bm{T}_\cframe{E} = 
@@ -341,7 +369,7 @@ A rotation matrix is orthogonal, that is $ \bm{R}^{-1} = \bm{R}^\intercal$, and 
 \end{equation}
 a graphical depiction of this sequence of transformations is shown in Fig.~\ref{fig:transformation_sequence}.
 
-In general, the kinematic structure of a robot consists in describing the location and orientation of the frames attached to the composing links. Thus, as homogeneous transformation matrix is associated to each of the $n+1$ rigid bodies in the kinematic chain.
+In general, describing the kinematic structure of a robot consists in expressing the location and orientation of the frames attached to the composing links. This is conventionally achieved by associating a homogeneous transformation matrix to each of the $n+1$ rigid bodies in the kinematic chain.
 
 \subsubsection{Representation of transformation matrices}
 % ---
@@ -384,7 +412,7 @@ depending on the Euler angles \cite{Siciliano2008RoboticsModellingPlanning} $\le
 	\end{bmatrix}^\intercal \in \mathbb{R}^{10}
 \end{equation}
 % ---
-is used to define the rotation matrix $^\cframe{P}\bm{R}^T_\cframe{C}$ in axis-angle form \cite{Lynch2017Modernrobotics} as
+determines the rotation matrix $^\cframe{P}\bm{R}^T_\cframe{C}$ in axis-angle form \cite{Lynch2017Modernrobotics} as
 % ---
 \begin{equation}\label{eq:rotation_matrix_axis_angle}
 	^\cframe{P}\bm{R}_\cframe{C}\left(q_{C};\bm{\gamma}\right) = \left(\exp^{\left[{^{\left\lbrace P\right\rbrace}}\bm{\xi}_{C}\right]\phi}\right) \left(\exp^{\left[{^{\left\lbrace C\right\rbrace}}\bm{\zeta}_{C}\right] q_C}	\right).
@@ -398,7 +426,7 @@ is used to define the rotation matrix $^\cframe{P}\bm{R}^T_\cframe{C}$ in axis-a
 %	\end{bmatrix}^\intercal.
 %\end{equation}
 % ---
-The terms $ \bm{\xi} \in \mathbb{R}^3$ and $ \bm{\zeta} \in \mathbb{R}^3$ being unitary rotation axes and  $ \left[~\cdot~\right] $ denoting a vector $\bm{u} = \left[u_x,u_y,u_z\right]^\intercal$ expressed as a skew-symmetric matrix; i.e.,
+The terms $ \bm{\xi} \in \mathbb{R}^3$ and $ \bm{\zeta} \in \mathbb{R}^3$ are unitary rotation axes and $ \left[~\cdot~\right] $ denotes a vector $\bm{u} = \left[u_x,u_y,u_z\right]^\intercal$ expressed as a skew-symmetric matrix; i.e.,
 % ---
 \begin{equation}
 	[\bm{u}] = \begin{bmatrix}
@@ -451,7 +479,7 @@ The motion of a rigid body in a kinematic chain is a composition of pure transla
 	\bm{\nu} = \left[\bm{v}^\intercal, \bm{\omega}^\intercal\right]^\intercal.
 \end{equation*}
 % ---
-The twist of a child body $C$ depends on the motion of its driving joint $(q_C,\dot{q}_C)$, the twist of the parent link $P$ $\left(\bm{v}_P,\bm{\omega}_P\right)$, and the geometry of the links. The corresponding expressions are
+The twist of a child body $C$ depends on the position $q_C$ and velocity $\dot{q}_C$ of its driving joint, the twist of the parent link $P$ $\left(\bm{v}_P,\bm{\omega}_P\right)$, and the geometry of the links. The corresponding expressions are
 % ---
 \begin{equation}\label{eq:cartesian_linear_velocity}
 	^\cframe{C}\bm{v}_C = ^\cframe{C}\bm{R}_\cframe{P}\left(q_C\right)\left(^\cframe{P}\bm{v}_P + \left[^\cframe{P}\bm{\omega}_p\right] {}^\cframe{C}\bm{r}_C\right)
@@ -481,9 +509,9 @@ Kinematic calibration is crucial for robotic systems, particularly for floating 
 
 Two primary approaches have been developed for kinematic calibration: model-based and non-parametric (model-less) calibration \cite{ChenGang2014Reviewkinematicscalibration}. Model-based calibration utilizes a mathematical model of the robot's kinematic structure, typically represented by the DH parameters. The calibration process involves measuring joint angles and end-effector poses for various configurations and then estimating the DH parameters that best fit the observed data. Model-based calibration offers high accuracy but is sensitive to errors in the robot's model. Model-less calibration, on the other hand, does not rely on a predefined kinematic model. Instead, it estimates the relationship between joint angles and end-effector pose using a set of external markers, fiducial markers, or visual features in the robot's environment. Model-less calibration is more robust to model inaccuracies but can be more computationally demanding and complex.
 
-Calibrating floating base systems, like humanoid and legged robots, is challenging due to their complex kinematic structure, geometrical uncertainties, sensor noise, and dynamic environment. The hierarchical tree structure with multiple joints and links makes accurate calibration computationally challenging. Geometrical uncertainties from manufacturing tolerances, wear and environmental factors can introduce errors, affecting the accuracy of the estimated kinematic parameters. Sensor noise, from on-board and off-board measurement devices, adds uncertainty, impacting parameter accuracy, particularly in dynamic environments. The dynamic nature of these robots, with rapidly changing movements and environmental conditions, further complicates calibration, which requires continuous adaptation and monitoring.
+Calibrating floating base systems, like humanoid and legged robots, is challenging due to their complex kinematic structure, geometrical uncertainties, sensor noise, and dynamic environment \redtext{REF}. The hierarchical tree structure with multiple joints and links makes accurate calibration computationally challenging. Geometrical uncertainties from manufacturing tolerances, wear and environmental factors can introduce errors, affecting the accuracy of the estimated kinematic parameters. Sensor noise, from on-board and off-board measurement devices, adds uncertainty, impacting parameter accuracy, particularly in dynamic environments. The dynamic nature of these robots, with rapidly changing movements and environmental conditions, further complicates calibration, which requires continuous adaptation and monitoring.
 
-\paragraph*{Calibration devices.} Several devices are typically used to perform this calibration, each with its own advantages and limitations. \TODO~\redtext{Add the variables that are measured/identified in the following processes.}
+\paragraph*{Calibration methods} Various methods are used to perform kinematic calibration, each with its own advantages and limitations.
 % ---
 \begin{itemize}
 	\item Marker-based calibration.  This method relies on external markers at a location $\bm{x}_i$ attached to the robot's body. A camera system tracks the movements of these markers, and the calibration process estimates the relationship between the measured joint angles $\bm{q}$ and marker positions. This makes use of the robot forward kinematics formulation
@@ -557,7 +585,7 @@ by the Newton-Euler equations \cite{Atkeson1986Estimationinertialparameters}:
 	\end{bmatrix}}_{\bm{A}_i} \bm{\theta}_i,
 \end{equation}
 % ---
-where the definitions for the Cartesian linear and angular accelerations in Eq.~\eqref{eq:cartesian_linear_acceleration} and Eq.~\eqref{eq:cartesian_angular_acceleration} were used and term $\left[\bullet{\bm{\omega}}_i\right]$ is defined as
+where the wrench $\bm{w}_{ii} =\left[\bm{f}_{ii}^\intercal, \bm{n}_{ii}^\intercal\right]^\intercal$ corresponds to the force and moment at joint $i$ due to the inertial properties of link $i$ only. The term $\bm{g} = [0, 0, -9.81]^\intercal$ m/s is the gravitational acceleration vector and the  Cartesian linear and angular accelerations are expressed according to  Eq.~\eqref{eq:cartesian_linear_acceleration} and Eq.~\eqref{eq:cartesian_angular_acceleration}. The term $\left[\bullet{\bm{\omega}}_i\right]$ is defined as
 % ---
 \begin{equation}
 	[\bullet \bm{\omega}] = \begin{bmatrix}
@@ -567,9 +595,9 @@ where the definitions for the Cartesian linear and angular accelerations in Eq.~
 	\end{bmatrix}.
 \end{equation}
 % ---
-The wrench $\bm{w}_{ii} =\left[\bm{f}_{ii}^\intercal, \bm{n}_{ii}^\intercal\right]^\intercal$ corresponds to the force and moment at joint $i$ due to the inertial properties of link $i$ only.
 
-As a result of joint $j$ exerting a wrench on its associated link $j$, there will be a reacting wrench onto to link $i$; as such, $^\cframe{i}\bm{w}_{ij} \in \mathbb{R}^6$ is the wrench at joint $i$ due to the movement of link $j$ alone. Given a transformation matrix $^\cframe{i}\bm{T}_\cframe{j}$ defined by a tuple $\left(^\cframe{i}\bm{R}_\cframe{j},^\cframe{i}\bm{p}_j\right)$, its adjoint representation \cite{Lynch2017Modernrobotics}
+
+As a result of joint $j$ exerting a wrench on its associated link $j$, there will be a reacting wrench onto link $i$; as such, $^\cframe{i}\bm{w}_{ij} \in \mathbb{R}^6$ is the wrench at joint $i$ due to the movement of link $j$ alone. Given a transformation matrix $^\cframe{i}\bm{T}_\cframe{j}$ defined by a tuple $\left(^\cframe{i}\bm{R}_\cframe{j},^\cframe{i}\bm{p}_j\right)$, its adjoint representation \cite{Lynch2017Modernrobotics}
 \begin{equation}
 	\left[\text{Ad}_{\bm{T}_j}\right] =  
 	\begin{bmatrix}
@@ -655,7 +683,7 @@ at each of the joints can be expressed in matrix form
 	\label{eq:wrench_inverse_dynamics}
 \end{equation}
 % ---
-This expression corresponds to the inverse dynamics of the robot, that is, its output gives the $n$ wrenches necessary to produce the rigid body motions captured by the quantities ${}^\cframe{i}\bm{\omega}_i$ $,{}^\cframe{i}\dot{\bm{\omega}}_i$, and ${}^\cframe{i}\dot{\bm{v}}_i$ for each of the $n$ joints. Given that typically only joint torque $\tau$ is measured, Eq.~\eqref{eq:wrench_inverse_dynamics} is projected onto the rotation axes of the joints \cite{Siciliano2007SpringerHandbookRobotics} yielding
+This expression corresponds to the inverse dynamics of the robot, that is, its output gives the $n$ wrench vectors necessary to produce the rigid body motions captured by the quantities ${}^\cframe{i}\bm{\omega}_i$ $,{}^\cframe{i}\dot{\bm{\omega}}_i$, and ${}^\cframe{i}\dot{\bm{v}}_i$ for each of the $n$ joints. Since, typically, only joint torque $\tau$ is measured, Eq.~\eqref{eq:wrench_inverse_dynamics} is projected onto the rotation axes of the joints \cite{Siciliano2007SpringerHandbookRobotics} yielding
 % ---
 \begin{equation}\label{eq:lip_inverse_dnamics}
 \bm{\tau} = \bm{Y}\left(
@@ -735,10 +763,10 @@ Methods to address the identifiability, numerical stability, and observability o
 
 %Several methods have been proposed to estimate the inertial parameters of humanoid and legged robots. For instance, there are methods utilizing base-link dynamics, which require generalized coordinates of the base-link, joint angles, and external forces \cite{Ayusawa2008Identificationhumanoidrobots, Ayusawa2008Identificationinertialparameters, Ayusawa2009MinimalsetInertial, Iwasaki2012Identificationinertialparameters}. The work by Jovic et al. \cite{Jovic2016HumanoidHumanInertia} introduced a hierarchical optimization approach, accurately reconstructing ground reaction forces and force moments. Mistry et al. \cite{Mistry2009Inertialparameterestimation} proposed a method for whole-body inertial parameter estimation, demonstrating feasibility for floating-base humanoid systems using a partial force sensor set. Another state-estimation technique for legged robots, combining forward kinematics and preintegrated contact factors, was introduced by Hartley et al. \cite{Hartley2018LeggedRobotState}. Addressing the dynamics of legged systems, Ayusawa et al. \cite{Ayusawa2014Identifiabilityidentificationinertial} proposed a method based on underactuated base-link dynamics for identifying inertial parameters. Buchanan et al. \cite{RussellBuchanan2021LearningInertialOdometry} introduced a proprioceptive state estimator for legged robots based on learned displacement measurement from IMU data, significantly reducing drift in challenging scenarios. Extensions for floating-base robots with flexible joints and links have been presented elsewhere \cite{Khalil2017GeneralDynamicAlgorithm}. In general, unlike the methods for the inertial parameter estimation of fixed based robots, the methods for floating base robots are not as standardized.
 
-\paragraph*{Floating base} Research in robotics is actively exploring methods for estimating the inertial parameters of floating base systems; in particular, humanoid and legged robots. For instance, there are methods utilizing base-link dynamics, which require generalized coordinates of the base-link, joint angles, and external forces \cite{Ayusawa2008Identificationhumanoidrobots, Ayusawa2008Identificationinertialparameters, Ayusawa2009MinimalsetInertial, Iwasaki2012Identificationinertialparameters}. The work by Jovic et al. \cite{Jovic2016HumanoidHumanInertia} introduced a hierarchical optimization approach, accurately reconstructing ground reaction forces and force moments. Mistry et al. \cite{Mistry2009Inertialparameterestimation} proposed a method for whole-body inertial parameter estimation, demonstrating feasibility for floating-base humanoid systems using a partial force sensor set. Another state-estimation technique for legged robots, combining forward kinematics and preintegrated contact factors, was introduced by Hartley et al. \cite{Hartley2018LeggedRobotState}. Addressing the dynamics of legged systems, Ayusawa et al. \cite{Ayusawa2014Identifiabilityidentificationinertial} proposed a method based on underactuated base-link dynamics for identifying inertial parameters. Buchanan et al. \cite{RussellBuchanan2021LearningInertialOdometry} introduced a proprioceptive state estimator for legged robots based on learned displacement measurement from IMU data, significantly reducing drift in challenging scenarios. Extensions for floating-base robots with flexible joints and links have been presented elsewhere \cite{Khalil2017GeneralDynamicAlgorithm}. In general, unlike the methods for the inertial parameter estimation of fixed based robots, the methods for floating base robots are not as standardized.
+\paragraph*{Floating base} Research in robotics is actively exploring methods for estimating the inertial parameters of floating base systems; in particular, humanoid and legged robots. For instance, there are methods utilizing base-link dynamics, which require generalized coordinates of the base-link, joint angles, and external forces \cite{Ayusawa2008Identificationhumanoidrobots, Ayusawa2008Identificationinertialparameters, Ayusawa2009MinimalsetInertial, Iwasaki2012Identificationinertialparameters}. The work by Jovic et al. \cite{Jovic2016HumanoidHumanInertia} introduced a hierarchical optimization approach, accurately reconstructing ground reaction forces and force moments. Mistry et al. \cite{Mistry2009Inertialparameterestimation} proposed a method for whole-body inertial parameter estimation, demonstrating feasibility for floating-base humanoid systems using a partial force sensor set. Another state-estimation technique for legged robots, combining forward kinematics and preintegrated contact factors, was introduced by Hartley et al. \cite{Hartley2018LeggedRobotState}. Addressing the dynamics of legged systems, Ayusawa et al. \cite{Ayusawa2014Identifiabilityidentificationinertial} proposed a method based on underactuated base-link dynamics for identifying inertial parameters. Buchanan et al. \cite{RussellBuchanan2021LearningInertialOdometry} introduced a proprioceptive state estimator for legged robots based on learned displacement measurement from IMU data, significantly reducing drift in challenging scenarios. Extensions for floating-base robots with flexible joints and links have been presented elsewhere \cite{Khalil2017GeneralDynamicAlgorithm}. From the variety of methods, a reasonable conclusion is that, unlike the methods for the inertial parameter estimation of fixed based robots, the methods for floating base robots are not as standardized.
 
 % SUBSECTION ========================================================================================
-\subsection{Physical feasibility of the inertial parameters}\label{sec:spd_manifold}
+\subsubsection{Physical feasibility of the inertial parameters}\label{sec:spd_manifold}
 %A \emph{differentiable manifold} $\mathcal{M}$ is a topological space that is locally similar to Euclidean space and has a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. $\mathcal{T}_{\bm{P}}\mathcal{M}$ is the \emph{tangent space} at a point $\bm{P}\in \mathcal{M}$ and represents the vector space of all the possible tangent vectors to the manifold that pass through $\bm{P}$. The pair $(\mathcal{M},\rho)$ defines a \emph{Riemannian manifold} if $ \mathcal{M} $ is differentiable and is equipped with a positive definite metric tensor $\rho$ at each point \cite{Pennec2006Riemannianframeworktensor}. 
 More recently, the physical feasibility of the identified parameters has taken a prominent role \cite{Wensing2017Linearmatrixinequalities,Ayusawa2010Identificationstandardinertial,Traversaro2016Identificationfullyphysical,Sousa2014Physicalfeasibilityrobot}. This is vital due to its importance in ensuring stable control methods. For instance, physically feasible inertial parameters lead to always invertible symmetric positive definite mass matrices. For the inertial parameters of a rigid body to be physically feasible, it is required that its mass is
 strictly positive and that its inertia matrix $ \bm{I}_i $ is symmetric positive definite (SPD)  with its eigenvalues ---$\bm{s}\left(\bm{I}_i\right) = [s_1,s_2,s_3]^T$--- satisfying the triangle inequality, i.e.:\\
@@ -754,17 +782,17 @@ strictly positive and that its inertia matrix $ \bm{I}_i $ is symmetric positive
 			s_2 + s_3 \geq s_1\\
 			s_1 + s_3 \geq s_2
 		\end{cases}
-	\end{aligned} 
+	\end{aligned} .
 \end{equation}
 % ---
 
-The physical feasibility constraints can be expressed in the language of differential geometry. First, it is necessary to define a differentiable manifold $\mathcal{M}$. It is a topological space that exhibits local similarity to Euclidean space and possesses a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. At any point $\bm{P}$ on the manifold there is an associated tangent space, denoted as $\mathcal{T}_{\bm{P}}\mathcal{M}$, that encompasses the vector space containing all possible tangent vectors to $\mathcal{M}$ that pass through $\bm{P}$. A Riemannian manifold is defined by the pair $(\mathcal{M},\rho)$, where each point $\bm{P}$ in $\mathcal{M}$ is equipped with a positive definite metric tensor $\rho$ \cite{Pennec2006Riemannianframeworktensor}.
+These physical feasibility constraints can be expressed in the language of differential geometry. To that end, it is first necessary to define a differentiable manifold $\mathcal{M}$. It is a topological space that exhibits local similarity to Euclidean space and possesses a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. At any point $\bm{P}$ on the manifold there is an associated tangent space, denoted as $\mathcal{T}_{\bm{P}}\mathcal{M}$, that encompasses the vector space containing all possible tangent vectors to $\mathcal{M}$ that pass through $\bm{P}$. A Riemannian manifold is defined by the pair $(\mathcal{M},\rho)$, where each point $\bm{P}$ in $\mathcal{M}$ is equipped with a positive definite metric tensor $\rho$ \cite{Pennec2006Riemannianframeworktensor}.
 
 %A differentiable manifold, denoted as $\mathcal{M}$, is a topological space that exhibits local similarity to Euclidean space and possesses a globally defined differential structure \cite{Jayasumana2013KernelmethodsRiemannian}. The tangent space at a point $\bm{P}$ in $\mathcal{M}$, denoted as $\mathcal{T}_{\bm{P}}\mathcal{M}$, encompasses the vector space containing all possible tangent vectors to the manifold that pass through $\bm{P}$. A Riemannian manifold is defined by the pair $(\mathcal{M},\rho)$, where $\mathcal{M}$ is a differentiable manifold and each point in $\mathcal{M}$ is equipped with a positive definite metric tensor $\rho$ \cite{Pennec2006Riemannianframeworktensor}.
 
 %Denoting $\mathcal{S}^n \triangleq\left\lbrace \bm{S} \in \mathbb{R}^{n \times n} : \bm{S} = \bm{S}^T\right\rbrace$ as the space of real square symmetric matrices of dimension $n \times n$. Then, the space of $n \times n$ SPD matrices $ \mathcal{S}^n_{++}\triangleq \left\lbrace \bm{P}\in \mathcal{S}^n : \bm{P} \succ 0 \right\rbrace $  defines a smooth submanifold $\mathcal{M}$ of $\mathcal{S}^n$. By definition, its tangent space $\mathcal{T}\mathcal{M} \in \mathcal{S}^n$ is equipped with an \emph{affine invariant Riemannian metric} $\rho$ \cite{Lee2018geometricalgorithmrobust}. Consequently, $ \mathcal{S}^n_{++} $ defines a Riemannian manifold. Finally, the product manifold $ \mathcal{M}^N $ of SPD manifolds is the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$. It is the set of matrices  $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}_i\in\mathcal{M}_i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho_{1},\ldots, \rho_{N} \right) $. %Similarly, the generalizations of the operators mentioned above to $\mathcal{M}^N$ are the concatenations of the individual operators for each $\mathcal{M}_i$.
 
-The inertial parameters of rigid body, and by extension of a robot, are associated to the manifolds of SPD matrices. To make clear this relation, let $\mathcal{S}^n$ be the space of real square symmetric matrices with dimension $n \times n$, denoted as $\mathcal{S}^n \triangleq\left\lbrace \bm{S} \in \mathbb{R}^{n \times n} : \bm{S} = \bm{S}^T\right\rbrace$. The space of $n \times n$ SPD matrices, $\mathcal{S}^n_{++}\triangleq \left\lbrace \bm{P}\in \mathcal{S}^n : \bm{P} \succ 0 \right\rbrace$, defines a smooth submanifold $\mathcal{M}$ within $\mathcal{S}^n$. Its tangent space $\mathcal{T}\mathcal{M} \in \mathcal{S}^n$ is equipped with an \emph{affine invariant Riemannian metric} $\rho$ \cite{Lee2018geometricalgorithmrobust}, thereby making $ \mathcal{S}^n_{++} $ a Riemannian manifold. Finally, the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$ defines the product manifold of SPD manifolds.  It represents the set of matrices $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}_i\in\mathcal{M}_i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho{1},\ldots, \rho{N} \right) $. The physical feasibility constraints of the inertial parameters $\bm{\theta}_i$ of the $i$-th link, summarized in Eq.~\eqref{eq:feasibility_constraints}, are satisfied if the pseudo inertia matrix 
+The inertial parameters of rigid body, and by extension of a robot, are associated to the manifolds of SPD matrices. To make clear this relation, let $\mathcal{S}^n$ be the space of real square symmetric matrices with dimension $n \times n$, denoted as $\mathcal{S}^n \triangleq\left\lbrace \bm{S} \in \mathbb{R}^{n \times n} : \bm{S} = \bm{S}^T\right\rbrace$. The space of $n \times n$ SPD matrices, $\mathcal{S}^n_{++}\triangleq \left\lbrace \bm{P}\in \mathcal{S}^n : \bm{P} \succ 0 \right\rbrace$, defines a smooth submanifold $\mathcal{M}$ within $\mathcal{S}^n$. Its tangent space $\mathcal{T}\mathcal{M} \in \mathcal{S}^n$ is equipped with an affine invariant Riemannian metric $\rho$ \cite{Lee2018geometricalgorithmrobust}, thereby making $ \mathcal{S}^n_{++} $ a Riemannian manifold. Finally, the Cartesian product $\mathcal{M}^N =\mathcal{M}_1\times \mathcal{M}_2\times \ldots \times \mathcal{M}_N$ defines the product manifold of SPD manifolds.  It represents the set of matrices $\left\lbrace \left(\bm{P}_1,\ldots,\bm{P}_N\right):\bm{P}_i\in\mathcal{M}_i,\quad i=1,\ldots,N\right\rbrace$ and is also a Riemannian manifold with the metric $ \bm{\rho} =\text{diag}\left( \rho{1},\ldots, \rho{N} \right) $. The physical feasibility constraints of the inertial parameters $\bm{\theta}_i$ of the $i$-th link, summarized in Eq.~\eqref{eq:feasibility_constraints}, are satisfied if the pseudo inertia matrix 
 %---
 %\begin{equation}\label{eq:pseudo_inertia_matrix}
 %\bm{P}_i(\bm{\theta}_i)=f(\bm{\theta}_i)=\begin{bmatrix}
@@ -777,7 +805,8 @@ The inertial parameters of rigid body, and by extension of a robot, are associat
 	\end{bmatrix} \in \mathcal{S}^4,
 \end{equation}
 %---
-defined for each rigid body is symmetric positive-definite \cite{Wensing2017Linearmatrixinequalities}; that is, $\bm{P}_i(\bm{\theta}_i)\in \mathcal{S}_{++}^4$. Note that $\mathbb{1}$ is used to denote the $3 \times 3$ identity matrix. %Here $ \bm{\Sigma}_i = \frac{1}{2}\text{tr}(\bm{I}_i)\mathbb{1} - \bm{I}_i\in \mathcal{S}^3 $ is called the \emph{density weighted covariance matrix}. Conversely,  $ \bm{I}_i = \text{tr}\left(\bm{\Sigma}_i\right)\mathbb{1} - \bm{\Sigma}_i \in \mathcal{S}^3_{++} $, where $\mathbb{1}$ is the $3 \times 3$ identity matrix. 
+defined for each rigid body is symmetric positive-definite \cite{Wensing2017Linearmatrixinequalities}. %; that is, $\bm{P}_i(\bm{\theta}_i)\in \mathcal{S}_{++}^4$. 
+Note that $\mathbb{1}$ is used to denote the $3 \times 3$ identity matrix. %Here $ \bm{\Sigma}_i = \frac{1}{2}\text{tr}(\bm{I}_i)\mathbb{1} - \bm{I}_i\in \mathcal{S}^3 $ is called the \emph{density weighted covariance matrix}. Conversely,  $ \bm{I}_i = \text{tr}\left(\bm{\Sigma}_i\right)\mathbb{1} - \bm{\Sigma}_i \in \mathcal{S}^3_{++} $, where $\mathbb{1}$ is the $3 \times 3$ identity matrix. 
 The requirement that $\bm{P}_i(\bm{\theta}_i) \succ 0$ implies the fully physically feasible inertial parameters are in the manifold $\mathcal{S}^4_{++}=\left\lbrace \bm{P}_i(\bm{\theta}_i) \in \mathcal{S}^{4}: \bm{P}_i(\bm{\theta}_i) \succ 0 \right\rbrace$. For every rigid body $i$ in the kinematic chain, there exist a pseudo inertia matrix  \cite{Lee2018geometricalgorithmrobust}. Consequently, this means that the inertial parameters of a robot define a point $\left\lbrace \bm{P}_i\right\rbrace_{i=1}^N$ in the Riemannian product manifold $\mathcal{M}^N$.
 
 
@@ -882,14 +911,14 @@ The requirement that $\bm{P}_i(\bm{\theta}_i) \succ 0$ implies the fully physica
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\section{Describing body shape: Connectivity and graph theory}
+\subsection{Describing body shape: Robot mechanical topology}
 
 %As discussed in \cite{Featherstone2007RigidBodyDynamics}, the connectivity of a kinematic chain describes how its parts are connected to each other. This is known as the mechanical topology; i.e., the arrangement of joints and links. \redtext{The topology is a fundamental piece of knowledge to describe the body structure. Without it, the individual geometry of the parts lacks meaning. Similarly, knowledge of the inertial properties of each of the bodies in a kinematic chain is insufficient to understand the dynamics associated to their coupling. Thus, a robotic agent must be capable of inferring the topology of its body before it can instantiate its kinematic and dynamic properties.}
-As outlined by Featherstone \cite{Featherstone2007RigidBodyDynamics}, the connectivity of a kinematic chain delineates the interconnection of its components, constituting what is known as the mechanical topology---essentially, the configuration of joints and links. Understanding this topology is crucial as it serves as a foundational element for describing the body structure. Without this information, the individual geometry of the components lacks significance. Similarly, knowledge of only the inertial properties of each body in a kinematic chain is insufficient for describing the dynamics associated with their coupling. Therefore, a robotic agent must possess the capability to deduce the topology of its body before instantiating its kinematic and dynamic properties.
+As outlined by Featherstone \cite{Featherstone2007RigidBodyDynamics}, the connectivity of a kinematic chain delineates the interconnection of its components, constituting what is known as the mechanical topology---essentially, the arrangement of joints and links. Understanding this topology is crucial as it serves as a foundational element for describing the body structure. Without this information, the individual geometry of the components lacks significance. Similarly, knowledge of only the inertial properties of each body in a kinematic chain is insufficient for describing the dynamics associated with their coupling. Therefore, a robotic agent must possess the capability to deduce the topology of its body before instantiating its kinematic and dynamic properties.
 
-Having the topology of the body such relevance, the fact is that a scarce number of works have pondered the problem of how to learn it (see, for example, \cite{Bongard2006Resilientmachinescontinuous}). It seems reasonable to assume that the this stems from the typical premise that this information is known a priori. Yet, a fully independent robotic agent that is to develop an understanding of its body through the development of a body schema needs to obtain this information exclusively by itself. This gains prominence as gradually robots become more adaptable and modular. Therefore, if there is access to the number and modalities of the robot's sensorimotor signals, an indication of the body topology must be extracted from them. But, how?
+Having the topology of the body such relevance, the fact is that a scarce number of works have pondered the problem of how to learn it (see, for example, \cite{Bongard2006Resilientmachinescontinuous}). It seems reasonable to assume that the this stems from the typical premise that this information is known a priori. Yet, a fully independent robotic agent that is to develop an understanding of its body through the development of a body schema needs to obtain this information exclusively by itself. This gains prominence as gradually robots become more adaptable and modular. Therefore, if there is access to the number and modalities of the robot's sensorimotor signals, an indication of the body topology must be extracted from them.% But, how?
 
-\subsection{Embodiment and information structure}\label{sec:embodiment_and_information}
+\subsubsection{Embodiment and information structure}\label{sec:embodiment_and_information}
 %To find an answer to the question of how to learn the body topology, this dissertation shares the well-accepted hypothesis that the interaction of an agent with its environment and its body morphology induce statistical regularities in its sensorimotor signals \cite{Pfeifer2006InformationTheoreticImplications,Pfeifer2007SelfOrganizationEmbodiment,LungarellaEmbodimentInformationCausal,Pfeifer2006Howbodyshapes}, see Fig.~\ref{fig:implications_of_embodiment}. 
 %% ---
 %\begin{figure}[t!]
@@ -912,7 +941,7 @@ Having the topology of the body such relevance, the fact is that a scarce number
 	\end{center}
 \end{figure}
 % ---
-To address the question of how the body's topology can be learned, this dissertation relies on the widely accepted hypothesis that an agent's interaction with its environment and its body morphology gives rise to statistical regularities in its sensorimotor signals \cite{Pfeifer2006InformationTheoreticImplications,Pfeifer2007SelfOrganizationEmbodiment,LungarellaEmbodimentInformationCausal,Pfeifer2006Howbodyshapes} (see Fig.~\ref{fig:implications_of_embodiment}). These statistical regularities, intertwined with the concept of sensorimotor contingencies \cite{Jacquey2019Sensorimotorcontingenciesas}, have been quantified using information-theoretic measures, which assess the information sharing among different modalities in the robot's sensorimotor system \cite{Schmidt2013Bootstrappingperceptionusing,Lungarella2006Mappinginformationflow,Polani2009Modelsinformationprocessing,Bossomaier2016introductiontransferentropy,Olsson2006unknownsensorsactuators}. 
+To address the question of how the body's topology can be learned, this dissertation relies on the widely accepted hypothesis that the interaction of an embodied agent with its environment gives rise to statistical regularities in its sensorimotor signals \cite{Pfeifer2006InformationTheoreticImplications,Pfeifer2007SelfOrganizationEmbodiment,LungarellaEmbodimentInformationCausal,Pfeifer2006Howbodyshapes} (see Fig.~\ref{fig:implications_of_embodiment}). These statistical regularities, intertwined with the concept of sensorimotor contingencies \cite{Jacquey2019Sensorimotorcontingenciesas}, have been quantified using information-theoretic measures, which assess the information sharing among different modalities in the robot's sensorimotor system \cite{Schmidt2013Bootstrappingperceptionusing,Lungarella2006Mappinginformationflow,Polani2009Modelsinformationprocessing,Bossomaier2016introductiontransferentropy,Olsson2006unknownsensorsactuators}. 
 % ---
 \begin{figure*}[!t]
 	\centering	
@@ -940,10 +969,10 @@ Fig.~\ref{fig:emobodiment_and_info_structure} illustrates how information struct
 %The embodiment of a robot determines its perceptual and behavioral capabilities and influences the emergence of sensorimotor regularities arising from body-environment interaction\cite{Pfeifer2006Howbodyshapes}. Information-theoretic quantities have been used to capture these regularities as information flows between the various modalities in the sensorimotor system\cite{Schmidt2013Bootstrappingperceptionusing,Lungarella2006Mappinginformationflow,Polani2009Modelsinformationprocessing,Bossomaier2016introductiontransferentropy,Olsson2006unknownsensorsactuators}. To illustrate how embodiment influences information structure, consider a hypothetical robot equipped with a set of sensors, depicted on Fig.~\ref{fig:f1a_embodiment_and_information_structure}. From an information-theoretic perspective, these sensors are information sources that share information with each other. The strength of these relations is represented graphically as edges connecting the sensors (light blue edges). As a result of the underlying embodiment of the robot, stronger connections between sensors exist (dark blue edges). These strong connections hint at the robot's body topology (Fig.~\ref{fig:f1b_embodiment_and_information_structure}), a tree-like serial kinematic structure where the stronger exchange of information occurs between sensors of adjacent bodies. Succinctly, body structure becomes the hypothesis behind the strength of information sharing. 
 
 
-\subsection{Fundamentals of graph theory}
+\subsubsection{Fundamentals of graph theory}
 The sensorimotor relationships shown in Fig.~\ref{fig:emobodiment_and_info_structure} are an example of mathematical object known as a graph \cite{West2001Introductiongraphtheory}. The mechanical topology of a robot can also be represented as a graph, whose connectivity represents the topology \cite{Featherstone2007RigidBodyDynamics}. Therefore, it is important to introduce some fundamental concepts related to graph theory before proceeding with the discussion. 
 
-\subsubsection{Definition of a graph}
+\paragraph*{Definition of a graph}
 A graph $\mathcal{G} = \left(\mathcal{V}, \mathcal{E}\right)$ is a mathematical construct the represents the interconnections between the elements of a system \cite{West2001Introductiongraphtheory}. These elements are represented as a set $ \mathcal{V}=\left\lbrace v_i\right\rbrace^n_{i=1}$ of $n$ \emph{nodes} (also called \emph{vertices}) and their connections are depicted as a set of \emph{edges} $ \mathcal{E}= \left\lbrace e_i\right\rbrace^m_{i=1} \subseteq \mathcal{V} \times \mathcal{V} $. Note that it is possible that an edge connects a node to itself, in which case the edge defines a self loop.
 % ---
 %\begin{figure}[th!]
@@ -1021,7 +1050,7 @@ An \emph{undirected} graph lacks any specified direction assigned to its edges, 
 A \emph{weighted} graph $ \mathcal{G}\big(\mathcal{V},\mathcal{E},\bm{W}\big) $ associates numerical value, a weight, to each edge. The weights with weights $ \bm{W}: \mathcal{V} \times \mathcal{V}\to \mathbb{R}_+$ express some quantitative measure such as distance, cost, time, or any other relevant metric depending on the context of the graph. Unlike an unweighted graph, where edges simply represent connections between nodes, a weighted graph provides additional information about the relationships between nodes. For a weighted graph, the \emph{strength} of a vertex corresponds to the sum of the edge weights associated with it.
 
 
-\subsubsection{Algebraic representation of a graph}
+\paragraph*{Algebraic representation of a graph}
 A graph with $n$ vertices can be represented as a square $n\times n$ matrix $\bm{A}$. This algebraic representation is called the \emph{adjacency matrix} and depicts the graph's connectivity pattern; that is, the elements of the matrix indicate whether pairs of vertices $\left(i,j\right)$ are adjacent or not in the graph. Formally,
 the elements of a \emph{binary} adjacency matrix $\bm{A}$ are determined as follows
 % ---
@@ -1079,7 +1108,7 @@ The normalized adjacency matrix, defined as
 % --- 
 is particularly employed in spectral graph theory \cite{Spielman2012Spectralgraphtheory} and related analyses. Normalization helps account for variations in node degrees and provides a more balanced representation of the graph structure. One common application is in spectral clustering algorithms \cite{VonLuxburg2007tutorialspectralclusteringa}, where the normalized adjacency matrix is used to compute eigenvectors and eigenvalues, aiding in the identification of clusters or communities within a graph. %It also finds applications in various graph-based machine learning and data mining tasks.
 
-\subsubsection{Subgraphs and spanning trees}
+\paragraph*{Subgraphs and spanning trees}
 A \emph{subgraph} $\mathcal{G}_1$ is obtained by selecting a subset of the nodes of another graph $\mathcal{G}$ and a corresponding subset of the edges connecting those nodes. Formally, a graph $\mathcal{G}_1\left(\mathcal{V}_1, \mathcal{E}_1\right)$ is a subgraph of $\mathcal{G}$ if and only if $\mathcal{V}_1 \subseteq  \mathcal{V}$ and $\mathcal{E}_1 \subseteq \mathcal{E}$. This is written $\mathcal{G}_1 \subseteq \mathcal{G}$. One particular subgraph of interest in this work are spanning trees. First, a \emph{tree graph} is a graph that does not contain cycles. Such structure usually depicts a hierarchical arrangement. Consequently, a \emph{spanning tree} $\mathcal{G}_1$ of a graph $\mathcal{G}$ is a subgraph containing all the nodes in $\mathcal{G}$ and whose edges form a tree that defines paths that ensure that all the nodes remain connected. The edges of $\mathcal{G}_1$ are denoted as the branches of the tree. In general, a graph $\mathcal{G}_1$ is said to be a spanning subgraph of $\mathcal{G}$ if and only if $\mathcal{V}_1 = \mathcal{V}$ and $\mathcal{E}_1 \subseteq \mathcal{E}$. It is worth noting that every connected graph has a spanning tree and that there are $n^{n-2}$ distinct spanning trees with $n - 1$ edges on a connected graph with $n$ vertices \cite{West2001Introductiongraphtheory}. Examples of spanning trees are shown in Fig.~\ref{fig:tree_examples}.
 
 \paragraph*{Minimum spanning tree and Kruskal's algorithm}
@@ -1110,23 +1139,24 @@ The minimum spanning tree of an undirected, connected, and weighted graph is the
 \end{figure*}
 
 % SUBSECTION ================================================================================
-\subsubsection{Metrics for graph comparison}
+\paragraph*{Metrics for graph comparison}
 Several works cover a number of metrics and measures to asses the similarity of any two given graphs. Commonly used metrics include eigenvalue distribution analysis \cite{Crawford2017GraphStructureSimilarity,Gera2018Identifyingnetworkstructure}, and the graph adjacency spectral and matrix distances \cite{Wills2020Metricsgraphcomparison}. This dissertation will use the latter two measures as they allow the local and global comparison of the graph structure.
 
-\paragraph*{Spectral distance.} The spectrum of a graph $\mathcal{G}$ is the vector $ \bm{s}^{\bm{W}}$ containing the eigenvalues $s_k$ of its weighted adjacency matrix $\bm{W}$ sorted in descending order; that is
+%\paragraph*{Spectral distance.} 
+On the one hand, the spectral distance between two graphs $\bm{W}_1$ and $\bm{W}_2$ is simply the $L_2$ norm of the difference between their spectra
+% ---
+\begin{equation}
+	d_{\bm{s}}\left(\mathcal{G}_1,\mathcal{G}_2\right) = \sqrt{\left(\bm{s}^{\bm{W}_1}-\bm{s}^{\bm{W}_2}\right)^\intercal\left(\bm{s}^{\bm{W}_1}-\bm{s}^{\bm{W}_2}\right)},
+\end{equation}
+% ---
+with spectrum of a graph $\mathcal{G}$ defined as the vector $ \bm{s}^{\bm{W}}$ containing the eigenvalues $s_k$ of its weighted adjacency matrix $\bm{W}$ sorted in descending order; that is
 % ---
 \begin{equation}
 	\bm{s}^{\bm{W}} = [s_1,s_2,\ldots,s_k,\ldots,s_n]^\intercal.
 \end{equation}
 % ---
-The spectral distance between two graphs $\bm{W}_1$ and $\bm{W}_2$ is simply the $L_2$ norm of the difference between their spectra
-% ---
-\begin{equation}
-	d_{\bm{s}}\left(\mathcal{G}_1,\mathcal{G}_2\right) = \sqrt{\left(\bm{s}^{\bm{W}_1}-\bm{s}^{\bm{W}_2}\right)^\intercal\left(\bm{s}^{\bm{W}_1}-\bm{s}^{\bm{W}_2}\right)}.
-\end{equation}
-% ---
-
-\paragraph*{Matrix distance.} This distance expresses the a direct comparison of the pairwise affinities between the graphs $\bm{W}_1$ and $\bm{W}_2$. From the many potential matrix distances, here the Frobenius distance is used; i.e,
+%\paragraph*{Matrix distance.}
+On the other hand, the matrix distance expresses the a direct comparison of the pairwise affinities between the graphs $\bm{W}_1$ and $\bm{W}_2$. From the many potential matrix distances, here the Frobenius distance is used; i.e,
 % ---
 \begin{equation}
 	d_{\bm{W}}\left(\mathcal{G}_1,\mathcal{G}_2\right) =\lvert \lvert \bm{W}_1- \bm{W}_2\rvert \rvert_F.
@@ -1138,10 +1168,10 @@ The spectral distance between two graphs $\bm{W}_1$ and $\bm{W}_2$ is simply the
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\subsection{Network topology inference}\label{sec:network_topology_inference}
+\subsubsection{Network topology inference}\label{sec:network_topology_inference}
 As mentioned before, the mechanical topology of a robot can be represented as a graph. The nodes in said graph correspond to the links and the edges indicate the joints connecting those bodies. how to obtain this graph remains unanswered. The relation between the robot morphology and information structure provides a starting point to search for the robot topology in the relationships among the sensorimotor signals. In general, the process of identifying and visually representing relationships among various elements within a system, based on the available measurements, is termed \emph{network topology inference} (NTI) \cite{Dong2019Learninggraphsdata}. Unveiling the structure of a network or graph through topology learning facilitates the analysis of interactions among entities. 
 
-\subsubsection{Types of connectivity}
+\paragraph{Types of connectivity}
 %Finding and graphically representing the relationships among the different constituent elements of a system given the available measurements is known as \emph{network topology inference} (NTI) \cite{Dong2019Learninggraphsdata}. By learning the topology of a network/graph, it is possible to reveal a structure that aids in the analysis of the interaction among the entities. As discussed in \cite{Friston2011Functionaleffectiveconnectivity}, one method to represent interaction is via \emph{functional connectivity} (FC), which is an information-theoretic
 %measure that characterizes dependencies based on the probability distributions of the observed signals (examples include correlations and mutual information). FC can be further subdivided into non-directed and directed, with the latter being related to statistical causation from the data \cite{Bastos2016tutorialreviewfunctional}. In contrast, \emph{effective connectivity} refers explicitly to the dynamic (state-dependent) influence that one element on the network has on another under a particular network model of causal dynamics; i.e, it refers to coupling or directed causal influence \cite{Park2013Structuralfunctionalbrain}. Exemplary works that use the concepts above can be found in biology\cite{Zhang2017Networkbasedmachine} and neuroscience \cite{Karwowski2019Applicationgraphtheory,Sporns2018Graphtheorymethods}.
 
@@ -1154,12 +1184,11 @@ As mentioned before, the mechanical topology of a robot can be represented as a 
 \end{figure*}
 
 Often used in the field of neuroscience \cite{Karwowski2019Applicationgraphtheory}, three different types of connectivity are distinguished\cite{Park2013Structuralfunctionalbrain,FaskowitzEdgesbrainnetworks}:
-
-\paragraph*{Structural Connectivity (SC)} Refers to the physical connections between different elements in a network. In the context of neuroscience, it typically involves the anatomical connections between brain regions. It is measured with techniques such as diffusion-weighted imaging (DWI) or diffusion tensor imaging (DTI) are commonly used to infer structural connectivity in the brain.
-
-\paragraph*{Functional Connectivity (FC)} Refers to the statistical dependencies or temporal correlations between the activity of different elements in a network. As explained in \cite{Friston2011Functionaleffectiveconnectivity}, FC is an information-theoretic metric that characterizes dependencies using probability distributions of observed signals. It can be categorized into non-directed and directed forms, with the latter being associated with statistical causation derived from the data \cite{Bastos2016tutorialreviewfunctional}. %FC is often assessed through statistical methods applied to time-series data to identify patterns of correlated activity between different brain regions.
-
-\paragraph*{Effective Connectivity (EC)} Specifically addresses the dynamic, state-dependent influence that one network element has on another within a particular causal dynamics model. Essentially, effective connectivity denotes coupling or directed causal influence \cite{Park2013Structuralfunctionalbrain}. Exemplary applications of these concepts can be observed in the fields of biology \cite{Zhang2017Networkbasedmachine} and neuroscience \cite{Karwowski2019Applicationgraphtheory,Sporns2018Graphtheorymethods}.
+\begin{itemize}
+	\item Structural Connectivity (SC). Refers to the physical connections between different elements in a network. In the context of neuroscience, it typically involves the anatomical connections between brain regions. It is measured with techniques such as diffusion-weighted imaging (DWI) or diffusion tensor imaging (DTI) are commonly used to infer structural connectivity in the brain.
+	\item Functional Connectivity (FC). Refers to the statistical dependencies or temporal correlations between the activity of different elements in a network. As explained in \cite{Friston2011Functionaleffectiveconnectivity}, FC is an information-theoretic metric that characterizes dependencies using probability distributions of observed signals. It can be categorized into non-directed and directed forms, with the latter being associated with statistical causation derived from the data \cite{Bastos2016tutorialreviewfunctional}.
+	\item Effective Connectivity (EC). Specifically addresses the dynamic, state-dependent influence that one network element has on another within a particular causal dynamics model. Essentially, effective connectivity denotes coupling or directed causal influence \cite{Park2013Structuralfunctionalbrain}. Exemplary applications of these concepts can be observed in the fields of biology \cite{Zhang2017Networkbasedmachine} and neuroscience \cite{Karwowski2019Applicationgraphtheory,Sporns2018Graphtheorymethods}.
+\end{itemize}
 
 A representation of the intricate relationships among the three types of connectivity is given in Fig.~\ref{fig:types_of_connectivity}. It depicts a simple robot arm as an example. The nodes represent the three links that compose the robot. Regarding SC and FC, a nuanced connection exists, albeit not strictly one-to-one. For example, the SC reflect the actual physical composition of the body, three bodies connected by two joints (the edges in the SC graph). Sensory signals coming from these bodies might lead to potential functional interactions of varied degree (the edges in the FC graph) that have a foundation on the bodily structure of the robot; yet, it does not ensure their occurrence. Actually, functional relationships can appear even in the absence of direct structural connections, not the light edge between nodes $A$ and $C$ in the FC graph. Moving to EC and FC, the former extends the latter by seeking to model the direction and strength of influence between different elements. While FC identifies statistical associations, EC strives to unveil the underlying causal relationships, the directed edges in the EC graph. In summary, these three connectivity types are interrelated components in the complex landscape of NTI. Structural connections provide the anatomical substrate, functional connections depict statistical dependencies, and effective connections aspire to model causal relationships within the network.
 
@@ -1172,9 +1201,9 @@ A representation of the intricate relationships among the three types of connect
 %
 %In summary, structural, functional, and effective connectivity are interrelated aspects of network topology inference, with structural connections providing the anatomical substrate, functional connections representing statistical dependencies, and effective connections aiming to model causal relationships within the network. Techniques from neuroscience are often applied to study these aspects in the context of brain networks, but similar principles can be extended to other complex systems.
 
-\subsubsection{Inferring the connectivity}
+\paragraph*{Inferring the connectivity}
 In NTI the elements $\mathcal{V}$ of a graph $\mathcal{G}$ are known but its connectivity (i.e. how these elements relate to each other) is unknown. %Then, the graph topology inference problem consists in finding the edges $\mathcal{E}$ that best explain the relationships among the nodes $\mathcal{V}$ given some prior knowledge, such as  data distribution, the location of the sensors, the physical relationships between the signals, or the data similarity \cite{Dong2019Learninggraphsdata,Stankovic2019Introductiongraphsignal}. 
-The problem of learning the edges $\mathcal{E}$ that best explain the relationships among the $N_\mathcal{V}$ elements in $\mathcal{V}$ leads to define a graph a graph $\mathcal{G}\left(\mathcal{V},\mathcal{E},\bm{W}\right)$ with an strictly positive weighted adjacency matrix $\bm{W}$. To find this matrix, a number of sample points $m$ from the signals at the nodes $\bm{x} = [x1,x2,\ldots, x_{N_\mathcal{V}}]^\intercal \in \mathbb{R}^{N_\mathcal{V}}$ are collected into a data matrix $\bm{X} \in \mathbb{R}^{N_\mathcal{V} \times m}$. Using $\bm{X}$ together with some prior knowledge, such as  data distribution, the location of the sensors, the physical relationships between the signals, or the data similarity candidate graphs $\mathcal{G}$ can be defined \cite{Dong2019Learninggraphsdata,Stankovic2019Introductiongraphsignal}. Commonly, NTI methods are subdivided in statistical models, physically motivated models, and more recently, in methods from graph signal processing (GSP), see Fig.~. 
+The problem of learning the edges $\mathcal{E}$ that best explain the relationships among the $N_\mathcal{V}$ elements in $\mathcal{V}$ leads to define a graph a graph $\mathcal{G}\left(\mathcal{V},\mathcal{E},\bm{W}\right)$ with an strictly positive weighted adjacency matrix $\bm{W}$. To find this matrix, a number of sample points $m$ from the signals at the nodes $\bm{x} = [x1,x2,\ldots, x_{N_\mathcal{V}}]^\intercal \in \mathbb{R}^{N_\mathcal{V}}$ are collected into a data matrix $\bm{X} \in \mathbb{R}^{N_\mathcal{V} \times m}$. Using $\bm{X}$ together with some prior knowledge, such as  data distribution, the location of the sensors, the physical relationships between the signals, or the data similarity candidate graphs $\mathcal{G}$ can be defined \cite{Dong2019Learninggraphsdata,Stankovic2019Introductiongraphsignal}. Commonly, NTI methods are subdivided in statistical models, physically motivated models, and more recently, in methods from graph signal processing (GSP), see Fig.~\ref{fig:graph_learning}. 
 % ---
 \begin{figure*}[!t]
 	\centering	
@@ -1184,13 +1213,8 @@ The problem of learning the edges $\mathcal{E}$ that best explain the relationsh
 	\caption[] {\label{fig:graph_learning}\textbf{Different methods for NTI.} Image taken from \cite{Dong2019Learninggraphsdata}.}
 \end{figure*}
 % ---
-\paragraph*{Statistical models} These NTI methods aim to capture signal similarities, utilizing measures such as the Pearson correlation, Jaccard coefficient, Gaussian radial basis functions, and mutual information. The predominant approach involves expressing these similarities by computing the correlation of the data matrix $\bm{X}$ and assuming joint Gaussianity of the variables. The primary objective is usually to estimate the graph structure embedded in the precision matrix (defined as the inverse of the covariance matrix). However, as the precision matrix is not a proper adjacency matrix, methods have been developed to ensure Laplacian constraints (to find a valid graph) and structural constraints (to promote sparsity). Notable examples include the graphical LASSO \cite{Mazumder2011GraphicalLassoNew} and the work in \cite{Olsson2006unknownsensorsactuators,Egilmez2021GraphLaplacianLearning}. Information theory is pivotal in NTI, providing a robust framework for deducing network structures through fundamental concepts like mutual information. Numerous methodologies rooted in information theory have been proposed for network inference \cite{Lungarella2006Mappinginformationflow,Villaverde2014MIDERnetworkinference,Ursino2020TransferEntropyas,Novelli2020Inferringnetworkproperties}.%, with a particular emphasis on domains such as systems biology, bioinformatics, and various scientific disciplines.
 
-%\paragraph*{Learning graphs from smooth signals}
-
-\paragraph*{Psychically motivated models} Here the structure of $\mathcal{G}$ is assumed to be tied to an underlying physical phenomenon or process on the graph; for example, network diffusion processes or information propagation models.
-
-\paragraph*{Graph signal processing} In GSP the the vector of node signals $\bm{x}$ af any given time is deemed a graph signal and is hypothesized to be a function of some process that depends on the graph; i.e., $\bm{X} = f(\mathcal{G})$. In GSP, each of the vectors $\bm{x}$ is considered a signal defined on the nodes of the weighted graph $\mathcal{G}$. Learning this graph implies determining an adjacency $\bm{W}$ such that $f(\mathcal{G})$ reflects some features in the data matrix $\bm{X}$. Examples involve learning graphs from observations of smooth signals and identifying the structure of network diffusion processes.
+NTI methods based on statistical models aim to capture signal similarities, utilizing measures such as the Pearson correlation, Jaccard coefficient, Gaussian radial basis functions, and mutual information. The predominant approach involves expressing these similarities by computing the correlation of the data matrix $\bm{X}$ and assuming joint Gaussianity of the variables. The primary objective is usually to estimate the graph structure embedded in the precision matrix (defined as the inverse of the covariance matrix). However, as the precision matrix is not a proper adjacency matrix, methods have been developed to ensure Laplacian constraints (to find a valid graph) and structural constraints (to promote sparsity). Notable examples include the graphical LASSO \cite{Mazumder2011GraphicalLassoNew} and the work in \cite{Olsson2006unknownsensorsactuators,Egilmez2021GraphLaplacianLearning}. Information theory is pivotal in NTI, providing a robust framework for deducing network structures through fundamental concepts like mutual information. Numerous methodologies rooted in information theory have been proposed for network inference \cite{Lungarella2006Mappinginformationflow,Villaverde2014MIDERnetworkinference,Ursino2020TransferEntropyas,Novelli2020Inferringnetworkproperties}. In NTI motivated by psychical models the structure of $\mathcal{G}$ is assumed to be tied to an underlying physical phenomenon or process on the graph; for example, network diffusion processes or information propagation models. Finally, in GSP-based NTI, the vector of node signals $\bm{x}$ af any given time is deemed a graph signal and is hypothesized to be a function of some process that depends on the graph; i.e., $\bm{X} = f(\mathcal{G})$. In GSP, each of the vectors $\bm{x}$ is considered a signal defined on the nodes of the weighted graph $\mathcal{G}$. Learning this graph implies determining an adjacency $\bm{W}$ such that $f(\mathcal{G})$ reflects some features in the data matrix $\bm{X}$. Examples involve learning graphs from observations of smooth signals and identifying the structure of network diffusion processes.
 
 Of particular interest to this dissertation are the statistical methods based on information theoretic measures to determine the functional connectivity among the robot sensorimotor signals. The belief is that the FC found through these methods should be in agreement with the embodiment and information structure hypothesis and, thus, should lead to the discovery of the robot mechanical topology (which is analogous to the structural connectivity).
 
@@ -1208,14 +1232,14 @@ Of particular interest to this dissertation are the statistical methods based on
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\subsection{Basics of information theory}
+\subsubsection{Basics of information theory}
 %To recapitulate, in building a body schema, an understanding of the body topology is necessary. According to the types of connectivity described in Sec.~\ref{sec:network_topology_inference}, a graph expressing the arrangement of the robot's joints and links would be equivalent to a description of its structural connectivity. But since only knowledge of the number and modalities of the sensorimotor signals is available, this SC must be extracted from the potential relationships between these signals.
 %In Sec.~\ref{sec:embodiment_and_information} it was mentioned that the robot morphology influences the information structure of the sensorimotor signals. As such, expressing this structure as a graph corresponds to the inference of the functional connectivity among the robot signals. In particular, the FC among the sensorimotor signals can be captured by measures from information theory\cite{Cover1999Elementsinformationtheory}, as they are general, in the sense that they are not tied to a particular model, and expressive, as they can capture statistical relationships of linear and nonlinear nature. 
 Recapitulating, the construction of a body schema necessitates an understanding of the body's topology. As discussed in Section~\ref{sec:network_topology_inference}, a graph that represents the organization of the robot's joints and links functions as a depiction of its structural connectivity. However, given the available information, restricted to the number and modalities of the sensorimotor signals, the deduction of this structural connectivity must occur from the potential relationships among these signals.
 
 In Section~\ref{sec:embodiment_and_information}, the emphasis was on the fact that the robot's morphology shapes the information structure of sensorimotor signals. Consequently, representing this structure as a graph corresponds to the inference of the functional connectivity among the robot signals. Specifically, FC among sensorimotor signals can be captured using measures from information theory\cite{Cover1999Elementsinformationtheory}. These measures are general, as they are not tied to a specific model, and expressive, enabling the capture of statistical relationships of both linear and nonlinear nature.
 
-\subsubsection{Entropy of random variables}
+\paragraph*{Entropy of random variables}
 
 The entropy of a random variable is a function which attempts to characterize
 the average uncertainty or unpredictability of a random variable. It is often used to quantify the amount of information in a random process. Formally, the entropy of a variable $X$ is a function of its probability distribution and is defined as 
@@ -1241,7 +1265,7 @@ In loose terms, entropy can be associated with the amount of information that a 
 \end{figure*}
 % ---
 
-\subsubsection{Mutual Information}
+\paragraph*{Mutual Information}
 The mutual information (MI) measures the amount of information that one random variable provides about another random variable. Conversely, it quantifies the reduction in uncertainty about one variable due to knowledge of the other. The MI between two random variables is a symmetric measure of information computed as the relative entropy (also known as Kullback-Leibler divergence) of the joint probability distribution $p\left(x,y\right)$ and the product of the marginal probability distributions $p\left(x\right)$ and $p\left(y\right)$; that is,
 % ---
 \begin{equation}\label{eq:mutual_information}
@@ -1266,7 +1290,7 @@ where it is clear why the MI is symmetric; it represents the information shared 
 % ---
 \paragraph*{Connection to correlation} It is worth dedicating some time to discuss using mutual information against the well-known correlation. Both have the common objective of evaluating the interdependence between random variables. Correlation measures the intensity and directionality of a linear association between two variables, whereas MI can identify any statistical dependency---including non-linear associations. Therefore, MI represents a more comprehensive measure of the connection between variables compared to correlation, rendering it a valuable instrument to express the relations between sensorimotor variables.
 
-\subsection{Summary}
+\subsubsection{Summary}
 The mechanical arrangement of the robot's joints and links referred to as topology, constitutes a crucial element of the robot body schema, playing a fundamental role in fully characterizing its kinematic and dynamic properties. As illustrated in Fig.~\ref{fig:topology_inference_process}, a robotic agent's autonomous acquisition of body topology necessitates reliance on the information structure embedded in its sensorimotor signals. The unveiling of this structure entails thoroughly examining the relationships among the sensorimotor signals using information theory measures. Once these measures are established, they can be utilized to infer the functional connectivity among the signals. In the subsequent chapter, we delve into the final step, wherein graph theory tools and first-order kinematic principles are employed to ascertain the mechanical structural connectivity based on sensorimotor functional connectivity.
 
 
@@ -1418,14 +1442,48 @@ The mechanical arrangement of the robot's joints and links referred to as topolo
 % -------------------------------------- SECTION -------------------------------------------|
 %                                           |                                               |
 % ===========================================================================================
-\section{Driving learning and adaption: Advanced gradient descent}
+\subsection{Learning and adaption of the body properties}
 
-\subsection{Offline and online learning}
-In the realm of machine learning, online learning and offline learning represent distinct approaches to model training. Online learning, or incremental learning, involves learning the model as new data becomes available, typically processing one observation at a time. In this scenario, the learning algorithm's parameters are updated after each individual training instance, making it particularly advantageous for systems dealing with a continuous flow of data that must rapidly adapt to changing conditions. On the other hand, offline learning, also known as batch learning, entails training the model over all observations in a dataset $\mathcal{D}$ simultaneously. The model is trained with a static dataset, and the parameters are updated once the learning process is complete for the entire dataset. %Offline learning is more prevalent in industry due to its various advantages, such as simplicity and ease of implementation. In essence, online learning is a dynamic approach where the model adapts to new data in real-time, while offline learning is a more static method where the model is trained on a fixed dataset.
+% SUBSECTION ================================================================================
+\subsubsection{Learning completes the robot body schema}
+Model-based robotics is inherently linked to the concept of the body schema, as defined in Def.~\ref{def:robot_body_schema}. The methods presented so far in this chapter encompass a theoretical foundation to model the physical properties of robots. However, these methods often treat body properties as immutable, relying on a single identification or calibration procedure, and ofter dependent on external (off-body) measurement devices. Some studies have compared the conventional characteristics of model-based robotics, such as being amodal, fixed, explicit, centralized, and modular, with the properties of a biological body schema \cite{Hoffmann2021Bodymodelshumans}. Unlike robotic body models, the body schema is dynamic, capable of modification based on experiences, learning, and changes in the body itself. Additionally, biological systems are inherently self-learning and rely on the integration of multi-modal sensory information \cite{Asada2018168Proprioceptionbodyschema}.
+
+Leveraging proprioceptive embodied sensors and integrating machine learning techniques with model-based robotics allows turning the problems of instantiating the topology, kinematics, and inertial description of a robot into incremental learning problems. Such a a synergistic combination can provide traditional model-based body representations with the plasticity required to to enable robots to construct, monitor, and adjust their understanding of their bodies by integrating information from multiple sensory modalities.% Consequently, this integration aligns more closely with the concept of the robot body schema. %This dissertation focuses on a subset of the body schema properties highlighted in Fig.~\ref{fig:body_schema_properties}, marked with triangles in the figure. The subsequent discussion will survey frameworks and methods that have been employed or could be utilized to infer quantities directly connected to the highlighted properties of the robot body schema.
+
+%First, we define the self as a set
+%S = {N, A, λ, θ},
+%(1)
+%whose elements are the number of degrees of freedom (i.e.
+%links) N , the adjacency matrix A of the robot defining
+%the connectivity of the kinematic tree, the morphological
+%description of every link in the robot λ, and the inertial
+%parameters of the links θ.
+%Figure 1 shows how elements of S are found in three dif-
+%ferent inverse dynamics identification/learning frameworks.
+%Fig. 1a shows that classical system identification assumes
+%a known calibrated kinematic model (i.e., N , A, λ) and
+%mostly focuses on learning θ
+
+%\redtext{The body schema outlines connections among components in the robot morphology. Explicit models rely on predefined parameters, typically identified measured using encoders, tracking the trajectory based on proprioception. In contrast, implicit models are applied in uncalibrated systems, where interaction with the environment estimates desired parameters. This mechanistic approach differs from the biological case, where the inherently flexible link structure adapts to changes in the environment and the self-body. Unlike in robotics, where knowledge is externally provided at a high cost for parameter estimation, biological systems are inherently self-learning, aligning with implicit model principles. Additionally, robotics lacks cross-modal association, whereas the integration of multi-modal sensory information is fundamental in the biological case, emphasizing sophisticated adaptability and sensory integration \cite{Asada2018168Proprioceptionbodyschema}.}
+
+
+%Model-based robotics is naturally connected to the concept of body schema as per Def.~\ref{def:robot_body_schema}, it includes a theoretical groundwork and methods that take into account physical properties of robots and include them in their representations. Yet, the body properties within the scope of these methods are typically considered immutable and are inferred from a single identification or calibration procedure. Some works have contrasted the conventional amodal, fixed, explicit, centralized, and modular representations provided by model-based robotics against the properties of a biological body schema \cite{Hoffmann2021Bodymodelshumans}. Indeed, unlike body models in robotics, the body schema is not fixed but can be modified based on experiences, learning, and changes in the body itself. Moreover, biological systems are inherently self-learning and depend on the integration of multi-modal sensory information \cite{Asada2018168Proprioceptionbodyschema}.
+%
+%Combining model-based robotics with learning techniques makes conventional fixed descriptions capable of adaptation. Frameworks that leverage and expand this combination make conventional model-based body models closer to a body schema allowing robots to build, monitor, and adapt the understanding of their bodies integrating information from multiple sensory modalities. Therefore, from this combination it is possible to be more in line with the concept of the robot body schema. In this dissertation attention is given to a subset of the body schema properties in Fig.~\ref{fig:body_schema_properties}, identified with triangles in the figure. In the following discussion frameworks and methods that have been used or could be used to infer quantities that have a direct connection with the highlighted properties of the robot body schema will be surveyed.
+
+
+%\say{The concept of body schema is related to model learning in robotics as it provides a framework for robots to understand and represent their own bodies and the surrounding environment. Research in this area aims to enable robots to improve their capabilities by automatically synthesizing, extending, or adapting a model of their body, similar to how the human body schema allows for adaptive and coordinated movement. This involves integrating information from multiple sensory modalities and controlling complex bodies, which are desirable capabilities for robots. By studying the body representations in biology from a functional or computational perspective, researchers seek to develop robotic systems that can effectively model their own bodies and interact with the environment in a more human-like manner. Therefore, the concept of body schema plays a crucial role in the development of robotic systems that can learn and adapt to their own physical characteristics and the surrounding world.}
+
+
+
+\subsubsection{Offline and online learning}
+In the realm of machine learning, online learning and offline learning represent distinct approaches to model training. Online learning, or incremental learning, involves learning the model as new data becomes available, typically processing one observation at a time. In this scenario, the learning algorithm's parameters are updated after each individual training instance, making it particularly advantageous for systems dealing with a continuous flow of data that must rapidly adapt to changing conditions. On the other hand, offline learning, also known as batch learning, entails training the model over all observations in a dataset simultaneously. The model is trained with a static dataset, and the parameters are updated once the learning process is complete for the entire dataset. %Offline learning is more prevalent in industry due to its various advantages, such as simplicity and ease of implementation. In essence, online learning is a dynamic approach where the model adapts to new data in real-time, while offline learning is a more static method where the model is trained on a fixed dataset.
 
 %In contrast, online learning excels in real-time adaptation and efficient resource utilization, making it more appropriate for scenarios with continuously changing data patterns[4][12]. 
 
-\subsection{Fundamentals of gradient descent}
+Offline learning (i.e. offline optimization) is more  aligned with the context of model-based robotics. To truly make the transition to a robot body schema online (incremental) learning needs to be the fundamental philosophy to learning the properties of the body schema. In this dissertation modern variations of gradient descent will be considered as the driving mechanism behind the learning and adaption of the attributes of the robot morphology. 
+
+\subsubsection{Fundamentals of gradient descent}
 
 Gradient descent (GD) is in essence an optimization algorithm to sequentially minimize a \emph{cost function} $J(\bm{x})$ with respect to a given set of parameters $\bm{x} \in \mathbb{R}^d$ moving in the direction opposite to its gradient $\nabla_{\bm{x}}J(\bm{x})$ at the current point $\bm{x}_k$. GD is considered a local optimizer as it primarily finds a local minimum of $J$. The algorithm can be summarized in a iterative process expressed in the simple equation
 % ---
@@ -1447,7 +1505,7 @@ From the number of data points from an already-collected dataset $\mathcal{D}$ t
 
 Stochastic Gradient Descent (SGD) \cite{Bottou2012Stochasticgradientdescent} serves as a simplification of batch GD and is widely employed machine in machine learning for online learning due to its efficiency with large-scale datasets and its ability to adapt to new data one observation at a time. Its advantages lie in its speed, processing quicker parameter updates, and memory efficiency. A recent review \cite{Tian2023RecentAdvancesStochastic} discusses the the properties of SGD as a standard optimization algorithm in deep learning. Despite its ability to escape local minima, the noisy updates of SGD and bouncing behavior near the minimum can yield good but non-optimal solutions \redtext{REF}. When the gradient of the cost function is computed using a small subset or mini-batch of $\mathcal{D}$, rather than a single example or the entire dataset, SGD becomes mini-batch GD. This approach reduces the noise in the parameter updates compared to SGD, leading to more stable convergence. It allows for computational efficiency as the mini-batch can be processed in parallel, and it is typically faster than batch GD for convergence.
 
-\subsection{Improved gradient descent}
+\subsubsection{Improved gradient descent}
 The challenges associated with standard (commonly named vanilla) GD encompass critical issues. First, there is the already mentioned sensitivity to the selected learning rate $\eta$. Noisy gradients are a particular problem of SGD and mini-batch GD. These may lead to slower and less stable training compared to batch GD. The algorithms may also encounter obstacles like local minima and saddle points, particularly problematic in non-convex optimization problems, hindering the discovery of the global minimum.
 
 Various improvements have been proposed to improve vanilla GD in recent years \cite{Ruder2016overviewgradientdescent,Tian2023RecentAdvancesStochastic}. Noteworthy among these enhancements are the incorporation of a momentum term, adaptive learning rate mechanisms, and measures to handle very small step sizes. The momentum term, functioning as a moving average over past gradients, serves to smooth out steps in gradient descent, thereby mitigating oscillations and expediting convergence. Its purpose is to combat issues such as bouncing around the search space and getting stuck in flat regions, ultimately elevating the optimization algorithm's efficacy and yielding superior final results.
@@ -1456,6 +1514,7 @@ The adaptive learning rate, tailored individually for each parameter based on th
 
 However, a notable drawback of learning rate adaption is the its potential reduction to infinitesimally small values over time, limiting the ability to acquire additional knowledge. To counteract this issue, a decaying average of squared gradients was proposed to adjust the step size for each parameter. This adaptive strategy stabilizes the learning process, preventing oscillations in the optimization trajectory and proving effective for non-convex optimization problems commonly encountered in machine learning.
 
+The following, three modern variants of gradient descent used in this dissertation are briefly discussed.
 %
 %\paragraph*{ Gradient descent with momentum.} In cost functions that change rapidly in one parameter direction and rather slowly in others, regular GD oscillates heavily in directions quasi perpendicular to the gradient and makes meager progress towards the minimum. This algorithm dampens this oscillations and accelerateseAlso known as Nesterov's accelerated gradient, Accelerates faster towards the minimum and increases the chance of escaping local minima
 %\subsection{Adaptive gradient descent}
@@ -1493,7 +1552,7 @@ However, a notable drawback of learning rate adaption is the its potential reduc
 
 
 
-\subsubsection{Adaptive moment estimation: Adam}
+\paragraph*{Adaptive moment estimation: Adam}
 Adaptive Moment Estimation GD, commonly known as Adam \cite{Kingma2014Adammethodstochastic}, has become a powerful optimization technique standard in machine learning. Adam is an adaptive learning algorithm that refines SGD approach by incorporating both first-order moment estimates ($m_t$) and second-order moment estimates ($v_t$) of the gradients; that is
 % ---
 \begin{align}\label{eq:adam_mean_and_uncentered_variance}
@@ -1536,7 +1595,7 @@ The algorithm's ability to handle noisy gradients effectively speaks to its stab
 %
 %\subsection{ADAM gradient descent}
 %Adaptive Moment Estimation. In essence a combination between the effects of momentum and RMSProp; that is, it inherits the speed from momentum and the ability to adapt the gradient directions.
-\subsubsection{AMS gradient descent}
+\paragraph{AMS gradient descent}
 
 
 AMSGrad is a gradient descent method that aims at convergence issues faced by Adam and its variations \cite{Reddi2019convergenceadam}; which have been observed to exhibit issues related to the learning rate, where it may become too aggressive and lead to poor convergence behavior in certain scenarios. AMSGrad tries to address this issue by modifying the way it updates the parameters. 
@@ -1560,7 +1619,7 @@ excludes also the regularization of the first momentum term. The alteration to t
 In essence, AMSGrad aims to provide a more stable and consistent learning rate, preventing scenarios where the learning rate diminishes rapidly and adversely affects convergence. By addressing this issue, AMSGrad aims to offer improved convergence behavior and generalization, particularly in cases where Adam might exhibit erratic behavior due to the uncorrected bias in the second-order moment estimate.
 
 %\subsubsection{Riemannian gradient descent on $ \mathcal{S}^{4}_{++} $}
-\subsubsection{Gradient descent on Riemannian manifolds}
+\paragraph*{Gradient descent on Riemannian manifolds}
 % ---
 \begin{figure*}[!t]
 	\centering	
@@ -1614,7 +1673,7 @@ Inspired by the stability and convergence speed of AMSGrad, this thesis utilizes
 \section{Chapter summary}
 %This chapter presented an overview of the different concepts that relate to the understanding of the physical structure of the robot. The physical self, and its relation to embodiment, body morphology, and body schema were discussed. Particular emphasis was given to the body schema as it functions as a model representation of the physical structure of the robot. Its most important features were discussed and connections to model-based robotics were established to present the definition of the robot body schema that is used in this dissertation. The bodily features needed to construct the robot body schema were outlined and methods to learn its kinematics and dynamics, that is the description of body size and inertial properties, were discussed. Special attention was dedicated to body shape, understood as the mechanical arrangement of the joints and links, that is, the body topology. This body aspect is essential to characterize the kinematic and dynamic features. Relevant concepts from the fields of information and graph theory were provided to illustrate how performing network topology inference on the sensorimotor signals of a robot can lead to the inference of the mechanical structural connectivity. Lastly, modern implementations of gradient descent were revisited as they are relevant in the implementation of online learning schemes to extract the features of the robot body schema.
 
-This chapter offers an overview of various concepts related to comprehending the physical structure of the robot. It delves into the physical self and its connections to embodiment, body morphology, and body schema. Special focus is given to the body schema, serving as a model representation of the robot's physical structure. The chapter discusses its key features and establishes connections to model-based robotics, presenting the definition of the robot body schema utilized in this dissertation. Essential bodily features required for constructing the robot body schema are outlined, and methods for learning its kinematics and dynamics, encompassing the description of body size and inertial properties, are examined. Emphasis is placed on body shape, defined as the mechanical arrangement of joints and links, i.e., the body topology, crucial for characterizing kinematic and dynamic features. Concepts from information and graph theory are introduced to illustrate how performing network topology inference on the robot's sensorimotor signals can infer mechanical structural connectivity. Lastly, the chapter revisits modern implementations of gradient descent, particularly relevant in implementing online learning schemes to extract features of the robot body schema.
+This chapter offers an overview of various concepts related to the physical structure of the robot. It delves into the physical self and its connections to embodiment, body morphology, and body schema. Special focus is given to the body schema, serving as a model representation of the robot's physical structure. The chapter discusses its key features and establishes connections to model-based robotics, presenting the definition of the robot body schema utilized in this dissertation. Essential bodily features required for constructing the robot body schema are outlined, and methods for representing its kinematics and dynamics, encompassing the description of body size and inertial properties, are examined. Emphasis is placed on body shape, defined as the mechanical arrangement of joints and links, i.e., the body topology, crucial for characterizing kinematic and dynamic features. Concepts from information and graph theory are introduced to illustrate how performing network topology inference on the robot's sensorimotor signals can infer mechanical structural connectivity. Lastly, the chapter revisits modern implementations of gradient descent, particularly relevant in implementing online learning schemes to extract features of the robot body schema.
 
 % ===========================================================================================
 %                                           |                                               |
